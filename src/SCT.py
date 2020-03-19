@@ -7,8 +7,10 @@ from graphviz import Digraph
 class SupBuilder(object):
     '''
         Class with tools for dinamicaly building an Automaton and displaying it
+            sup_name = 'Name for your supervisor automata'
     '''
-    def __init__(self):
+    def __init__(self, sup_name = 'supervisor'):
+        self.__name = sup_name
         self.__states = {}          # Dictionary containing states and transitions directions into a DataFrame
         self.__alphabet = set()     # Alphabet set
         self.__t_count = {}         # Counter of presence of each transition
@@ -18,9 +20,20 @@ class SupBuilder(object):
         '''
             Print a graph representing the supervisor structure
         '''
+        graph = Digraph(comment=self.__name, filename='{}.gv'.format(self.__name), format='pdf')
 
-        pass
+        # Insert nodes in the graph
+        for s in self.__states:
+            graph.node(s,s,shape='circle')
 
+        # insert transitions in the graph
+        for s in self.__states:
+            for i in self.__states[s].index:
+                print(self.__states[s].loc[i]['transition'])
+                graph.edge(s,self.__states[s].loc[i]['output_node'],self.__states[s].loc[i]['transition'])
+        
+        graph.view(filename=self.__name,directory='Automaton')      #Save Automaton as pdf file
+    
     
     
     #----- STATES methods:
