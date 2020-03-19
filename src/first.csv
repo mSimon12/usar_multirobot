@@ -1,0 +1,4 @@
+in_state,transition,out_state
+A,t1,B
+B,t2,A
+A,t3,C

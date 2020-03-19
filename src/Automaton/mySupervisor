@@ -1,7 +1,9 @@
 // mySupervisor
 digraph {
+	A [label=A shape=circle]
 	B [label=B shape=circle]
 	C [label=C shape=circle]
-	C -> B [label=t2]
-	C -> B [label=t3]
+	A -> B [label=t1]
+	A -> C [label=t3]
+	B -> A [label=t2]
 }

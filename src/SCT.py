@@ -1,5 +1,4 @@
 
-
 import pandas as pd
 from tabulate import tabulate
 from graphviz import Digraph
@@ -27,13 +26,40 @@ class SupBuilder(object):
             graph.node(s,s,shape='circle')
 
         # insert transitions in the graph
-        for s in self.__states:
-            for i in self.__states[s].index:
-                print(self.__states[s].loc[i]['transition'])
-                graph.edge(s,self.__states[s].loc[i]['output_node'],self.__states[s].loc[i]['transition'])
+        for s_from in self.__states:
+            for s_to in self.__states:
+                transitions = self.__states[s_from].loc[self.__states[s_from]['output_node'] == s_to]
+                if not transitions.index.empty:
+                    separetor = ','
+                    graph.edge(s_from, s_to, separetor.join(transitions['transition'].values))
         
         graph.view(filename=self.__name,directory='Automaton')      #Save Automaton as pdf file
     
+
+    def read_csv(self, file):
+        '''
+            Create the supervisor from a csv file
+        '''
+        source_file = pd.read_csv(file)
+
+        for i in source_file.index:
+            in_state = source_file.loc[i,source_file.columns[0]]
+            t = source_file.loc[i,source_file.columns[1]]
+            out_state = source_file.loc[i,source_file.columns[2]]
+            #Insert new states
+            if not in_state in self.__states:
+                self.insert_state(in_state)
+            if not out_state in self.__states:
+                self.insert_state(out_state)
+
+            #Insert transition
+            self.insert_transition(t,in_state,out_state)
+    
+    def read_txt(self, file, directory=None):
+        '''
+            Create the supervisor from a txt file
+        '''
+        pass
     
     
     #----- STATES methods:
@@ -144,7 +170,9 @@ class SupBuilder(object):
         else:
             print("Error: Inexistent node!")
 
+
 #########################################################################################################
+
 
 class SupMonitor(object):
 
