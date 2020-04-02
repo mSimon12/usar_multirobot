@@ -1,0 +1,8 @@
+prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/install
+
+Name: myrobot_gazebo
+Description: Description of myrobot_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

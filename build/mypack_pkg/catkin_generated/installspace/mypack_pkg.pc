@@ -1,0 +1,8 @@
+prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/install
+
+Name: mypack_pkg
+Description: Description of mypack_pkg
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
