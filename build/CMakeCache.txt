@@ -378,12 +378,6 @@ myrobot_description_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/pr
 //Value Computed by CMake
 myrobot_description_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/myrobot_description
 
-//Value Computed by CMake
-myrobot_gazebo_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/myrobot_gazebo
-
-//Value Computed by CMake
-myrobot_gazebo_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/myrobot_gazebo
-
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/melodic/share/rosconsole/cmake
 
@@ -407,6 +401,12 @@ rostime_DIR:PATH=/opt/ros/melodic/share/rostime/cmake
 
 //The directory containing a CMake configuration file for std_msgs.
 std_msgs_DIR:PATH=/opt/ros/melodic/share/std_msgs/cmake
+
+//Value Computed by CMake
+usar_gazebo_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/usar_gazebo
+
+//Value Computed by CMake
+usar_gazebo_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/usar_gazebo
 
 //The directory containing a CMake configuration file for xmlrpcpp.
 xmlrpcpp_DIR:PATH=/opt/ros/melodic/share/xmlrpcpp/cmake

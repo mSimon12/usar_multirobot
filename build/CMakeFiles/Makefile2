@@ -968,22 +968,22 @@ myrobot_description/preinstall:
 .PHONY : myrobot_description/preinstall
 
 #=============================================================================
-# Directory level rules for directory myrobot_gazebo
+# Directory level rules for directory usar_gazebo
 
 # Convenience name for "all" pass in the directory.
-myrobot_gazebo/all:
+usar_gazebo/all:
 
-.PHONY : myrobot_gazebo/all
+.PHONY : usar_gazebo/all
 
 # Convenience name for "clean" pass in the directory.
-myrobot_gazebo/clean:
+usar_gazebo/clean:
 
-.PHONY : myrobot_gazebo/clean
+.PHONY : usar_gazebo/clean
 
 # Convenience name for "preinstall" pass in the directory.
-myrobot_gazebo/preinstall:
+usar_gazebo/preinstall:
 
-.PHONY : myrobot_gazebo/preinstall
+.PHONY : usar_gazebo/preinstall
 
 #=============================================================================
 # Special targets to cleanup operation of make.

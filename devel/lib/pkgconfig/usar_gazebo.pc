@@ -1,0 +1,8 @@
+prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel
+
+Name: usar_gazebo
+Description: Description of usar_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

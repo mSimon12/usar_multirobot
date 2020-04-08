@@ -1,2 +1,2 @@
-mypack_pkg:myrobot_description:myrobot_gazebo
+mypack_pkg:myrobot_description:usar_gazebo
 -DCATKIN_DEVEL_PREFIX=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel -DCMAKE_INSTALL_PREFIX=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/install -G Unix Makefiles

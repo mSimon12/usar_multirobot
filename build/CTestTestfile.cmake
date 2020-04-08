@@ -7,4 +7,4 @@
 subdirs("gtest")
 subdirs("mypack_pkg")
 subdirs("myrobot_description")
-subdirs("myrobot_gazebo")
+subdirs("usar_gazebo")

@@ -133,7 +133,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/gtest/cmake_install.cmake")
   include("/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/mypack_pkg/cmake_install.cmake")
   include("/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/myrobot_description/cmake_install.cmake")
-  include("/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/myrobot_gazebo/cmake_install.cmake")
+  include("/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/usar_gazebo/cmake_install.cmake")
 
 endif()
 
