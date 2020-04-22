@@ -8,8 +8,14 @@
   <arg name="pitch" default="0.0"/>
   <arg name="yaw" default="0.0"/>
 
-  <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_model"
+  <param name="tf_prefix" value="$(arg robot_name)_tf" />
+  <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_$(arg robot_name)"
           args="-file $(find myrobot_description)/sdf/model.sdf -sdf -x $(arg xcoordinate) -y $(arg ycoordinate) -z $(arg zcoordinate) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg robot_name)"/>
 
-  <!-- Insert other nodes related to this package here -->
+  <!-- Parameters for the position controller -->
+  <param name="max_speed" value="3.0" />
+  <param name="max_ang_speed" value="3.0" />
+  <param name="robot_name" value="$(arg robot_name)" />
+  <node pkg="controllers" type="motion_controller.py" name="motion_controller" output='log'/>
+
 </launch>

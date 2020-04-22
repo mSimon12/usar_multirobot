@@ -79,5 +79,55 @@
 	<pose>20 25 1 0 -0 0</pose>
     </include>
 
+    <actor name="actor">
+      <skin>
+        <filename>walk.dae</filename>
+      </skin>
+      <animation name="walking">
+        <filename>walk.dae</filename>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <trajectory id="0" type="walking">
+          <waypoint>
+            <time>0</time>
+            <pose>0 -6 1.3 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>4</time>
+            <pose>0 -10 1.3 0 0 -1.57</pose>
+          </waypoint>
+          <waypoint>
+            <time>4.5</time>
+            <pose>0 -10 1.3 0 0 0</pose>
+          </waypoint>
+	  <waypoint>
+            <time>8.5</time>
+            <pose>4 -10 1.3 0 0 0</pose>
+          </waypoint>
+	  <waypoint>
+            <time>9.0</time>
+            <pose>4 -10 1.3 0 0 1.57</pose>
+          </waypoint>
+	  <waypoint>
+            <time>13.0</time>
+            <pose>4 -6 1.3 0 0 1.57</pose>
+          </waypoint>
+	  <waypoint>
+            <time>13.5</time>
+            <pose>4 -6 1.3 0 0 3.14</pose>
+          </waypoint>
+	  <waypoint>
+            <time>17.5</time>
+            <pose>0 -6 1.3 0 0 3.14</pose>
+          </waypoint>
+	  <waypoint>
+            <time>18</time>
+            <pose>0 -6 1.3 0 0 -1.57</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+
   </world>
 </sdf>

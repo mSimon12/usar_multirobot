@@ -1,0 +1,8 @@
+prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel
+
+Name: controllers
+Description: Description of controllers
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

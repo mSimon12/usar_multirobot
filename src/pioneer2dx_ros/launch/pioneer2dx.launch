@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_name" default="robot"/>
+  <arg name="xcoordinate" default="0.0"/>
+  <arg name="ycoordinate" default="0.0"/>
+  <arg name="zcoordinate" default="0.0"/>
+  <arg name="roll" default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+  
+  <param name="tf_prefix" value="$(arg robot_name)_tf" />
+  <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_$(arg robot_name)"
+          args="-file $(find pioneer2dx_ros)/sdf/model.sdf -sdf -x $(arg xcoordinate) -y $(arg ycoordinate) -z $(arg zcoordinate) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg robot_name)"/>
+
+  <!-- Parameters for the position controller -->
+  <param name="max_speed" value="2.2" />
+  <param name="max_ang_speed" value="6" />
+  <param name="robot_name" value="$(arg robot_name)" />
+  <node pkg="controllers" type="motion_controller.py" name="motion_controller" output='log'/>
+
+</launch>
