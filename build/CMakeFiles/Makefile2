@@ -264,7 +264,7 @@ gtest/googlemock/preinstall: gtest/googlemock/gtest/preinstall
 gtest/googlemock/CMakeFiles/gmock_main.dir/all:
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock_main.dir/build.make gtest/googlemock/CMakeFiles/gmock_main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=2 "Built target gmock_main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=4 "Built target gmock_main"
 .PHONY : gtest/googlemock/CMakeFiles/gmock_main.dir/all
 
 # Build rule for subdir invocation for target.
@@ -296,7 +296,7 @@ clean: gtest/googlemock/CMakeFiles/gmock_main.dir/clean
 gtest/googlemock/CMakeFiles/gmock.dir/all:
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/depend
 	$(MAKE) -f gtest/googlemock/CMakeFiles/gmock.dir/build.make gtest/googlemock/CMakeFiles/gmock.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=1 "Built target gmock"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=3 "Built target gmock"
 .PHONY : gtest/googlemock/CMakeFiles/gmock.dir/all
 
 # Build rule for subdir invocation for target.
@@ -379,7 +379,7 @@ clean: gtest/googlemock/gtest/CMakeFiles/gtest_main.dir/clean
 gtest/googlemock/gtest/CMakeFiles/gtest.dir/all:
 	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest.dir/depend
 	$(MAKE) -f gtest/googlemock/gtest/CMakeFiles/gtest.dir/build.make gtest/googlemock/gtest/CMakeFiles/gtest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=3 "Built target gtest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=5 "Built target gtest"
 .PHONY : gtest/googlemock/gtest/CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
@@ -742,7 +742,7 @@ hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messag
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=37,38,39,40,41,42,43,44,45,46,47,48,49,50,51 "Built target hector_uav_msgs_generate_messages_eus"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=38,39,40,41,42,43,44,45,46,47,48,49,50,51,52 "Built target hector_uav_msgs_generate_messages_eus"
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
@@ -779,7 +779,7 @@ hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/all:
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/rule
@@ -851,12 +851,12 @@ hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messag
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=22,23,24,25,26,27,28,29,30,31,32,33,34,35,36 "Built target hector_uav_msgs_generate_messages_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=24,25,26,27,28,29,30,31,32,33,34,35,36,37 "Built target hector_uav_msgs_generate_messages_cpp"
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/all
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 15
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 14
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/rule
@@ -992,7 +992,7 @@ hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messag
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=52,53,54,55,56,57,58,59,60,61,62,63,64,65 "Built target hector_uav_msgs_generate_messages_lisp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=53,54,55,56,57,58,59,60,61,62,63,64,65,66 "Built target hector_uav_msgs_generate_messages_lisp"
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/all
 
 # Build rule for subdir invocation for target.
@@ -1518,7 +1518,7 @@ all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_m
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 74
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 73
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages.dir/rule
@@ -2326,7 +2326,7 @@ hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messag
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=66,67,68,69,70,71,72,73,74,75,76,77,78,79,80 "Built target hector_uav_msgs_generate_messages_nodejs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=67,68,69,70,71,72,73,74,75,76,77,78,79,80,81 "Built target hector_uav_msgs_generate_messages_nodejs"
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/all
 
 # Build rule for subdir invocation for target.
@@ -2947,7 +2947,7 @@ hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messag
 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=81,82,83,84,85,86,87,88,89,90,91,92,93,94,95 "Built target hector_uav_msgs_generate_messages_py"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=82,83,84,85,86,87,88,89,90,91,92,93,94,95,96 "Built target hector_uav_msgs_generate_messages_py"
 .PHONY : hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/all
 
 # Build rule for subdir invocation for target.
@@ -3040,21 +3040,33 @@ clean: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generat
 # Directory level rules for directory controllers
 
 # Convenience name for "all" pass in the directory.
-controllers/all:
+controllers/all: controllers/CMakeFiles/controllers_generate_messages.dir/all
 
 .PHONY : controllers/all
 
 # Convenience name for "clean" pass in the directory.
+controllers/clean: controllers/CMakeFiles/controllers_gennodejs.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_genlisp.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_generate_messages_lisp.dir/clean
+controllers/clean: controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
 controllers/clean: controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir/clean
 controllers/clean: controllers/CMakeFiles/roscpp_generate_messages_eus.dir/clean
 controllers/clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
 controllers/clean: controllers/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
+controllers/clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
 controllers/clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
-controllers/clean: controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
+controllers/clean: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/clean
 controllers/clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/clean
 controllers/clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_generate_messages_cpp.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_generate_messages.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_gencpp.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_genpy.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_generate_messages_py.dir/clean
 controllers/clean: controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/clean
-controllers/clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_generate_messages_eus.dir/clean
+controllers/clean: controllers/CMakeFiles/controllers_geneus.dir/clean
 
 .PHONY : controllers/clean
 
@@ -3062,6 +3074,168 @@ controllers/clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.di
 controllers/preinstall:
 
 .PHONY : controllers/preinstall
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_gennodejs.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_gennodejs.dir/all: controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_gennodejs.dir/build.make controllers/CMakeFiles/controllers_gennodejs.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_gennodejs.dir/build.make controllers/CMakeFiles/controllers_gennodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_gennodejs"
+.PHONY : controllers/CMakeFiles/controllers_gennodejs.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_gennodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_gennodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_gennodejs.dir/rule
+
+# Convenience name for target.
+controllers_gennodejs: controllers/CMakeFiles/controllers_gennodejs.dir/rule
+
+.PHONY : controllers_gennodejs
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_gennodejs.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_gennodejs.dir/build.make controllers/CMakeFiles/controllers_gennodejs.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_gennodejs.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_gennodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_generate_messages_nodejs.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/all
+controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/all: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build.make controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build.make controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_generate_messages_nodejs"
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_nodejs: controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/rule
+
+.PHONY : controllers_generate_messages_nodejs
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build.make controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_genlisp.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_genlisp.dir/all: controllers/CMakeFiles/controllers_generate_messages_lisp.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_genlisp.dir/build.make controllers/CMakeFiles/controllers_genlisp.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_genlisp.dir/build.make controllers/CMakeFiles/controllers_genlisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_genlisp"
+.PHONY : controllers/CMakeFiles/controllers_genlisp.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_genlisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_genlisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_genlisp.dir/rule
+
+# Convenience name for target.
+controllers_genlisp: controllers/CMakeFiles/controllers_genlisp.dir/rule
+
+.PHONY : controllers_genlisp
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_genlisp.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_genlisp.dir/build.make controllers/CMakeFiles/controllers_genlisp.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_genlisp.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_genlisp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_generate_messages_lisp.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_generate_messages_lisp.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/all
+controllers/CMakeFiles/controllers_generate_messages_lisp.dir/all: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_lisp.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=1 "Built target controllers_generate_messages_lisp"
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_lisp.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_generate_messages_lisp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_lisp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_lisp: controllers/CMakeFiles/controllers_generate_messages_lisp.dir/rule
+
+.PHONY : controllers_generate_messages_lisp
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_generate_messages_lisp.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_lisp.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_lisp.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_generate_messages_lisp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/roscpp_generate_messages_py.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/roscpp_generate_messages_py.dir/all:
+	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target roscpp_generate_messages_py"
+.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_py: controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+.PHONY : roscpp_generate_messages_py
+
+# clean rule for target.
+controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
+.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
+
+.PHONY : clean
 
 #=============================================================================
 # Target rules for target controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir
@@ -3192,6 +3366,38 @@ clean: controllers/CMakeFiles/roscpp_generate_messages_cpp.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all:
+	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_eus"
+.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_eus: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_eus
+
+# clean rule for target.
+controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
+.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir
 
 # All Build rule for target.
@@ -3224,34 +3430,34 @@ clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target controllers/CMakeFiles/roscpp_generate_messages_py.dir
+# Target rules for target controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir
 
 # All Build rule for target.
-controllers/CMakeFiles/roscpp_generate_messages_py.dir/all:
-	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/depend
-	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target roscpp_generate_messages_py"
-.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
+controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all:
+	$(MAKE) -f controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build.make controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build.make controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target _controllers_generate_messages_check_deps_motion"
+.PHONY : controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all
 
 # Build rule for subdir invocation for target.
-controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule: cmake_check_build_system
+controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
-.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/rule
 
 # Convenience name for target.
-roscpp_generate_messages_py: controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+_controllers_generate_messages_check_deps_motion: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/rule
 
-.PHONY : roscpp_generate_messages_py
-
-# clean rule for target.
-controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean:
-	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
-.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
+.PHONY : _controllers_generate_messages_check_deps_motion
 
 # clean rule for target.
-clean: controllers/CMakeFiles/roscpp_generate_messages_py.dir/clean
+controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build.make controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/clean
+.PHONY : controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/clean
 
 .PHONY : clean
 
@@ -3320,6 +3526,177 @@ clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_generate_messages_cpp.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_generate_messages_cpp.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/all
+controllers/CMakeFiles/controllers_generate_messages_cpp.dir/all: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_cpp.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_generate_messages_cpp"
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_cpp.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_generate_messages_cpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_cpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_cpp: controllers/CMakeFiles/controllers_generate_messages_cpp.dir/rule
+
+.PHONY : controllers_generate_messages_cpp
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_generate_messages_cpp.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_cpp.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_cpp.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_generate_messages_cpp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_generate_messages.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_generate_messages.dir/all: controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/all
+controllers/CMakeFiles/controllers_generate_messages.dir/all: controllers/CMakeFiles/controllers_generate_messages_lisp.dir/all
+controllers/CMakeFiles/controllers_generate_messages.dir/all: controllers/CMakeFiles/controllers_generate_messages_cpp.dir/all
+controllers/CMakeFiles/controllers_generate_messages.dir/all: controllers/CMakeFiles/controllers_generate_messages_py.dir/all
+controllers/CMakeFiles/controllers_generate_messages.dir/all: controllers/CMakeFiles/controllers_generate_messages_eus.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages.dir/build.make controllers/CMakeFiles/controllers_generate_messages.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages.dir/build.make controllers/CMakeFiles/controllers_generate_messages.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_generate_messages"
+.PHONY : controllers/CMakeFiles/controllers_generate_messages.dir/all
+
+# Include target in all.
+all: controllers/CMakeFiles/controllers_generate_messages.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_generate_messages.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_generate_messages.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages: controllers/CMakeFiles/controllers_generate_messages.dir/rule
+
+.PHONY : controllers_generate_messages
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_generate_messages.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages.dir/build.make controllers/CMakeFiles/controllers_generate_messages.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_generate_messages.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_generate_messages.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_gencpp.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_gencpp.dir/all: controllers/CMakeFiles/controllers_generate_messages_cpp.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_gencpp.dir/build.make controllers/CMakeFiles/controllers_gencpp.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_gencpp.dir/build.make controllers/CMakeFiles/controllers_gencpp.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_gencpp"
+.PHONY : controllers/CMakeFiles/controllers_gencpp.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_gencpp.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_gencpp.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_gencpp.dir/rule
+
+# Convenience name for target.
+controllers_gencpp: controllers/CMakeFiles/controllers_gencpp.dir/rule
+
+.PHONY : controllers_gencpp
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_gencpp.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_gencpp.dir/build.make controllers/CMakeFiles/controllers_gencpp.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_gencpp.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_gencpp.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_genpy.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_genpy.dir/all: controllers/CMakeFiles/controllers_generate_messages_py.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_genpy.dir/build.make controllers/CMakeFiles/controllers_genpy.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_genpy.dir/build.make controllers/CMakeFiles/controllers_genpy.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_genpy"
+.PHONY : controllers/CMakeFiles/controllers_genpy.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_genpy.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_genpy.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_genpy.dir/rule
+
+# Convenience name for target.
+controllers_genpy: controllers/CMakeFiles/controllers_genpy.dir/rule
+
+.PHONY : controllers_genpy
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_genpy.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_genpy.dir/build.make controllers/CMakeFiles/controllers_genpy.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_genpy.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_genpy.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_generate_messages_py.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_generate_messages_py.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
+controllers/CMakeFiles/controllers_generate_messages_py.dir/all: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_py.dir/build.make controllers/CMakeFiles/controllers_generate_messages_py.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_py.dir/build.make controllers/CMakeFiles/controllers_generate_messages_py.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=2 "Built target controllers_generate_messages_py"
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_py.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_generate_messages_py.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_py.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_py.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_py: controllers/CMakeFiles/controllers_generate_messages_py.dir/rule
+
+.PHONY : controllers_generate_messages_py
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_generate_messages_py.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_py.dir/build.make controllers/CMakeFiles/controllers_generate_messages_py.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_py.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_generate_messages_py.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target controllers/CMakeFiles/roscpp_generate_messages_lisp.dir
 
 # All Build rule for target.
@@ -3352,34 +3729,67 @@ clean: controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir
+# Target rules for target controllers/CMakeFiles/controllers_generate_messages_eus.dir
 
 # All Build rule for target.
-controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all:
-	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/depend
-	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target rosgraph_msgs_generate_messages_eus"
-.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
+controllers/CMakeFiles/controllers_generate_messages_eus.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_eus.dir/all
+controllers/CMakeFiles/controllers_generate_messages_eus.dir/all: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_eus.dir/build.make controllers/CMakeFiles/controllers_generate_messages_eus.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_eus.dir/build.make controllers/CMakeFiles/controllers_generate_messages_eus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_generate_messages_eus"
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_eus.dir/all
 
 # Build rule for subdir invocation for target.
-controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule: cmake_check_build_system
+controllers/CMakeFiles/controllers_generate_messages_eus.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
-	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_eus.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
-.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-rosgraph_msgs_generate_messages_eus: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+controllers_generate_messages_eus: controllers/CMakeFiles/controllers_generate_messages_eus.dir/rule
 
-.PHONY : rosgraph_msgs_generate_messages_eus
-
-# clean rule for target.
-controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean:
-	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
-.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
+.PHONY : controllers_generate_messages_eus
 
 # clean rule for target.
-clean: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/clean
+controllers/CMakeFiles/controllers_generate_messages_eus.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_eus.dir/build.make controllers/CMakeFiles/controllers_generate_messages_eus.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_eus.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_generate_messages_eus.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target controllers/CMakeFiles/controllers_geneus.dir
+
+# All Build rule for target.
+controllers/CMakeFiles/controllers_geneus.dir/all: controllers/CMakeFiles/controllers_generate_messages_eus.dir/all
+	$(MAKE) -f controllers/CMakeFiles/controllers_geneus.dir/build.make controllers/CMakeFiles/controllers_geneus.dir/depend
+	$(MAKE) -f controllers/CMakeFiles/controllers_geneus.dir/build.make controllers/CMakeFiles/controllers_geneus.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target controllers_geneus"
+.PHONY : controllers/CMakeFiles/controllers_geneus.dir/all
+
+# Build rule for subdir invocation for target.
+controllers/CMakeFiles/controllers_geneus.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_geneus.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
+.PHONY : controllers/CMakeFiles/controllers_geneus.dir/rule
+
+# Convenience name for target.
+controllers_geneus: controllers/CMakeFiles/controllers_geneus.dir/rule
+
+.PHONY : controllers_geneus
+
+# clean rule for target.
+controllers/CMakeFiles/controllers_geneus.dir/clean:
+	$(MAKE) -f controllers/CMakeFiles/controllers_geneus.dir/build.make controllers/CMakeFiles/controllers_geneus.dir/clean
+.PHONY : controllers/CMakeFiles/controllers_geneus.dir/clean
+
+# clean rule for target.
+clean: controllers/CMakeFiles/controllers_geneus.dir/clean
 
 .PHONY : clean
 
@@ -3447,7 +3857,7 @@ clean: hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_
 hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target hector_quadrotor_propulsion"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=23 "Built target hector_quadrotor_propulsion"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/all
 
 # Include target in all.
@@ -4661,7 +5071,7 @@ clean: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMa
 hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/all:
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=7,8,9,10,11,12,13 "Built target hector_pose_estimation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=9,10,11,12,13,14,15 "Built target hector_pose_estimation"
 .PHONY : hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/all
 
 # Include target in all.
@@ -4890,7 +5300,7 @@ clean: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFil
 hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=14 "Built target hector_pose_estimation_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=16 "Built target hector_pose_estimation_node"
 .PHONY : hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/all
 
 # Include target in all.
@@ -5088,7 +5498,7 @@ hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose
 hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=98 "Built target pose_estimation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target pose_estimation"
 .PHONY : hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/all
 
 # Include target in all.
@@ -5098,7 +5508,7 @@ all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 9
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/rule
@@ -5158,7 +5568,7 @@ hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hect
 hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=15 "Built target hector_pose_estimation_nodelet"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=17 "Built target hector_pose_estimation_nodelet"
 .PHONY : hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/all
 
 # Include target in all.
@@ -5329,7 +5739,7 @@ hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_r
 hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/all: hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=6 "Built target hector_gazebo_ros_baro"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=8 "Built target hector_gazebo_ros_baro"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/all
 
 # Include target in all.
@@ -5463,7 +5873,7 @@ hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_q
 hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/all: hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=4 "Built target hector_gazebo_quadrotor_aerodynamics"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=6 "Built target hector_gazebo_quadrotor_aerodynamics"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/all
 
 # Include target in all.
@@ -5534,7 +5944,7 @@ hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_q
 hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/all: hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=5 "Built target hector_gazebo_quadrotor_propulsion"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=7 "Built target hector_gazebo_quadrotor_propulsion"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/all
 
 # Include target in all.
@@ -5794,7 +6204,7 @@ hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrot
 hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/all: hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=21 "Built target hector_quadrotor_pose_estimation_nodelet"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target hector_quadrotor_pose_estimation_nodelet"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/all
 
 # Include target in all.
@@ -5804,7 +6214,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_qu
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 26
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 24
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/rule
@@ -5834,7 +6244,7 @@ hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrot
 hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=20 "Built target hector_quadrotor_pose_estimation_node"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=22 "Built target hector_quadrotor_pose_estimation_node"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/all
 
 # Include target in all.
@@ -5844,7 +6254,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_qu
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 25
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 24
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/rule
@@ -5874,7 +6284,7 @@ hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrot
 hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/all: hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target hector_quadrotor_pose_estimation"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=21 "Built target hector_quadrotor_pose_estimation"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/all
 
 # Include target in all.
@@ -6314,7 +6724,7 @@ clean: hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_gene
 hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=19 "Built target hector_quadrotor_interface"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=20 "Built target hector_quadrotor_interface"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/all
 
 # Include target in all.
@@ -6324,7 +6734,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadroto
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 16
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 15
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/rule
@@ -6391,16 +6801,16 @@ hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: h
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/all
@@ -6429,7 +6839,7 @@ hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: h
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all: hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target pose_action"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=98 "Built target pose_action"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/all
 
 # Include target in all.
@@ -6484,16 +6894,16 @@ hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/all
@@ -6522,7 +6932,7 @@ hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all: hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=96 "Built target landing_action"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num= "Built target landing_action"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all
 
 # Include target in all.
@@ -6532,7 +6942,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.di
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 76
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 74
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/rule
@@ -6577,16 +6987,16 @@ hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/all
@@ -6625,7 +7035,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.di
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 76
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 75
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/rule
@@ -6709,16 +7119,16 @@ hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_c
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/roscpp_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/all
@@ -6779,7 +7189,7 @@ hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_c
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all: hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_py.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=17,18 "Built target hector_quadrotor_controllers"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=19 "Built target hector_quadrotor_controllers"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all
 
 # Include target in all.
@@ -6789,7 +7199,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadro
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 77
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 75
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/rule
@@ -7524,16 +7934,16 @@ hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/al
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/roscpp_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/roscpp_generate_messages_cpp.dir/all
+hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/roscpp_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/all
-hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/all
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all: hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/all
@@ -7577,7 +7987,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.d
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 76
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 75
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/rule
@@ -7787,7 +8197,7 @@ clean: hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/contr
 hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/all: hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/all
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/depend
 	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=16 "Built target hector_quadrotor_controller_gazebo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles --progress-num=18 "Built target hector_quadrotor_controller_gazebo"
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/all
 
 # Include target in all.
@@ -7797,7 +8207,7 @@ all: hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_
 
 # Build rule for subdir invocation for target.
 hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 17
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 16
 	$(MAKE) -f CMakeFiles/Makefile2 hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/CMakeFiles 0
 .PHONY : hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/rule

@@ -114,6 +114,7 @@ hector_quadrotor_controller_gazebo_EXTERNAL_OBJECTS =
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libboost_iostreams.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libsdformat.so
+/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libOgreTerrain.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libOgrePaging.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /opt/ros/melodic/lib/libgazebo_ros_control.so
@@ -192,6 +193,7 @@ hector_quadrotor_controller_gazebo_EXTERNAL_OBJECTS =
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libpthread.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libprotobuf.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libsdformat.so
+/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libOgreMain.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libboost_thread.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/libhector_quadrotor_controller_gazebo.so: /usr/lib/x86_64-linux-gnu/libboost_system.so

@@ -56,50 +56,6 @@ CMAKE_BINARY_DIR = /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multiro
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target install/strip
-install/strip: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip
-
-# Special rule for the target install/strip
-install/strip/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
-	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-.PHONY : install/strip/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -123,6 +79,27 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target install
 install: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
@@ -134,6 +111,29 @@ install/fast: preinstall/fast
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
 	/usr/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	/usr/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -166,6 +166,81 @@ preinstall/fast:
 depend:
 	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_gennodejs.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_gennodejs.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_gennodejs.dir/rule
+
+# Convenience name for target.
+controllers_gennodejs: controllers/CMakeFiles/controllers_gennodejs.dir/rule
+
+.PHONY : controllers_gennodejs
+
+# fast build rule for target.
+controllers_gennodejs/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_gennodejs.dir/build.make controllers/CMakeFiles/controllers_gennodejs.dir/build
+.PHONY : controllers_gennodejs/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_nodejs: controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/rule
+
+.PHONY : controllers_generate_messages_nodejs
+
+# fast build rule for target.
+controllers_generate_messages_nodejs/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build.make controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build
+.PHONY : controllers_generate_messages_nodejs/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_genlisp.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_genlisp.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_genlisp.dir/rule
+
+# Convenience name for target.
+controllers_genlisp: controllers/CMakeFiles/controllers_genlisp.dir/rule
+
+.PHONY : controllers_genlisp
+
+# fast build rule for target.
+controllers_genlisp/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_genlisp.dir/build.make controllers/CMakeFiles/controllers_genlisp.dir/build
+.PHONY : controllers_genlisp/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_generate_messages_lisp.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_lisp.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_lisp: controllers/CMakeFiles/controllers_generate_messages_lisp.dir/rule
+
+.PHONY : controllers_generate_messages_lisp
+
+# fast build rule for target.
+controllers_generate_messages_lisp/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build
+.PHONY : controllers_generate_messages_lisp/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+# Convenience name for target.
+roscpp_generate_messages_py: controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
 controllers/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
@@ -228,6 +303,21 @@ roscpp_generate_messages_cpp/fast:
 .PHONY : roscpp_generate_messages_cpp/fast
 
 # Convenience name for target.
+controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+# Convenience name for target.
+rosgraph_msgs_generate_messages_eus: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+
+.PHONY : rosgraph_msgs_generate_messages_eus
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_eus/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+.PHONY : rosgraph_msgs_generate_messages_eus/fast
+
+# Convenience name for target.
 controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
 	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
@@ -243,19 +333,19 @@ rosgraph_msgs_generate_messages_lisp/fast:
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
-.PHONY : controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/rule
+.PHONY : controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/rule
 
 # Convenience name for target.
-roscpp_generate_messages_py: controllers/CMakeFiles/roscpp_generate_messages_py.dir/rule
+_controllers_generate_messages_check_deps_motion: controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/rule
 
-.PHONY : roscpp_generate_messages_py
+.PHONY : _controllers_generate_messages_check_deps_motion
 
 # fast build rule for target.
-roscpp_generate_messages_py/fast:
-	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
+_controllers_generate_messages_check_deps_motion/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build.make controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build
+.PHONY : _controllers_generate_messages_check_deps_motion/fast
 
 # Convenience name for target.
 controllers/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
@@ -288,6 +378,81 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
+controllers/CMakeFiles/controllers_generate_messages_cpp.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_cpp.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_cpp: controllers/CMakeFiles/controllers_generate_messages_cpp.dir/rule
+
+.PHONY : controllers_generate_messages_cpp
+
+# fast build rule for target.
+controllers_generate_messages_cpp/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build
+.PHONY : controllers_generate_messages_cpp/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_generate_messages.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_generate_messages.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages: controllers/CMakeFiles/controllers_generate_messages.dir/rule
+
+.PHONY : controllers_generate_messages
+
+# fast build rule for target.
+controllers_generate_messages/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_generate_messages.dir/build.make controllers/CMakeFiles/controllers_generate_messages.dir/build
+.PHONY : controllers_generate_messages/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_gencpp.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_gencpp.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_gencpp.dir/rule
+
+# Convenience name for target.
+controllers_gencpp: controllers/CMakeFiles/controllers_gencpp.dir/rule
+
+.PHONY : controllers_gencpp
+
+# fast build rule for target.
+controllers_gencpp/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_gencpp.dir/build.make controllers/CMakeFiles/controllers_gencpp.dir/build
+.PHONY : controllers_gencpp/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_genpy.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_genpy.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_genpy.dir/rule
+
+# Convenience name for target.
+controllers_genpy: controllers/CMakeFiles/controllers_genpy.dir/rule
+
+.PHONY : controllers_genpy
+
+# fast build rule for target.
+controllers_genpy/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_genpy.dir/build.make controllers/CMakeFiles/controllers_genpy.dir/build
+.PHONY : controllers_genpy/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_generate_messages_py.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_py.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_py.dir/rule
+
+# Convenience name for target.
+controllers_generate_messages_py: controllers/CMakeFiles/controllers_generate_messages_py.dir/rule
+
+.PHONY : controllers_generate_messages_py
+
+# fast build rule for target.
+controllers_generate_messages_py/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_py.dir/build.make controllers/CMakeFiles/controllers_generate_messages_py.dir/build
+.PHONY : controllers_generate_messages_py/fast
+
+# Convenience name for target.
 controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
 	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 .PHONY : controllers/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
@@ -303,19 +468,34 @@ roscpp_generate_messages_lisp/fast:
 .PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
-controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
-.PHONY : controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+controllers/CMakeFiles/controllers_generate_messages_eus.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_generate_messages_eus.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-rosgraph_msgs_generate_messages_eus: controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+controllers_generate_messages_eus: controllers/CMakeFiles/controllers_generate_messages_eus.dir/rule
 
-.PHONY : rosgraph_msgs_generate_messages_eus
+.PHONY : controllers_generate_messages_eus
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
+controllers_generate_messages_eus/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_eus.dir/build.make controllers/CMakeFiles/controllers_generate_messages_eus.dir/build
+.PHONY : controllers_generate_messages_eus/fast
+
+# Convenience name for target.
+controllers/CMakeFiles/controllers_geneus.dir/rule:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f CMakeFiles/Makefile2 controllers/CMakeFiles/controllers_geneus.dir/rule
+.PHONY : controllers/CMakeFiles/controllers_geneus.dir/rule
+
+# Convenience name for target.
+controllers_geneus: controllers/CMakeFiles/controllers_geneus.dir/rule
+
+.PHONY : controllers_geneus
+
+# fast build rule for target.
+controllers_geneus/fast:
+	cd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build && $(MAKE) -f controllers/CMakeFiles/controllers_geneus.dir/build.make controllers/CMakeFiles/controllers_geneus.dir/build
+.PHONY : controllers_geneus/fast
 
 # Help Target
 help:
@@ -323,23 +503,35 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... install/strip"
+	@echo "... install/local"
+	@echo "... rebuild_cache"
+	@echo "... test"
+	@echo "... controllers_gennodejs"
+	@echo "... controllers_generate_messages_nodejs"
+	@echo "... controllers_genlisp"
+	@echo "... controllers_generate_messages_lisp"
+	@echo "... list_install_components"
+	@echo "... roscpp_generate_messages_py"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_cpp"
+	@echo "... install"
+	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
-	@echo "... roscpp_generate_messages_py"
-	@echo "... list_install_components"
+	@echo "... _controllers_generate_messages_check_deps_motion"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... roscpp_generate_messages_lisp"
+	@echo "... controllers_generate_messages_cpp"
+	@echo "... install/strip"
+	@echo "... controllers_generate_messages"
+	@echo "... controllers_gencpp"
 	@echo "... edit_cache"
-	@echo "... test"
-	@echo "... install/local"
-	@echo "... rebuild_cache"
-	@echo "... rosgraph_msgs_generate_messages_eus"
-	@echo "... install"
+	@echo "... controllers_genpy"
+	@echo "... controllers_generate_messages_py"
+	@echo "... roscpp_generate_messages_lisp"
+	@echo "... controllers_generate_messages_eus"
+	@echo "... controllers_geneus"
 .PHONY : help
 
 

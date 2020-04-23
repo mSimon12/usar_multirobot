@@ -1,4 +1,5 @@
 # Hashes of file build rules.
+ceea337c6d76210e906d18ced2fa57c8 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/controllers/motion.h
 f48163d18f5cb97276c57f6a1620e288 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/Altimeter.h
 5e0717a3f716c5c299cb82f7db0906f1 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/AttitudeCommand.h
 662802e1317d85b52cdefcbb775e8c28 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/Compass.h
@@ -42,6 +43,8 @@ ffa72029f3d751f7879c160fff1cbf4f /media/marcelo/ARQUIVOS/desenvolvimento/projeto
 13646e7651ebaaeb5c94013f5af09daa /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/VelocityXYCommand.h
 5b0302661a293235db2cd3a1feb595dd /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/VelocityZCommand.h
 f4a0b55117ab520bc31d5d9c3dbd7cc4 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/YawrateCommand.h
+592e0cbf6757a1dab1f9ba7e5d55f73a /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/controllers/srv/__init__.py
+5980b602939c237adc90b6cde1e3856f /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/controllers/srv/_motion.py
 4918483b567c0ca5e906e673a2b575ce /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/hector_uav_msgs/msg/_Altimeter.py
 1a84b9a3cb554f982a6bd8a3259ac9e6 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/hector_uav_msgs/msg/_AttitudeCommand.py
 af720b16a5532a9a7cd2e35ec39e022d /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/hector_uav_msgs/msg/_Compass.py
@@ -87,6 +90,7 @@ abc3a3e8cb87d0c59afcf738f32da899 /media/marcelo/ARQUIVOS/desenvolvimento/projeto
 6c33b4590bf48af7c68a43382a30907e /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/hector_uav_msgs/msg/__init__.py
 6d7d78de51b3bce71775ea1442c5f1bf /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/hector_uav_msgs/srv/_EnableMotors.py
 b4c9c88a1d1de3aa5c695c1a4c321087 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib/python2.7/dist-packages/hector_uav_msgs/srv/__init__.py
+e9e33373db717a00f6c059dd128a367a /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp/ros/controllers/srv/motion.lisp
 208cacf8e344713d5761c7532d9f5fe0 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp/ros/hector_uav_msgs/msg/Altimeter.lisp
 c46ad95f419c5aaac304199de6098e96 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp/ros/hector_uav_msgs/msg/AttitudeCommand.lisp
 10c64b4717a2a665cd5438dd19f6de85 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp/ros/hector_uav_msgs/msg/Compass.lisp
@@ -130,6 +134,7 @@ bfa8b4ae7fbbac946760f00d6c40446f /media/marcelo/ARQUIVOS/desenvolvimento/projeto
 d53a3c273da1ffd17e1075ea73d58e3d /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp/ros/hector_uav_msgs/msg/VelocityZCommand.lisp
 7b8c6dc44d5f21cb129e4437734c65ed /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp/ros/hector_uav_msgs/msg/YawrateCommand.lisp
 4ff2538564985d362b111d1d46d4d954 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp/ros/hector_uav_msgs/srv/EnableMotors.lisp
+0d753a5c66223c200eecc24a2fc6cb1e /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/gennodejs/ros/controllers/srv/motion.js
 62f8e2df710da16ed5d5f3dacb01b0a7 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/gennodejs/ros/hector_uav_msgs/msg/Altimeter.js
 4c0b93fffa6969853c9214eaeb579765 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/gennodejs/ros/hector_uav_msgs/msg/AttitudeCommand.js
 20fabbc1a75ce1318d40db7aa370cc12 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/gennodejs/ros/hector_uav_msgs/msg/Compass.js
@@ -173,6 +178,8 @@ cdb1906d19c140fb5a627c5e8711cb63 /media/marcelo/ARQUIVOS/desenvolvimento/projeto
 89c099acc8c4973dc7dd04f393dd4126 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/gennodejs/ros/hector_uav_msgs/msg/VelocityZCommand.js
 e1855447ebc6a596faab45d7be99f089 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/gennodejs/ros/hector_uav_msgs/msg/YawrateCommand.js
 dc3e29f9d525d30308b3bf2ce8d39352 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/gennodejs/ros/hector_uav_msgs/srv/EnableMotors.js
+6bc943b9d860228ce643492cb5ac698a /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/roseus/ros/controllers/manifest.l
+f76e7d8060404a52d753e2482906a760 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/roseus/ros/controllers/srv/motion.l
 ba0f4eaf853af3a0f139e763e668dcb4 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/roseus/ros/hector_uav_msgs/manifest.l
 d0f2dda2286b8e692c61667e4acc7ff4 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/roseus/ros/hector_uav_msgs/msg/Altimeter.l
 16aece7c07503bac748254e4651d4d81 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/roseus/ros/hector_uav_msgs/msg/AttitudeCommand.l
@@ -218,6 +225,12 @@ b2ea1caf91ccb8b29c03565bd495fd7f /media/marcelo/ARQUIVOS/desenvolvimento/projeto
 7b53cf0fc0a7cfdb686d9cc5224e7bca /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/roseus/ros/hector_uav_msgs/msg/YawrateCommand.l
 f621032490b82ca5f0e194926e5e4927 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/roseus/ros/hector_uav_msgs/srv/EnableMotors.l
 4944089e685101b5d750b050d76c590d CMakeFiles/clean_test_results
+2d07442bbc2277cf919ff9a873e62b1e controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion
+26e267cb8d0d8c8e8985e626d3159f75 controllers/CMakeFiles/controllers_generate_messages_cpp
+26e267cb8d0d8c8e8985e626d3159f75 controllers/CMakeFiles/controllers_generate_messages_eus
+26e267cb8d0d8c8e8985e626d3159f75 controllers/CMakeFiles/controllers_generate_messages_lisp
+26e267cb8d0d8c8e8985e626d3159f75 controllers/CMakeFiles/controllers_generate_messages_nodejs
+26e267cb8d0d8c8e8985e626d3159f75 controllers/CMakeFiles/controllers_generate_messages_py
 dd09ac6a68ca804e33e69d7aee998fe5 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Altimeter
 3835731cbb721b751f07656090b4a222 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_AttitudeCommand
 c526a9d039b69b21ff465c2687fd8829 hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Compass

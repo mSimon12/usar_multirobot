@@ -1195,6 +1195,71 @@ _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand/fast:
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand/fast
 
 #=============================================================================
+# Target rules for targets named controllers_gennodejs
+
+# Build rule for target.
+controllers_gennodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_gennodejs
+.PHONY : controllers_gennodejs
+
+# fast build rule for target.
+controllers_gennodejs/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_gennodejs.dir/build.make controllers/CMakeFiles/controllers_gennodejs.dir/build
+.PHONY : controllers_gennodejs/fast
+
+#=============================================================================
+# Target rules for targets named controllers_generate_messages_nodejs
+
+# Build rule for target.
+controllers_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_generate_messages_nodejs
+.PHONY : controllers_generate_messages_nodejs
+
+# fast build rule for target.
+controllers_generate_messages_nodejs/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build.make controllers/CMakeFiles/controllers_generate_messages_nodejs.dir/build
+.PHONY : controllers_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named controllers_genlisp
+
+# Build rule for target.
+controllers_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_genlisp
+.PHONY : controllers_genlisp
+
+# fast build rule for target.
+controllers_genlisp/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_genlisp.dir/build.make controllers/CMakeFiles/controllers_genlisp.dir/build
+.PHONY : controllers_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named controllers_generate_messages_lisp
+
+# Build rule for target.
+controllers_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_generate_messages_lisp
+.PHONY : controllers_generate_messages_lisp
+
+# fast build rule for target.
+controllers_generate_messages_lisp/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_lisp.dir/build
+.PHONY : controllers_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named roscpp_generate_messages_py
+
+# Build rule for target.
+roscpp_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_py
+.PHONY : roscpp_generate_messages_py
+
+# fast build rule for target.
+roscpp_generate_messages_py/fast:
+	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/build
+.PHONY : roscpp_generate_messages_py/fast
+
+#=============================================================================
 # Target rules for targets named roscpp_generate_messages_nodejs
 
 # Build rule for target.
@@ -1247,6 +1312,19 @@ roscpp_generate_messages_cpp/fast:
 .PHONY : roscpp_generate_messages_cpp/fast
 
 #=============================================================================
+# Target rules for targets named rosgraph_msgs_generate_messages_eus
+
+# Build rule for target.
+rosgraph_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_eus
+.PHONY : rosgraph_msgs_generate_messages_eus
+
+# fast build rule for target.
+rosgraph_msgs_generate_messages_eus/fast:
+	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+.PHONY : rosgraph_msgs_generate_messages_eus/fast
+
+#=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_lisp
 
 # Build rule for target.
@@ -1260,17 +1338,17 @@ rosgraph_msgs_generate_messages_lisp/fast:
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 #=============================================================================
-# Target rules for targets named roscpp_generate_messages_py
+# Target rules for targets named _controllers_generate_messages_check_deps_motion
 
 # Build rule for target.
-roscpp_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 roscpp_generate_messages_py
-.PHONY : roscpp_generate_messages_py
+_controllers_generate_messages_check_deps_motion: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _controllers_generate_messages_check_deps_motion
+.PHONY : _controllers_generate_messages_check_deps_motion
 
 # fast build rule for target.
-roscpp_generate_messages_py/fast:
-	$(MAKE) -f controllers/CMakeFiles/roscpp_generate_messages_py.dir/build.make controllers/CMakeFiles/roscpp_generate_messages_py.dir/build
-.PHONY : roscpp_generate_messages_py/fast
+_controllers_generate_messages_check_deps_motion/fast:
+	$(MAKE) -f controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build.make controllers/CMakeFiles/_controllers_generate_messages_check_deps_motion.dir/build
+.PHONY : _controllers_generate_messages_check_deps_motion/fast
 
 #=============================================================================
 # Target rules for targets named rosgraph_msgs_generate_messages_nodejs
@@ -1299,6 +1377,71 @@ rosgraph_msgs_generate_messages_py/fast:
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
+# Target rules for targets named controllers_generate_messages_cpp
+
+# Build rule for target.
+controllers_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_generate_messages_cpp
+.PHONY : controllers_generate_messages_cpp
+
+# fast build rule for target.
+controllers_generate_messages_cpp/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build.make controllers/CMakeFiles/controllers_generate_messages_cpp.dir/build
+.PHONY : controllers_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named controllers_generate_messages
+
+# Build rule for target.
+controllers_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_generate_messages
+.PHONY : controllers_generate_messages
+
+# fast build rule for target.
+controllers_generate_messages/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages.dir/build.make controllers/CMakeFiles/controllers_generate_messages.dir/build
+.PHONY : controllers_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named controllers_gencpp
+
+# Build rule for target.
+controllers_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_gencpp
+.PHONY : controllers_gencpp
+
+# fast build rule for target.
+controllers_gencpp/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_gencpp.dir/build.make controllers/CMakeFiles/controllers_gencpp.dir/build
+.PHONY : controllers_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named controllers_genpy
+
+# Build rule for target.
+controllers_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_genpy
+.PHONY : controllers_genpy
+
+# fast build rule for target.
+controllers_genpy/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_genpy.dir/build.make controllers/CMakeFiles/controllers_genpy.dir/build
+.PHONY : controllers_genpy/fast
+
+#=============================================================================
+# Target rules for targets named controllers_generate_messages_py
+
+# Build rule for target.
+controllers_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_generate_messages_py
+.PHONY : controllers_generate_messages_py
+
+# fast build rule for target.
+controllers_generate_messages_py/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_py.dir/build.make controllers/CMakeFiles/controllers_generate_messages_py.dir/build
+.PHONY : controllers_generate_messages_py/fast
+
+#=============================================================================
 # Target rules for targets named roscpp_generate_messages_lisp
 
 # Build rule for target.
@@ -1312,17 +1455,30 @@ roscpp_generate_messages_lisp/fast:
 .PHONY : roscpp_generate_messages_lisp/fast
 
 #=============================================================================
-# Target rules for targets named rosgraph_msgs_generate_messages_eus
+# Target rules for targets named controllers_generate_messages_eus
 
 # Build rule for target.
-rosgraph_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 rosgraph_msgs_generate_messages_eus
-.PHONY : rosgraph_msgs_generate_messages_eus
+controllers_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_generate_messages_eus
+.PHONY : controllers_generate_messages_eus
 
 # fast build rule for target.
-rosgraph_msgs_generate_messages_eus/fast:
-	$(MAKE) -f controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make controllers/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
-.PHONY : rosgraph_msgs_generate_messages_eus/fast
+controllers_generate_messages_eus/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_generate_messages_eus.dir/build.make controllers/CMakeFiles/controllers_generate_messages_eus.dir/build
+.PHONY : controllers_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named controllers_geneus
+
+# Build rule for target.
+controllers_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 controllers_geneus
+.PHONY : controllers_geneus
+
+# fast build rule for target.
+controllers_geneus/fast:
+	$(MAKE) -f controllers/CMakeFiles/controllers_geneus.dir/build.make controllers/CMakeFiles/controllers_geneus.dir/build
+.PHONY : controllers_geneus/fast
 
 #=============================================================================
 # Target rules for targets named hector_quadrotor_aerodynamics
@@ -3106,16 +3262,28 @@ help:
 	@echo "... hector_uav_msgs_generate_messages_py"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_MotorCommand"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand"
+	@echo "... controllers_gennodejs"
+	@echo "... controllers_generate_messages_nodejs"
+	@echo "... controllers_genlisp"
+	@echo "... controllers_generate_messages_lisp"
+	@echo "... roscpp_generate_messages_py"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_cpp"
+	@echo "... rosgraph_msgs_generate_messages_eus"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
-	@echo "... roscpp_generate_messages_py"
+	@echo "... _controllers_generate_messages_check_deps_motion"
 	@echo "... rosgraph_msgs_generate_messages_nodejs"
 	@echo "... rosgraph_msgs_generate_messages_py"
+	@echo "... controllers_generate_messages_cpp"
+	@echo "... controllers_generate_messages"
+	@echo "... controllers_gencpp"
+	@echo "... controllers_genpy"
+	@echo "... controllers_generate_messages_py"
 	@echo "... roscpp_generate_messages_lisp"
-	@echo "... rosgraph_msgs_generate_messages_eus"
+	@echo "... controllers_generate_messages_eus"
+	@echo "... controllers_geneus"
 	@echo "... hector_quadrotor_aerodynamics"
 	@echo "... hector_quadrotor_propulsion"
 	@echo "... uuid_msgs_generate_messages_cpp"
