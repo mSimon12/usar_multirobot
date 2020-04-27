@@ -10,7 +10,7 @@ roslaunch usar_gazebo post-disaster.launch
 To control the a robot position:
 ```
 source devel/setup.bash
-rosrun controllers robot_name x y rot
+rosrun controllers client.py robot_name x y rot
 ```
 'robot_name' pode ser: pioneer2dx_1, pioneer2dx_2, pioneer3at_1, pioneer3at_2
 x, y e rot representam a localização desejada e orientação final
