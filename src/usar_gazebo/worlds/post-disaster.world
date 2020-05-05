@@ -28,7 +28,7 @@
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
-      <shadows>1</shadows>
+      <shadows>true</shadows>
       <sky>
 	 <clouds>
 	    <speed>0.6</speed>
@@ -50,7 +50,7 @@
 
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>25.6856 -32.4837 42.3433 0 0.699644 2.22418</pose>
+        <pose frame=''>70 -65 35 -0 0.35 2.4</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -66,20 +66,20 @@
 
     <include>
 	<uri>model://collapsed_industrial</uri>
-	<pose>-30 20 0.8 0 -0 0</pose>
+	<pose>-20 10 0.8 0 -0 0</pose>
     </include>
 
     <include>
 	<uri>model://collapsed_house</uri>
-	<pose>-20 -20 0.8 0 -0 0</pose>
+	<pose>-20 -30 0.8 0 -0 0</pose>
     </include>
 
     <include>
 	<uri>model://collapsed_fire_station</uri>
-	<pose>20 25 1 0 -0 0</pose>
+	<pose>35 5 1 0 -0 0</pose>
     </include>
 
-    <actor name="actor">
+    <!-- <actor name="actor">
       <skin>
         <filename>walk.dae</filename>
       </skin>
@@ -127,7 +127,7 @@
           </waypoint>
         </trajectory>
       </script>
-    </actor>
+    </actor> -->
 
   </world>
 </sdf>
