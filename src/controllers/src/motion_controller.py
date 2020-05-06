@@ -107,11 +107,11 @@ def controller(msg):
                     speed.angular.z = (MAX_ANG_SPEED - 0.2) * angle_to_goal_error/pi - 0.2      #rotate velocity proportional to difference
             else:
                 # Linear speed limitation 
-                if abs(new_speed - speed.linear.x) > 0.2:
+                if abs(new_speed - speed.linear.x) > 0.1:
                     if new_speed > speed.linear.x:
-                        speed.linear.x = speed.linear.x + 0.2
+                        speed.linear.x = speed.linear.x + 0.1
                     else:
-                        speed.linear.x = speed.linear.x - 0.2
+                        speed.linear.x = speed.linear.x - 0.1
                 else:
                     speed.linear.x = new_speed 
                 speed.angular.z = (MAX_ANG_SPEED/pi) * angle_to_goal_error * (1 - exp(-dist))
@@ -124,11 +124,11 @@ def controller(msg):
                 speed.angular.z = (MAX_ANG_SPEED - 0.2) * angle_error/pi - 0.2      #rotate velocity proportional to difference
         elif flag == 2:
             # Correction phase
-            if abs(new_speed - speed.linear.x) > 0.2:
+            if abs(new_speed - speed.linear.x) > 0.1:
                 if new_speed > speed.linear.x:
-                    speed.linear.x = speed.linear.x + 0.2
+                    speed.linear.x = speed.linear.x + 0.1
                 else:
-                    speed.linear.x = speed.linear.x - 0.2
+                    speed.linear.x = speed.linear.x - 0.1
             else:
                 speed.linear.x = new_speed 
             speed.angular.z = (MAX_ANG_SPEED/pi) * (angle_to_goal_error + angle_error)/2
