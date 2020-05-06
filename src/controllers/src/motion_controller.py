@@ -81,7 +81,7 @@ def controller(msg):
         if dist > 0.3:
             # Approach phase
             flag = 0
-        elif dist < 0.05 and abs(angle_error) < 0.05:
+        elif dist < 0.1 and abs(angle_error) < 0.05:
             # End the movement
             speed.linear.x = 0
             speed.angular.z = 0

@@ -98,7 +98,7 @@
     </include>
   </group>
 
-  <!-- Spawn simulated quadrotor uav 2 -->
+  <!-- Spawn simulated quadrotor uav 2 
   <group ns="UAV_2">
     <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
       <arg name="name" default="UAV_2"/>
@@ -112,6 +112,6 @@
       <arg name="y" default="2.0"/>
       <arg name="z" default="1.46"/> 
     </include>
-  </group>
+  </group> -->
 
 </launch>

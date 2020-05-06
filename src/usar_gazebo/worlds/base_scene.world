@@ -20,7 +20,7 @@
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type='adiabatic'/>
     <physics name='default_physics' default='0' type='ode'>
-      <max_step_size>0.001</max_step_size>
+      <max_step_size>0.005</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
@@ -50,7 +50,7 @@
 
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>45 -10 20 -0 0.35 2.4</pose>
+        <pose frame=''>-15 -10 13 -0 0.35 0.5</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -67,6 +67,35 @@
     <include>
 	<uri>model://collapsed_house</uri>
 	<pose>27 19 0.7 0 0 0</pose>
+    </include>
+
+    <include>
+	<uri>model://victim1</uri>
+	<pose>21.35 19.25 1.56 -1.55 0.46 0.03</pose>
+    </include>
+    <plugin filename="libRubblePlugin.so" name="rubble">
+      <bottom_right>20 18 1.5</bottom_right>
+      <top_left>22 20.5 2.0</top_left>
+      <min_size>0.05 0.05 0.05</min_size>
+      <max_size>0.2 0.2 0.2</max_size>
+      <min_mass>0.1</min_mass>
+      <max_mass>1.0</max_mass>
+      <count>15</count>
+    </plugin>
+
+    <include>
+	<uri>model://victim2</uri>
+	<pose>12.28 14.97 1.4 -1.43 -0.09 1</pose>
+    </include>
+
+    <include>
+	<uri>model://victim3</uri>
+	<pose>35.75 11.69 1.37 1.57 -1.5 1.57</pose>
+    </include>
+    
+    <include>
+	<uri>model://victim4</uri>
+	<pose>31.18 19.63 1.54 1.29 -1.45 1.43</pose>
     </include>
 
 <!--    <include>
