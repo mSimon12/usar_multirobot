@@ -1,6 +1,12 @@
 #!/usr/bin/env python2.7
 
+import roslib
+roslib.load_manifest('controllers')
 import rospy
+import actionlib
+
+from controllers.msg import motionAction
+
 from geometry_msgs.msg import Twist
 from controllers.srv import motion
 from nav_msgs.msg import Odometry
@@ -12,29 +18,22 @@ x = 0.0
 y = 0.0
 theta = 0.0
 
-#Callback for current pose estimation
-def actual_Pose(msg):
-    global x
-    global y
-    global theta    
-    
-    x = msg.pose.pose.position.x
-    y = msg.pose.pose.position.y
 
-    rot_q = msg.pose.pose.orientation
-    (roll, pitch, theta) = euler_from_quaternion([rot_q.x, rot_q.y, rot_q.z, rot_q.w])      # Convertion from quartenion to euler representation
+class positionServer:
+  def __init__(self,name):
+    self.server = actionlib.SimpleActionServer(name, motionAction, self.execute, False)
+    self.server.start()
 
-
-#Callback that control the robot
-def controller(msg):
+  def execute(self, goal):
+    # Do lots of awesome groundbreaking robot stuff here
     global x
     global y
     global theta
     
     # Desired position and rotation angle
-    x_goal = msg.destination.linear.x
-    y_goal = msg.destination.linear.y
-    theta_goal = msg.destination.angular.z
+    x_goal = goal.destination.linear.x
+    y_goal = goal.destination.linear.y
+    theta_goal = goal.destination.angular.z
 
     # Speed object for controlling the robot
     speed = Twist()     
@@ -86,6 +85,7 @@ def controller(msg):
             speed.linear.x = 0
             speed.angular.z = 0
             pub.publish(speed)
+            self.server.set_succeeded()                     # Set the status of the goal as succeeded
             return True                                     # Return True to the service caller
         elif dist < 0.05 and (flag == 0 or flag == 2):
             # Orientation correction phase
@@ -143,15 +143,19 @@ def controller(msg):
         pub.publish(speed)  #Publish desired 
         rate.sleep()
 
-#Create the node responsible for the movement
-def start_controller():
-    rospy.init_node("motion_controller", anonymous=True)
-    rospy.Service("/{}/move".format(NAME), motion, controller)
-    # rospy.Subscriber("/{}/controller/pose".format(NAME), Twist, controller)         # Topic to receive desired position
-    rospy.Subscriber("/{}/odom".format(NAME),Odometry, actual_Pose)                 # Topic to receive current position
 
-    rospy.loginfo("Controller ready!")
-    rospy.spin()
+#Callback for current pose estimation
+def actual_Pose(msg):
+    global x
+    global y
+    global theta    
+    
+    x = msg.pose.pose.position.x
+    y = msg.pose.pose.position.y
+
+    rot_q = msg.pose.pose.orientation
+    (roll, pitch, theta) = euler_from_quaternion([rot_q.x, rot_q.y, rot_q.z, rot_q.w])      # Convertion from quartenion to euler representation
+
 
 if __name__=='__main__':
 
@@ -162,4 +166,9 @@ if __name__=='__main__':
     MAX_LINEAR_SPEED = rospy.get_param("max_speed", default=1)
     MAX_ANG_SPEED = rospy.get_param("max_ang_speed", default=0.5)
     NAME = rospy.get_param("robot_name", default="")
-    start_controller()
+
+    rospy.init_node("motion_controller", anonymous=True)
+    rospy.Subscriber("/{}/odom".format(NAME),Odometry, actual_Pose)                 # Topic to receive current position
+    server = positionServer("/{}/pose".format(NAME))                               # Create the server responsible for the movement
+    rospy.loginfo("Controller ready!")
+    rospy.spin()

@@ -42,6 +42,22 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/controllers/action" TYPE FILE FILES "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/controllers/action/motion.action")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/controllers/msg" TYPE FILE FILES
+    "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/controllers/msg/motionAction.msg"
+    "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/controllers/msg/motionActionGoal.msg"
+    "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/controllers/msg/motionActionResult.msg"
+    "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/controllers/msg/motionActionFeedback.msg"
+    "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/controllers/msg/motionGoal.msg"
+    "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/controllers/msg/motionResult.msg"
+    "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/controllers/msg/motionFeedback.msg"
+    )
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/controllers/cmake" TYPE FILE FILES "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/controllers/catkin_generated/installspace/controllers-msg-paths.cmake")
 endif()
 

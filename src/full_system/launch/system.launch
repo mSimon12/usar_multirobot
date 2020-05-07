@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<launch>
+
+   <!--Launch the world with the robots on Gazebo  -->	
+   <include file="$(find usar_gazebo)/launch/base_scene.launch"/>
+ 
+   <!--
+   <include file="$(find full_system)/launch/mapping.launch">
+      <arg name="scan_topic"  value="/pioneer3at_1/scan" />
+      <arg name="base_frame"  value="link_chassis"/>
+      <arg name="odom_frame"  value="odom"/>
+   </include> -->
+
+
+</launch>	
+

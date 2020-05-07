@@ -28,7 +28,7 @@
               </texture>
               <blend>
                 <min_height>1</min_height>
-                <fade_dist>5</fade_dist>
+                <fade_dist>1</fade_dist>
               </blend>
               <uri>model://ground/ground_heightmap.png</uri>
               <size>100 100 2</size>

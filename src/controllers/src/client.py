@@ -1,29 +1,30 @@
 #!/usr/bin/env python
 
 import sys
+import roslib
+roslib.load_manifest('controllers')
 import rospy
-from geometry_msgs.msg import Twist
-from controllers.srv import motion
+import actionlib
 
-def client(name, dest):
-    rospy.init_node('client',anonymous=True)
-    rospy.wait_for_service("/{}/move".format(name))     #Service name = robot_name/move 
+from controllers.msg import motionAction, motionGoal
 
-    service_call = rospy.ServiceProxy("/{}/move".format(name),motion)       # Send a Twist position
-    try:
-        res = service_call(dest)
-        rospy.loginfo("Result = {}".format(res))
-    except rospy.ROSInterruptException:
-        pass
+def client(name, goal):
+    rospy.init_node('client', anonymous=True)
+    client = actionlib.SimpleActionClient("/{}/pose".format(name), motionAction)     #Server name = robot_name/pose
+    client.wait_for_server()
+
+    # Fill in the goal here
+    client.send_goal(goal)
+    # client.wait_for_result(rospy.Duration(5.0))
 
 if __name__=="__main__":
-    if len(sys.argv)==5:
+    if len(sys.argv) == 5:
         name = sys.argv[1]
 
-        dest = Twist()
-        dest.linear.x = float(sys.argv[2]) 
-        dest.linear.y = float(sys.argv[3])
-        dest.angular.z = float(sys.argv[4])
+        dest = motionGoal()
+        dest.destination.linear.x = float(sys.argv[2]) 
+        dest.destination.linear.y = float(sys.argv[3])
+        dest.destination.angular.z = float(sys.argv[4])
         client(name, dest)
     else:
         print("Wrong statement.")

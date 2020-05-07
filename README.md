@@ -6,7 +6,7 @@ To run the world with multiple robots:
 source devel/setup.bash
 roslaunch usar_gazebo post-disaster.launch
 ```
-ou
+or
 ```
 roslaunch usar_gazebo post-disaster.launch
 ```

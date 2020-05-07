@@ -5,6 +5,7 @@
 ;;  FROM /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/controllers/package.xml (0.0.0)
 ;; USING /opt/ros/melodic/lib/python2.7/dist-packages/geneus/geneus_main.pyc /opt/ros/melodic/share/geneus/package.xml (2.2.6)
 ;;
+(ros::load-ros-package "actionlib_msgs")
 (ros::load-ros-package "geometry_msgs")
 (ros::load-ros-package "roscpp")
 (ros::load-ros-package "rosgraph_msgs")

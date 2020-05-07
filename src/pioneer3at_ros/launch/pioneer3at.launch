@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <arg name="robot_name" default="robot"/>
+  <arg name="robot_name" default="pioneer3at"/>
   <arg name="xcoordinate" default="0.0"/>
   <arg name="ycoordinate" default="0.0"/>
   <arg name="zcoordinate" default="0.0"/>

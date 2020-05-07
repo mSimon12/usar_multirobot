@@ -781,6 +781,12 @@ diagnostic_updater_DIR:PATH=/opt/ros/melodic/share/diagnostic_updater/cmake
 //The directory containing a CMake configuration file for dynamic_reconfigure.
 dynamic_reconfigure_DIR:PATH=/opt/ros/melodic/share/dynamic_reconfigure/cmake
 
+//Value Computed by CMake
+full_system_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/full_system
+
+//Value Computed by CMake
+full_system_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/full_system
+
 //The directory containing a CMake configuration file for gazebo.
 gazebo_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/gazebo
 
@@ -1542,7 +1548,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=28
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=29
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

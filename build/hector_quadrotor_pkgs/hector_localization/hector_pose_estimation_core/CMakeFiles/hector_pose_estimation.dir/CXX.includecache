@@ -8,6 +8,24 @@
 
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_pose_estimation/matrix_config.h
 
+/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/Altimeter.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
+
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include/hector_pose_estimation/Eigen/MatrixBaseAddons.h
 
 /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include/hector_pose_estimation/Eigen/QuaternionBaseAddons.h
