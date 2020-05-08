@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="human_name" default="fireman1"/>
+  <arg name="xcoordinate" default="0.0"/>
+  <arg name="ycoordinate" default="0.0"/>
+  <arg name="zcoordinate" default="0.0"/>
+  <arg name="roll" default="0.0"/>
+  <arg name="pitch" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+  
+  <param name="tf_prefix" value="$(arg human_name)_tf" />
+  <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_$(arg human_name)"
+          args="-file $(find human_teams)/models/fireman1/model.sdf -sdf -x $(arg xcoordinate) -y $(arg ycoordinate) -z $(arg zcoordinate) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg human_name)"/>
+
+</launch>

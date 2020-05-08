@@ -7,8 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel:$CMAKE_PREFIX_PATH"
-export PATH="/opt/ros/melodic/bin:/home/marcelo/anaconda3/bin:/home/marcelo/.local/bin:/home/marcelo/JaCaMo/scripts:/home/marcelo/JASON/scripts:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+export LD_LIBRARY_PATH="/opt/ros/melodic/lib"
+export PKG_CONFIG_PATH="/opt/ros/melodic/lib/pkgconfig"
 export PWD="/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build"
-export ROSLISP_PACKAGE_DIRECTORIES="/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/share/common-lisp"
-export ROS_PACKAGE_PATH="/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src:$ROS_PACKAGE_PATH"
+export PYTHONPATH="/opt/ros/melodic/lib/python2.7/dist-packages"

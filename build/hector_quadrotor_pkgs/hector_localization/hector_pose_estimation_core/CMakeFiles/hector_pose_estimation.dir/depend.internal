@@ -936,7 +936,6 @@ hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles
  /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/src/measurements/baro.cpp.o
  /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_pose_estimation/matrix_config.h
- /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include/hector_uav_msgs/Altimeter.h
  /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include/hector_pose_estimation/Eigen/MatrixBaseAddons.h
  /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include/hector_pose_estimation/Eigen/QuaternionBaseAddons.h
  /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include/hector_pose_estimation/collection.h
@@ -964,25 +963,15 @@ hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles
  /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include/hector_pose_estimation/system_model.inl
  /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include/hector_pose_estimation/types.h
  /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/src/measurements/baro.cpp
- /opt/ros/melodic/include/ros/builtin_message_traits.h
  /opt/ros/melodic/include/ros/console.h
  /opt/ros/melodic/include/ros/console_backend.h
- /opt/ros/melodic/include/ros/datatypes.h
  /opt/ros/melodic/include/ros/duration.h
  /opt/ros/melodic/include/ros/exception.h
  /opt/ros/melodic/include/ros/macros.h
- /opt/ros/melodic/include/ros/message_forward.h
- /opt/ros/melodic/include/ros/message_operations.h
- /opt/ros/melodic/include/ros/message_traits.h
  /opt/ros/melodic/include/ros/platform.h
- /opt/ros/melodic/include/ros/roscpp_serialization_macros.h
  /opt/ros/melodic/include/ros/rostime_decl.h
- /opt/ros/melodic/include/ros/serialization.h
- /opt/ros/melodic/include/ros/serialized_message.h
  /opt/ros/melodic/include/ros/time.h
- /opt/ros/melodic/include/ros/types.h
  /opt/ros/melodic/include/rosconsole/macros_generated.h
- /opt/ros/melodic/include/std_msgs/Header.h
  /usr/include/eigen3/Eigen/Cholesky
  /usr/include/eigen3/Eigen/Core
  /usr/include/eigen3/Eigen/Geometry

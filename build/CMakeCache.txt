@@ -1040,6 +1040,12 @@ hector_uav_msgs_DIR:PATH=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_m
 //Value Computed by CMake
 hector_uav_msgs_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_uav_msgs
 
+//Value Computed by CMake
+human_teams_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/human_teams
+
+//Value Computed by CMake
+human_teams_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/human_teams
+
 //The directory containing a CMake configuration file for ignition-cmake0.
 ignition-cmake0_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/ignition-cmake0
 
@@ -1084,12 +1090,6 @@ message_to_tf_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos
 
 //Value Computed by CMake
 message_to_tf_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/message_to_tf
-
-//Value Computed by CMake
-mypack_pkg_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/mypack_pkg
-
-//Value Computed by CMake
-mypack_pkg_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/mypack_pkg
 
 //Value Computed by CMake
 myrobot_description_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/myrobot_description

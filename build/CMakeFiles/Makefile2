@@ -4548,22 +4548,22 @@ clean: hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_
 .PHONY : clean
 
 #=============================================================================
-# Directory level rules for directory mypack_pkg
+# Directory level rules for directory human_teams
 
 # Convenience name for "all" pass in the directory.
-mypack_pkg/all:
+human_teams/all:
 
-.PHONY : mypack_pkg/all
+.PHONY : human_teams/all
 
 # Convenience name for "clean" pass in the directory.
-mypack_pkg/clean:
+human_teams/clean:
 
-.PHONY : mypack_pkg/clean
+.PHONY : human_teams/clean
 
 # Convenience name for "preinstall" pass in the directory.
-mypack_pkg/preinstall:
+human_teams/preinstall:
 
-.PHONY : mypack_pkg/preinstall
+.PHONY : human_teams/preinstall
 
 #=============================================================================
 # Directory level rules for directory myrobot_description
