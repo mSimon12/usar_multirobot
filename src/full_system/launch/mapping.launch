@@ -5,11 +5,11 @@
   <arg name="base_frame"  default="link_chassis"/>
   <arg name="odom_frame"  default="odom"/>
   
-
+  <!--
   <param name="robot_description" command="$(find xacro)/xacro.py '$(find pioneer3at_ros)/urdf/pioneer3at_ros.urdf'"/>
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"></node>
   
-  <node pkg="rviz" type="rviz" name="rviz"></node>
+  <node pkg="rviz" type="rviz" name="rviz"></node> -->
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
     <param name="base_frame" value="$(arg base_frame)"/>
