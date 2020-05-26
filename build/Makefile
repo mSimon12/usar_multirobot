@@ -1741,6 +1741,149 @@ hector_quadrotor_propulsion/fast:
 .PHONY : hector_quadrotor_propulsion/fast
 
 #=============================================================================
+# Target rules for targets named slam_generate_messages_eus
+
+# Build rule for target.
+slam_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_generate_messages_eus
+.PHONY : slam_generate_messages_eus
+
+# fast build rule for target.
+slam_generate_messages_eus/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_generate_messages_eus.dir/build.make slam/CMakeFiles/slam_generate_messages_eus.dir/build
+.PHONY : slam_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named slam_generate_messages_lisp
+
+# Build rule for target.
+slam_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_generate_messages_lisp
+.PHONY : slam_generate_messages_lisp
+
+# fast build rule for target.
+slam_generate_messages_lisp/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_generate_messages_lisp.dir/build.make slam/CMakeFiles/slam_generate_messages_lisp.dir/build
+.PHONY : slam_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named slam_generate_messages_cpp
+
+# Build rule for target.
+slam_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_generate_messages_cpp
+.PHONY : slam_generate_messages_cpp
+
+# fast build rule for target.
+slam_generate_messages_cpp/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_generate_messages_cpp.dir/build.make slam/CMakeFiles/slam_generate_messages_cpp.dir/build
+.PHONY : slam_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named slam_gencpp
+
+# Build rule for target.
+slam_gencpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_gencpp
+.PHONY : slam_gencpp
+
+# fast build rule for target.
+slam_gencpp/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_gencpp.dir/build.make slam/CMakeFiles/slam_gencpp.dir/build
+.PHONY : slam_gencpp/fast
+
+#=============================================================================
+# Target rules for targets named slam_generate_messages
+
+# Build rule for target.
+slam_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_generate_messages
+.PHONY : slam_generate_messages
+
+# fast build rule for target.
+slam_generate_messages/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_generate_messages.dir/build.make slam/CMakeFiles/slam_generate_messages.dir/build
+.PHONY : slam_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named slam_genlisp
+
+# Build rule for target.
+slam_genlisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_genlisp
+.PHONY : slam_genlisp
+
+# fast build rule for target.
+slam_genlisp/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_genlisp.dir/build.make slam/CMakeFiles/slam_genlisp.dir/build
+.PHONY : slam_genlisp/fast
+
+#=============================================================================
+# Target rules for targets named slam_generate_messages_nodejs
+
+# Build rule for target.
+slam_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_generate_messages_nodejs
+.PHONY : slam_generate_messages_nodejs
+
+# fast build rule for target.
+slam_generate_messages_nodejs/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_generate_messages_nodejs.dir/build.make slam/CMakeFiles/slam_generate_messages_nodejs.dir/build
+.PHONY : slam_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named slam_gennodejs
+
+# Build rule for target.
+slam_gennodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_gennodejs
+.PHONY : slam_gennodejs
+
+# fast build rule for target.
+slam_gennodejs/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_gennodejs.dir/build.make slam/CMakeFiles/slam_gennodejs.dir/build
+.PHONY : slam_gennodejs/fast
+
+#=============================================================================
+# Target rules for targets named slam_generate_messages_py
+
+# Build rule for target.
+slam_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_generate_messages_py
+.PHONY : slam_generate_messages_py
+
+# fast build rule for target.
+slam_generate_messages_py/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_generate_messages_py.dir/build.make slam/CMakeFiles/slam_generate_messages_py.dir/build
+.PHONY : slam_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named slam_genpy
+
+# Build rule for target.
+slam_genpy: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_genpy
+.PHONY : slam_genpy
+
+# fast build rule for target.
+slam_genpy/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_genpy.dir/build.make slam/CMakeFiles/slam_genpy.dir/build
+.PHONY : slam_genpy/fast
+
+#=============================================================================
+# Target rules for targets named slam_geneus
+
+# Build rule for target.
+slam_geneus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 slam_geneus
+.PHONY : slam_geneus
+
+# fast build rule for target.
+slam_geneus/fast:
+	$(MAKE) -f slam/CMakeFiles/slam_geneus.dir/build.make slam/CMakeFiles/slam_geneus.dir/build
+.PHONY : slam_geneus/fast
+
+#=============================================================================
 # Target rules for targets named uuid_msgs_generate_messages_cpp
 
 # Build rule for target.
@@ -2703,6 +2846,331 @@ message_to_tf/fast:
 .PHONY : message_to_tf/fast
 
 #=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# Build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_roslaunch-check
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_roslaunch-check
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check.dir/build
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_roslaunch-check
+
+# Build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_roslaunch-check
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check.dir/build
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_gtest_test_merging_pipeline: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+.PHONY : _run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build
+.PHONY : _run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# Build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_experiments: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_py
+
+# Build rule for target.
+map_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_py
+.PHONY : map_msgs_generate_messages_py
+
+# fast build rule for target.
+map_msgs_generate_messages_py/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_py.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_py.dir/build
+.PHONY : map_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_eus
+
+# Build rule for target.
+map_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_eus
+.PHONY : map_msgs_generate_messages_eus
+
+# fast build rule for target.
+map_msgs_generate_messages_eus/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_eus.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_eus.dir/build
+.PHONY : map_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_map05.pgm
+
+# Build rule for target.
+multirobot_map_merge_map05.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_map05.pgm
+.PHONY : multirobot_map_merge_map05.pgm
+
+# fast build rule for target.
+multirobot_map_merge_map05.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_map05.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_map05.pgm.dir/build
+.PHONY : multirobot_map_merge_map05.pgm/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_map00.pgm
+
+# Build rule for target.
+multirobot_map_merge_map00.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_map00.pgm
+.PHONY : multirobot_map_merge_map00.pgm
+
+# fast build rule for target.
+multirobot_map_merge_map00.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_map00.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_map00.pgm.dir/build
+.PHONY : multirobot_map_merge_map00.pgm/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_gtest
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_gtest
+.PHONY : _run_tests_multirobot_map_merge_gtest
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_gtest/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest.dir/build
+.PHONY : _run_tests_multirobot_map_merge_gtest/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_nodejs
+
+# Build rule for target.
+map_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_nodejs
+.PHONY : map_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+map_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build
+.PHONY : map_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_lisp
+
+# Build rule for target.
+map_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_lisp
+.PHONY : map_msgs_generate_messages_lisp
+
+# fast build rule for target.
+map_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_lisp.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_lisp.dir/build
+.PHONY : map_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named clean_test_results_multirobot_map_merge
+
+# Build rule for target.
+clean_test_results_multirobot_map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clean_test_results_multirobot_map_merge
+.PHONY : clean_test_results_multirobot_map_merge
+
+# fast build rule for target.
+clean_test_results_multirobot_map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/clean_test_results_multirobot_map_merge.dir/build.make multirobot_map_merge/CMakeFiles/clean_test_results_multirobot_map_merge.dir/build
+.PHONY : clean_test_results_multirobot_map_merge/fast
+
+#=============================================================================
+# Target rules for targets named combine_grids
+
+# Build rule for target.
+combine_grids: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 combine_grids
+.PHONY : combine_grids
+
+# fast build rule for target.
+combine_grids/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/combine_grids.dir/build.make multirobot_map_merge/CMakeFiles/combine_grids.dir/build
+.PHONY : combine_grids/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_cpp
+
+# Build rule for target.
+map_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_cpp
+.PHONY : map_msgs_generate_messages_cpp
+
+# fast build rule for target.
+map_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_cpp.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_cpp.dir/build
+.PHONY : map_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_2011-08-09-12-22-52.pgm
+
+# Build rule for target.
+multirobot_map_merge_2011-08-09-12-22-52.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_2011-08-09-12-22-52.pgm
+.PHONY : multirobot_map_merge_2011-08-09-12-22-52.pgm
+
+# fast build rule for target.
+multirobot_map_merge_2011-08-09-12-22-52.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_2011-08-09-12-22-52.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_2011-08-09-12-22-52.pgm.dir/build
+.PHONY : multirobot_map_merge_2011-08-09-12-22-52.pgm/fast
+
+#=============================================================================
+# Target rules for targets named map_merge
+
+# Build rule for target.
+map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_merge
+.PHONY : map_merge
+
+# fast build rule for target.
+map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_merge.dir/build.make multirobot_map_merge/CMakeFiles/map_merge.dir/build
+.PHONY : map_merge/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_2012-01-28-11-12-01.pgm
+
+# Build rule for target.
+multirobot_map_merge_2012-01-28-11-12-01.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_2012-01-28-11-12-01.pgm
+.PHONY : multirobot_map_merge_2012-01-28-11-12-01.pgm
+
+# fast build rule for target.
+multirobot_map_merge_2012-01-28-11-12-01.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_2012-01-28-11-12-01.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_2012-01-28-11-12-01.pgm.dir/build
+.PHONY : multirobot_map_merge_2012-01-28-11-12-01.pgm/fast
+
+#=============================================================================
+# Target rules for targets named test_merging_pipeline
+
+# Build rule for target.
+test_merging_pipeline: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_merging_pipeline
+.PHONY : test_merging_pipeline
+
+# fast build rule for target.
+test_merging_pipeline/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/test_merging_pipeline.dir/build.make multirobot_map_merge/CMakeFiles/test_merging_pipeline.dir/build
+.PHONY : test_merging_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge
+
+# Build rule for target.
+run_tests_multirobot_map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge
+.PHONY : run_tests_multirobot_map_merge
+
+# fast build rule for target.
+run_tests_multirobot_map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge.dir/build
+.PHONY : run_tests_multirobot_map_merge/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# Build rule for target.
+run_tests_multirobot_map_merge_gtest_test_merging_pipeline: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+.PHONY : run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build
+.PHONY : run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge
+
+# Build rule for target.
+_run_tests_multirobot_map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge
+.PHONY : _run_tests_multirobot_map_merge
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge.dir/build
+.PHONY : _run_tests_multirobot_map_merge/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_gtest
+
+# Build rule for target.
+run_tests_multirobot_map_merge_gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_gtest
+.PHONY : run_tests_multirobot_map_merge_gtest
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_gtest/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest.dir/build
+.PHONY : run_tests_multirobot_map_merge_gtest/fast
+
+#=============================================================================
 # Target rules for targets named std_srvs_generate_messages_cpp
 
 # Build rule for target.
@@ -3538,6 +4006,17 @@ help:
 	@echo "... full_system_genpy"
 	@echo "... hector_quadrotor_aerodynamics"
 	@echo "... hector_quadrotor_propulsion"
+	@echo "... slam_generate_messages_eus"
+	@echo "... slam_generate_messages_lisp"
+	@echo "... slam_generate_messages_cpp"
+	@echo "... slam_gencpp"
+	@echo "... slam_generate_messages"
+	@echo "... slam_genlisp"
+	@echo "... slam_generate_messages_nodejs"
+	@echo "... slam_gennodejs"
+	@echo "... slam_generate_messages_py"
+	@echo "... slam_genpy"
+	@echo "... slam_geneus"
 	@echo "... uuid_msgs_generate_messages_cpp"
 	@echo "... sensor_msgs_generate_messages_lisp"
 	@echo "... uuid_msgs_generate_messages_py"
@@ -3612,6 +4091,31 @@ help:
 	@echo "... topic_tools_generate_messages_lisp"
 	@echo "... topic_tools_generate_messages_py"
 	@echo "... message_to_tf"
+	@echo "... _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments"
+	@echo "... run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch"
+	@echo "... _run_tests_multirobot_map_merge_roslaunch-check"
+	@echo "... run_tests_multirobot_map_merge_roslaunch-check"
+	@echo "... _run_tests_multirobot_map_merge_gtest_test_merging_pipeline"
+	@echo "... run_tests_multirobot_map_merge_roslaunch-check_launch_experiments"
+	@echo "... map_msgs_generate_messages_py"
+	@echo "... map_msgs_generate_messages_eus"
+	@echo "... multirobot_map_merge_map05.pgm"
+	@echo "... multirobot_map_merge_map00.pgm"
+	@echo "... _run_tests_multirobot_map_merge_gtest"
+	@echo "... _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch"
+	@echo "... map_msgs_generate_messages_nodejs"
+	@echo "... map_msgs_generate_messages_lisp"
+	@echo "... clean_test_results_multirobot_map_merge"
+	@echo "... combine_grids"
+	@echo "... map_msgs_generate_messages_cpp"
+	@echo "... multirobot_map_merge_2011-08-09-12-22-52.pgm"
+	@echo "... map_merge"
+	@echo "... multirobot_map_merge_2012-01-28-11-12-01.pgm"
+	@echo "... test_merging_pipeline"
+	@echo "... run_tests_multirobot_map_merge"
+	@echo "... run_tests_multirobot_map_merge_gtest_test_merging_pipeline"
+	@echo "... _run_tests_multirobot_map_merge"
+	@echo "... run_tests_multirobot_map_merge_gtest"
 	@echo "... std_srvs_generate_messages_cpp"
 	@echo "... std_srvs_generate_messages_eus"
 	@echo "... std_srvs_generate_messages_lisp"

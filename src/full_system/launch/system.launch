@@ -5,24 +5,6 @@
    <!--Launch the world with the robots on Gazebo  -->	
    <include file="$(find usar_gazebo)/launch/base_scene.launch"/>
    <!--<include file="$(find usar_gazebo)/launch/post-disaster.launch"/> -->
- 
-   <!--
-   <include file="$(find full_system)/launch/mapping.launch">
-      <arg name="scan_topic"  value="/pioneer3at_1/scan" />
-      <arg name="base_frame"  value="link_chassis"/>
-      <arg name="odom_frame"  value="odom"/>
-   </include> -->
-
-
-<!-- LAUNCH RVIZ 
-  <arg name="gui" default="true" />
-  <arg name="rvizconfig" default="$(find urdf_tutorial)/rviz/urdf.rviz" />
-
-  <param name="use_gui" value="$(arg gui)"/>
-
-  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" /> -->
-
 
 <!-- LAUNCH ROBOTS -->
 
@@ -66,7 +48,7 @@
       <arg name="y" default="1.0"/>
       <arg name="z" default="1.44"/> 
     </include>
-  </group>
+  </group> 
 
   <!-- Spawn simulated quadrotor uav 2 
   <group ns="UAV_2">
@@ -125,7 +107,7 @@
 <!-- LAUNCH HUMAN TEAMS -->
 
   <!-- Launch fireman1 -->
-  <group ns="human1">
+  <group ns="human1"> 
     <include file="$(find human_teams)/launch/fireman1.launch">
       <arg name="human_name" value="human1"/>
       <arg name="xcoordinate" value="-2.0"/>
@@ -145,6 +127,34 @@
       <arg name="yaw" value="1.57"/>
     </include>
   </group> 
+
+<!--LAUNCH MAP_MERGE 
+  <include file="$(find slam)/launch/multi_map_merge.launch">
+      <arg name="namespace" value="pioneer3at"/>
+      <arg name="first_robot"  value="pioneer3at_1"/>
+      <arg name="second_robot" value="pioneer3at_2"/>
+
+      <arg name="first_robot_x_pos" value=" -5.0"/>
+      <arg name="first_robot_y_pos" value=" 0.0"/>
+      <arg name="first_robot_z_pos" value=" 0.17"/>
+      <arg name="first_robot_yaw"   value=" 0.0"/>
+
+      <arg name="second_robot_x_pos" value="-3.0"/>
+      <arg name="second_robot_y_pos" value="-3.0"/>
+      <arg name="second_robot_z_pos" value=" 0.0"/>
+      <arg name="second_robot_yaw"   value=" 0.0"/> 
+  </include> -->
+
+<!-- LAUNCH RVIZ 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find slam)/rviz/multi_slam.rviz"/>
+  <master auto="start"/>
+  <param name="/use_sim_time" value="true"/> -->
+
+<!-- LAUNCH RQT
+  <node name="rqt_topic" pkg="rqt_topic" type="rqt_topic" output="screen" /> 
+  <node name="rqt_graph" pkg="rqt_graph" type="rqt_graph" output="screen" /> 
+  <node name="rqt_console" pkg="rqt_console" type="rqt_console" output="screen" /> 
+  <node name="rqt_tf_tree" pkg="rqt_tf_tree" type="rqt_tf_tree" output="screen" /> -->
 
 
 </launch>	

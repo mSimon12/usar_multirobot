@@ -57,7 +57,7 @@
     <visual name="visual1">
       <origin rpy="0  0  0" xyz="0    0    0.18"/>
       <geometry>
-        <mesh filename="package://pioneer3at_ros/meshes/pioneer3at_ros/chassis.dae" scale="1.0 1.0 1.0"/>
+        <mesh filename="package://pioneer3at_ros/meshes/chassis.dae" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -76,7 +76,7 @@
     <visual name="visual">
       <origin rpy="0  0  0" xyz="0  0  0"/>
       <geometry>
-        <mesh filename="package://pioneer3at_ros/meshes/pioneer3at_ros/wheel.dae" scale="1.0 1.0 1.0"/>
+        <mesh filename="package://pioneer3at_ros/meshes/wheel.dae" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -95,7 +95,7 @@
     <visual name="visual">
       <origin rpy="0  0  0" xyz="0  0  0"/>
       <geometry>
-        <mesh filename="package://pioneer3at_ros/meshes/pioneer3at_ros/wheel.dae" scale="1.0 1.0 1.0"/>
+        <mesh filename="package://pioneer3at_ros/meshes/wheel.dae" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -114,7 +114,7 @@
     <visual name="visual">
       <origin rpy="0  0  0" xyz="0  0  0"/>
       <geometry>
-        <mesh filename="package://pioneer3at_ros/meshes/pioneer3at_ros/wheel.dae" scale="1.0 1.0 1.0"/>
+        <mesh filename="package://pioneer3at_ros/meshes/wheel.dae" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>
@@ -133,7 +133,7 @@
     <visual name="visual">
       <origin rpy="0  0  0" xyz="0  0  0"/>
       <geometry>
-        <mesh filename="package://pioneer3at_ros/meshes/pioneer3at_ros/wheel.dae" scale="1.0 1.0 1.0"/>
+        <mesh filename="package://pioneer3at_ros/meshes/wheel.dae" scale="1.0 1.0 1.0"/>
       </geometry>
     </visual>
   </link>

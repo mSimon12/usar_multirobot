@@ -10,41 +10,43 @@
 
   <param name="tf_prefix" type="string" value="$(arg robot_name)"/>
 <!--
-  <param name="base_footprint_frame" type="string" value="$(arg tf_prefix)/base_footprint" />
-  <param name="world_frame" type="string" value="$(arg world_frame)" />
+  <param name="base_footprint_frame" type="string" value="$(arg robot_name)/base_footprint" />
+  <param name="world_frame" type="string" value="world" />
 -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find pioneer3at_ros)/urdf/pioneer3at_ros.urdf"/>
-  <!--<param name="robot_description" textfile="$(find pioneer3at_ros)/urdf/pioneer3at_ros.urdf"/>-->
 
-  <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_model"
+  <!-- SPAWN robot model on gazebo -->
+  <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_robot"
         args="-file $(find pioneer3at_ros)/sdf/model.sdf -sdf -x $(arg xcoordinate) -y $(arg ycoordinate) -z $(arg zcoordinate) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg robot_name)"/>
 
-  <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen">
-<!--
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find pioneer3at_ros)/urdf/pioneer3at_ros.urdf"/> 
+  <!--<param name="robot_description" textfile="$(find pioneer3at_ros)/urdf/pioneer3at_ros.urdf"/> -->
+
+  <!-- Combine joint values -->
+  <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="log">
       <remap from="joint_states" to="/$(arg robot_name)/joint_states"/>
       <remap from="robot_description" to="/$(arg robot_name)/robot_description"/>
-      <param name="publish_frequency" type="double" value="100.0"/>
+      <param name="publish_frequency" type="double" value="100"/>
       <param name="tf_prefix" type="string" value="$(arg robot_name)"/>
--->
-    </node>  
+  </node>  
 
+  <!-- send fake joint values -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="False"/>
+  </node> 
 
-<!-- Calling joint_state_publisher is a former method.
-    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="screen">
-      <param name="publish_frequency" type="double" value="15.0" />
-      <param name="use_gui" value="false" />
-    </node>
--->
+   <!-- Publishing tf_static between earth and robot/odom. -->
+   <node name="earth_to_map_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
+  	  args="$(arg xcoordinate) $(arg ycoordinate) $(arg zcoordinate) $(arg yaw) $(arg pitch) $(arg roll) earth $(arg robot_name)/map 100"/> 
 
-    <!-- Publishing tf_static for included models. -->
+    <!-- Publishing tf_static for included models. 
     <node name="tf_static_hokuyo_link" pkg="tf" type="static_transform_publisher" 
           args="0 0 0 0 0 0 $(arg robot_name)/hokuyo_link  $(arg robot_name)/hokuyo::hokuyo_link 100"/>
 
     <node name="tf_static_camera_link" pkg="tf" type="static_transform_publisher" 
-          args="0 0 0 0 0 0 $(arg robot_name)/camera_link $(arg robot_name)/camera::camera_link 100"/>
+          args="0 0 0 0 0 0 $(arg robot_name)/camera_link $(arg robot_name)/camera::camera_link 100"/> -->
 
-    <!-- Publishing tf_static between odom and base_link. -->
+    <!-- Publishing tf_static between odom and base_link.
     <node name="tf_static_odom_base" pkg="tf" type="static_transform_publisher"
-  	  args="0 0 0 0 0 0 $(arg robot_name)/odom $(arg robot_name)/base_link 100"/>
+  	  args="0 0 0 0 0 0 $(arg robot_name)/odom $(arg robot_name)/base_link 10"/>  -->
 
 </launch>
