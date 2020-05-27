@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <launch>
-  <arg name="scan_topic"  default="/pioneer3at_1/scan" />
+  <arg name="scan_topic"  default="scan" />
   <arg name="base_frame"  default="link_chassis"/>
   <arg name="odom_frame"  default="odom"/>
   

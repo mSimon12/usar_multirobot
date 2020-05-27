@@ -48,7 +48,7 @@
       <arg name="y" default="1.0"/>
       <arg name="z" default="1.44"/> 
     </include>
-  </group> 
+  </group>
 
   <!-- Spawn simulated quadrotor uav 2 
   <group ns="UAV_2">
@@ -107,7 +107,7 @@
 <!-- LAUNCH HUMAN TEAMS -->
 
   <!-- Launch fireman1 -->
-  <group ns="human1"> 
+  <group ns="human1">
     <include file="$(find human_teams)/launch/fireman1.launch">
       <arg name="human_name" value="human1"/>
       <arg name="xcoordinate" value="-2.0"/>
@@ -128,8 +128,9 @@
     </include>
   </group> 
 
+  
 <!--LAUNCH MAP_MERGE 
-  <include file="$(find slam)/launch/multi_map_merge.launch">
+  <include file="$(find controllers)/launch/multi_map_merge.launch">
       <arg name="namespace" value="pioneer3at"/>
       <arg name="first_robot"  value="pioneer3at_1"/>
       <arg name="second_robot" value="pioneer3at_2"/>
@@ -145,10 +146,11 @@
       <arg name="second_robot_yaw"   value=" 0.0"/> 
   </include> -->
 
-<!-- LAUNCH RVIZ 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find slam)/rviz/multi_slam.rviz"/>
+<!-- LAUNCH RVIZ -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/>
+
   <master auto="start"/>
-  <param name="/use_sim_time" value="true"/> -->
+  <param name="/use_sim_time" value="true"/> 
 
 <!-- LAUNCH RQT
   <node name="rqt_topic" pkg="rqt_topic" type="rqt_topic" output="screen" /> 

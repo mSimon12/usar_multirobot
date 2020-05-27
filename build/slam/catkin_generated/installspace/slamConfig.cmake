@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/install/lib;/opt/ros/melodic/lib)
+    foreach(path /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/install/lib;/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
@@ -177,7 +177,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(slam_EXPORTED_TARGETS "slam_generate_messages_cpp;slam_generate_messages_eus;slam_generate_messages_lisp;slam_generate_messages_nodejs;slam_generate_messages_py")
+set(slam_EXPORTED_TARGETS "")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${slam_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -185,7 +185,7 @@ foreach(t ${slam_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "message_runtime;roscpp;rospy;std_msgs;geometry_msgs")
+set(depends "")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
@@ -214,7 +214,7 @@ foreach(depend ${depends})
   list(APPEND slam_EXPORTED_TARGETS ${${slam_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "slam-msg-extras.cmake")
+set(pkg_cfg_extras "")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${slam_DIR}/${extra})

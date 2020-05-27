@@ -25,13 +25,4 @@
   <param name="robot_name" value="$(arg robot_name)" />
   <node pkg="controllers" type="motion_controller.py" name="motion_controller" output='log'/>
 
-  <!-- LAUNCH MAPPING -->
-  <include file="$(find slam)/launch/hector_slam.launch">
-    <arg name="robot_name"  default="$(arg robot_name)"/>
-    <arg name="map_frame"  value="$(arg robot_name)/map"/>
-    <arg name="base_frame"  value="$(arg robot_name)/base_link"/>
-    <arg name="odom_frame"  value="$(arg robot_name)/odom"/>
-    <arg name="scan_topic"  value="/$(arg robot_name)/scan" />
-  </include> 
-
 </launch>
