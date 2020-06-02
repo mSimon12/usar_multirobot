@@ -38,6 +38,7 @@
   <group ns="UAV_1">
     <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
       <arg name="name" default="UAV_1"/>
+      <arg name="tf_prefix" value="UAV_1" />
       <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
       <arg name="controllers" value="
     	  controller/position
@@ -50,10 +51,11 @@
     </include>
   </group>
 
-  <!-- Spawn simulated quadrotor uav 2 
+  <!-- Spawn simulated quadrotor uav 2 -->
   <group ns="UAV_2">
-    <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
+    <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" > 
       <arg name="name" default="UAV_2"/>
+      <arg name="tf_prefix" value="UAV_2" />
       <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
       <arg name="controllers" value="
     	  controller/position
@@ -64,7 +66,7 @@
       <arg name="y" default="2.0"/>
       <arg name="z" default="1.46"/> 
     </include>
-  </group> -->
+  </group> 
 
   <!-- Launch Pioneer2DX 1
   <group ns="pioneer2dx_1">

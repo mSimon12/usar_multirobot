@@ -294,7 +294,7 @@ _catkin_empty_exported_target: cmake_check_build_system
 
 # fast build rule for target.
 _catkin_empty_exported_target/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_localization/CMakeFiles/_catkin_empty_exported_target.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_localization/CMakeFiles/_catkin_empty_exported_target.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_localization/CMakeFiles/_catkin_empty_exported_target.dir/build.make quadrotor/hector_localization/hector_localization/CMakeFiles/_catkin_empty_exported_target.dir/build
 .PHONY : _catkin_empty_exported_target/fast
 
 #=============================================================================
@@ -307,7 +307,7 @@ hector_uav_msgs_genpy: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_genpy/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genpy.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genpy.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genpy.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genpy.dir/build
 .PHONY : hector_uav_msgs_genpy/fast
 
 #=============================================================================
@@ -320,7 +320,7 @@ hector_uav_msgs_genlisp: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_genlisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genlisp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genlisp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genlisp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_genlisp.dir/build
 .PHONY : hector_uav_msgs_genlisp/fast
 
 #=============================================================================
@@ -333,7 +333,7 @@ hector_uav_msgs_geneus: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_geneus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_geneus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_geneus.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_geneus.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_geneus.dir/build
 .PHONY : hector_uav_msgs_geneus/fast
 
 #=============================================================================
@@ -346,7 +346,7 @@ hector_uav_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_eus.dir/build
 .PHONY : hector_uav_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -359,7 +359,7 @@ hector_uav_msgs_gencpp: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_gencpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gencpp.dir/build
 .PHONY : hector_uav_msgs_gencpp/fast
 
 #=============================================================================
@@ -372,34 +372,8 @@ hector_uav_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_cpp.dir/build
 .PHONY : hector_uav_msgs_generate_messages_cpp/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingGoal
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingGoal: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingGoal
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingGoal
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingGoal/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingGoal.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingGoal.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingGoal/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal/fast
 
 #=============================================================================
 # Target rules for targets named hector_uav_msgs_generate_messages_lisp
@@ -411,7 +385,7 @@ hector_uav_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_lisp.dir/build
 .PHONY : hector_uav_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -424,8 +398,47 @@ _hector_uav_msgs_generate_messages_check_deps_TakeoffResult: cmake_check_build_s
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_TakeoffResult/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffResult.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffResult.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffResult.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffResult.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffResult/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_ThrustCommand
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_ThrustCommand: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_ThrustCommand
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_ThrustCommand
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_ThrustCommand/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ThrustCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ThrustCommand.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_ThrustCommand/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingGoal
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingGoal: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingGoal
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingGoal
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingGoal/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingGoal.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingGoal.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingGoal/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal/fast
 
 #=============================================================================
 # Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseActionResult
@@ -437,99 +450,8 @@ _hector_uav_msgs_generate_messages_check_deps_PoseActionResult: cmake_check_buil
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_PoseActionResult/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionResult.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionResult.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionResult.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionResult.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseActionResult/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_YawrateCommand
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_YawrateCommand: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_YawrateCommand
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_YawrateCommand
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_YawrateCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_YawrateCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_YawrateCommand.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_YawrateCommand/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingAction
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingAction: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingAction
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingAction
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingAction/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingAction.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingAction.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingAction/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseFeedback
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseFeedback: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseFeedback
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseFeedback
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseFeedback/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseFeedback.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseFeedback.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseFeedback/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_Supply
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_Supply: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_Supply
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_Supply
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_Supply/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Supply.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Supply.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_Supply/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal/fast
 
 #=============================================================================
 # Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_ServoCommand
@@ -541,8 +463,112 @@ _hector_uav_msgs_generate_messages_check_deps_ServoCommand: cmake_check_build_sy
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_ServoCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ServoCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ServoCommand.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ServoCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ServoCommand.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_ServoCommand/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionGoal.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingAction
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingAction: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingAction
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingAction
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingAction/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingAction.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingAction.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingAction/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_EnableMotors
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_EnableMotors: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_EnableMotors
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_EnableMotors
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_EnableMotors/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_EnableMotors.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_EnableMotors.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_EnableMotors/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseGoal
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseGoal: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseGoal
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseGoal
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseGoal/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseGoal.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseGoal.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseGoal/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_RawRC
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_RawRC: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_RawRC
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawRC
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_RawRC/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawRC.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawRC.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawRC/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_YawrateCommand
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_YawrateCommand: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_YawrateCommand
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_YawrateCommand
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_YawrateCommand/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_YawrateCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_YawrateCommand.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_YawrateCommand/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionGoal.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_msgs_generate_messages_py
@@ -554,7 +580,7 @@ actionlib_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
 .PHONY : actionlib_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -567,7 +593,7 @@ actionlib_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
 .PHONY : actionlib_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -580,7 +606,7 @@ std_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_eus.dir/build
 .PHONY : std_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -593,73 +619,8 @@ actionlib_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
 .PHONY : actionlib_msgs_generate_messages_lisp/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_MotorStatus
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_MotorStatus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_MotorStatus
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorStatus
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_MotorStatus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorStatus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorStatus.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorStatus/fast
-
-#=============================================================================
-# Target rules for targets named hector_uav_msgs_generate_messages
-
-# Build rule for target.
-hector_uav_msgs_generate_messages: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 hector_uav_msgs_generate_messages
-.PHONY : hector_uav_msgs_generate_messages
-
-# fast build rule for target.
-hector_uav_msgs_generate_messages/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages.dir/build
-.PHONY : hector_uav_msgs_generate_messages/fast
-
-#=============================================================================
-# Target rules for targets named actionlib_msgs_generate_messages_eus
-
-# Build rule for target.
-actionlib_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_eus
-.PHONY : actionlib_msgs_generate_messages_eus
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-.PHONY : actionlib_msgs_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseGoal
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseGoal: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseGoal
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseGoal
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseGoal/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseGoal.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseGoal.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseGoal/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_EnableMotors
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_EnableMotors: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_EnableMotors
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_EnableMotors
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_EnableMotors/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_EnableMotors.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_EnableMotors.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_EnableMotors/fast
 
 #=============================================================================
 # Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffGoal
@@ -671,7 +632,7 @@ _hector_uav_msgs_generate_messages_check_deps_TakeoffGoal: cmake_check_build_sys
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_TakeoffGoal/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffGoal.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffGoal.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffGoal.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffGoal.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffGoal/fast
 
 #=============================================================================
@@ -684,7 +645,7 @@ geometry_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 geometry_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build
 .PHONY : geometry_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -697,7 +658,7 @@ _hector_uav_msgs_generate_messages_check_deps_RawImu: cmake_check_build_system
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_RawImu/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawImu.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawImu.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawImu.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawImu.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_RawImu/fast
 
 #=============================================================================
@@ -710,7 +671,7 @@ std_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -723,8 +684,60 @@ std_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_RC
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_RC: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_RC
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_RC
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_RC/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RC.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RC.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_RC/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingActionResult
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingActionResult: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingActionResult
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionResult
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingActionResult/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionResult.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionResult.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionResult/fast
+
+#=============================================================================
+# Target rules for targets named std_msgs_generate_messages_nodejs
+
+# Build rule for target.
+std_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_nodejs
+.PHONY : std_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+std_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+.PHONY : std_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
 # Target rules for targets named std_msgs_generate_messages_py
@@ -736,7 +749,7 @@ std_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -749,7 +762,7 @@ geometry_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 geometry_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build
 .PHONY : geometry_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -762,7 +775,7 @@ geometry_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 geometry_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build
 .PHONY : geometry_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -775,7 +788,7 @@ hector_uav_msgs_gennodejs: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_gennodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gennodejs.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gennodejs.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gennodejs.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_gennodejs.dir/build
 .PHONY : hector_uav_msgs_gennodejs/fast
 
 #=============================================================================
@@ -788,47 +801,8 @@ _hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback: cmake_check_bu
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_HeightCommand
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_HeightCommand: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_HeightCommand
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeightCommand
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_HeightCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeightCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeightCommand.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeightCommand/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffAction
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffAction: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffAction
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffAction
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffAction/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffAction.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffAction.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffAction/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_Compass
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_Compass: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_Compass
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_Compass
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_Compass/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Compass.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Compass.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_Compass/fast
 
 #=============================================================================
 # Target rules for targets named actionlib_msgs_generate_messages_cpp
@@ -840,7 +814,7 @@ actionlib_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
 .PHONY : actionlib_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -853,8 +827,34 @@ _hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback: cmake_check
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_HeadingCommand
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_HeadingCommand: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_HeadingCommand
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeadingCommand
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_HeadingCommand/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeadingCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeadingCommand.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeadingCommand/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingResult
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingResult: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingResult
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingResult
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_LandingResult/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingResult.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingResult.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingResult/fast
 
 #=============================================================================
 # Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingFeedback
@@ -866,7 +866,7 @@ _hector_uav_msgs_generate_messages_check_deps_LandingFeedback: cmake_check_build
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_LandingFeedback/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingFeedback.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingFeedback.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingFeedback.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingFeedback.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingFeedback/fast
 
 #=============================================================================
@@ -879,7 +879,7 @@ _hector_uav_msgs_generate_messages_check_deps_ControllerState: cmake_check_build
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_ControllerState/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ControllerState.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ControllerState.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ControllerState.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ControllerState.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_ControllerState/fast
 
 #=============================================================================
@@ -892,203 +892,47 @@ _hector_uav_msgs_generate_messages_check_deps_RuddersCommand: cmake_check_build_
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_RuddersCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RuddersCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RuddersCommand.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RuddersCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RuddersCommand.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_RuddersCommand/fast
 
 #=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_RawRC
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffAction
 
 # Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_RawRC: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_RawRC
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawRC
+_hector_uav_msgs_generate_messages_check_deps_TakeoffAction: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffAction
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffAction
 
 # fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_RawRC/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawRC.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawRC.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawRC/fast
+_hector_uav_msgs_generate_messages_check_deps_TakeoffAction/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffAction.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffAction.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffAction/fast
 
 #=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_ThrustCommand
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_HeightCommand
 
 # Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_ThrustCommand: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_ThrustCommand
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_ThrustCommand
+_hector_uav_msgs_generate_messages_check_deps_HeightCommand: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_HeightCommand
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeightCommand
 
 # fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_ThrustCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ThrustCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_ThrustCommand.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_ThrustCommand/fast
+_hector_uav_msgs_generate_messages_check_deps_HeightCommand/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeightCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeightCommand.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeightCommand/fast
 
 #=============================================================================
-# Target rules for targets named hector_uav_msgs_generate_messages_nodejs
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_Compass
 
 # Build rule for target.
-hector_uav_msgs_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 hector_uav_msgs_generate_messages_nodejs
-.PHONY : hector_uav_msgs_generate_messages_nodejs
+_hector_uav_msgs_generate_messages_check_deps_Compass: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_Compass
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_Compass
 
 # fast build rule for target.
-hector_uav_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/build
-.PHONY : hector_uav_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named geometry_msgs_generate_messages_eus
-
-# Build rule for target.
-geometry_msgs_generate_messages_eus: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_eus
-.PHONY : geometry_msgs_generate_messages_eus
-
-# fast build rule for target.
-geometry_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
-.PHONY : geometry_msgs_generate_messages_eus/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback/fast
-
-#=============================================================================
-# Target rules for targets named geometry_msgs_generate_messages_py
-
-# Build rule for target.
-geometry_msgs_generate_messages_py: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_py
-.PHONY : geometry_msgs_generate_messages_py
-
-# fast build rule for target.
-geometry_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
-.PHONY : geometry_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseAction
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseAction: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseAction
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseAction
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseAction/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseAction.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseAction.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseAction/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_MotorPWM
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_MotorPWM: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_MotorPWM
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorPWM
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_MotorPWM/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorPWM.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorPWM.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorPWM/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseResult
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseResult: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseResult
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseResult
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_PoseResult/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseResult.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseResult.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseResult/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingResult
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingResult: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingResult
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingResult
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingResult/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingResult.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingResult.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingResult/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_HeadingCommand
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_HeadingCommand: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_HeadingCommand
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeadingCommand
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_HeadingCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeadingCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_HeadingCommand.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_HeadingCommand/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_LandingActionResult
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingActionResult: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_LandingActionResult
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionResult
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_LandingActionResult/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionResult.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_LandingActionResult.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_LandingActionResult/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_RC
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_RC: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_RC
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_RC
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_RC/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RC.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RC.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_RC/fast
-
-#=============================================================================
-# Target rules for targets named std_msgs_generate_messages_nodejs
-
-# Build rule for target.
-std_msgs_generate_messages_nodejs: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 std_msgs_generate_messages_nodejs
-.PHONY : std_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-std_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
-.PHONY : std_msgs_generate_messages_nodejs/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand/fast
+_hector_uav_msgs_generate_messages_check_deps_Compass/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Compass.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Compass.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_Compass/fast
 
 #=============================================================================
 # Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_AttitudeCommand
@@ -1100,7 +944,7 @@ _hector_uav_msgs_generate_messages_check_deps_AttitudeCommand: cmake_check_build
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_AttitudeCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_AttitudeCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_AttitudeCommand.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_AttitudeCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_AttitudeCommand.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_AttitudeCommand/fast
 
 #=============================================================================
@@ -1113,7 +957,7 @@ _hector_uav_msgs_generate_messages_check_deps_Altimeter: cmake_check_build_syste
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_Altimeter/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Altimeter.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Altimeter.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Altimeter.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Altimeter.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_Altimeter/fast
 
 #=============================================================================
@@ -1126,34 +970,125 @@ _hector_uav_msgs_generate_messages_check_deps_VelocityZCommand: cmake_check_buil
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_VelocityZCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityZCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityZCommand.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityZCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_VelocityZCommand.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_VelocityZCommand/fast
 
 #=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_Supply
 
 # Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult
+_hector_uav_msgs_generate_messages_check_deps_Supply: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_Supply
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_Supply
 
 # fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult/fast
+_hector_uav_msgs_generate_messages_check_deps_Supply/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Supply.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_Supply.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_Supply/fast
 
 #=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_RawMagnetic
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseFeedback
 
 # Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_RawMagnetic: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_RawMagnetic
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawMagnetic
+_hector_uav_msgs_generate_messages_check_deps_PoseFeedback: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseFeedback
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseFeedback
 
 # fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_RawMagnetic/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawMagnetic.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawMagnetic.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawMagnetic/fast
+_hector_uav_msgs_generate_messages_check_deps_PoseFeedback/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseFeedback.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseFeedback.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseFeedback/fast
+
+#=============================================================================
+# Target rules for targets named geometry_msgs_generate_messages_py
+
+# Build rule for target.
+geometry_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_py
+.PHONY : geometry_msgs_generate_messages_py
+
+# fast build rule for target.
+geometry_msgs_generate_messages_py/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_py.dir/build
+.PHONY : geometry_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseAction
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseAction: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseAction
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseAction
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseAction/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseAction.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseAction.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseAction/fast
+
+#=============================================================================
+# Target rules for targets named hector_uav_msgs_generate_messages_nodejs
+
+# Build rule for target.
+hector_uav_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 hector_uav_msgs_generate_messages_nodejs
+.PHONY : hector_uav_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+hector_uav_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_nodejs.dir/build
+.PHONY : hector_uav_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named geometry_msgs_generate_messages_eus
+
+# Build rule for target.
+geometry_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 geometry_msgs_generate_messages_eus
+.PHONY : geometry_msgs_generate_messages_eus
+
+# fast build rule for target.
+geometry_msgs_generate_messages_eus/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build
+.PHONY : geometry_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PoseResult
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseResult: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_PoseResult
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseResult
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_PoseResult/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseResult.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PoseResult.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_PoseResult/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_MotorPWM
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_MotorPWM: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_MotorPWM
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorPWM
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_MotorPWM/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorPWM.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorPWM.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorPWM/fast
 
 #=============================================================================
 # Target rules for targets named hector_uav_msgs_generate_messages_py
@@ -1165,21 +1100,8 @@ hector_uav_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 hector_uav_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages_py.dir/build
 .PHONY : hector_uav_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_MotorCommand
-
-# Build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_MotorCommand: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_MotorCommand
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorCommand
-
-# fast build rule for target.
-_hector_uav_msgs_generate_messages_check_deps_MotorCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorCommand.dir/build
-.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorCommand/fast
 
 #=============================================================================
 # Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand
@@ -1191,8 +1113,86 @@ _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand: cmake_check_bui
 
 # fast build rule for target.
 _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/build.make hector_quadrotor_pkgs/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/build
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_PositionXYCommand.dir/build
 .PHONY : _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_MotorCommand
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_MotorCommand: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_MotorCommand
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorCommand
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_MotorCommand/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorCommand.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorCommand.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorCommand/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_RawMagnetic
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_RawMagnetic: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_RawMagnetic
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawMagnetic
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_RawMagnetic/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawMagnetic.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_RawMagnetic.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_RawMagnetic/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult/fast
+
+#=============================================================================
+# Target rules for targets named hector_uav_msgs_generate_messages
+
+# Build rule for target.
+hector_uav_msgs_generate_messages: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 hector_uav_msgs_generate_messages
+.PHONY : hector_uav_msgs_generate_messages
+
+# fast build rule for target.
+hector_uav_msgs_generate_messages/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/hector_uav_msgs_generate_messages.dir/build
+.PHONY : hector_uav_msgs_generate_messages/fast
+
+#=============================================================================
+# Target rules for targets named actionlib_msgs_generate_messages_eus
+
+# Build rule for target.
+actionlib_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 actionlib_msgs_generate_messages_eus
+.PHONY : actionlib_msgs_generate_messages_eus
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_eus/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
+.PHONY : actionlib_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named _hector_uav_msgs_generate_messages_check_deps_MotorStatus
+
+# Build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_MotorStatus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _hector_uav_msgs_generate_messages_check_deps_MotorStatus
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorStatus
+
+# fast build rule for target.
+_hector_uav_msgs_generate_messages_check_deps_MotorStatus/fast:
+	$(MAKE) -f quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorStatus.dir/build.make quadrotor/hector_uav_msgs/CMakeFiles/_hector_uav_msgs_generate_messages_check_deps_MotorStatus.dir/build
+.PHONY : _hector_uav_msgs_generate_messages_check_deps_MotorStatus/fast
 
 #=============================================================================
 # Target rules for targets named controllers_gennodejs
@@ -1724,7 +1724,7 @@ hector_quadrotor_aerodynamics: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_aerodynamics/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_aerodynamics.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_aerodynamics.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_model/CMakeFiles/hector_quadrotor_aerodynamics.dir/build.make quadrotor/hector_quadrotor_model/CMakeFiles/hector_quadrotor_aerodynamics.dir/build
 .PHONY : hector_quadrotor_aerodynamics/fast
 
 #=============================================================================
@@ -1737,7 +1737,7 @@ hector_quadrotor_propulsion: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_propulsion/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/build.make quadrotor/hector_quadrotor_model/CMakeFiles/hector_quadrotor_propulsion.dir/build
 .PHONY : hector_quadrotor_propulsion/fast
 
 #=============================================================================
@@ -1750,7 +1750,7 @@ uuid_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 uuid_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_cpp.dir/build
 .PHONY : uuid_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -1763,7 +1763,7 @@ sensor_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
 .PHONY : sensor_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -1776,7 +1776,7 @@ uuid_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 uuid_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_py.dir/build
 .PHONY : uuid_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -1789,7 +1789,7 @@ geographic_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 geographic_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_cpp.dir/build
 .PHONY : geographic_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -1802,7 +1802,7 @@ geographic_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 geographic_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_eus.dir/build
 .PHONY : geographic_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -1815,7 +1815,7 @@ geographic_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 geographic_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_py.dir/build
 .PHONY : geographic_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -1828,7 +1828,7 @@ uuid_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 uuid_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_eus.dir/build
 .PHONY : uuid_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -1841,7 +1841,7 @@ tf2_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 tf2_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
 .PHONY : tf2_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -1854,7 +1854,7 @@ nav_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 nav_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_py.dir/build
 .PHONY : nav_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -1867,7 +1867,7 @@ nav_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 nav_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_nodejs.dir/build
 .PHONY : nav_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -1880,7 +1880,7 @@ nav_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 nav_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_lisp.dir/build
 .PHONY : nav_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -1893,7 +1893,7 @@ tf_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 tf_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_lisp.dir/build
 .PHONY : tf_generate_messages_lisp/fast
 
 #=============================================================================
@@ -1906,7 +1906,7 @@ tf2_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 tf2_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
 .PHONY : tf2_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -1919,7 +1919,7 @@ sensor_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
 .PHONY : sensor_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -1932,7 +1932,7 @@ sensor_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
 .PHONY : sensor_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -1945,7 +1945,7 @@ uuid_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 uuid_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_nodejs.dir/build
 .PHONY : uuid_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -1958,7 +1958,7 @@ tf_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 tf_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_cpp.dir/build
 .PHONY : tf_generate_messages_cpp/fast
 
 #=============================================================================
@@ -1971,7 +1971,7 @@ geographic_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 geographic_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_lisp.dir/build
 .PHONY : geographic_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -1984,7 +1984,7 @@ nav_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 nav_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_eus.dir/build
 .PHONY : nav_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -1997,7 +1997,7 @@ actionlib_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_eus.dir/build
 .PHONY : actionlib_generate_messages_eus/fast
 
 #=============================================================================
@@ -2010,7 +2010,7 @@ tf2_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 tf2_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
 .PHONY : tf2_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2023,7 +2023,7 @@ tf2_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 tf2_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
 .PHONY : tf2_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -2036,7 +2036,7 @@ nav_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 nav_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/nav_msgs_generate_messages_cpp.dir/build
 .PHONY : nav_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2049,7 +2049,7 @@ uuid_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 uuid_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/uuid_msgs_generate_messages_lisp.dir/build
 .PHONY : uuid_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2062,7 +2062,7 @@ tf_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 tf_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_eus.dir/build
 .PHONY : tf_generate_messages_eus/fast
 
 #=============================================================================
@@ -2075,7 +2075,7 @@ tf_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 tf_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_nodejs.dir/build
 .PHONY : tf_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2088,7 +2088,7 @@ tf2_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 tf2_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
 .PHONY : tf2_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2101,7 +2101,7 @@ sensor_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
 .PHONY : sensor_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -2114,7 +2114,7 @@ tf_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 tf_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/tf_generate_messages_py.dir/build
 .PHONY : tf_generate_messages_py/fast
 
 #=============================================================================
@@ -2127,7 +2127,7 @@ sensor_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 sensor_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
 .PHONY : sensor_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2140,7 +2140,7 @@ actionlib_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_cpp.dir/build
 .PHONY : actionlib_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2153,7 +2153,7 @@ actionlib_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_lisp.dir/build
 .PHONY : actionlib_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2166,7 +2166,7 @@ geographic_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 geographic_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/geographic_msgs_generate_messages_nodejs.dir/build
 .PHONY : geographic_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2179,7 +2179,7 @@ actionlib_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
 .PHONY : actionlib_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2192,7 +2192,7 @@ hector_pose_estimation: cmake_check_build_system
 
 # fast build rule for target.
 hector_pose_estimation/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/hector_pose_estimation.dir/build
 .PHONY : hector_pose_estimation/fast
 
 #=============================================================================
@@ -2205,7 +2205,7 @@ actionlib_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 actionlib_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation_core/CMakeFiles/actionlib_generate_messages_py.dir/build
 .PHONY : actionlib_generate_messages_py/fast
 
 #=============================================================================
@@ -2218,7 +2218,7 @@ nodelet_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 nodelet_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_lisp.dir/build
 .PHONY : nodelet_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2231,7 +2231,7 @@ bond_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 bond_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_cpp.dir/build
 .PHONY : bond_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2244,7 +2244,7 @@ nodelet_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 nodelet_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_nodejs.dir/build
 .PHONY : nodelet_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2257,7 +2257,7 @@ nodelet_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 nodelet_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_cpp.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_cpp.dir/build
 .PHONY : nodelet_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2270,7 +2270,7 @@ hector_pose_estimation_node: cmake_check_build_system
 
 # fast build rule for target.
 hector_pose_estimation_node/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_node.dir/build
 .PHONY : hector_pose_estimation_node/fast
 
 #=============================================================================
@@ -2283,7 +2283,7 @@ nodelet_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 nodelet_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_eus.dir/build
 .PHONY : nodelet_generate_messages_eus/fast
 
 #=============================================================================
@@ -2296,7 +2296,7 @@ bond_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 bond_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_eus.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_eus.dir/build
 .PHONY : bond_generate_messages_eus/fast
 
 #=============================================================================
@@ -2309,7 +2309,7 @@ bond_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 bond_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_py.dir/build
 .PHONY : bond_generate_messages_py/fast
 
 #=============================================================================
@@ -2322,7 +2322,7 @@ bond_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 bond_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_lisp.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_lisp.dir/build
 .PHONY : bond_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2335,7 +2335,7 @@ nodelet_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 nodelet_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_py.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/nodelet_generate_messages_py.dir/build
 .PHONY : nodelet_generate_messages_py/fast
 
 #=============================================================================
@@ -2348,7 +2348,7 @@ pose_estimation: cmake_check_build_system
 
 # fast build rule for target.
 pose_estimation/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/pose_estimation.dir/build
 .PHONY : pose_estimation/fast
 
 #=============================================================================
@@ -2361,7 +2361,7 @@ bond_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 bond_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/bond_generate_messages_nodejs.dir/build
 .PHONY : bond_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2374,7 +2374,7 @@ hector_pose_estimation_nodelet: cmake_check_build_system
 
 # fast build rule for target.
 hector_pose_estimation_nodelet/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/build.make hector_quadrotor_pkgs/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/build
+	$(MAKE) -f quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/build.make quadrotor/hector_localization/hector_pose_estimation/CMakeFiles/hector_pose_estimation_nodelet.dir/build
 .PHONY : hector_pose_estimation_nodelet/fast
 
 #=============================================================================
@@ -2387,7 +2387,7 @@ hector_gazebo_plugins_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_plugins_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_lisp.dir/build
 .PHONY : hector_gazebo_plugins_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2400,7 +2400,7 @@ hector_gazebo_plugins_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_plugins_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_cpp.dir/build
 .PHONY : hector_gazebo_plugins_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2413,7 +2413,7 @@ dynamic_reconfigure_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 dynamic_reconfigure_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_py/fast
 
 #=============================================================================
@@ -2426,7 +2426,7 @@ hector_gazebo_ros_baro: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_ros_baro/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_ros_baro.dir/build
 .PHONY : hector_gazebo_ros_baro/fast
 
 #=============================================================================
@@ -2439,7 +2439,7 @@ hector_gazebo_plugins_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_plugins_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_eus.dir/build
 .PHONY : hector_gazebo_plugins_generate_messages_eus/fast
 
 #=============================================================================
@@ -2452,7 +2452,7 @@ dynamic_reconfigure_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 dynamic_reconfigure_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2465,7 +2465,7 @@ hector_gazebo_plugins_gencfg: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_plugins_gencfg/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_gencfg.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_gencfg.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_gencfg.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_gencfg.dir/build
 .PHONY : hector_gazebo_plugins_gencfg/fast
 
 #=============================================================================
@@ -2478,7 +2478,7 @@ hector_gazebo_quadrotor_aerodynamics: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_quadrotor_aerodynamics/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_aerodynamics.dir/build
 .PHONY : hector_gazebo_quadrotor_aerodynamics/fast
 
 #=============================================================================
@@ -2491,7 +2491,7 @@ dynamic_reconfigure_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 dynamic_reconfigure_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2504,7 +2504,7 @@ hector_gazebo_quadrotor_propulsion: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_quadrotor_propulsion/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_propulsion.dir/build
 .PHONY : hector_gazebo_quadrotor_propulsion/fast
 
 #=============================================================================
@@ -2517,7 +2517,7 @@ dynamic_reconfigure_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 dynamic_reconfigure_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_eus/fast
 
 #=============================================================================
@@ -2530,7 +2530,7 @@ hector_gazebo_plugins_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_plugins_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_py.dir/build
 .PHONY : hector_gazebo_plugins_generate_messages_py/fast
 
 #=============================================================================
@@ -2543,7 +2543,7 @@ hector_gazebo_quadrotor_simple_controller: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_quadrotor_simple_controller/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_simple_controller.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_simple_controller.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_simple_controller.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_quadrotor_simple_controller.dir/build
 .PHONY : hector_gazebo_quadrotor_simple_controller/fast
 
 #=============================================================================
@@ -2556,7 +2556,7 @@ dynamic_reconfigure_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 dynamic_reconfigure_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build
 .PHONY : dynamic_reconfigure_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2569,7 +2569,7 @@ hector_gazebo_plugins_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 hector_gazebo_plugins_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/hector_gazebo_plugins_generate_messages_nodejs.dir/build
 .PHONY : hector_gazebo_plugins_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2582,7 +2582,7 @@ dynamic_reconfigure_gencfg: cmake_check_build_system
 
 # fast build rule for target.
 dynamic_reconfigure_gencfg/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_gencfg.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_gencfg.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_gencfg.dir/build.make quadrotor/hector_quadrotor_gazebo_plugins/CMakeFiles/dynamic_reconfigure_gencfg.dir/build
 .PHONY : dynamic_reconfigure_gencfg/fast
 
 #=============================================================================
@@ -2595,7 +2595,7 @@ hector_quadrotor_pose_estimation_nodelet: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_pose_estimation_nodelet/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/build.make quadrotor/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_nodelet.dir/build
 .PHONY : hector_quadrotor_pose_estimation_nodelet/fast
 
 #=============================================================================
@@ -2608,7 +2608,7 @@ hector_quadrotor_pose_estimation_node: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_pose_estimation_node/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/build.make quadrotor/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation_node.dir/build
 .PHONY : hector_quadrotor_pose_estimation_node/fast
 
 #=============================================================================
@@ -2621,7 +2621,7 @@ hector_quadrotor_pose_estimation: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_pose_estimation/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/build.make quadrotor/hector_quadrotor_pose_estimation/CMakeFiles/hector_quadrotor_pose_estimation.dir/build
 .PHONY : hector_quadrotor_pose_estimation/fast
 
 #=============================================================================
@@ -2634,7 +2634,7 @@ topic_tools_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 topic_tools_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_eus.dir/build.make quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_eus.dir/build
 .PHONY : topic_tools_generate_messages_eus/fast
 
 #=============================================================================
@@ -2647,7 +2647,7 @@ topic_tools_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 topic_tools_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_cpp.dir/build.make quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_cpp.dir/build
 .PHONY : topic_tools_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2660,7 +2660,7 @@ topic_tools_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 topic_tools_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build.make quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_nodejs.dir/build
 .PHONY : topic_tools_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2673,7 +2673,7 @@ topic_tools_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 topic_tools_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
 .PHONY : topic_tools_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2686,7 +2686,7 @@ topic_tools_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 topic_tools_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_py.dir/build.make quadrotor/hector_localization/message_to_tf/CMakeFiles/topic_tools_generate_messages_py.dir/build
 .PHONY : topic_tools_generate_messages_py/fast
 
 #=============================================================================
@@ -2699,8 +2699,333 @@ message_to_tf: cmake_check_build_system
 
 # fast build rule for target.
 message_to_tf/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/message_to_tf.dir/build.make hector_quadrotor_pkgs/hector_localization/message_to_tf/CMakeFiles/message_to_tf.dir/build
+	$(MAKE) -f quadrotor/hector_localization/message_to_tf/CMakeFiles/message_to_tf.dir/build.make quadrotor/hector_localization/message_to_tf/CMakeFiles/message_to_tf.dir/build
 .PHONY : message_to_tf/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# Build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_roslaunch-check
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_roslaunch-check
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check.dir/build
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_roslaunch-check
+
+# Build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_roslaunch-check
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check.dir/build
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_gtest_test_merging_pipeline: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+.PHONY : _run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build
+.PHONY : _run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# Build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_experiments: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_experiments
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_roslaunch-check_launch_experiments.dir/build
+.PHONY : run_tests_multirobot_map_merge_roslaunch-check_launch_experiments/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_py
+
+# Build rule for target.
+map_msgs_generate_messages_py: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_py
+.PHONY : map_msgs_generate_messages_py
+
+# fast build rule for target.
+map_msgs_generate_messages_py/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_py.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_py.dir/build
+.PHONY : map_msgs_generate_messages_py/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_eus
+
+# Build rule for target.
+map_msgs_generate_messages_eus: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_eus
+.PHONY : map_msgs_generate_messages_eus
+
+# fast build rule for target.
+map_msgs_generate_messages_eus/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_eus.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_eus.dir/build
+.PHONY : map_msgs_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_map05.pgm
+
+# Build rule for target.
+multirobot_map_merge_map05.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_map05.pgm
+.PHONY : multirobot_map_merge_map05.pgm
+
+# fast build rule for target.
+multirobot_map_merge_map05.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_map05.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_map05.pgm.dir/build
+.PHONY : multirobot_map_merge_map05.pgm/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_map00.pgm
+
+# Build rule for target.
+multirobot_map_merge_map00.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_map00.pgm
+.PHONY : multirobot_map_merge_map00.pgm
+
+# fast build rule for target.
+multirobot_map_merge_map00.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_map00.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_map00.pgm.dir/build
+.PHONY : multirobot_map_merge_map00.pgm/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_gtest
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_gtest
+.PHONY : _run_tests_multirobot_map_merge_gtest
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_gtest/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_gtest.dir/build
+.PHONY : _run_tests_multirobot_map_merge_gtest/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# Build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch.dir/build
+.PHONY : _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_nodejs
+
+# Build rule for target.
+map_msgs_generate_messages_nodejs: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_nodejs
+.PHONY : map_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+map_msgs_generate_messages_nodejs/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_nodejs.dir/build
+.PHONY : map_msgs_generate_messages_nodejs/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_lisp
+
+# Build rule for target.
+map_msgs_generate_messages_lisp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_lisp
+.PHONY : map_msgs_generate_messages_lisp
+
+# fast build rule for target.
+map_msgs_generate_messages_lisp/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_lisp.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_lisp.dir/build
+.PHONY : map_msgs_generate_messages_lisp/fast
+
+#=============================================================================
+# Target rules for targets named clean_test_results_multirobot_map_merge
+
+# Build rule for target.
+clean_test_results_multirobot_map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 clean_test_results_multirobot_map_merge
+.PHONY : clean_test_results_multirobot_map_merge
+
+# fast build rule for target.
+clean_test_results_multirobot_map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/clean_test_results_multirobot_map_merge.dir/build.make multirobot_map_merge/CMakeFiles/clean_test_results_multirobot_map_merge.dir/build
+.PHONY : clean_test_results_multirobot_map_merge/fast
+
+#=============================================================================
+# Target rules for targets named combine_grids
+
+# Build rule for target.
+combine_grids: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 combine_grids
+.PHONY : combine_grids
+
+# fast build rule for target.
+combine_grids/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/combine_grids.dir/build.make multirobot_map_merge/CMakeFiles/combine_grids.dir/build
+.PHONY : combine_grids/fast
+
+#=============================================================================
+# Target rules for targets named map_msgs_generate_messages_cpp
+
+# Build rule for target.
+map_msgs_generate_messages_cpp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_msgs_generate_messages_cpp
+.PHONY : map_msgs_generate_messages_cpp
+
+# fast build rule for target.
+map_msgs_generate_messages_cpp/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_cpp.dir/build.make multirobot_map_merge/CMakeFiles/map_msgs_generate_messages_cpp.dir/build
+.PHONY : map_msgs_generate_messages_cpp/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_2011-08-09-12-22-52.pgm
+
+# Build rule for target.
+multirobot_map_merge_2011-08-09-12-22-52.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_2011-08-09-12-22-52.pgm
+.PHONY : multirobot_map_merge_2011-08-09-12-22-52.pgm
+
+# fast build rule for target.
+multirobot_map_merge_2011-08-09-12-22-52.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_2011-08-09-12-22-52.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_2011-08-09-12-22-52.pgm.dir/build
+.PHONY : multirobot_map_merge_2011-08-09-12-22-52.pgm/fast
+
+#=============================================================================
+# Target rules for targets named map_merge
+
+# Build rule for target.
+map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 map_merge
+.PHONY : map_merge
+
+# fast build rule for target.
+map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/map_merge.dir/build.make multirobot_map_merge/CMakeFiles/map_merge.dir/build
+.PHONY : map_merge/fast
+
+#=============================================================================
+# Target rules for targets named multirobot_map_merge_2012-01-28-11-12-01.pgm
+
+# Build rule for target.
+multirobot_map_merge_2012-01-28-11-12-01.pgm: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 multirobot_map_merge_2012-01-28-11-12-01.pgm
+.PHONY : multirobot_map_merge_2012-01-28-11-12-01.pgm
+
+# fast build rule for target.
+multirobot_map_merge_2012-01-28-11-12-01.pgm/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/multirobot_map_merge_2012-01-28-11-12-01.pgm.dir/build.make multirobot_map_merge/CMakeFiles/multirobot_map_merge_2012-01-28-11-12-01.pgm.dir/build
+.PHONY : multirobot_map_merge_2012-01-28-11-12-01.pgm/fast
+
+#=============================================================================
+# Target rules for targets named test_merging_pipeline
+
+# Build rule for target.
+test_merging_pipeline: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_merging_pipeline
+.PHONY : test_merging_pipeline
+
+# fast build rule for target.
+test_merging_pipeline/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/test_merging_pipeline.dir/build.make multirobot_map_merge/CMakeFiles/test_merging_pipeline.dir/build
+.PHONY : test_merging_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge
+
+# Build rule for target.
+run_tests_multirobot_map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge
+.PHONY : run_tests_multirobot_map_merge
+
+# fast build rule for target.
+run_tests_multirobot_map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge.dir/build
+.PHONY : run_tests_multirobot_map_merge/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# Build rule for target.
+run_tests_multirobot_map_merge_gtest_test_merging_pipeline: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+.PHONY : run_tests_multirobot_map_merge_gtest_test_merging_pipeline
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest_test_merging_pipeline.dir/build
+.PHONY : run_tests_multirobot_map_merge_gtest_test_merging_pipeline/fast
+
+#=============================================================================
+# Target rules for targets named _run_tests_multirobot_map_merge
+
+# Build rule for target.
+_run_tests_multirobot_map_merge: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 _run_tests_multirobot_map_merge
+.PHONY : _run_tests_multirobot_map_merge
+
+# fast build rule for target.
+_run_tests_multirobot_map_merge/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge.dir/build.make multirobot_map_merge/CMakeFiles/_run_tests_multirobot_map_merge.dir/build
+.PHONY : _run_tests_multirobot_map_merge/fast
+
+#=============================================================================
+# Target rules for targets named run_tests_multirobot_map_merge_gtest
+
+# Build rule for target.
+run_tests_multirobot_map_merge_gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 run_tests_multirobot_map_merge_gtest
+.PHONY : run_tests_multirobot_map_merge_gtest
+
+# fast build rule for target.
+run_tests_multirobot_map_merge_gtest/fast:
+	$(MAKE) -f multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest.dir/build.make multirobot_map_merge/CMakeFiles/run_tests_multirobot_map_merge_gtest.dir/build
+.PHONY : run_tests_multirobot_map_merge_gtest/fast
 
 #=============================================================================
 # Target rules for targets named std_srvs_generate_messages_cpp
@@ -2712,7 +3037,7 @@ std_srvs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 std_srvs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
 .PHONY : std_srvs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2725,7 +3050,7 @@ std_srvs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 std_srvs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_eus.dir/build
 .PHONY : std_srvs_generate_messages_eus/fast
 
 #=============================================================================
@@ -2738,7 +3063,7 @@ std_srvs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 std_srvs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_lisp.dir/build
 .PHONY : std_srvs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2751,7 +3076,7 @@ std_srvs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 std_srvs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_py.dir/build
 .PHONY : std_srvs_generate_messages_py/fast
 
 #=============================================================================
@@ -2764,7 +3089,7 @@ std_srvs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 std_srvs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_interface/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build
 .PHONY : std_srvs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2777,7 +3102,7 @@ hector_quadrotor_interface: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_interface/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/build.make quadrotor/hector_quadrotor_interface/CMakeFiles/hector_quadrotor_interface.dir/build
 .PHONY : hector_quadrotor_interface/fast
 
 #=============================================================================
@@ -2790,7 +3115,7 @@ pose_action: cmake_check_build_system
 
 # fast build rule for target.
 pose_action/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/pose_action.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_actions/CMakeFiles/pose_action.dir/build.make quadrotor/hector_quadrotor_actions/CMakeFiles/pose_action.dir/build
 .PHONY : pose_action/fast
 
 #=============================================================================
@@ -2803,7 +3128,7 @@ landing_action: cmake_check_build_system
 
 # fast build rule for target.
 landing_action/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/landing_action.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_actions/CMakeFiles/landing_action.dir/build.make quadrotor/hector_quadrotor_actions/CMakeFiles/landing_action.dir/build
 .PHONY : landing_action/fast
 
 #=============================================================================
@@ -2816,7 +3141,7 @@ takeoff_action: cmake_check_build_system
 
 # fast build rule for target.
 takeoff_action/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/build.make quadrotor/hector_quadrotor_actions/CMakeFiles/takeoff_action.dir/build
 .PHONY : takeoff_action/fast
 
 #=============================================================================
@@ -2829,7 +3154,7 @@ hector_quadrotor_controllers: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_controllers/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/hector_quadrotor_controllers.dir/build
 .PHONY : hector_quadrotor_controllers/fast
 
 #=============================================================================
@@ -2842,7 +3167,7 @@ visualization_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 visualization_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_py.dir/build
 .PHONY : visualization_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -2855,7 +3180,7 @@ visualization_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 visualization_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_lisp.dir/build
 .PHONY : visualization_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2868,7 +3193,7 @@ visualization_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 visualization_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_eus.dir/build
 .PHONY : visualization_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -2881,7 +3206,7 @@ control_toolbox_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 control_toolbox_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_py.dir/build
 .PHONY : control_toolbox_generate_messages_py/fast
 
 #=============================================================================
@@ -2894,7 +3219,7 @@ trajectory_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_lisp.dir/build
 .PHONY : trajectory_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -2907,7 +3232,7 @@ visualization_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 visualization_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_nodejs.dir/build
 .PHONY : visualization_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2920,7 +3245,7 @@ control_toolbox_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 control_toolbox_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_eus.dir/build
 .PHONY : control_toolbox_generate_messages_eus/fast
 
 #=============================================================================
@@ -2933,7 +3258,7 @@ control_toolbox_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 control_toolbox_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_nodejs.dir/build
 .PHONY : control_toolbox_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -2946,7 +3271,7 @@ control_toolbox_gencfg: cmake_check_build_system
 
 # fast build rule for target.
 control_toolbox_gencfg/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_gencfg.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_gencfg.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_gencfg.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_gencfg.dir/build
 .PHONY : control_toolbox_gencfg/fast
 
 #=============================================================================
@@ -2959,7 +3284,7 @@ control_toolbox_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 control_toolbox_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_cpp.dir/build
 .PHONY : control_toolbox_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2972,7 +3297,7 @@ control_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 control_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_cpp.dir/build
 .PHONY : control_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -2985,7 +3310,7 @@ control_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 control_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_eus.dir/build
 .PHONY : control_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -2998,7 +3323,7 @@ control_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 control_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_lisp.dir/build
 .PHONY : control_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -3011,7 +3336,7 @@ control_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 control_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_nodejs.dir/build
 .PHONY : control_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -3024,7 +3349,7 @@ visualization_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 visualization_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/visualization_msgs_generate_messages_cpp.dir/build
 .PHONY : visualization_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -3037,7 +3362,7 @@ trajectory_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_cpp.dir/build
 .PHONY : trajectory_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -3050,7 +3375,7 @@ control_toolbox_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 control_toolbox_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_toolbox_generate_messages_lisp.dir/build
 .PHONY : control_toolbox_generate_messages_lisp/fast
 
 #=============================================================================
@@ -3063,7 +3388,7 @@ trajectory_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_eus.dir/build
 .PHONY : trajectory_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -3076,7 +3401,7 @@ trajectory_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_nodejs.dir/build
 .PHONY : trajectory_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -3089,7 +3414,7 @@ control_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 control_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/control_msgs_generate_messages_py.dir/build
 .PHONY : control_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -3102,7 +3427,7 @@ trajectory_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 trajectory_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_controllers/CMakeFiles/trajectory_msgs_generate_messages_py.dir/build
 .PHONY : trajectory_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -3115,7 +3440,7 @@ quadrotor_teleop: cmake_check_build_system
 
 # fast build rule for target.
 quadrotor_teleop/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/build.make quadrotor/hector_quadrotor_teleop/CMakeFiles/quadrotor_teleop.dir/build
 .PHONY : quadrotor_teleop/fast
 
 #=============================================================================
@@ -3128,7 +3453,7 @@ controller_manager_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_eus/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build.make quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_eus.dir/build
 .PHONY : controller_manager_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -3141,7 +3466,7 @@ controller_manager_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build.make quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_nodejs.dir/build
 .PHONY : controller_manager_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -3154,7 +3479,7 @@ controller_manager_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_py/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build.make quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_py.dir/build
 .PHONY : controller_manager_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -3167,7 +3492,7 @@ controller_manager_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build.make quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_cpp.dir/build
 .PHONY : controller_manager_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -3180,7 +3505,7 @@ controller_manager_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 controller_manager_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build.make quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/controller_manager_msgs_generate_messages_lisp.dir/build
 .PHONY : controller_manager_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -3193,7 +3518,7 @@ hector_quadrotor_controller_gazebo: cmake_check_build_system
 
 # fast build rule for target.
 hector_quadrotor_controller_gazebo/fast:
-	$(MAKE) -f hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/build.make hector_quadrotor_pkgs/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/build
+	$(MAKE) -f quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/build.make quadrotor/hector_quadrotor_controller_gazebo/CMakeFiles/hector_quadrotor_controller_gazebo.dir/build
 .PHONY : hector_quadrotor_controller_gazebo/fast
 
 #=============================================================================
@@ -3433,69 +3758,69 @@ help:
 	@echo "... hector_uav_msgs_generate_messages_eus"
 	@echo "... hector_uav_msgs_gencpp"
 	@echo "... hector_uav_msgs_generate_messages_cpp"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingGoal"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal"
 	@echo "... hector_uav_msgs_generate_messages_lisp"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffResult"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_ThrustCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingGoal"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffActionGoal"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseActionResult"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_YawrateCommand"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingAction"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseFeedback"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_Supply"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_ServoCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingActionFeedback"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseActionGoal"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingAction"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_EnableMotors"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseGoal"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_RawRC"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_YawrateCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingActionGoal"
 	@echo "... actionlib_msgs_generate_messages_py"
 	@echo "... actionlib_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_eus"
 	@echo "... actionlib_msgs_generate_messages_lisp"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_MotorStatus"
-	@echo "... hector_uav_msgs_generate_messages"
-	@echo "... actionlib_msgs_generate_messages_eus"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseGoal"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_EnableMotors"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffGoal"
 	@echo "... geometry_msgs_generate_messages_nodejs"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_RawImu"
 	@echo "... std_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_RC"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingActionResult"
+	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
 	@echo "... geometry_msgs_generate_messages_lisp"
 	@echo "... geometry_msgs_generate_messages_cpp"
 	@echo "... hector_uav_msgs_gennodejs"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseActionFeedback"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_HeightCommand"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffAction"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_Compass"
 	@echo "... actionlib_msgs_generate_messages_cpp"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffActionFeedback"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_HeadingCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingResult"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingFeedback"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_ControllerState"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_RuddersCommand"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_RawRC"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_ThrustCommand"
-	@echo "... hector_uav_msgs_generate_messages_nodejs"
-	@echo "... geometry_msgs_generate_messages_eus"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback"
-	@echo "... geometry_msgs_generate_messages_py"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseAction"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_MotorPWM"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseResult"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingResult"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_HeadingCommand"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_LandingActionResult"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_RC"
-	@echo "... std_msgs_generate_messages_nodejs"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_VelocityXYCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffAction"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_HeightCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_Compass"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_AttitudeCommand"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_Altimeter"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_VelocityZCommand"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_RawMagnetic"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_Supply"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseFeedback"
+	@echo "... geometry_msgs_generate_messages_py"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseAction"
+	@echo "... hector_uav_msgs_generate_messages_nodejs"
+	@echo "... geometry_msgs_generate_messages_eus"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffFeedback"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_PoseResult"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_MotorPWM"
 	@echo "... hector_uav_msgs_generate_messages_py"
-	@echo "... _hector_uav_msgs_generate_messages_check_deps_MotorCommand"
 	@echo "... _hector_uav_msgs_generate_messages_check_deps_PositionXYCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_MotorCommand"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_RawMagnetic"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_TakeoffActionResult"
+	@echo "... hector_uav_msgs_generate_messages"
+	@echo "... actionlib_msgs_generate_messages_eus"
+	@echo "... _hector_uav_msgs_generate_messages_check_deps_MotorStatus"
 	@echo "... controllers_gennodejs"
 	@echo "... controllers_generate_messages_nodejs"
 	@echo "... controllers_genlisp"
@@ -3612,6 +3937,31 @@ help:
 	@echo "... topic_tools_generate_messages_lisp"
 	@echo "... topic_tools_generate_messages_py"
 	@echo "... message_to_tf"
+	@echo "... _run_tests_multirobot_map_merge_roslaunch-check_launch_experiments"
+	@echo "... run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch"
+	@echo "... _run_tests_multirobot_map_merge_roslaunch-check"
+	@echo "... run_tests_multirobot_map_merge_roslaunch-check"
+	@echo "... _run_tests_multirobot_map_merge_gtest_test_merging_pipeline"
+	@echo "... run_tests_multirobot_map_merge_roslaunch-check_launch_experiments"
+	@echo "... map_msgs_generate_messages_py"
+	@echo "... map_msgs_generate_messages_eus"
+	@echo "... multirobot_map_merge_map05.pgm"
+	@echo "... multirobot_map_merge_map00.pgm"
+	@echo "... _run_tests_multirobot_map_merge_gtest"
+	@echo "... _run_tests_multirobot_map_merge_roslaunch-check_launch_map_merge.launch"
+	@echo "... map_msgs_generate_messages_nodejs"
+	@echo "... map_msgs_generate_messages_lisp"
+	@echo "... clean_test_results_multirobot_map_merge"
+	@echo "... combine_grids"
+	@echo "... map_msgs_generate_messages_cpp"
+	@echo "... multirobot_map_merge_2011-08-09-12-22-52.pgm"
+	@echo "... map_merge"
+	@echo "... multirobot_map_merge_2012-01-28-11-12-01.pgm"
+	@echo "... test_merging_pipeline"
+	@echo "... run_tests_multirobot_map_merge"
+	@echo "... run_tests_multirobot_map_merge_gtest_test_merging_pipeline"
+	@echo "... _run_tests_multirobot_map_merge"
+	@echo "... run_tests_multirobot_map_merge_gtest"
 	@echo "... std_srvs_generate_messages_cpp"
 	@echo "... std_srvs_generate_messages_eus"
 	@echo "... std_srvs_generate_messages_lisp"

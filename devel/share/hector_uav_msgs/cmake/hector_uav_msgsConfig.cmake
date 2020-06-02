@@ -67,7 +67,7 @@ set(hector_uav_msgs_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(hector_uav_msgs_SOURCE_PREFIX /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_uav_msgs)
+  set(hector_uav_msgs_SOURCE_PREFIX /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_uav_msgs)
   set(hector_uav_msgs_DEVEL_PREFIX /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel)
   set(hector_uav_msgs_INSTALL_PREFIX "")
   set(hector_uav_msgs_PREFIX ${hector_uav_msgs_DEVEL_PREFIX})
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(hector_uav_msgs_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include;/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_uav_msgs/include " STREQUAL " ")
+if(NOT "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include;/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_uav_msgs/include " STREQUAL " ")
   set(hector_uav_msgs_INCLUDE_DIRS "")
-  set(_include_dirs "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include;/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_uav_msgs/include")
+  set(_include_dirs "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include;/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_uav_msgs/include")
   if(NOT "https://github.com/tu-darmstadt-ros-pkg/hector_quadrotor/issues " STREQUAL " ")
     set(_report "Check the issue tracker 'https://github.com/tu-darmstadt-ros-pkg/hector_quadrotor/issues' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://ros.org/wiki/hector_uav_msgs " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/i
         message(FATAL_ERROR "Project 'hector_uav_msgs' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'hector_uav_msgs' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_uav_msgs/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'hector_uav_msgs' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_uav_msgs/${idir}'.  ${_report}")
     endif()
     _list_append_unique(hector_uav_msgs_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib;/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

@@ -67,7 +67,7 @@ set(hector_quadrotor_pose_estimation_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(hector_quadrotor_pose_estimation_SOURCE_PREFIX /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_quadrotor_pose_estimation)
+  set(hector_quadrotor_pose_estimation_SOURCE_PREFIX /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_quadrotor_pose_estimation)
   set(hector_quadrotor_pose_estimation_DEVEL_PREFIX /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel)
   set(hector_quadrotor_pose_estimation_INSTALL_PREFIX "")
   set(hector_quadrotor_pose_estimation_PREFIX ${hector_quadrotor_pose_estimation_DEVEL_PREFIX})
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(hector_quadrotor_pose_estimation_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/include " STREQUAL " ")
+if(NOT "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_quadrotor_pose_estimation/include " STREQUAL " ")
   set(hector_quadrotor_pose_estimation_INCLUDE_DIRS "")
-  set(_include_dirs "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/include")
+  set(_include_dirs "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_quadrotor_pose_estimation/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT "http://ros.org/wiki/hector_quadrotor_pose_estimation " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hec
         message(FATAL_ERROR "Project 'hector_quadrotor_pose_estimation' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'hector_quadrotor_pose_estimation' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_quadrotor_pose_estimation/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'hector_quadrotor_pose_estimation' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_quadrotor_pose_estimation/${idir}'.  ${_report}")
     endif()
     _list_append_unique(hector_quadrotor_pose_estimation_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib;/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

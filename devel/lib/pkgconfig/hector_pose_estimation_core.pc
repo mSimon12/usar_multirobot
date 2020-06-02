@@ -3,6 +3,6 @@ prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel
 Name: hector_pose_estimation_core
 Description: Description of hector_pose_estimation_core
 Version: 0.3.0
-Cflags: -I/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/hector_quadrotor_pkgs/hector_localization/hector_pose_estimation_core/include -I/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include -I/usr/include/eigen3
+Cflags: -I/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_localization/hector_pose_estimation_core/include -I/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include -I/usr/include/eigen3
 Libs: -L${prefix}/lib -lhector_pose_estimation
 Requires: rostime rosconsole roscpp sensor_msgs geometry_msgs nav_msgs geographic_msgs tf
