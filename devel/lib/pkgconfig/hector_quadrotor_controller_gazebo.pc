@@ -1,8 +1,0 @@
-prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel
-
-Name: hector_quadrotor_controller_gazebo
-Description: Description of hector_quadrotor_controller_gazebo
-Version: 0.3.5
-Cflags: -I/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/hector_quadrotor_controller_gazebo/include
-Libs: -L${prefix}/lib -lhector_quadrotor_controller_gazebo
-Requires: gazebo_ros_control hector_quadrotor_interface
