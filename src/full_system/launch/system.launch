@@ -10,7 +10,7 @@
 
   <!-- Launch Pioneer3AT 1 -->
   <group ns="pioneer3at_1">
-    <include file="$(find pioneer3at_ros)/launch/pioneer3at.launch">
+    <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
       <arg name="xcoordinate" value="0.0"/>
       <arg name="ycoordinate" value="5.0"/>
@@ -23,7 +23,7 @@
 
   <!-- Launch Pioneer3AT 2 -->
   <group ns="pioneer3at_2">
-    <include file="$(find pioneer3at_ros)/launch/pioneer3at.launch">
+    <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_2"/>
       <arg name="xcoordinate" value="0.0"/>
       <arg name="ycoordinate" value="6.0"/>
@@ -36,7 +36,7 @@
 
   <!-- Spawn simulated quadrotor uav 1 -->
   <group ns="UAV_1">
-    <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
+    <include file="$(find hector_quadrotor_gazebo)/launch/quadrotor.launch" >
       <arg name="name" default="UAV_1"/>
       <arg name="tf_prefix" value="UAV_1" />
       <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
@@ -51,9 +51,9 @@
     </include>
   </group>
 
-  <!-- Spawn simulated quadrotor uav 2 -->
+  <!-- Spawn simulated quadrotor uav 2 
   <group ns="UAV_2">
-    <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" > 
+    <include file="$(find hector_quadrotor_gazebo)/launch/quadrotor.launch" > 
       <arg name="name" default="UAV_2"/>
       <arg name="tf_prefix" value="UAV_2" />
       <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
@@ -66,18 +66,18 @@
       <arg name="y" default="2.0"/>
       <arg name="z" default="1.46"/> 
     </include>
-  </group> 
+  </group> -->
 
-  <!-- Launch Pioneer2DX 1
+  <!-- Launch Pioneer2DX 1 
   <group ns="pioneer2dx_1">
     <include file="$(find pioneer2dx_ros)/launch/pioneer2dx.launch">
       <arg name="robot_name" value="pioneer2dx_1"/>
-      <arg name="xcoordinate" value="20.0"/>
-      <arg name="ycoordinate" value="-30.0"/>
-      <arg name="zcoordinate" value="1.3"/>
+      <arg name="xcoordinate" value="0.0"/>
+      <arg name="ycoordinate" value="7.0"/>
+      <arg name="zcoordinate" value="1.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
-      <arg name="yaw" value="1.57"/>
+      <arg name="yaw" value="0.0"/>
     </include>
   </group> -->
 
@@ -85,26 +85,14 @@
   <group ns="pioneer2dx_2">
     <include file="$(find pioneer2dx_ros)/launch/pioneer2dx.launch">
       <arg name="robot_name" value="pioneer2dx_2"/>
-      <arg name="xcoordinate" value="19.0"/>
-      <arg name="ycoordinate" value="-30.0"/>
-      <arg name="zcoordinate" value="1.3"/>
+      <arg name="xcoordinate" value="0.0"/>
+      <arg name="ycoordinate" value="8.0"/>
+      <arg name="zcoordinate" value="1.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
-      <arg name="yaw" value="1.57"/>
+      <arg name="yaw" value="0.0"/>
     </include>
   </group> -->
-
-  <!-- Include MYROBOT 
-  <include file="$(find myrobot_description)/launch/myrobot.launch">
-    <arg name="robot_name" value="myrobot"/>
-    <arg name="xcoordinate" value="5.0"/>
-    <arg name="ycoordinate" value="0.0"/>
-    <arg name="zcoordinate" value="2.0"/>
-    <arg name="roll" value="0.0"/>
-    <arg name="pitch" value="0.0"/>
-    <arg name="yaw" value="0.0"/>
-  </include>-->
-
 
 <!-- LAUNCH HUMAN TEAMS -->
 

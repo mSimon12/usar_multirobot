@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+
+<launch>
+	<param name="..." value="..." type="..."/>
+
+	<node pkg="turtlesim" type="turtlesim_node" name="t_node"/>
+    
+</launch>	

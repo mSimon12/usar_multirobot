@@ -766,12 +766,6 @@ controller_manager_DIR:PATH=/opt/ros/melodic/share/controller_manager/cmake
 //The directory containing a CMake configuration file for controller_manager_msgs.
 controller_manager_msgs_DIR:PATH=/opt/ros/melodic/share/controller_manager_msgs/cmake
 
-//Value Computed by CMake
-controllers_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/controllers
-
-//Value Computed by CMake
-controllers_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/controllers
-
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/melodic/share/cpp_common/cmake
 
@@ -1109,12 +1103,6 @@ multirobot_map_merge_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/p
 //Value Computed by CMake
 multirobot_map_merge_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/multirobot_map_merge
 
-//Value Computed by CMake
-myrobot_description_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/myrobot_description
-
-//Value Computed by CMake
-myrobot_description_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/myrobot_description
-
 //The directory containing a CMake configuration file for nav_msgs.
 nav_msgs_DIR:PATH=/opt/ros/melodic/share/nav_msgs/cmake
 
@@ -1125,22 +1113,58 @@ nodelet_DIR:PATH=/opt/ros/melodic/share/nodelet/cmake
 onelib:FILEPATH=/usr/lib/x86_64-linux-gnu/libsdformat.so
 
 //Value Computed by CMake
-pioneer2dx_ros_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer2dx_ros
+pioneer2dx_controllers_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer2dx/pioneer2dx_controllers
 
 //Value Computed by CMake
-pioneer2dx_ros_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer2dx_ros
+pioneer2dx_controllers_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer2dx/pioneer2dx_controllers
 
 //Value Computed by CMake
-pioneer3at_ros_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer3at_ros
+pioneer2dx_ros_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer2dx/pioneer2dx_ros
 
 //Value Computed by CMake
-pioneer3at_ros_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer3at_ros
+pioneer2dx_ros_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer2dx/pioneer2dx_ros
+
+//Value Computed by CMake
+pioneer2dx_slam_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer2dx/pioneer2dx_slam
+
+//Value Computed by CMake
+pioneer2dx_slam_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer2dx/pioneer2dx_slam
+
+//Value Computed by CMake
+pioneer3at_controllers_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer3at/pioneer3at_controllers
+
+//Value Computed by CMake
+pioneer3at_controllers_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer3at/pioneer3at_controllers
+
+//Value Computed by CMake
+pioneer3at_description_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer3at/pioneer3at_description
+
+//Value Computed by CMake
+pioneer3at_description_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer3at/pioneer3at_description
+
+//Value Computed by CMake
+pioneer3at_slam_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer3at/pioneer3at_slam
+
+//Value Computed by CMake
+pioneer3at_slam_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer3at/pioneer3at_slam
 
 //The directory containing a CMake configuration file for pluginlib.
 pluginlib_DIR:PATH=/opt/ros/melodic/share/pluginlib/cmake
 
 //The directory containing a CMake configuration file for polled_camera.
 polled_camera_DIR:PATH=/opt/ros/melodic/share/polled_camera/cmake
+
+//Value Computed by CMake
+quadrotor_controllers_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/quadrotor/quadrotor_controllers
+
+//Value Computed by CMake
+quadrotor_controllers_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/quadrotor_controllers
+
+//Value Computed by CMake
+quadrotor_slam_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/quadrotor/quadrotor_slam
+
+//Value Computed by CMake
+quadrotor_slam_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/quadrotor/quadrotor_slam
 
 //The directory containing a CMake configuration file for realtime_tools.
 realtime_tools_DIR:PATH=/opt/ros/melodic/share/realtime_tools/cmake
@@ -1183,12 +1207,6 @@ rostime_DIR:PATH=/opt/ros/melodic/share/rostime/cmake
 
 //The directory containing a CMake configuration file for sensor_msgs.
 sensor_msgs_DIR:PATH=/opt/ros/melodic/share/sensor_msgs/cmake
-
-//Value Computed by CMake
-slam_BINARY_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/slam
-
-//Value Computed by CMake
-slam_SOURCE_DIR:STATIC=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/slam
 
 //The directory containing a CMake configuration file for smclib.
 smclib_DIR:PATH=/opt/ros/melodic/share/smclib/cmake
@@ -1575,7 +1593,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=31
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=34
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="robot_name" default="robot"/>
+  <arg name="frame" default="earth"/>
+
+  <node pkg="octomap_server" type="octomap_server_node" name="octomap_server">
+      
+      <param name="frame_id" type="string" value="$(arg frame)" />  	<!-- fixed map frame (set to 'map' if SLAM or localization running!) -->
+      <param name="resolution" value="0.01" />				<!-- Resolution in meters for the map -->
+      <param name="height_map" value="true" />				<!-- Height map with colors -->
+      <param name="sensor_model/max_range" value="5.0" />		<!-- maximum range to integrate (speedup!) -->
+      <remap from="cloud_in" to="/$(arg robot_name)/camera/depth/points" />	<!-- data source to integrate (PointCloud2) -->
+      <remap from="projected_map" to="/$(arg robot_name)/map" />	<!-- 2D Map output -->
+  </node>
+
+</launch>

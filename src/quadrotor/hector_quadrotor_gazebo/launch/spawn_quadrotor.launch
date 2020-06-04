@@ -23,7 +23,7 @@
   <arg name="base_link_frame" default="$(arg tf_prefix)/base_link"/>
 
   
-  <param name="tf_prefix" type="string" value="$(arg tf_prefix)"/> <!-- required for hector_pose_estimation and message_to_tf -->
+  <param name="tf_prefix" type="string" value="$(arg tf_prefix)"/> 		<!-- required for hector_pose_estimation and message_to_tf -->
   <param name="base_link_frame" type="string" value="$(arg base_link_frame)" />
   <param name="base_stabilized_frame" type="string" value="$(arg tf_prefix)/base_stabilized" />
   <param name="base_footprint_frame" type="string" value="$(arg tf_prefix)/base_footprint" />
@@ -41,8 +41,8 @@
   </node>
 
   <!-- Publishing tf_static between earth and drone/world. -->
-   <node name="earth_to_map_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
-  	  args="0 0 0 0 0 0 earth $(arg name)/world 100"/>
+   <node name="earth_to_world_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
+  	  args="0 0 0 0 0 0 earth $(arg name)/world 100"/> 
 
   <!-- publish state and tf -->
   <node name="ground_truth_to_tf" pkg="message_to_tf" type="message_to_tf" output="screen">
