@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="robot_name" default="robot"/>
+  <arg name="model" default="model_depth_camera"/>
   <arg name="xcoordinate" default="0.0"/>
   <arg name="ycoordinate" default="0.0"/>
   <arg name="zcoordinate" default="0.0"/>
@@ -11,6 +12,7 @@
   <!-- Make robot_description and run robot_state_publisher --> 
   <include file="$(find pioneer3at_description)/launch/make_robot_description_and_call_state_publisher_pioneer3at.launch">
     <arg name="robot_name"  value="$(arg robot_name)"/>
+    <arg name="model" value="$(arg model)"/>
     <arg name="xcoordinate" value="$(arg xcoordinate)"/>
     <arg name="ycoordinate" value="$(arg ycoordinate)"/>
     <arg name="zcoordinate" value="$(arg zcoordinate)"/>
@@ -26,15 +28,19 @@
   <node name="motion_controller" pkg="pioneer3at_controllers" type="motion_controller.py" output='log'/>
 
   <!-- LAUNCH MAPPING -->
-  <include file="$(find pioneer3at_slam)/launch/octomap_mapping.launch">	
-    <arg name="robot_name"  default="$(arg robot_name)"/>
-  </include>
-  <!--<include file="$(find pioneer3at_slam)/launch/hector_slam.launch">
-    <arg name="robot_name"  default="$(arg robot_name)"/>
-    <arg name="map_frame"  value="$(arg robot_name)/map"/>
-    <arg name="base_frame"  value="$(arg robot_name)/base_link"/>
-    <arg name="odom_frame"  value="$(arg robot_name)/odom"/>
-    <arg name="scan_topic"  value="/$(arg robot_name)/scan" />
+  <include file="$(find pioneer3at_slam)/launch/rtab_slam.launch">
+    <arg name="robot_name"  value="$(arg robot_name)"/>
+  </include> 
+  <!-- <include file="$(find pioneer3at_slam)/launch/hector_slam.launch">
+    <arg name="robot_name"  value="$(arg robot_name)"/>
+    <arg name="map_size" value="2048"/> 
   </include> -->
+  <!-- <include file="$(find pioneer3at_slam)/launch/mapping.launch">	
+    <arg name="robot_name"  value="$(arg robot_name)"/>
+  </include> -->
+  <!--<include file="$(find pioneer3at_slam)/launch/octomap_mapping.launch">	
+    <arg name="robot_name"  value="$(arg robot_name)"/>
+  </include> -->
+  
 
 </launch>

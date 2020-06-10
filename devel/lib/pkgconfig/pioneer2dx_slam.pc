@@ -1,0 +1,8 @@
+prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel
+
+Name: pioneer2dx_slam
+Description: Description of pioneer2dx_slam
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

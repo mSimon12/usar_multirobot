@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="robot_name" default="robot"/>
+  <arg name="model" default="model_depth_camera"/>
   <arg name="xcoordinate" default="0.0"/>
   <arg name="ycoordinate" default="0.0"/>
   <arg name="zcoordinate" default="0.0"/>
@@ -16,7 +17,7 @@
 
   <!-- SPAWN robot model on gazebo -->
   <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_model"
-        args="-file $(find pioneer3at_description)/sdf/model.sdf -sdf -x $(arg xcoordinate) -y $(arg ycoordinate) -z $(arg zcoordinate) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg robot_name)"/>
+        args="-file $(find pioneer3at_description)/sdf/$(arg model).sdf -sdf -x $(arg xcoordinate) -y $(arg ycoordinate) -z $(arg zcoordinate) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg robot_name)"/>
 
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find pioneer3at_description)/urdf/pioneer3at_ros.urdf"/> 
   <!--<param name="robot_description" textfile="$(find pioneer3at_description)/urdf/pioneer3at_ros.urdf"/> -->
@@ -34,13 +35,13 @@
     <param name="use_gui" value="False"/>
   </node> 
 
-   <!-- Publishing tf_static between earth and robot/map. 
+   <!-- Publishing tf_static between earth and robot/map. -->
    <node name="earth_to_map_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
-  	  args="$(arg xcoordinate) $(arg ycoordinate) $(arg zcoordinate) $(arg yaw) $(arg pitch) $(arg roll) earth $(arg robot_name)/map 100"/> -->
+  	  args="0 0 0 0 0 0 earth $(arg robot_name)/map 100"/> 
 
-   <!-- Publishing tf_static between earth and robot/odom. -->
+   <!-- Publishing tf_static between earth and robot/odom. 
    <node name="earth_to_map_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
-  	  args="0 0 0 0 0 0 earth $(arg robot_name)/odom 100"/>
+  	  args="0 0 0 0 0 0 earth $(arg robot_name)/odom 100"/> -->
 
    <!-- Publishing tf_static between camera_link and depth_camera. -->
    <node name="tf_static_depth_link" pkg="tf" type="static_transform_publisher"  
