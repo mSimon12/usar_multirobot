@@ -10,7 +10,7 @@ import std_msgs.msg
 class RawMagnetic(genpy.Message):
   _md5sum = "babd510868ac7b486e2097c79e1384c9"
   _type = "hector_uav_msgs/RawMagnetic"
-  _has_header = True #flag to mark the presence of a Header object
+  _has_header = True  # flag to mark the presence of a Header object
   _full_text = """Header header
 float64[3] channel
 
@@ -49,7 +49,7 @@ string frame_id
     """
     if args or kwds:
       super(RawMagnetic, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.header is None:
         self.header = std_msgs.msg.Header()
       if self.channel is None:
@@ -109,7 +109,7 @@ string frame_id
       self.channel = _get_struct_3d().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -159,7 +159,7 @@ string frame_id
       self.channel = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=3)
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():

@@ -10,8 +10,8 @@ import geometry_msgs.msg
 class motionRequest(genpy.Message):
   _md5sum = "0ee7a53442725ed49843ff163a1b1b2a"
   _type = "quadrotor_controllers/motionRequest"
-  _has_header = False #flag to mark the presence of a Header object
-  _full_text = """
+  _has_header = False  # flag to mark the presence of a Header object
+  _full_text = """#Request message type
 geometry_msgs/Twist destination
 
 
@@ -52,7 +52,7 @@ float64 z"""
     """
     if args or kwds:
       super(motionRequest, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.destination is None:
         self.destination = geometry_msgs.msg.Twist()
     else:
@@ -90,7 +90,7 @@ float64 z"""
       (_x.destination.linear.x, _x.destination.linear.y, _x.destination.linear.z, _x.destination.angular.x, _x.destination.angular.y, _x.destination.angular.z,) = _get_struct_6d().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -121,7 +121,7 @@ float64 z"""
       (_x.destination.linear.x, _x.destination.linear.y, _x.destination.linear.z, _x.destination.angular.x, _x.destination.angular.y, _x.destination.angular.z,) = _get_struct_6d().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():
@@ -144,9 +144,9 @@ import struct
 class motionResponse(genpy.Message):
   _md5sum = "95e696a0d10686913abb262e0b4cbbcf"
   _type = "quadrotor_controllers/motionResponse"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = False  # flag to mark the presence of a Header object
   _full_text = """
-
+#Response message type
 bool succeeded
 
 
@@ -170,7 +170,7 @@ bool succeeded
     """
     if args or kwds:
       super(motionResponse, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.succeeded is None:
         self.succeeded = False
     else:
@@ -188,7 +188,8 @@ bool succeeded
     :param buff: buffer, ``StringIO``
     """
     try:
-      buff.write(_get_struct_B().pack(self.succeeded))
+      _x = self.succeeded
+      buff.write(_get_struct_B().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -205,7 +206,7 @@ bool succeeded
       self.succeeded = bool(self.succeeded)
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -215,7 +216,8 @@ bool succeeded
     :param numpy: numpy python module
     """
     try:
-      buff.write(_get_struct_B().pack(self.succeeded))
+      _x = self.succeeded
+      buff.write(_get_struct_B().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -233,7 +235,7 @@ bool succeeded
       self.succeeded = bool(self.succeeded)
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():

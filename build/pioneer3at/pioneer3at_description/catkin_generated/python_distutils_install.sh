@@ -26,6 +26,7 @@ echo_and_run /usr/bin/env \
     CATKIN_BINARY_DIR="/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build" \
     "/usr/bin/python2" \
     "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer3at/pioneer3at_description/setup.py" \
+     \
     build --build-base "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer3at/pioneer3at_description" \
     install \
     --root="${DESTDIR-/}" \

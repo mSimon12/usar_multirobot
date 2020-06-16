@@ -10,7 +10,7 @@ import std_msgs.msg
 class MotorPWM(genpy.Message):
   _md5sum = "42f78dd80f99e0208248b8a257b8a645"
   _type = "hector_uav_msgs/MotorPWM"
-  _has_header = True #flag to mark the presence of a Header object
+  _has_header = True  # flag to mark the presence of a Header object
   _full_text = """Header header
 uint8[] pwm
 
@@ -49,7 +49,7 @@ string frame_id
     """
     if args or kwds:
       super(MotorPWM, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.header is None:
         self.header = std_msgs.msg.Header()
       if self.pwm is None:
@@ -118,7 +118,7 @@ string frame_id
       self.pwm = str[start:end]
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -177,7 +177,7 @@ string frame_id
       self.pwm = str[start:end]
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():

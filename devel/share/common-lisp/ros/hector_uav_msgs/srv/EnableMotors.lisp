@@ -49,10 +49,10 @@
   "6a0b406242562fc416b2c9c8a3efb051")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<EnableMotors-request>)))
   "Returns full string definition for message of type '<EnableMotors-request>"
-  (cl:format cl:nil "bool enable~%~%~%"))
+  (cl:format cl:nil "bool enable # enable or disable motors~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'EnableMotors-request)))
   "Returns full string definition for message of type 'EnableMotors-request"
-  (cl:format cl:nil "bool enable~%~%~%"))
+  (cl:format cl:nil "bool enable # enable or disable motors~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <EnableMotors-request>))
   (cl:+ 0
      1
@@ -107,10 +107,10 @@
   "6a0b406242562fc416b2c9c8a3efb051")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<EnableMotors-response>)))
   "Returns full string definition for message of type '<EnableMotors-response>"
-  (cl:format cl:nil "bool success~%~%~%"))
+  (cl:format cl:nil "bool success # whether enabling or disabling was successful~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'EnableMotors-response)))
   "Returns full string definition for message of type 'EnableMotors-response"
-  (cl:format cl:nil "bool success~%~%~%"))
+  (cl:format cl:nil "bool success # whether enabling or disabling was successful~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <EnableMotors-response>))
   (cl:+ 0
      1

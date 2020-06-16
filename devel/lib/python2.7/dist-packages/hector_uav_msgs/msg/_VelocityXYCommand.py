@@ -10,7 +10,7 @@ import std_msgs.msg
 class VelocityXYCommand(genpy.Message):
   _md5sum = "7b4d52af2aa98221d9bb260976d6a201"
   _type = "hector_uav_msgs/VelocityXYCommand"
-  _has_header = True #flag to mark the presence of a Header object
+  _has_header = True  # flag to mark the presence of a Header object
   _full_text = """Header header
 float32 x
 float32 y
@@ -50,7 +50,7 @@ string frame_id
     """
     if args or kwds:
       super(VelocityXYCommand, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.header is None:
         self.header = std_msgs.msg.Header()
       if self.x is None:
@@ -115,7 +115,7 @@ string frame_id
       (_x.x, _x.y,) = _get_struct_2f().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -167,21 +167,21 @@ string frame_id
       (_x.x, _x.y,) = _get_struct_2f().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_3I = None
-def _get_struct_3I():
-    global _struct_3I
-    if _struct_3I is None:
-        _struct_3I = struct.Struct("<3I")
-    return _struct_3I
 _struct_2f = None
 def _get_struct_2f():
     global _struct_2f
     if _struct_2f is None:
         _struct_2f = struct.Struct("<2f")
     return _struct_2f
+_struct_3I = None
+def _get_struct_3I():
+    global _struct_3I
+    if _struct_3I is None:
+        _struct_3I = struct.Struct("<3I")
+    return _struct_3I

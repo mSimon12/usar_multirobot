@@ -10,7 +10,7 @@ import std_msgs.msg
 class ServoCommand(genpy.Message):
   _md5sum = "d60ef35d4e3412dc6686b189be2523d0"
   _type = "hector_uav_msgs/ServoCommand"
-  _has_header = True #flag to mark the presence of a Header object
+  _has_header = True  # flag to mark the presence of a Header object
   _full_text = """Header header
 uint16[] value
 
@@ -49,7 +49,7 @@ string frame_id
     """
     if args or kwds:
       super(ServoCommand, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.header is None:
         self.header = std_msgs.msg.Header()
       if self.value is None:
@@ -116,7 +116,7 @@ string frame_id
       self.value = struct.unpack(pattern, str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -173,7 +173,7 @@ string frame_id
       self.value = numpy.frombuffer(str[start:end], dtype=numpy.uint16, count=length)
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():

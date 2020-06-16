@@ -49,10 +49,10 @@
   "5f07416156f9cd98c81988e24b4d6bda")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<motion-request>)))
   "Returns full string definition for message of type '<motion-request>"
-  (cl:format cl:nil "~%geometry_msgs/Twist destination~%~%~%================================================================================~%MSG: geometry_msgs/Twist~%# This expresses velocity in free space broken into its linear and angular parts.~%Vector3  linear~%Vector3  angular~%~%================================================================================~%MSG: geometry_msgs/Vector3~%# This represents a vector in free space. ~%# It is only meant to represent a direction. Therefore, it does not~%# make sense to apply a translation to it (e.g., when applying a ~%# generic rigid transformation to a Vector3, tf2 will only apply the~%# rotation). If you want your data to be translatable too, use the~%# geometry_msgs/Point message instead.~%~%float64 x~%float64 y~%float64 z~%~%"))
+  (cl:format cl:nil "#Request message type~%geometry_msgs/Twist destination~%~%~%================================================================================~%MSG: geometry_msgs/Twist~%# This expresses velocity in free space broken into its linear and angular parts.~%Vector3  linear~%Vector3  angular~%~%================================================================================~%MSG: geometry_msgs/Vector3~%# This represents a vector in free space. ~%# It is only meant to represent a direction. Therefore, it does not~%# make sense to apply a translation to it (e.g., when applying a ~%# generic rigid transformation to a Vector3, tf2 will only apply the~%# rotation). If you want your data to be translatable too, use the~%# geometry_msgs/Point message instead.~%~%float64 x~%float64 y~%float64 z~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'motion-request)))
   "Returns full string definition for message of type 'motion-request"
-  (cl:format cl:nil "~%geometry_msgs/Twist destination~%~%~%================================================================================~%MSG: geometry_msgs/Twist~%# This expresses velocity in free space broken into its linear and angular parts.~%Vector3  linear~%Vector3  angular~%~%================================================================================~%MSG: geometry_msgs/Vector3~%# This represents a vector in free space. ~%# It is only meant to represent a direction. Therefore, it does not~%# make sense to apply a translation to it (e.g., when applying a ~%# generic rigid transformation to a Vector3, tf2 will only apply the~%# rotation). If you want your data to be translatable too, use the~%# geometry_msgs/Point message instead.~%~%float64 x~%float64 y~%float64 z~%~%"))
+  (cl:format cl:nil "#Request message type~%geometry_msgs/Twist destination~%~%~%================================================================================~%MSG: geometry_msgs/Twist~%# This expresses velocity in free space broken into its linear and angular parts.~%Vector3  linear~%Vector3  angular~%~%================================================================================~%MSG: geometry_msgs/Vector3~%# This represents a vector in free space. ~%# It is only meant to represent a direction. Therefore, it does not~%# make sense to apply a translation to it (e.g., when applying a ~%# generic rigid transformation to a Vector3, tf2 will only apply the~%# rotation). If you want your data to be translatable too, use the~%# geometry_msgs/Point message instead.~%~%float64 x~%float64 y~%float64 z~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <motion-request>))
   (cl:+ 0
      (roslisp-msg-protocol:serialization-length (cl:slot-value msg 'destination))
@@ -107,10 +107,10 @@
   "5f07416156f9cd98c81988e24b4d6bda")
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql '<motion-response>)))
   "Returns full string definition for message of type '<motion-response>"
-  (cl:format cl:nil "~%~%bool succeeded~%~%~%~%~%"))
+  (cl:format cl:nil "~%#Response message type~%bool succeeded~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:message-definition ((type (cl:eql 'motion-response)))
   "Returns full string definition for message of type 'motion-response"
-  (cl:format cl:nil "~%~%bool succeeded~%~%~%~%~%"))
+  (cl:format cl:nil "~%#Response message type~%bool succeeded~%~%~%~%~%"))
 (cl:defmethod roslisp-msg-protocol:serialization-length ((msg <motion-response>))
   (cl:+ 0
      1

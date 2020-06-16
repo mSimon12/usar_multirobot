@@ -147,7 +147,7 @@ struct Definition< ::pioneer2dx_controllers::motionRequest_<ContainerAllocator> 
 {
   static const char* value()
   {
-    return "\n"
+    return "#Request message type\n"
 "geometry_msgs/Twist destination\n"
 "\n"
 "\n"

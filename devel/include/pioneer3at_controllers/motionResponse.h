@@ -147,7 +147,7 @@ struct Definition< ::pioneer3at_controllers::motionResponse_<ContainerAllocator>
   static const char* value()
   {
     return "\n"
-"\n"
+"#Response message type\n"
 "bool succeeded\n"
 "\n"
 "\n"

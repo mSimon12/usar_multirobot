@@ -66,7 +66,7 @@ class EnableMotorsRequest {
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    bool enable
+    bool enable # enable or disable motors
     
     `;
   }
@@ -137,7 +137,7 @@ class EnableMotorsResponse {
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    bool success
+    bool success # whether enabling or disabling was successful
     
     `;
   }

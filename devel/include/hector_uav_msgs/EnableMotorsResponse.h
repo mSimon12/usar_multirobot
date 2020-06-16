@@ -146,7 +146,7 @@ struct Definition< ::hector_uav_msgs::EnableMotorsResponse_<ContainerAllocator> 
 {
   static const char* value()
   {
-    return "bool success\n"
+    return "bool success # whether enabling or disabling was successful\n"
 ;
   }
 

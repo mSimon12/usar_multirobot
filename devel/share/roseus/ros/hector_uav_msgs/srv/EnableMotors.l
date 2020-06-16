@@ -107,17 +107,17 @@
 (setf (get hector_uav_msgs::EnableMotorsRequest :md5sum-) "6a0b406242562fc416b2c9c8a3efb051")
 (setf (get hector_uav_msgs::EnableMotorsRequest :datatype-) "hector_uav_msgs/EnableMotorsRequest")
 (setf (get hector_uav_msgs::EnableMotorsRequest :definition-)
-      "bool enable
+      "bool enable # enable or disable motors
 ---
-bool success
+bool success # whether enabling or disabling was successful
 ")
 
 (setf (get hector_uav_msgs::EnableMotorsResponse :md5sum-) "6a0b406242562fc416b2c9c8a3efb051")
 (setf (get hector_uav_msgs::EnableMotorsResponse :datatype-) "hector_uav_msgs/EnableMotorsResponse")
 (setf (get hector_uav_msgs::EnableMotorsResponse :definition-)
-      "bool enable
+      "bool enable # enable or disable motors
 ---
-bool success
+bool success # whether enabling or disabling was successful
 ")
 
 

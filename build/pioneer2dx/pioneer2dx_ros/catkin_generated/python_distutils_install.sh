@@ -26,6 +26,7 @@ echo_and_run /usr/bin/env \
     CATKIN_BINARY_DIR="/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build" \
     "/usr/bin/python2" \
     "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/src/pioneer2dx/pioneer2dx_ros/setup.py" \
+     \
     build --build-base "/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/build/pioneer2dx/pioneer2dx_ros" \
     install \
     --root="${DESTDIR-/}" \

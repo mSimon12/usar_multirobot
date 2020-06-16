@@ -67,7 +67,7 @@ class motionRequest {
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    
+    #Request message type
     geometry_msgs/Twist destination
     
     
@@ -159,7 +159,7 @@ class motionResponse {
     // Returns full string definition for message
     return `
     
-    
+    #Response message type
     bool succeeded
     
     

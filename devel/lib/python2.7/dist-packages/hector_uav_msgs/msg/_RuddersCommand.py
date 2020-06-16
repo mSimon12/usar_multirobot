@@ -10,7 +10,7 @@ import std_msgs.msg
 class RuddersCommand(genpy.Message):
   _md5sum = "2e136cb8cfffc2233e404b320c27bca6"
   _type = "hector_uav_msgs/RuddersCommand"
-  _has_header = True #flag to mark the presence of a Header object
+  _has_header = True  # flag to mark the presence of a Header object
   _full_text = """Header header
 float32 aileron
 float32 elevator
@@ -51,7 +51,7 @@ string frame_id
     """
     if args or kwds:
       super(RuddersCommand, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.header is None:
         self.header = std_msgs.msg.Header()
       if self.aileron is None:
@@ -119,7 +119,7 @@ string frame_id
       (_x.aileron, _x.elevator, _x.rudder,) = _get_struct_3f().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -171,7 +171,7 @@ string frame_id
       (_x.aileron, _x.elevator, _x.rudder,) = _get_struct_3f().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():

@@ -113,7 +113,7 @@
 (setf (get quadrotor_controllers::motionRequest :md5sum-) "5f07416156f9cd98c81988e24b4d6bda")
 (setf (get quadrotor_controllers::motionRequest :datatype-) "quadrotor_controllers/motionRequest")
 (setf (get quadrotor_controllers::motionRequest :definition-)
-      "
+      "#Request message type
 geometry_msgs/Twist destination
 
 
@@ -136,7 +136,7 @@ float64 x
 float64 y
 ---
 
-
+#Response message type
 bool succeeded
 
 
@@ -145,7 +145,7 @@ bool succeeded
 (setf (get quadrotor_controllers::motionResponse :md5sum-) "5f07416156f9cd98c81988e24b4d6bda")
 (setf (get quadrotor_controllers::motionResponse :datatype-) "quadrotor_controllers/motionResponse")
 (setf (get quadrotor_controllers::motionResponse :definition-)
-      "
+      "#Request message type
 geometry_msgs/Twist destination
 
 
@@ -168,7 +168,7 @@ float64 x
 float64 y
 ---
 
-
+#Response message type
 bool succeeded
 
 
