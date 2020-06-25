@@ -300,7 +300,7 @@
       
       <!-- DEPTH CAMERA -->
       <sensor name="camera" type="depth">
-        <update_rate>10</update_rate>
+        <update_rate>20</update_rate>
 	<visualize>true</visualize>
         <camera name="camera">
           <horizontal_fov>1.047198</horizontal_fov>
@@ -310,8 +310,8 @@
             <format>R8G8B8</format>
           </image>
           <clip>
-            <near>0.1</near>
-            <far>4</far>
+            <near>0.05</near>
+            <far>3.5</far>
           </clip>
 	  <!-- Noise is sampled independently per pixel on each frame.
                That pixel's noise value is added to each of its color
@@ -333,8 +333,8 @@
           <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
           <pointCloudTopicName>depth/points</pointCloudTopicName>
           <frameName>depth_link</frameName>
-          <pointCloudCutoff>0.1</pointCloudCutoff>
-          <pointCloudCutoffMax>4.0</pointCloudCutoffMax>
+          <pointCloudCutoff>0.05</pointCloudCutoff>
+          <pointCloudCutoffMax>3.5</pointCloudCutoffMax>
 	  <hackBaseline>0.07</hackBaseline>
           <distortionK1>0</distortionK1>
           <distortionK2>0</distortionK2>

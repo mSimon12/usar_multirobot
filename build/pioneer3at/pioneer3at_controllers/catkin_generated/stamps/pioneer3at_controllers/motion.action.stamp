@@ -1,9 +1,0 @@
-#Define the goal
-geometry_msgs/Twist destination
----
-#Define the result
-bool succeeded	
----
-#Define a feedback message
-geometry_msgs/Twist actual_position
-

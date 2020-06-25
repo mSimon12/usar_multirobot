@@ -1,7 +1,0 @@
-set(pioneer3at_description_SETUP_PY_SETUP_MODULE "distutils.core")
-set(pioneer3at_description_SETUP_PY_VERSION "2.5.8")
-set(pioneer3at_description_SETUP_PY_SCRIPTS "")
-set(pioneer3at_description_SETUP_PY_PACKAGES "pioneer3at_ros")
-set(pioneer3at_description_SETUP_PY_PACKAGE_DIRS "src/pioneer3at_ros")
-set(pioneer3at_description_SETUP_PY_MODULES "")
-set(pioneer3at_description_SETUP_PY_MODULE_DIRS "")

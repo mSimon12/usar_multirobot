@@ -1,8 +1,0 @@
-prefix=/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel
-
-Name: quadrotor_controllers
-Description: Description of quadrotor_controllers
-Version: 0.0.0
-Cflags: -I/media/marcelo/ARQUIVOS/desenvolvimento/projetos/usar_multirobot/devel/include
-Libs: -L${prefix}/lib 
-Requires: message_runtime roscpp rospy std_msgs geometry_msgs

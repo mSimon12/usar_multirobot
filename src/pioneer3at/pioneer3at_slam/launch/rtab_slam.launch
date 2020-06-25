@@ -21,28 +21,45 @@
 
           <!-- Define path of data base generated -->
 	  <param name="database_path" type="string" value="$(find pioneer3at_slam)/db/$(arg robot_name)-rtabmap.db"/>
-
+          <param name="subscribe_depth" type="bool" value="true"/>
+          <param name="subscribe_rgbd" type="bool" value="true"/>
+	  <param name="subscribe_scan" type="bool" value="false"/>
+	  	  
+	  <param name="wait_for_transform" type="bool" value="true"/>
           <param name="frame_id" type="string" value="$(arg base_frame)"/>
 	  <param name="map_frame_id" type="string" value="$(arg map_frame)"/>
 
-          <param name="subscribe_depth" type="bool" value="true"/>
-          <param name="subscribe_rgbd" type="bool" value="true"/>
-	  
+	  <!-- output -->
+	  <remap from="rgbd_image"      to="rgbd_image"/> 
+	  <param name="queue_size" type="int" value="10"/>
+
 	  <!-- Updates map even if the robot is not moving -->
-	  <param name="map_always_update" type="bool" value="false"/> 
+	  <param name="map_always_update" type="bool" value="false"/>
+	  
+	  <!-- Remap get_map_data service for donwoload of the map -->
+	  <remap from="rtabmap/get_map_data" to="$(arg map_frame)/get_map_data"/> 
 
-	  <param name="grid_size" type="double" value="100"/> <!-- 50 meters wide -->
+	  <param name="grid_size" type="double" value="100"/> <!-- 100 meters wide -->
 
-          <!--<remap from="odom" to="$(arg odom_frame)"/>-->
+	  <!-- RTAB-Map's parameters: do "rosrun rtabmap rtabmap (double-dash)params" to see the list of available parameters. -->
+          <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>	<!-- Update map only if the robot is moving -->
+          <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>	<!-- Update map only if the robot is moving -->
+          <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>	<!-- Set to false to generate map correction between /map and /odom -->
+	  <param name="RGBD/ProximityBySpace" type="string" value="true"/>   <!-- Local loop closure detection (using estimated position) with locations in WM -->
+	  <param name="Kp/MaxDepth" type="string" value="3.5"/>
+	  <param name="Reg/Strategy" type="string" value="0"/>      <!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
+	  <param name="Icp/CorrespondenceRatio" type="string" value="0.3"/>
+	  <param name="Vis/MinInliers" type="string" value="15"/>      <!-- 3D visual words minimum inliers to accept loop closure -->
+	  <param name="Vis/InlierDistance" type="string" value="0.1"/>    <!-- 3D visual words correspondence distance -->
+	  <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0"/> 
+	  <param name="Rtabmap/TimeThr" type="string" value="700"/>
+	  <param name="Mem/RehearsalSimilarity" type="string" value="0.30"/>
+	  <param name="Optimizer/Slam2D" type="string" value="true"/>
+	  <param name="Reg/Force3DoF" type="string" value="true"/>
+	  <param name="GridGlobal/MinSize" type="string" value="20"/>
+          <param name="RGBD/OptimizeMaxError" type="string" value="0.1"/>
+          <param name="Grid/FromDepth" type="string" value="true"/>
 
-          <remap from="rgbd_image" to="rgbd_image"/>
-          <param name="queue_size" type="int" value="10"/>
-
-          <!-- RTAB-Map's parameters -->
-          <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
-          <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
-          <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
     </node>
-
 
 </launch>
