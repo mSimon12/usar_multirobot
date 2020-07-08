@@ -1,6 +1,5 @@
-global_frame: earth
-rolling_window: true
+global_frame: odom
 
 plugins:
-  - {name: obstacles_laser,          type: "costmap_2d::ObstacleLayer"}
+  - {name: obstacle_layer,          type: "costmap_2d::ObstacleLayer"}
   - {name: inflation,                 type: "costmap_2d::InflationLayer"}

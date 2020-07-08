@@ -311,7 +311,7 @@
           </image>
           <clip>
             <near>0.05</near>
-            <far>3.5</far>
+            <far>15</far>
           </clip>
 	  <!-- Noise is sampled independently per pixel on each frame.
                That pixel's noise value is added to each of its color
@@ -348,7 +348,7 @@
         </plugin>
       </sensor> 
 
-      <!-- RGB CAMERA
+      <!-- RGB CAMERA 
       <sensor type="camera" name="camera">
         <update_rate>10</update_rate>
         <visualize>false</visualize>
@@ -361,7 +361,7 @@
           </image>
           <clip>
             <near>0.05</near>
-            <far>10</far>
+            <far>20</far>
           </clip>
 
           <noise>
@@ -373,9 +373,9 @@
         <plugin name="rgb_camera_controller" filename="libgazebo_ros_camera.so">
           <alwaysOn>true</alwaysOn>
           <updateRate>0.0</updateRate>
-          <cameraName>camera/rgb</cameraName>
-          <imageTopicName>image_raw</imageTopicName>
-          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <cameraName>camera</cameraName>
+          <imageTopicName>rgb/image_raw</imageTopicName>
+          <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
           <frameName>camera_link</frameName>
           <hackBaseline>0.07</hackBaseline>
           <distortionK1>0.0</distortionK1>

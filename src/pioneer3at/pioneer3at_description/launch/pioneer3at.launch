@@ -24,16 +24,10 @@
   <!-- Navigation (move_base) --> 
   <include file="$(find pioneer3at_navigation)/launch/move_base.launch">
     <arg name="robot_name" default="$(arg robot_name)"/>
-    <arg name="no_static_map" value="true"/>
-    
-    <!-- Parameters for the controller -->
-    <arg name="max_vel" value="0.7" />
-    <arg name="min_vel" value="-0.7" />
-    <arg name="max_ang_vel" value="2.4" />
   </include>
 
   <!-- LAUNCH MAPPING -->
-  <include file="$(find pioneer3at_slam)/launch/rtab_slam2.launch">	<!-- rtab_slam, hector_slam, octomap_mapping, mapping -->
+  <include file="$(find pioneer3at_slam)/launch/rtab_slam.launch">	<!-- rtab_slam, hector_slam, octomap_mapping, mapping -->
     <arg name="robot_name"    value="$(arg robot_name)"/>
     <arg name="localization"  value="true"/>
     <arg name="rtabmapviz"    value="false"/>

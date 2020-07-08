@@ -31,7 +31,7 @@
   <joint name="camera_joint" type="fixed">
     <parent link="base_link"/>
     <child link="camera_link"/>
-    <origin rpy="0  0  0" xyz="0.1   0    0.40"/>
+    <origin rpy="0  0 0" xyz="0.1   0    0.40"/>
     <axis xyz="0  0  1"/>
     <limit effort="0.0" lower="0.0" upper="0.0" velocity="0.0"/>
   </joint>
