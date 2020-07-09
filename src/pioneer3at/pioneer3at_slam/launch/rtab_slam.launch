@@ -68,8 +68,6 @@
 	  <!-- Remap get_map_data service for download of the map -->
 	  <remap from="rtabmap/get_map_data" to="get_map_data"/> 
 
-	  <param name="grid_size" type="double" value="100"/> <!-- 100 meters wide -->
-
 	  <!-- RTAB-Map's parameters: do "rosrun rtabmap rtabmap (double-dash)params" to see the list of available parameters. -->
           <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>	<!-- Update map only if the robot is moving -->
           <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>	<!-- Update map only if the robot is moving -->
@@ -82,7 +80,7 @@
 	  <param name="Kp/MaxDepth" type="string" value="3.5"/>
 
 	  <param name="Reg/Force3DoF" type="string" value="true"/>
- 	  <param name="Reg/Strategy" type="string" value="2"/>      <!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
+ 	  <param name="Reg/Strategy" type="string" value="1"/>      <!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
 	  <param name="Icp/CorrespondenceRatio" type="string" value="0.5"/>
 
 	  <param name="Vis/MinInliers" type="string" value="15"/>      <!-- 3D visual words minimum inliers to accept loop closure -->
@@ -92,15 +90,17 @@
 
 	  <param name="Mem/RehearsalSimilarity" type="string" value="0.30"/>
 
-	  <param name="Optimizer/Slam2D" type="string" value="true"/>
+	  <param name="Reg/Force3DoF" type="string" value="true"/>
 	  
-	  <param name="GridGlobal/MinSize" type="string" value="20"/>
-          
+	  <param name="GridGlobal/MinSize" type="string" value="100"/>
+          <param name="GridGlobal/OccupancyThr" type="string" value="0.5"/>
+
 	  <param name="Rtabmap/DetectionRate" type="string" value="100"/>
  	  
           <param name="Grid/FromDepth" type="string" value="true"/>
-	  <param name="Grid/MaxObstacleHeight" type="string" value="1.0"/>
+	  <param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>
 	  <param name="Grid/MaxGroundAngle" type="string" value="75.0"/>
+	  <param name="Grid/RayTracing" type="string" value="true"/>
 
 	  <!-- localization mode -->
 	  <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
@@ -118,18 +118,6 @@
       <remap from="rgb/camera_info" to="$(arg camera_info_topic)"/>
       <remap from="scan"            to="$(arg scan_topic)"/>
     </node>
-
-    <!--<node pkg="nodelet" type="nodelet" name="obstacles_detection" args="load rtabmap_ros/obstacles_detection camera_nodelet_manager">
-      <remap from="cloud" to="cloudXYZ"/>
-      <remap from="obstacles" to="/$(arg robot_name)/octomap_obstacles"/> 
-      <remap from="ground"    to="/$(arg robot_name)/octomap_ground"/>   
-
-      <param name="frame_id" type="string" value="$(arg base_frame)"/>		
-      <param name="map_frame_id" type="string" value="earth"/>
-      <param name="wait_for_transform" type="bool" value="true"/>
-      <param name="min_cluster_size" type="int" value="20"/>
-      <param name="max_obstacles_height" type="double" value="0.4"/>
-    </node> -->
 
 </launch>
 

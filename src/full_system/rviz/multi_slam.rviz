@@ -27,7 +27,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PC2_r2
+    SyncSource: PC2_r1
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -149,6 +149,29 @@ Visualization Manager:
       Use Timestamp: false
       Value: true
     - Alpha: 1
+      Buffer Length: 1
+      Class: rviz/Path
+      Color: 25; 255; 0
+      Enabled: true
+      Head Diameter: 0.30000001192092896
+      Head Length: 0.20000000298023224
+      Length: 0.30000001192092896
+      Line Style: Lines
+      Line Width: 0.029999999329447746
+      Name: Path_r1
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Pose Color: 255; 85; 255
+      Pose Style: None
+      Radius: 0.029999999329447746
+      Shaft Diameter: 0.10000000149011612
+      Shaft Length: 0.10000000149011612
+      Topic: /pioneer3at_1/global_path
+      Unreliable: false
+      Value: true
+    - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
         Max Value: 10
@@ -235,21 +258,23 @@ Visualization Manager:
       Unreliable: false
       Value: false
       Visibility:
-        "": true
         2dMap_robot1: true
         2dMap_robot2: true
-        Camera_r1: true
         Camera_r2: true
         Drone1: true
         GlobalCostmap_r1: true
         GlobalCostmap_r2: true
         GlobalPlan_r1: true
+        GlobalPlan_r2: true
         Grid: true
         LocalCostmap_r1: true
         LocalCostmap_r2: true
         LocalPlan_r1: true
+        LocalPlan_r2: true
         Map: true
         PC2_r1: true
+        PC2_r2: true
+        Path: true
         Robot1: true
         Robot2: true
         TF: true
@@ -258,84 +283,49 @@ Visualization Manager:
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: true
+      Enabled: false
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        camera_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        hokuyo_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_front_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        left_rear_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_front_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        right_rear_wheel:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
       Name: Robot2
       Robot Description: pioneer3at_2/robot_description
       TF Prefix: pioneer3at_2
       Update Interval: 0
-      Value: true
+      Value: false
       Visual Enabled: true
     - Alpha: 0.30000001192092896
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: 2dMap_robot2
       Topic: /pioneer3at_1/grid_map
       Unreliable: false
       Use Timestamp: false
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: GlobalCostmap_r2
       Topic: /pioneer3at_2/move_base/global_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: true
+      Enabled: false
       Name: LocalCostmap_r2
       Topic: /pioneer3at_2/move_base/local_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -348,7 +338,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -365,12 +355,12 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
       Color: 32; 74; 135
-      Enabled: true
+      Enabled: false
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
@@ -388,12 +378,12 @@ Visualization Manager:
       Shaft Length: 0.10000000149011612
       Topic: /pioneer3at_2/move_base/NavfnROS/plan
       Unreliable: false
-      Value: true
+      Value: false
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
       Color: 115; 210; 22
-      Enabled: true
+      Enabled: false
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
@@ -411,7 +401,7 @@ Visualization Manager:
       Shaft Length: 0.10000000149011612
       Topic: /pioneer3at_1/move_base/TrajectoryPlannerROS/local_plan
       Unreliable: false
-      Value: true
+      Value: false
     - Class: rviz/Camera
       Enabled: false
       Image Rendering: background and overlay
@@ -423,21 +413,23 @@ Visualization Manager:
       Unreliable: false
       Value: false
       Visibility:
-        "": true
         2dMap_robot1: true
         2dMap_robot2: true
         Camera_r1: true
-        Camera_r2: true
         Drone1: true
         GlobalCostmap_r1: true
         GlobalCostmap_r2: true
         GlobalPlan_r1: true
+        GlobalPlan_r2: true
         Grid: true
         LocalCostmap_r1: true
         LocalCostmap_r2: true
         LocalPlan_r1: true
+        LocalPlan_r2: true
         Map: true
         PC2_r1: true
+        PC2_r2: true
+        Path: true
         Robot1: true
         Robot2: true
         TF: true
@@ -520,25 +512,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 23.97649574279785
+      Distance: 18.7877140045166
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -30.141267776489258
-        Y: -29.60687255859375
-        Z: 1.5964792510203552e-6
+        X: -34.938724517822266
+        Y: -27.29202651977539
+        Z: 1.9587560018408112e-8
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.550397515296936
+      Pitch: 0.46539759635925293
       Target Frame: map
       Value: XYOrbit (rviz)
-      Yaw: 3.3903989791870117
+      Yaw: 3.8603978157043457
     Saved: ~
 Window Geometry:
   Camera_r1:

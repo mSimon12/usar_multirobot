@@ -6,15 +6,11 @@
   <arg name="cmd_vel_topic" default="cmd_vel" />
   <arg name="odom_topic" default="odom" />
 
-  <arg name="max_vel" default="1.0" />
-  <arg name="min_vel" default="0.0" />
-  <arg name="max_ang_vel" default="1.0" />
-
   <arg name="move_forward_only" default="true"/>
 
   <arg name="base_global_planner" default="navfn/NavfnROS"/>
-  <!-- <arg name="base_local_planner" default="dwa_local_planner/DWAPlannerROS"/> -->
-  <arg name="base_local_planner" default="base_local_planner/TrajectoryPlannerROS"/> 
+  <arg name="base_local_planner" default="dwa_local_planner/DWAPlannerROS"/>
+  <!-- <arg name="base_local_planner" default="base_local_planner/TrajectoryPlannerROS"/>  -->
 
   <!-- move_base -->
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
@@ -44,18 +40,19 @@
     <remap from="map" to="map" />
 
     <!-- Configure global parameters -->
-    <param name="~/global_costmap/global_frame" value="$(arg robot_name)/odom" />
+    <param name="~/global_costmap/global_frame" value="$(arg robot_name)/map" />
+    <param name="~/global_costmap/static/map_topic" value="/$(arg robot_name)/grid_map" />
     <param name="~/global_costmap/robot_base_frame" value="$(arg robot_name)/base_link" />
-    <param name="~/global_costmap/obstacle_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
-    <param name="~/global_costmap/obstacle_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/octomap_obstacles" />
+    <!--<param name="~/global_costmap/obstacles_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
+    <param name="~/global_costmap/obstacles_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/octomap_obstacles" />-->
 
     <!-- Configure local parameters -->
     <param name="~/local_costmap/global_frame" value="$(arg robot_name)/odom" />
     <param name="~/local_costmap/robot_base_frame" value="$(arg robot_name)/base_link" />
-    <param name="~/local_costmap/obstacle_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
-    <param name="~/local_costmap/obstacle_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/octomap_obstacles" />
+    <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
+    <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/octomap_obstacles" />
 
-    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    <param name="DWAPlannerROS/min_vel_x" value="-0.2" if="$(arg move_forward_only)" />
   </node>
 </launch>
 
