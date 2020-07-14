@@ -238,71 +238,30 @@
       </axis>
     </joint>
 
-<!-- EXTRA COMPONENTS-->  
-    <!--RGB and THERMAL cameras-->  
+<!-- DEPTH CAMERA-->
     <link name="camera_link">
-      <pose>0.1 0 0.22 0 0 0</pose>
-      <audio_sink /> <!-- Camera and microphone should be combined -->
+      <pose>0.1 0 0.15 0 0 0</pose>
       <inertial>
         <mass>0.1</mass>
-        <inertia>
-          <ixx>0.000166667</ixx>
-          <iyy>0.000166667</iyy>
-          <izz>0.000166667</izz>
-        </inertia>
       </inertial>
-      <collision name="collision-box">
-        <pose>-0.01 0 0 0 0 0</pose>
+      <collision name="collision">
         <geometry>
           <box>
-            <size>0.08 0.1 0.1</size>
+            <size>0.073000 0.276000 0.072000</size>
           </box>
         </geometry>
       </collision>
-      <collision name="collision-lens">
-        <pose>0.04 0 0 0 1.57 0</pose>
+      <visual name="visual">
         <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>0.02</length>
-          </cylinder>
+          <mesh>
+            <uri>model://kinect.dae</uri>
+          </mesh>
         </geometry>
-      </collision>
-      <visual name="visual-box">
-        <pose>-0.01 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.08 0.1 0.1</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-          <emissive>0 0 0 0</emissive>
-        </material>
       </visual>
-      <visual name="visual-lens">
-        <pose>0.04 0 0 0 1.57 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.03</radius>
-            <length>0.02</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <ambient>0 0 0 1</ambient>
-          <diffuse>0 0 0 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-          <emissive>0 0 0 0</emissive>
-        </material>
-      </visual>    
-      
-      <!-- DEPTH CAMERA -->
       <sensor name="camera" type="depth">
-        <update_rate>20</update_rate>
-	<visualize>true</visualize>
-        <camera name="camera">
+        <update_rate>100</update_rate>
+	<visualize>false</visualize>
+        <camera>
           <horizontal_fov>1.047198</horizontal_fov>
           <image>
             <width>640</width>
@@ -313,18 +272,10 @@
             <near>0.05</near>
             <far>15</far>
           </clip>
-	  <!-- Noise is sampled independently per pixel on each frame.
-               That pixel's noise value is added to each of its color
-               channels, which at that point lie in the range [0,1]. -->
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.007</stddev>
-          </noise>
         </camera>
 	<plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
           <alwaysOn>true</alwaysOn>
-	  <updateRate>0.0</updateRate>
+	  <updateRate>100.0</updateRate>
 	  <baseline>0.2</baseline>    
           <cameraName>camera</cameraName>
           <imageTopicName>rgb/image_raw</imageTopicName>
@@ -333,7 +284,7 @@
           <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
           <pointCloudTopicName>depth/points</pointCloudTopicName>
           <frameName>depth_link</frameName>
-          <pointCloudCutoff>0.05</pointCloudCutoff>
+          <pointCloudCutoff>0.5</pointCloudCutoff>
           <pointCloudCutoffMax>3.5</pointCloudCutoffMax>
 	  <hackBaseline>0.07</hackBaseline>
           <distortionK1>0</distortionK1>
@@ -346,207 +297,21 @@
           <Cy>0</Cy>
           <focalLength>0</focalLength>
         </plugin>
-      </sensor> 
-
-      <!-- RGB CAMERA 
-      <sensor type="camera" name="camera">
-        <update_rate>10</update_rate>
-        <visualize>false</visualize>
-        <camera name="camera">
-          <horizontal_fov>1.047</horizontal_fov>
-          <image>
-            <width>640</width>
-            <height>480</height>
-            <format>R8G8B8</format>
-          </image>
-          <clip>
-            <near>0.05</near>
-            <far>20</far>
-          </clip>
-
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.007</stddev>
-          </noise>
-        </camera>
-        <plugin name="rgb_camera_controller" filename="libgazebo_ros_camera.so">
-          <alwaysOn>true</alwaysOn>
-          <updateRate>0.0</updateRate>
-          <cameraName>camera</cameraName>
-          <imageTopicName>rgb/image_raw</imageTopicName>
-          <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>
-          <frameName>camera_link</frameName>
-          <hackBaseline>0.07</hackBaseline>
-          <distortionK1>0.0</distortionK1>
-          <distortionK2>0.0</distortionK2>
-          <distortionK3>0.0</distortionK3>
-          <distortionT1>0.0</distortionT1>
-          <distortionT2>0.0</distortionT2>
-        </plugin>
-      </sensor> -->
-
-      <!-- THERMAL CAMERA 
-      <sensor type="camera" name="thermal_camera_sensor">
-        <update_rate>20</update_rate>
-        <camera name="camera_ros_thermal">
-          <horizontal_fov>1.047</horizontal_fov>
-          <image>
-            <width>320</width>
-            <height>240</height>
-            <format>R8G8B8</format>
-          </image>
-          <clip>
-            <near>0.1</near>
-            <far>100</far>
-          </clip>
-
-          <noise>
-            <type>gaussian</type>
-            <mean>0.0</mean>
-            <stddev>0.007</stddev>
-          </noise>
-        </camera>
-        <plugin name="thermal_camera_controller" 
-                filename="libgazebo_ros_thermal_camera_pink.so">
-          <alwaysOn>true</alwaysOn>
-          <updateRate>10</updateRate>
-          <cameraName>camera/thermal</cameraName>
-          <imageTopicName>image_raw</imageTopicName>
-          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-          <frameName>camera_link</frameName>
-          <interface:camera name="thermal_camera_iface" />
-        </plugin>
-      </sensor> -->
+      </sensor>
     </link>
 
-    <joint name="camera_joint" type="revolute">
+    <joint name="camera_joint" type="fixed">
       <parent>base_link</parent>
       <child>camera_link</child>
       <pose>0 0 0 0 0 0</pose>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-        </limit>
-      </axis>
     </joint>
 
-    <!-- LASER camera -->
-    <link name="hokuyo_link">
-      <pose>0.1 0 0.135 0 0 0</pose>
-      <inertial>
-        <mass>0.1</mass>
-        <inertia>
-          <ixx>0.6205208333e-04</ixx>
-          <iyy>0.6205208333e-04</iyy>
-          <izz>4.1927083333e-05</izz>
-        </inertia>
-      </inertial>
-      <visual name="visual-base">
-        <pose>0 0 -0.0145 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.05 0.05 0.041</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.7 0.7 0.7 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-          <emissive>0 0 0 0</emissive>
-        </material>
-      </visual>
-      <visual name="visual-top">
-        <pose>0 0 0.0205 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.021</radius>
-            <length>0.029</length>
-          </cylinder>
-        </geometry>
-        <material>
-          <ambient>0 0 0 1</ambient>
-          <diffuse>0 0 0 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-          <emissive>0 0 0 0</emissive>
-        </material>
-      </visual>
-      <visual name="visual-top-back">
-        <pose>-0.02 0 0.019 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.01 0.01 0.025</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.1 0.1 0.1 1</ambient>
-          <diffuse>0.3 0.3 0.3 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-          <emissive>0 0 0 0</emissive>
-        </material>
-      </visual>
-      <collision name="collision-base">
-        <pose>0 0 -0.0145 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.05 0.05 0.041</size>
-          </box>
-        </geometry>
-      </collision>
-      <collision name="collision-top">
-        <pose>0 0 0.0205 0 0 0</pose>
-        <geometry>
-          <cylinder>
-            <radius>0.021</radius>
-            <length>0.029</length>
-          </cylinder>
-        </geometry>
-      </collision>
-      <!--<sensor type="ray" name="lms200">
-        <always_on>true</always_on>
-        <update_rate>30</update_rate>
-        <pose>0 0 0.01815 0 0 0</pose>    #From URG04LX Spec
-        <visualize>false</visualize>
-        <ray>
-          <scan>
-            <horizontal>
-		          <samples>180</samples>			#1040!!!
-		          <resolution>1</resolution>
-		          <min_angle>-1.570796</min_angle>  #90deg: -1.570796
-		          <max_angle>1.570796</max_angle>   #90deg: 1.570796
-            </horizontal>
-          </scan>
-          <range>
-#           <min>0.20</min>  From URG04LX Spec 
-            <min>0.1</min>
-            <max>30</max>    #From URG04LX Spec
-            <resolution>0.001</resolution>  #From URG04LX Spec 
-          </range>
-        </ray>
-        <plugin name="gazebo_ros_hokuyo_controller" filename="libgazebo_ros_laser.so">
-          <topicName>scan</topicName>
-          <gaussianNoise>0.005</gaussianNoise>
-          <alwaysOn>true</alwaysOn>
-          <updateRate>30</updateRate>
-          <frameName>hokuyo_link</frameName>
-        </plugin>
-      </sensor> -->
-    </link>
-    <joint name="hokuyo_joint" type="revolute">
-      <parent>base_link</parent>
-      <child>hokuyo_link</child>
-      <pose>0 0 0 0 0 0</pose>
-      <axis>
-        <xyz>0 0 1</xyz>
-        <limit>
-          <lower>0</lower>
-          <upper>0</upper>
-        </limit>
-      </axis>
+    <joint name="depth_joint" type="fixed">
+      <parent>camera_link</parent>
+      <child>depth_link</child>
+      <pose>0 0 0 -1.58 0 -1.58</pose>
     </joint>
-    
+
     <!-- CONTROLLERS -->
     <plugin name="skid_steer_drive_controller" 
             filename="libgazebo_ros_skid_steer_drive.so">

@@ -19,8 +19,8 @@
   <node pkg="gazebo_ros" type="spawn_model" respawn="false" name="spawn_model"
         args="-file $(find pioneer3at_description)/sdf/$(arg model).sdf -sdf -x $(arg xcoordinate) -y $(arg ycoordinate) -z $(arg zcoordinate) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -model $(arg robot_name)"/>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find pioneer3at_description)/urdf/pioneer3at_ros.urdf"/> 
-  <!--<param name="robot_description" textfile="$(find pioneer3at_description)/urdf/pioneer3at_ros.urdf"/> -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find pioneer3at_description)/urdf/pioneer3at_depth_ros.urdf"/> 
+  <!-- <param name="robot_description" command="$(find xacro)/xacro inorder $(find pioneer3at_description)/urdf/pioneer3at_ros.urdf"/> -->
 
   <!-- Combine joint values -->
   <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="log">
@@ -42,10 +42,10 @@
    <!-- Publishing tf_static between earth and robot/odom. 
    <node name="earth_to_map_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
   	  args="0 0 0 0 0 0 earth $(arg robot_name)/odom 100"/> -->
-
-   <!-- Publishing tf_static between camera_link and depth_camera. -->
+	
+   <!-- Publishing tf_static between camera_link and depth_camera. 
    <node name="tf_static_depth_link" pkg="tf" type="static_transform_publisher"  
-          args="0 0 0 -1.58 0 -1.58 /$(arg robot_name)/camera_link $(arg robot_name)/depth_link 100"/>
+          args="0 0 0 -1.58 0 -1.58 /$(arg robot_name)/camera_link $(arg robot_name)/depth_link 100"/> -->
 
     <!-- Publishing tf_static for included models. 
     <node name="tf_static_hokuyo_link" pkg="tf" type="static_transform_publisher" 

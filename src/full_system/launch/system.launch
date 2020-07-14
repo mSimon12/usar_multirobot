@@ -21,7 +21,7 @@
     </include>
   </group> 
 
-  <!-- Launch Pioneer3AT 2 
+  <!-- Launch Pioneer3AT 2 -->
   <group ns="pioneer3at_2">
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_2"/>
@@ -32,7 +32,7 @@
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
     </include>
-  </group> -->
+  </group>
 
   <!-- Spawn simulated quadrotor uav 1 -->
   <group ns="UAV_1">
