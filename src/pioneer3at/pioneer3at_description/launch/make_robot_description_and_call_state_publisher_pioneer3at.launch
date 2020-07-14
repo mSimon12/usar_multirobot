@@ -39,14 +39,6 @@
    <node name="earth_to_map_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
   	  args="0 0 0 0 0 0 earth $(arg robot_name)/map 100"/> 
 
-   <!-- Publishing tf_static between earth and robot/odom. 
-   <node name="earth_to_map_tf_broadcaster" pkg="tf" type="static_transform_publisher"  
-  	  args="0 0 0 0 0 0 earth $(arg robot_name)/odom 100"/> -->
-	
-   <!-- Publishing tf_static between camera_link and depth_camera. 
-   <node name="tf_static_depth_link" pkg="tf" type="static_transform_publisher"  
-          args="0 0 0 -1.58 0 -1.58 /$(arg robot_name)/camera_link $(arg robot_name)/depth_link 100"/> -->
-
     <!-- Publishing tf_static for included models. 
     <node name="tf_static_hokuyo_link" pkg="tf" type="static_transform_publisher" 
           args="0 0 0 0 0 0 $(arg robot_name)/hokuyo_link  $(arg robot_name)/hokuyo::hokuyo_link 100"/>

@@ -40,7 +40,7 @@
     <remap from="map" to="map" />
 
     <!-- Configure global parameters -->
-    <param name="~/global_costmap/global_frame" value="$(arg robot_name)/map" />
+    <param name="~/global_costmap/global_frame" value="earth" />
     <param name="~/global_costmap/static/map_topic" value="/$(arg robot_name)/grid_map" />
     <param name="~/global_costmap/robot_base_frame" value="$(arg robot_name)/base_link" />
     <!--<param name="~/global_costmap/obstacles_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
@@ -52,7 +52,7 @@
     <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
     <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/octomap_obstacles" />
 
-    <param name="DWAPlannerROS/min_vel_x" value="-0.2" if="$(arg move_forward_only)" />
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
   </node>
 </launch>
 

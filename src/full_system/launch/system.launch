@@ -119,22 +119,22 @@
   </group> -->
 
   
-<!--LAUNCH MAP_MERGE 
-  <include file="$(find controllers)/launch/multi_map_merge.launch">
+<!--LAUNCH MAP_MERGE  -->
+  <include file="$(find pioneer3at_slam)/launch/multi_map_merge.launch">
       <arg name="namespace" value="pioneer3at"/>
       <arg name="first_robot"  value="pioneer3at_1"/>
       <arg name="second_robot" value="pioneer3at_2"/>
 
-      <arg name="first_robot_x_pos" value=" -5.0"/>
-      <arg name="first_robot_y_pos" value=" 0.0"/>
-      <arg name="first_robot_z_pos" value=" 0.17"/>
+      <arg name="first_robot_x_pos" value=" -33.0"/>
+      <arg name="first_robot_y_pos" value=" -30.0"/>
+      <arg name="first_robot_z_pos" value=" 0.45"/>
       <arg name="first_robot_yaw"   value=" 0.0"/>
 
-      <arg name="second_robot_x_pos" value="-3.0"/>
-      <arg name="second_robot_y_pos" value="-3.0"/>
-      <arg name="second_robot_z_pos" value=" 0.0"/>
+      <arg name="second_robot_x_pos" value="-33.0"/>
+      <arg name="second_robot_y_pos" value="-31.0"/>
+      <arg name="second_robot_z_pos" value=" 0.45"/>
       <arg name="second_robot_yaw"   value=" 0.0"/> 
-  </include> -->
+  </include>
 
 <!-- LAUNCH RVIZ -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/>
