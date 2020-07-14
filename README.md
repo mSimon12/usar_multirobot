@@ -20,14 +20,22 @@ roslaunch full_system system.launch
 ```
 
 
-To control the a pioneer3at position, in a new terminal:
+To control the a pioneer3at position, there is two options:
+
+-First option:
 ```
 source devel/setup.bash
-rosrun pioneer3at_controllers pioneer3at_system.py robot_name x y rot
+rosrun pioneer3at_controllers approach.py robot_name x y rot
 ```
 'robot_name' can be:  pioneer3at_1, pioneer3at_2 ...
 
 'x', 'y' and 'rot' represent the desired position and orientation for the pioneer3at
+
+-Second option:
+```
+rostopic pub -1 /robot_name/events pioneer3at_controllers/events_message "event: 'approach' param: [x, y, rot]"
+
+```
 
 
 To control the a drone position, in a new terminal:

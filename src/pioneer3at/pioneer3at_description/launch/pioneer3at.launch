@@ -33,4 +33,8 @@
     <arg name="rtabmapviz"    value="false"/>
   </include>   
 
+  <!-- Launch the node responsible for controlling manouvers -->
+  <param name="robot_name" value= "$(arg robot_name)"/>
+  <node pkg="pioneer3at_controllers" type="pioneer3at_system.py" name="manouvers_control" output="screen"/>
+
 </launch>
