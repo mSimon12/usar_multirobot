@@ -20,7 +20,7 @@
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type='adiabatic'/>
     <physics name='default_physics' default='0' type='ode'>
-      <max_step_size>0.003</max_step_size>
+      <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>1000</real_time_update_rate>
     </physics>
@@ -79,16 +79,6 @@
 	<uri>model://victim1</uri>
 	<pose>-7.76 -3.077 2.89 -1.81 0.082 -3.139</pose>
     </include>
-    
-    <!--<plugin filename="libRubblePlugin.so" name="rubble">
-      <bottom_right>20 18 1.5</bottom_right>
-      <top_left>22 20.5 2.0</top_left>
-      <min_size>0.05 0.05 0.05</min_size>
-      <max_size>0.2 0.2 0.2</max_size>
-      <min_mass>0.1</min_mass>
-      <max_mass>1.0</max_mass>
-      <count>15</count>
-    </plugin> -->
 
     <include>
 	<uri>model://victim2</uri>
@@ -103,6 +93,18 @@
     <include>
 	<uri>model://victim4</uri>
 	<pose>-13.85 -4.52 3.211 -0.90 -1.44 1.286</pose>
+    </include>
+
+    <include>
+	<name>gas1</name>
+	<uri>model://barrel</uri>
+	<pose>11.585058 -22.330523 3.353037 -1.416627 0.0 0.0</pose>
+    </include>
+
+    <include>
+	<name>gas2</name>
+	<uri>model://barrel</uri>
+	<pose>26.487747 -15.985578 2.766598 -0.469817 0.715003 -0.897744</pose>
     </include>
 
 <!--    <include>

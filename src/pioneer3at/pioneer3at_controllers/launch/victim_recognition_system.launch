@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+   <arg name="robot_name" default="robot"/>
+   <arg name="sensor_range" default="1.5"/>
+   <arg name="sensor_update_period" default="0.1"/>
+
+
+   <param name="robot_name" type="str" value="$(arg robot_name)"/>
+   <rosparam param="victims_models">[victim1,victim2,victim3,victim4]</rosparam>
+   <param name="sensor_range" type="double" value="$(arg sensor_range)"/>
+   <param name="sensor_update_period" type="double" value="$(arg sensor_update_period)"/>
+   
+   <node name="victim_recognition_system" pkg="pioneer3at_controllers" type="victim_recognition_system.py" output="screen"/>
+    
+</launch>	

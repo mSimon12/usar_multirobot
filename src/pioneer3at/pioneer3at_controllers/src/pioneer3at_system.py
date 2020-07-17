@@ -50,7 +50,7 @@ if __name__=="__main__":
     sys = pioneerSys(NAME)
     
     rospy.init_node("{}_system".format(NAME), anonymous=False)
-    rospy.Subscriber("/{}/events".format(NAME), events_message, event_receiver)         # Topic to receive desired position
+    rospy.Subscriber("/events", events_message, event_receiver)         # Topic to receive desired position
 
     rospy.spin()
 

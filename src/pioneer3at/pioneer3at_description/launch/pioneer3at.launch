@@ -37,4 +37,18 @@
   <param name="robot_name" value= "$(arg robot_name)"/>
   <node pkg="pioneer3at_controllers" type="pioneer3at_system.py" name="manouvers_control" output="screen"/>
 
+  <!-- Launch victym recognition system -->
+  <include file="$(find pioneer3at_controllers)/launch/victim_recognition_system.launch">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="sensor_range" value="2.0"/>
+    <arg name="sensor_update_period" value="0.5"/>
+  </include>
+
+  <!-- Launch gas sensor -->
+  <include file="$(find pioneer3at_controllers)/launch/gas_sensor.launch">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="sensor_range" value="4.0"/>
+    <arg name="sensor_update_period" value="1.0"/>
+  </include>
+
 </launch>
