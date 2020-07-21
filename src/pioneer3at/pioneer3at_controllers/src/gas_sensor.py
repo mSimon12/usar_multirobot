@@ -30,6 +30,7 @@ def find_gas(robot_name, gas_models, sensor_range = 1):
         hip = (g_status[g]['x_pos']**2 + g_status[g]['y_pos']**2)**(1/2)
         dist = (hip**2 + g_status[g]['z_pos']**2)**(1/2)
 
+
         # Mark the victim as found if it is into the range
         if dist < sensor_range:
             g_status[g]['status'] = True
@@ -40,26 +41,26 @@ def find_gas(robot_name, gas_models, sensor_range = 1):
 
 
 def event_receiver(msg):
-    global running
+    global status
 
-    if msg.event == 'start' and (running == False):
-        running = True
-        vs_on()                               #Start the sensor
-    elif msg.event == 'stop':
-        running = False                       #Stop the sensor
+    if (msg.event == 'start') and (status == 'idle'):
+        status = 'running'
+        vs_on()                                             #Start the sensor
+    elif (msg.event == 'stop') and (status == 'running'):
+        status = 'idle'                                     #Stop the sensor
     elif msg.event == 'erro':
-        running = False                       #Stop the sensor to simulate that it is not working
+        status = 'error'                                    #Stop the sensor to simulate that it is not working
     elif msg.event == 'reset':
-        running = False                       #Reset the sensor
+        status = 'idle'                                     #Reset the sensor
 
 
 # Function for victim recognition
 def vs_on():
-    global robot, gas_models, sensor_range,  sensor_update_period, running
+    global robot, gas_models, sensor_range,  sensor_update_period, status
 
     pub = rospy.Publisher("/{}/gas_sensor/out".format(robot), events_message, queue_size=10)
 
-    while (not rospy.is_shutdown()) and running: 
+    while (not rospy.is_shutdown()) and (status == 'running'): 
         sensor = find_gas(robot, gas_models, sensor_range)
         for g in sensor:
             if sensor[g]['status'] == True:
@@ -74,14 +75,14 @@ def vs_on():
                 msg.param = [pos.pose.position.x, pos.pose.position.y, pos.pose.position.z]
                 pub.publish(msg)          # Publish the found gas location 
 
-                gas_models.remove(g)       # Remove the found gas from the list
+                # gas_models.remove(g)       # Remove the found gas from the list
 
         time.sleep(sensor_update_period)
 
 if __name__ == '__main__':
     try:
-        global robot, gas_models, sensor_range,  sensor_update_period, running
-        running = False
+        global robot, gas_models, sensor_range,  sensor_update_period, status
+        status = 'idle'
 
         # Get parameters
         robot = rospy.get_param('robot_name', default='robot')

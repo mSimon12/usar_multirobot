@@ -33,9 +33,10 @@
     <arg name="rtabmapviz"    value="false"/>
   </include>   
 
-  <!-- Launch the node responsible for controlling manouvers -->
-  <param name="robot_name" value= "$(arg robot_name)"/>
-  <node pkg="pioneer3at_controllers" type="pioneer3at_system.py" name="manouvers_control" output="screen"/>
+  <!-- LAUNCH FRONTIER EXPLORATION SERVER-->
+  <include file="$(find rrt_exploration)/launch/single.launch">	
+    <arg name="robot_name"    value="$(arg robot_name)"/>
+  </include> 
 
   <!-- Launch victym recognition system -->
   <include file="$(find pioneer3at_controllers)/launch/victim_recognition_system.launch">
@@ -50,5 +51,11 @@
     <arg name="sensor_range" value="4.0"/>
     <arg name="sensor_update_period" value="1.0"/>
   </include>
+
+  <!-- Launch the node responsible for controlling manouvers -->
+  <param name="robot_name" value= "$(arg robot_name)"/>
+  <node pkg="pioneer3at_controllers" type="pioneer3at_system.py" name="manouvers_control" output="screen"/>
+
+   
 
 </launch>

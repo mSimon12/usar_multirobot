@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<!-- Launch file for the rrt-detector and the assigner -->
+<launch>
+  <arg name="robot_name"  default="robot"/>
+  <arg name="map_topic"   default="/$(arg robot_name)/grid_map"/>
+  <arg name="base_frame"  default="/$(arg robot_name)/base_link"/>
+
+  <arg name="eta" value="1.0"/>
+  <arg name="Geta" value="15.0"/>
+  <param name="namespace_init_count" value="1"/>
+
+  <group ns="exploration">
+    <node pkg="rrt_exploration" type="global_rrt_detector" name="global_detector" output="log">
+  	<param name="eta" value="$(arg Geta)"/>
+  	<param name="map_topic" value="$(arg map_topic)"/>
+
+	<remap from="/detected_points" to="detected_points" />
+    </node>
+  
+    <node pkg="rrt_exploration" type="local_rrt_detector" name="local_detector" output="log">
+  	<param name="eta" value="$(arg eta)"/>
+  	<param name="map_topic" value="$(arg map_topic)"/>
+  	<param name="robot_frame" value="$(arg base_frame)"/>
+	<remap from="/detected_points" to="detected_points" />
+    </node>
+ 
+    <node pkg="rrt_exploration" type="filter.py" name="filter" output="log">
+  	<param name="map_topic" value="$(arg map_topic)"/>
+  	<param name="info_radius" value="1"/> 
+  	<param name="costmap_clearing_threshold" value="70"/> 
+  	<param name="goals_topic" value="detected_points" />
+  	<param name="namespace" value="/pioneer3at_"/> 
+  	<param name="n_robots" value="1"/>
+  	<param name="rate" value="1"/>
+	<param name="global_costmap_topic" value="/move_base/global_costmap/costmap" />
+    </node>
+  
+    <node pkg="rrt_exploration" type="assigner.py" name="assigner" output="log">
+  	<param name="map_topic" value="$(arg map_topic)"/>
+  	<param name="global_frame" value="earth"/>
+  	<param name="info_radius" value="1"/> 
+  	<param name="info_multiplier" value="3.0"/> 
+  	<param name="hysteresis_radius" value="3.0"/> 
+  	<param name="hysteresis_gain" value="2.0"/> 
+  	<param name="frontiers_topic" value="filtered_points"/> 
+  	<param name="n_robots" value="1"/>
+  	<param name="namespace" value="/pioneer3at_"/>
+  	<param name="delay_after_assignement" value="0.5"/>
+  	<param name="rate" value="1"/>
+	<param name="plan_service" value="/move_base/NavfnROS/make_plan"/>
+    </node>
+  </group>
+  
+</launch>
