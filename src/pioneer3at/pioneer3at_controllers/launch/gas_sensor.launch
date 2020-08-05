@@ -10,6 +10,6 @@
    <param name="sensor_range" type="double" value="$(arg sensor_range)"/>
    <param name="sensor_update_period" type="double" value="$(arg sensor_update_period)"/>
    
-   <node name="gas_sensor" pkg="pioneer3at_controllers" type="gas_sensor.py" output="screen"/>
+   <node name="gas_sensor" pkg="pioneer3at_controllers" type="gas_sensor.py" output="log"/>
     
 </launch>	

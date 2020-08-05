@@ -51,6 +51,7 @@
     <param name="~/local_costmap/robot_base_frame" value="$(arg robot_name)/base_link" />
     <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
     <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/octomap_obstacles" />
+    <!-- <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/camera/depth/points" /> -->
 
     <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
   </node>

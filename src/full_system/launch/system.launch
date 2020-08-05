@@ -51,7 +51,7 @@
     </include>
   </group>
 
-  <!-- Spawn simulated quadrotor uav 2 
+  <!-- Spawn simulated quadrotor uav 2
   <group ns="UAV_2">
     <include file="$(find hector_quadrotor_gazebo)/launch/quadrotor.launch" > 
       <arg name="name" default="UAV_2"/>
@@ -62,11 +62,11 @@
     	  controller/velocity
     	  controller/attitude
           "/>
-      <arg name="x" default="0.0"/>
-      <arg name="y" default="2.0"/>
-      <arg name="z" default="1.46"/> 
+      <arg name="x" default="-33.0"/>
+      <arg name="y" default="-34.0"/>
+      <arg name="z" default="0.6"/> 
     </include>
-  </group> -->
+  </group>  -->
 
   <!-- Launch Pioneer2DX 1 
   <group ns="pioneer2dx_1">

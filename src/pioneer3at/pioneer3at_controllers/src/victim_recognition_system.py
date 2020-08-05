@@ -2,6 +2,7 @@
 
 import time
 import rospy
+from threading import Thread
 
 from gazebo_msgs.srv import GetModelState
 from pioneer3at_controllers.msg import events_message
@@ -39,28 +40,11 @@ def find_victim(robot_name, victims, sensor_range = 1):
 
     return v_status         #Return the status of all victims
 
-
-def event_receiver(msg):
-    global status
-
-    if (msg.event == 'start') and (status == 'idle'):
-        status = 'running'
-        vs_on()                                             #Start the sensor
-    elif (msg.event == 'stop') and (status == 'running'):
-        status = 'idle'                                     #Stop the sensor
-    elif msg.event == 'erro':
-        status = 'error'                                    #Stop the sensor to simulate that it is not working
-    elif msg.event == 'reset':
-        status = 'idle'                                     #Reset the sensor
-
-
 # Function for victim recognition
 def vs_on():
-    global robot, victims, sensor_range,  sensor_update_period, status
+    global robot, victims, sensor_range,  sensor_update_period, status, pub
 
-    pub = rospy.Publisher("/{}/victim_sensor/out".format(robot), events_message, queue_size=10)
-
-    while (not rospy.is_shutdown()) and (status == 'running'): 
+    while (not rospy.is_shutdown()) and (status == 'RUNNING'): 
         sensor = find_victim(robot, victims, sensor_range)
         for v in sensor:
             if sensor[v]['status'] == True:
@@ -79,10 +63,28 @@ def vs_on():
 
         time.sleep(sensor_update_period)
 
+def event_receiver(msg):
+    global status, pub
+
+    if (msg.event == 'start') and (status == 'IDLE'):
+        status = 'RUNNING'
+        thread = Thread(target = vs_on)
+        thread.start()                                      #Start the sensor
+        # vs_on()              
+    elif (msg.event == 'stop') and (status == 'RUNNING'):
+        status = 'IDLE'                                     #Stop the sensor
+    elif (msg.event == 'erro') and (status == 'RUNNING'):
+        status = 'ERROR'                                    #Stop the sensor to simulate that it is not working
+        pub.publish(msg)                                    #Re-send the msg to the output 
+    elif (msg.event == 'reset') and (status == 'ERROR'):
+        status = 'IDLE'                                     #Reset the sensor
+    else:
+        rospy.logwarn("VICTIM_SENSOR command not allowed!")
+
 if __name__ == '__main__':
     try:
-        global robot, victims, sensor_range,  sensor_update_period, status
-        status = 'idle'
+        global robot, victims, sensor_range,  sensor_update_period, status, pub
+        status = 'IDLE'
 
         # Get parameters
         robot = rospy.get_param('robot_name', default='robot')
@@ -93,10 +95,10 @@ if __name__ == '__main__':
         rospy.init_node('victim_recognition_system', anonymous=False)                                 # Initialize the node of the sensor
 
         rospy.wait_for_service('/gazebo/get_model_state')
+        pub = rospy.Publisher("/{}/victim_sensor/out".format(robot), events_message, queue_size=10)
         rospy.Subscriber("/{}/victim_sensor/in".format(robot), events_message, event_receiver)        # Topic to receive occured events
 
         rospy.spin()
             
     except rospy.ROSInterruptException:
         pass
-

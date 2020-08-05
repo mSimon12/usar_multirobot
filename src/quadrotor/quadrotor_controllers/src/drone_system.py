@@ -17,7 +17,7 @@ class droneSys(object):
         self.__client = actionlib.SimpleActionClient("/{}/action/pose".format(name), PoseAction)     #Server name = robot_name/pose
         self.__client.wait_for_server()
         self.__dest = PoseGoal()
-        self.__dest.target_pose.header.frame_id = "{}/world".format(name)
+        self.__dest.target_pose.header.frame_id = "earth"
 
     
 

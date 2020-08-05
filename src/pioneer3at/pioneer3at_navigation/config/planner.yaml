@@ -65,6 +65,7 @@ DWAPlannerROS:
   min_trans_vel: -0.7
   max_rot_vel: 2.4
   min_rot_vel: -2.4
+  min_in_place_vel_theta: 0.2
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 0.1
@@ -89,5 +90,5 @@ DWAPlannerROS:
   max_scaling_factor: 0.2 # The maximum factor to scale the robot's footprint by
 
   # # Oscillation Prevention Parameters
-  oscillation_reset_dist: 0.4 #How far the robot must travel in meters before oscillation flags are reset (double, default: 0.05)
+  oscillation_reset_dist: 0.3 #How far the robot must travel in meters before oscillation flags are reset (double, default: 0.05)
 

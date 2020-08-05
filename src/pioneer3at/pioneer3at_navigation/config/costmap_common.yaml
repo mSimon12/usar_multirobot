@@ -44,7 +44,7 @@ obstacles_layer:
     max_obstacle_height: 50.0
 
 inflation:
-    inflation_radius: 0.8 # Safe distance from obstacles
+    inflation_radius: 1.0 # Safe distance from obstacles
 
 recovery_behaviors:
   - name: 'conservative_reset'

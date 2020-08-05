@@ -21,7 +21,7 @@
     <arg name="yaw" value="$(arg yaw)"/>
   </include> 
 
-  <!-- Navigation (move_base) --> 
+  <!-- NAVIGATION (move_base) --> 
   <include file="$(find pioneer3at_navigation)/launch/move_base.launch">
     <arg name="robot_name" default="$(arg robot_name)"/>
   </include>
@@ -32,30 +32,51 @@
     <arg name="localization"  value="true"/>
     <arg name="rtabmapviz"    value="false"/>
   </include>   
-
-  <!-- LAUNCH FRONTIER EXPLORATION SERVER-->
-  <include file="$(find rrt_exploration)/launch/single.launch">	
+ 
+  <!-- LAUNCH FRONTIER EXPLORATION -->
+  <include file="$(find exploration_server)/launch/exploration.launch">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="sensor_range" value="3.5"/>
+    <arg name="plugin" value="frontier_exploration::FrontierPlugin"/>
+  </include>
+  <!-- <include file="$(find rrt_exploration)/launch/single.launch">	
     <arg name="robot_name"    value="$(arg robot_name)"/>
-  </include> 
+  </include> -->
 
-  <!-- Launch victym recognition system -->
+  <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
   <include file="$(find pioneer3at_controllers)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="sensor_range" value="2.0"/>
     <arg name="sensor_update_period" value="0.5"/>
   </include>
 
-  <!-- Launch gas sensor -->
+  <!-- LAUNCH GAS SENSOR -->
   <include file="$(find pioneer3at_controllers)/launch/gas_sensor.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="sensor_range" value="4.0"/>
     <arg name="sensor_update_period" value="1.0"/>
   </include>
 
-  <!-- Launch the node responsible for controlling manouvers -->
-  <param name="robot_name" value= "$(arg robot_name)"/>
-  <node pkg="pioneer3at_controllers" type="pioneer3at_system.py" name="manouvers_control" output="screen"/>
+  <!-- LAUNCH BATTERY MONITOR -->
+  <include file="$(find pioneer3at_controllers)/launch/battery_monitor.launch">
+    <arg name="publish_rate" value="0.1"/>
+  </include>
 
-   
+  <!-- LAUNCH FAILURES MONITOR -->
+  <include file="$(find pioneer3at_controllers)/launch/failures_monitor.launch"/>
+
+  <!-- Launch the node responsible for controlling manouvers -->
+  <include file="$(find pioneer3at_controllers)/launch/manouvers.launch">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="xcoordinate" value="$(arg xcoordinate)"/>
+    <arg name="ycoordinate" value="$(arg ycoordinate)"/>
+    <arg name="vsv_safe_dist" value="2.0"/>
+    <arg name="vsv_n_points" default="8"/>
+  </include>
+
+  <!-- Launch Supervisory Control System 
+  <include file="$(find supervisor)/launch/supervisor.launch">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+  </include> -->
 
 </launch>

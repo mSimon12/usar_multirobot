@@ -11,6 +11,6 @@
    <param name="sensor_range" type="double" value="$(arg sensor_range)"/>
    <param name="sensor_update_period" type="double" value="$(arg sensor_update_period)"/>
    
-   <node name="victim_recognition_system" pkg="pioneer3at_controllers" type="victim_recognition_system.py" output="screen"/>
+   <node name="victim_recognition_system" pkg="pioneer3at_controllers" type="victim_recognition_system.py" output="log"/>
     
 </launch>	

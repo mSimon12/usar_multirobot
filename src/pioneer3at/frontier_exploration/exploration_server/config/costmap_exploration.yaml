@@ -1,0 +1,49 @@
+# Robot footprint
+footprint: [[-0.35, -0.3], [-0.35, 0.3], [0.35, 0.3], [0.35, -0.3]]
+#robot_radius: 0.4
+
+transform_tolerance: 0.5
+update_frequency: 5.0
+publish_frequency: 5.0
+
+global_frame: map
+robot_base_frame: base_link
+resolution: 0.02
+
+rolling_window: false
+track_unknown_space: true
+
+
+#layer definitions
+static:
+    map_topic: map
+#map_topic: move_base/global_costmap/costmap
+    subscribe_to_updates: true
+
+polygon_layer:
+   resize_to_polygon: true
+
+obstacles_layer:
+  observation_sources: point_cloud_sensor
+  point_cloud_sensor: 
+    sensor_frame: camera_link
+    data_type: PointCloud2
+    topic: camera/depth/points
+    marking: true
+    clearing: true
+    raytrace_range: 1.0
+    obstacle_range: 1.0
+
+inflation:
+    inflation_radius: 1.0 # Safe distance from obstacles
+
+
+plugins: 
+  - {name: static,            type: "costmap_2d::StaticLayer"}
+  - {name: polygon_layer,    type: "polygon_layer::PolygonLayer"}
+  #Can disable sensor layer if gmapping is fast enough to update scans
+  - {name: obstacles_layer,           type: "costmap_2d::ObstacleLayer"}
+  - {name: inflation,                 type: "costmap_2d::InflationLayer"}
+
+
+

@@ -2,6 +2,7 @@
 
 import time
 import rospy
+from threading import Thread
 
 from gazebo_msgs.srv import GetModelState
 from pioneer3at_controllers.msg import events_message
@@ -40,27 +41,11 @@ def find_gas(robot_name, gas_models, sensor_range = 1):
     return g_status         #Return the status of all victims
 
 
-def event_receiver(msg):
-    global status
-
-    if (msg.event == 'start') and (status == 'idle'):
-        status = 'running'
-        vs_on()                                             #Start the sensor
-    elif (msg.event == 'stop') and (status == 'running'):
-        status = 'idle'                                     #Stop the sensor
-    elif msg.event == 'erro':
-        status = 'error'                                    #Stop the sensor to simulate that it is not working
-    elif msg.event == 'reset':
-        status = 'idle'                                     #Reset the sensor
-
-
 # Function for victim recognition
-def vs_on():
-    global robot, gas_models, sensor_range,  sensor_update_period, status
+def gs_on():
+    global robot, gas_models, sensor_range,  sensor_update_period, status, pub
 
-    pub = rospy.Publisher("/{}/gas_sensor/out".format(robot), events_message, queue_size=10)
-
-    while (not rospy.is_shutdown()) and (status == 'running'): 
+    while (not rospy.is_shutdown()) and (status == 'RUNNING'): 
         sensor = find_gas(robot, gas_models, sensor_range)
         for g in sensor:
             if sensor[g]['status'] == True:
@@ -79,10 +64,28 @@ def vs_on():
 
         time.sleep(sensor_update_period)
 
+def event_receiver(msg):
+    global status, pub
+
+    if (msg.event == 'start') and (status == 'IDLE'):
+        status = 'RUNNING'
+        thread = Thread(target = gs_on)
+        thread.start()                                      #Start the sensor
+        # gs_on()                                             
+    elif (msg.event == 'stop') and (status == 'RUNNING'):
+        status = 'IDLE'                                     #Stop the sensor
+    elif (msg.event == 'erro') and (status == 'RUNNING'):
+        status = 'ERROR'                                    #Stop the sensor to simulate that it is not working
+        pub.publish(msg)                                    #Re-send the msg to the output 
+    elif (msg.event == 'reset') and (status == 'ERROR'):
+        status = 'IDLE'                                     #Reset the sensor
+    else:
+        rospy.logwarn("GAS_SENSOR command not allowed!")
+
 if __name__ == '__main__':
     try:
-        global robot, gas_models, sensor_range,  sensor_update_period, status
-        status = 'idle'
+        global robot, gas_models, sensor_range,  sensor_update_period, status, pub
+        status = 'IDLE'
 
         # Get parameters
         robot = rospy.get_param('robot_name', default='robot')
@@ -93,10 +96,10 @@ if __name__ == '__main__':
         rospy.init_node('gas_sensor', anonymous=False)                                                # Initialize the node of the sensor
 
         rospy.wait_for_service('/gazebo/get_model_state')
+        pub = rospy.Publisher("/{}/gas_sensor/out".format(robot), events_message, queue_size=10)
         rospy.Subscriber("/{}/gas_sensor/in".format(robot), events_message, event_receiver)        # Topic to receive occured events
 
         rospy.spin()
             
     except rospy.ROSInterruptException:
         pass
-

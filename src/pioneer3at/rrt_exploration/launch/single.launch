@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 
-<!-- Launch file for the rrt-detector and the assigner -->
+<!-- Launch file for the rrt-detector and the assigner  -->
 <launch>
   <arg name="robot_name"  default="robot"/>
   <arg name="map_topic"   default="/$(arg robot_name)/grid_map"/>
   <arg name="base_frame"  default="/$(arg robot_name)/base_link"/>
 
   <arg name="eta" value="1.0"/>
-  <arg name="Geta" value="15.0"/>
+  <arg name="Geta" value="10.0"/>
   <param name="namespace_init_count" value="1"/>
 
   <group ns="exploration">

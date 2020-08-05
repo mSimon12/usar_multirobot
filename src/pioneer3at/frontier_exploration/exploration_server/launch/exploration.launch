@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<launch>
+    <arg name="robot_name" default="robot"/>
+
+    <!-- Set to your sensor's range -->
+    <arg name="sensor_range" default="1.0"/>
+
+    <arg name="plugin" default="exploration_server::ExamplePlugin"/>
+    <arg name="blacklist_box_size" default="0.5"/>
+
+    <param name="plugin_name" value="$(arg plugin)"/>
+    <param name="blacklist_box_size" value="$(arg blacklist_box_size)"/>
+     
+    <!-- Launch exploration client -->
+    <node name="exploration_client" pkg="exploration_server" type="plugin_client" output="screen" />
+
+    <!-- Launch exploration server -->
+    <node name="exploration_server_node" pkg="exploration_server" type="exploration_server_node"  output="screen">
+
+        <param name="frequency" type="double" value="5.0"/>
+        <param name="goal_aliasing" type="double" value="$(arg sensor_range)"/>
+
+	<!--<rosparam param="points" file="$(find exploration_server)/config/points.yaml" command="load" ns="explore_costmap" />-->
+    	<rosparam file="$(find exploration_server)/config/costmap_exploration.yaml" command="load" ns="explore_costmap" />
+
+	<!--#All standard costmap_2d parameters as in move_base, other than PolygonLayer -->
+    	<param name="~/explore_costmap/global_frame" value="earth" />
+    	<param name="~/explore_costmap/static/map_topic" value="/$(arg robot_name)/grid_map" />
+    	<param name="~/explore_costmap/robot_base_frame" value="$(arg robot_name)/base_link" />
+
+	<param name="~/explore_costmap/obstacles_layer/point_cloud_sensor/sensor_frame" value="$(arg robot_name)/camera_link" />
+    	<param name="~/explore_costmap/obstacles_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/camera/depth/points" />
+	<param name="~/explore_costmap/obstacles_layer/point_cloud_sensor/raytrace_range" value="$(arg sensor_range)" />
+	<param name="~/explore_costmap/obstacles_layer/point_cloud_sensor/obstacle_range" value="$(arg sensor_range)" />
+
+    </node>
+
+</launch>
