@@ -34,7 +34,7 @@
     </include>
   </group> -->
 
-  <!-- Spawn simulated quadrotor uav 1 -->
+  <!-- Spawn simulated quadrotor uav 1
   <group ns="UAV_1">
     <include file="$(find hector_quadrotor_gazebo)/launch/quadrotor.launch" >
       <arg name="name" default="UAV_1"/>
@@ -49,7 +49,7 @@
       <arg name="y" default="-33.0"/>
       <arg name="z" default="0.6"/> 
     </include>
-  </group>
+  </group> -->
 
   <!-- Spawn simulated quadrotor uav 2
   <group ns="UAV_2">
@@ -119,7 +119,7 @@
   </group> -->
 
   
-<!--LAUNCH MAP_MERGE -->
+<!--LAUNCH MAP_MERGE
   <include file="$(find pioneer3at_slam)/launch/multi_map_merge.launch">
       <arg name="namespace" value="pioneer3at"/>
       <arg name="first_robot"  value="pioneer3at_1"/>
@@ -134,7 +134,7 @@
       <arg name="second_robot_y_pos" value="-31.0"/>
       <arg name="second_robot_z_pos" value=" 0.45"/>
       <arg name="second_robot_yaw"   value=" 0.0"/> 
-  </include> 
+  </include> -->
 
 <!-- LAUNCH RVIZ -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
@@ -149,5 +149,4 @@
   <node name="rqt_tf_tree" pkg="rqt_tf_tree" type="rqt_tf_tree" output="screen" /> -->
 
 
-</launch>	
-
+</launch>

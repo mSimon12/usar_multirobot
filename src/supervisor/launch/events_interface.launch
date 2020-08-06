@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+  <!--<arg name="arg_name"  default=""/>-->
+  
+  <!-- Launch events interace -->
+  <node name="events_interface" pkg="supervisor" type="Interface.py" output="screen">
+    <!--<param name="" value="$(arg arg_name)" />-->
+  </node>
+
+</launch>

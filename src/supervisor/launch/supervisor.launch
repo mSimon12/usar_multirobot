@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="robot_name"  default="robot"/>
+  
+  <!-- Launch events interace -->
+  <node name="supervisor" pkg="supervisor" type="system_start.py" output="screen">
+    <param name="robot_name" value="$(arg robot_name)" />
+  </node>
+
+</launch>

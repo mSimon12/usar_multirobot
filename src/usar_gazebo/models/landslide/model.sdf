@@ -8,7 +8,6 @@
             <heightmap>
               <uri>model://landslide/landslide_heightmap1.png</uri>
               <size>70 70 15</size>
-              <pos>0 0 0</pos>
             </heightmap>
           </geometry>
 	  <surface>
@@ -49,7 +48,6 @@
 		    </blend>
 		    <uri>model://landslide/landslide_heightmap1.png</uri>
 		    <size>70 70 15</size>
-		    <pos>0 0 0</pos>
             </heightmap>
           </geometry>
         </visual>
