@@ -249,18 +249,52 @@ Visualization Manager:
     - Alpha: 1
       Class: rviz/RobotModel
       Collision Enabled: false
-      Enabled: false
+      Enabled: true
       Links:
         All Links Enabled: true
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        depth_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_front_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_rear_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_rear_wheel:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
       Name: Robot2
       Robot Description: pioneer3at_2/robot_description
       TF Prefix: pioneer3at_2
       Update Interval: 0
-      Value: false
+      Value: true
       Visual Enabled: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
@@ -274,7 +308,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -291,7 +325,7 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -319,12 +353,12 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: 2dMap_r2
       Topic: /pioneer3at_2/grid_map
       Unreliable: false
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: costmap
@@ -429,25 +463,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 23.041275024414062
+      Distance: 9.39093017578125
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -33.628387451171875
-        Y: -31.313209533691406
-        Z: 4.091964456165442e-6
+        X: 2.272254467010498
+        Y: 1.774444818496704
+        Z: 9.024677638080902e-6
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.49039649963378906
+      Pitch: 0.5053966641426086
       Target Frame: map
       Value: XYOrbit (rviz)
-      Yaw: 3.556750535964966
+      Yaw: 3.371752977371216
     Saved: ~
 Window Geometry:
   Displays:

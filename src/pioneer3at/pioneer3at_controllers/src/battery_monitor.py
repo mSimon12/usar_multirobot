@@ -54,6 +54,12 @@ class BatteryMonitor(Thread):
             
             self.battery_level -= bat_delta                             # Update battery level
 
+            # Delimitate to positive values [0,100]
+            if self.battery_level > 100:
+                self.battery_level = 100
+            elif self.battery_level < 0:
+                self.battery_level = 0
+
             if count >= (self.upd_rate/self.pub_rate):
                 self.msg.param[0] = self.battery_level
                 self.pub.publish(self.msg)                              # Publish the battery level

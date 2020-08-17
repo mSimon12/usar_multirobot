@@ -4,7 +4,33 @@
   <world name='default'>
     <light name='sun' type='directional'>
       <cast_shadows>1</cast_shadows>
-      <pose frame=''>0 0 20 0 -0 0</pose>
+      <pose frame=''>70 0 50 0.3 0.3 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.8 0.8 0.8 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <light name='sun1' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>70 0 50 0.3 0.3 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <specular>0.8 0.8 0.8 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <light name='sun2' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>70 0 50 0.3 0.3 0</pose>
       <diffuse>1 1 1 1</diffuse>
       <specular>0.8 0.8 0.8 1</specular>
       <attenuation>
@@ -50,7 +76,7 @@
 
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-22 -81 30 0 0.35 1.24</pose>
+        <pose frame=''>-0.33 -42 26 0 0.30 1.09</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -58,53 +84,54 @@
 
     <include>
 	<uri>model://ground_plane1</uri>
+	<pose>35 35 0 0 0 0</pose>
     </include>
 
     <include>
-	<uri>model://landslide</uri>
-        <pose>0 0 0 0 0 0</pose>
+	<uri>model://landslide_dae</uri>
+        <pose>0 0 -2 0 0 0</pose>
     </include>
 
     <include>
 	<uri>model://collapsed_house</uri>
-	<pose>-11.71 -7.65 1.28 0 0 -1.57</pose>
+	<pose>23 25 1 0 0 -1.57</pose>
     </include>
 
     <include>
 	<uri>model://collapsed_fire_station</uri>
-	<pose>15.03 -15.49 1.51 0 0 0.67</pose>
+	<pose>50 19.5 -1 0 0 0.67</pose>
     </include>
 
     <include>
 	<uri>model://victim1</uri>
-	<pose>-7.76 -3.077 2.89 -1.81 0.082 -3.139</pose>
+	<pose>26.66 30.32 3.67 -1.72 1.04 1.71</pose>
     </include>
 
     <include>
 	<uri>model://victim2</uri>
-	<pose>9.57 -15.29 4.26 -0.42 -1.15 1.37</pose>
+	<pose>44.13 19.83 1.89 0.82 0.99 -1.32</pose>
     </include>
 
     <include>
 	<uri>model://victim3</uri>
-	<pose>-1.73 -7.615 2.39 0.90 0.42 -2.69</pose>
+	<pose>34.40 21.18 2.49 0.62 -0.31 3.08</pose>
     </include>
     
     <include>
 	<uri>model://victim4</uri>
-	<pose>-13.85 -4.52 3.211 -0.90 -1.44 1.286</pose>
+	<pose>19.66 28.35 2.84 -1.61 0.32 1.91</pose>
     </include>
 
     <include>
 	<name>gas1</name>
 	<uri>model://barrel</uri>
-	<pose>11.585058 -22.330523 3.353037 -1.416627 0.0 0.0</pose>
+	<pose>46.79 12.99 0.77 -1.42 0.0 0.0</pose>
     </include>
 
     <include>
 	<name>gas2</name>
 	<uri>model://barrel</uri>
-	<pose>26.487747 -15.985578 2.766598 -0.469817 0.715003 -0.897744</pose>
+	<pose>62.11 18.42 0.82 -1.32 0.71 -0.90</pose>
     </include>
 
 <!--    <include>

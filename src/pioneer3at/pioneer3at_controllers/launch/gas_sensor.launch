@@ -2,13 +2,13 @@
 
 <launch>
    <arg name="robot_name" default="robot"/>
-   <arg name="sensor_range" default="1.5"/>
-   <arg name="sensor_update_period" default="0.1"/>
+   <arg name="sensor_range" default="2.0"/>
+   <arg name="sensor_update_rate" default="0.1"/>
 
    <param name="robot_name" type="str" value="$(arg robot_name)"/>
    <rosparam param="gas_models">[gas1, gas2]</rosparam>
    <param name="sensor_range" type="double" value="$(arg sensor_range)"/>
-   <param name="sensor_update_period" type="double" value="$(arg sensor_update_period)"/>
+   <param name="sensor_update_rate" type="double" value="$(arg sensor_update_rate)"/>
    
    <node name="gas_sensor" pkg="pioneer3at_controllers" type="gas_sensor.py" output="log"/>
     

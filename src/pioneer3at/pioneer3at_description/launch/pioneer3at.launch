@@ -47,14 +47,14 @@
   <include file="$(find pioneer3at_controllers)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="sensor_range" value="2.0"/>
-    <arg name="sensor_update_period" value="0.5"/>
+    <arg name="sensor_update_rate" value="2"/>
   </include>
 
   <!-- LAUNCH GAS SENSOR -->
   <include file="$(find pioneer3at_controllers)/launch/gas_sensor.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="sensor_range" value="4.0"/>
-    <arg name="sensor_update_period" value="1.0"/>
+    <arg name="sensor_update_rate" value="1.0"/>
   </include>
 
   <!-- LAUNCH BATTERY MONITOR -->
@@ -74,8 +74,9 @@
     <arg name="vsv_n_points" default="8"/>
   </include>
 
-  <!-- Launch Supervisory Control System -->
+  <!-- Launch Supervisory Control System 
   <include file="$(find supervisor)/launch/supervisor.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
-  </include> 
+  </include> -->
+
 </launch>

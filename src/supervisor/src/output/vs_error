@@ -3,8 +3,8 @@ digraph {
 	rankdir=LR
 	VS_NOK_Mi_OFF [label=VS_NOK_Mi_OFF color=black fillcolor=white shape=circle style=filled]
 	VS_NOK_Mi_ON [label=VS_NOK_Mi_ON color=black fillcolor=white shape=circle style=filled]
-	VS_OK_Mi_OFF [label=VS_OK_Mi_OFF color=black fillcolor=white shape=doublecircle style=filled]
-	VS_OK_Mi_ON [label=VS_OK_Mi_ON color=blue fillcolor=lightgrey shape=circle style=filled]
+	VS_OK_Mi_OFF [label=VS_OK_Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	VS_OK_Mi_ON [label=VS_OK_Mi_ON color=black fillcolor=white shape=circle style=filled]
 	VS_NOK_Mi_OFF -> VS_NOK_Mi_OFF [label=move_to fontcolor=blue]
 	VS_NOK_Mi_OFF -> VS_NOK_Mi_OFF [label="end_app,
 end_exp,

@@ -1,103 +1,113 @@
 #!/usr/bin/env python
 
-import time
 import rospy
 from threading import Thread
 
+# ROS
+from geometry_msgs.msg import Pose2D
 from gazebo_msgs.srv import GetModelState
 from pioneer3at_controllers.msg import events_message
 
-def find_victim(robot_name, victims, sensor_range = 1):
-    '''
-        Function to verify if a victim from the list is into the range of the sensor
-        robot_name: name of the robot model on Gazebo
-        victims: list of victims models on Gazebo
-        sensor_range: range in which the robot recognize a victim
-    '''
-    models_service = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)        # Get model service from Gazebo
+class VictimSensor(object):
 
-    # Get position of the victims related to the robot position
-    v_status = {}                                                                        # Dictionary with the status of each victim and xyz position
-    for v in victims:
-        try:
-            v_status[v] = {}
-            answer = models_service(v, robot_name)                                       # Call the service to receive the victim position
-            v_status[v]['x_pos'] = answer.pose.position.x
-            v_status[v]['y_pos'] = answer.pose.position.y
-            v_status[v]['z_pos'] = answer.pose.position.z
-        except rospy.ServiceException as e:
-            rospy.loginfo("Get Model State service call failed:  {}".format(e))
+    def __init__(self):
+        self.__state = 'IDLE'
 
-        # Find the distance between robot and victim
-        hip = (v_status[v]['x_pos']**2 + v_status[v]['y_pos']**2)**(1/2)
-        dist = (hip**2 + v_status[v]['z_pos']**2)**(1/2)
+        # Get parameters
+        self.__robot_name = rospy.get_param('robot_name', default='robot')
+        self.__victims = rospy.get_param('victims_models', default=[])
+        self.__sensor_range = rospy.get_param('sensor_range', default=1.0)
+        self.__sensor_update_rate = rospy.get_param('sensor_update_rate', default=1.0)
 
-        # Mark the victim as found if it is into the range
-        if dist < sensor_range:
-            v_status[v]['status'] = True
+        self.__models_service = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)                         # Get model service from Gazebo
+        self.__models_service.wait_for_service()
+
+        self.__pub = rospy.Publisher("victim_sensor/out", events_message, queue_size=10)
+        rospy.Subscriber("victim_sensor/in", events_message, self.event_receiver)                                    # Topic to receive occured events
+    
+
+    def event_receiver(self, msg):
+        '''
+            Callback for received messages. Responsible for changing the sensor state
+        '''
+        if (msg.event == 'start') and (self.__state == 'IDLE'):
+            self.__state = 'RUNNING'
+            thread = Thread(target = self.vs_on)
+            thread.start()                                              # Start the sensor
+        elif (msg.event == 'stop') and (self.__state == 'RUNNING'):
+            self.__state = 'IDLE'                                       # Stop the sensor
+        elif (msg.event == 'erro') and (self.__state == 'RUNNING'):
+            self.__state = 'ERROR'                                      # Stop the sensor to simulate that it is not working
+            self.__pub.publish(msg)                                     # Re-send the msg to the output 
+        elif (msg.event == 'reset') and (self.__state == 'ERROR'):
+            self.__state = 'IDLE'                                       # Reset the sensor
         else:
-            v_status[v]['status'] = False
+            rospy.logwarn("VICTIM_SENSOR command not allowed!")
 
-    return v_status         #Return the status of all victims
+    def vs_on(self):
+        '''
+            Function for victim recognition
+        '''
+        rate = rospy.Rate(self.__sensor_update_rate)
+        while (not rospy.is_shutdown()) and (self.__state == 'RUNNING'): 
+            sensor = self.__find_victim()
+            for v in sensor:
+                if sensor[v]['status'] == True:
+                    # Send the signal that a victim have been found and her location 
+                    pos = self.__models_service(v, '')                                              # Call the service to receive the global victim position
+    
+                    # Create pose as pose2D
+                    p = Pose2D()
+                    p.x = pos.pose.position.x
+                    p.y = pos.pose.position.y
+                    p.theta = 0
 
-# Function for victim recognition
-def vs_on():
-    global robot, victims, sensor_range,  sensor_update_period, status, pub
+                    # Create message
+                    msg = events_message()
+                    msg.event = 'victim_recognized'
+                    msg.position.append(p)
+                    self.__pub.publish(msg)                                                         # Publish the found victim location 
 
-    while (not rospy.is_shutdown()) and (status == 'RUNNING'): 
-        sensor = find_victim(robot, victims, sensor_range)
-        for v in sensor:
-            if sensor[v]['status'] == True:
-                # rospy.loginfo("Find {} at pose [{},{},{}".format(v, sensor[v]['x_pos'],sensor[v]['y_pos'],sensor[v]['z_pos']))
-                
-                # Send the signal that a victim have been found and her location 
-                models_service = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)       # Get model service from Gazebo
-                pos = models_service(v, '')                                                         # Call the service to receive the global victim position
-                
-                msg = events_message()
-                msg.event = 'victim_recognized'
-                msg.param = [pos.pose.position.x, pos.pose.position.y, pos.pose.position.z]
-                pub.publish(msg)        # Publish the found victim location 
+                    self.__victims.remove(v)                                                        # Remove the found victim from the list
 
-                victims.remove(v)       # Remove the found victim from the list
+            rate.sleep()
 
-        time.sleep(sensor_update_period)
+    def __find_victim(self):
+        '''
+            Function to verify if a victim from the list is into the range of the sensor
+            robot_name: name of the robot model on Gazebo
+            victims: list of victims models on Gazebo
+            sensor_range: range in which the robot recognize a victim
+        '''
+        # Get position of the victims related to the robot position
+        v_status = {}                                                                # Dictionary with the status of each victim and xyz position
+        for v in self.__victims:
+            try:
+                v_status[v] = {}
+                answer = self.__models_service(v, self.__robot_name)                        # Call the service to receive the victim position
+                v_status[v]['x_pos'] = answer.pose.position.x
+                v_status[v]['y_pos'] = answer.pose.position.y
+                v_status[v]['z_pos'] = answer.pose.position.z
+            except rospy.ServiceException as e:
+                rospy.loginfo("Get Model State service call failed:  {}".format(e))
 
-def event_receiver(msg):
-    global status, pub
+            # Find the distance between robot and victim
+            hip = (v_status[v]['x_pos']**2 + v_status[v]['y_pos']**2)**(1/2)
+            dist = (hip**2 + v_status[v]['z_pos']**2)**(1/2)
 
-    if (msg.event == 'start') and (status == 'IDLE'):
-        status = 'RUNNING'
-        thread = Thread(target = vs_on)
-        thread.start()                                      #Start the sensor
-        # vs_on()              
-    elif (msg.event == 'stop') and (status == 'RUNNING'):
-        status = 'IDLE'                                     #Stop the sensor
-    elif (msg.event == 'erro') and (status == 'RUNNING'):
-        status = 'ERROR'                                    #Stop the sensor to simulate that it is not working
-        pub.publish(msg)                                    #Re-send the msg to the output 
-    elif (msg.event == 'reset') and (status == 'ERROR'):
-        status = 'IDLE'                                     #Reset the sensor
-    else:
-        rospy.logwarn("VICTIM_SENSOR command not allowed!")
+            # Mark the victim as found if it is into the range
+            if dist < self.__sensor_range:
+                v_status[v]['status'] = True
+            else:
+                v_status[v]['status'] = False
+
+        return v_status                                                               # Return the status of all victims
+
 
 if __name__ == '__main__':
     try:
-        global robot, victims, sensor_range,  sensor_update_period, status, pub
-        status = 'IDLE'
-
-        # Get parameters
-        robot = rospy.get_param('robot_name', default='robot')
-        victims = rospy.get_param('victims_models', default=[])
-        sensor_range = rospy.get_param('sensor_range', default=1.0)
-        sensor_update_period =  rospy.get_param('sensor_update_period', default=1.0)
-
-        rospy.init_node('victim_recognition_system', anonymous=False)                                 # Initialize the node of the sensor
-
-        rospy.wait_for_service('/gazebo/get_model_state')
-        pub = rospy.Publisher("/{}/victim_sensor/out".format(robot), events_message, queue_size=10)
-        rospy.Subscriber("/{}/victim_sensor/in".format(robot), events_message, event_receiver)        # Topic to receive occured events
-
+        rospy.init_node('victim_recognition_system', anonymous=False)   # Initialize the node of the sensor
+        vs = VictimSensor()                                             # Initialize Victim Sensor
         rospy.spin()
             
     except rospy.ROSInterruptException:

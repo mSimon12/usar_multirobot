@@ -12,9 +12,9 @@
   <group ns="pioneer3at_1">
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
-      <arg name="xcoordinate" value="-33.0"/>
-      <arg name="ycoordinate" value="-30.0"/>
-      <arg name="zcoordinate" value="0.45"/>
+      <arg name="xcoordinate" value="2.0"/>
+      <arg name="ycoordinate" value="2.0"/>
+      <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
@@ -25,9 +25,9 @@
   <group ns="pioneer3at_2">
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_2"/>
-      <arg name="xcoordinate" value="-33.0"/>
-      <arg name="ycoordinate" value="-31.0"/>
-      <arg name="zcoordinate" value="0.45"/>
+      <arg name="xcoordinate" value="2.0"/>
+      <arg name="ycoordinate" value="3.0"/>
+      <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
@@ -45,8 +45,8 @@
     	  controller/velocity
     	  controller/attitude
           "/>
-      <arg name="x" default="-33.0"/>
-      <arg name="y" default="-33.0"/>
+      <arg name="x" default="2.0"/>
+      <arg name="y" default="1.0"/>
       <arg name="z" default="0.6"/> 
     </include>
   </group> -->
@@ -62,8 +62,8 @@
     	  controller/velocity
     	  controller/attitude
           "/>
-      <arg name="x" default="-33.0"/>
-      <arg name="y" default="-34.0"/>
+      <arg name="x" default="3.0"/>
+      <arg name="y" default="1.0"/>
       <arg name="z" default="0.6"/> 
     </include>
   </group>  -->
@@ -85,9 +85,9 @@
   <group ns="pioneer2dx_2">
     <include file="$(find pioneer2dx_ros)/launch/pioneer2dx.launch">
       <arg name="robot_name" value="pioneer2dx_2"/>
-      <arg name="xcoordinate" value="0.0"/>
-      <arg name="ycoordinate" value="8.0"/>
-      <arg name="zcoordinate" value="1.6"/>
+      <arg name="xcoordinate" value="2.0"/>
+      <arg name="ycoordinate" value="5.0"/>
+      <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
@@ -100,8 +100,8 @@
   <group ns="human1">
     <include file="$(find human_teams)/launch/fireman1.launch">
       <arg name="human_name" value="human1"/>
-      <arg name="xcoordinate" value="-34.0"/>
-      <arg name="ycoordinate" value="-34.0"/>
+      <arg name="xcoordinate" value="-2.0"/>
+      <arg name="ycoordinate" value="6.0"/>
       <arg name="zcoordinate" value="0.18"/>
       <arg name="yaw" value="1.57"/>
     </include>
