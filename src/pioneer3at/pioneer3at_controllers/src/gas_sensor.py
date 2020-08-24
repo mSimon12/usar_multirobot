@@ -68,7 +68,6 @@ class GasSensor(object):
             for g in sensor:
                 if sensor[g]['status'] == True:
                     # Verify if is a new point to publish
-                    rospy.logwarn(self.__points_with_gas)
                     if self.__points_with_gas:
                         count = 0
                         for point in self.__points_with_gas:

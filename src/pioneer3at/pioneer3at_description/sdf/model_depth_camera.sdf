@@ -240,10 +240,33 @@
 
 <!-- DEPTH CAMERA-->
     <link name="camera_link">
-      <pose>0.1 0 0.15 0 0 0</pose>
+      <pose>0.1 0 0.19 0 0.08 0</pose>
       <inertial>
         <mass>0.1</mass>
       </inertial>
+      <collision name="collision-box">
+        <pose>-0.025 0 -0.07 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.07</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual-box">
+        <pose>-0.025 0 -0.07 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.07</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 0.0 0.0 1</ambient>
+          <diffuse>1.0 0.0 0.0 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <emissive>0 0 0 0</emissive>
+        </material>
+      </visual>
+
       <collision name="collision">
         <geometry>
           <box>
@@ -259,7 +282,7 @@
         </geometry>
       </visual>
       <sensor name="camera" type="depth">
-        <update_rate>20</update_rate>
+        <update_rate>30</update_rate>
 	<visualize>false</visualize>
         <camera>
           <horizontal_fov>1.047198</horizontal_fov>
@@ -269,7 +292,7 @@
             <format>R8G8B8</format>
           </image>
           <clip>
-            <near>0.05</near>
+            <near>0.4</near>
             <far>15</far>
           </clip>
         </camera>
@@ -284,8 +307,8 @@
           <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>
           <pointCloudTopicName>depth/points</pointCloudTopicName>
           <frameName>depth_link</frameName>
-          <pointCloudCutoff>0.5</pointCloudCutoff>
-          <pointCloudCutoffMax>3.5</pointCloudCutoffMax>
+          <pointCloudCutoff>0.4</pointCloudCutoff>
+          <pointCloudCutoffMax>4.5</pointCloudCutoffMax>
 	  <hackBaseline>0.07</hackBaseline>
           <distortionK1>0</distortionK1>
           <distortionK2>0</distortionK2>

@@ -34,39 +34,27 @@
     </include>
   </group> -->
 
-  <!-- Spawn simulated quadrotor uav 1
+  <!-- Spawn simulated quadrotor uav 1 -->
   <group ns="UAV_1">
-    <include file="$(find hector_quadrotor_gazebo)/launch/quadrotor.launch" >
+    <include file="$(find uav)/launch/UAV.launch">
       <arg name="name" default="UAV_1"/>
-      <arg name="tf_prefix" value="UAV_1" />
-      <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
-      <arg name="controllers" value="
-    	  controller/position
-    	  controller/velocity
-    	  controller/attitude
-          "/>
-      <arg name="x" default="2.0"/>
-      <arg name="y" default="1.0"/>
-      <arg name="z" default="0.6"/> 
+      <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_with_kinect.gazebo.xacro"/>
+      <arg name="x" value="2.0"/>
+      <arg name="y" value="1.0"/>
+      <arg name="z" value="0.7"/> 
     </include>
-  </group> -->
+  </group>
 
   <!-- Spawn simulated quadrotor uav 2
   <group ns="UAV_2">
-    <include file="$(find hector_quadrotor_gazebo)/launch/quadrotor.launch" > 
+    <include file="$(find uav)/launch/UAV.launch">
       <arg name="name" default="UAV_2"/>
-      <arg name="tf_prefix" value="UAV_2" />
-      <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
-      <arg name="controllers" value="
-    	  controller/position
-    	  controller/velocity
-    	  controller/attitude
-          "/>
-      <arg name="x" default="3.0"/>
-      <arg name="y" default="1.0"/>
-      <arg name="z" default="0.6"/> 
+      <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_with_kinect.gazebo.xacro"/>
+      <arg name="x" value="3.0"/>
+      <arg name="y" value="1.0"/>
+      <arg name="z" value="0.7"/> 
     </include>
-  </group>  -->
+  </group> -->
 
   <!-- Launch Pioneer2DX 1 
   <group ns="pioneer2dx_1">
@@ -100,9 +88,9 @@
   <group ns="human1">
     <include file="$(find human_teams)/launch/fireman1.launch">
       <arg name="human_name" value="human1"/>
-      <arg name="xcoordinate" value="-2.0"/>
-      <arg name="ycoordinate" value="6.0"/>
-      <arg name="zcoordinate" value="0.18"/>
+      <arg name="xcoordinate" value="1.0"/>
+      <arg name="ycoordinate" value="1.0"/>
+      <arg name="zcoordinate" value="0.3"/>
       <arg name="yaw" value="1.57"/>
     </include>
   </group> -->
@@ -111,9 +99,9 @@
   <group ns="human2">
     <include file="$(find human_teams)/launch/fireman2.launch">
       <arg name="human_name" value="human2"/>
-      <arg name="xcoordinate" value="-34.0"/>
-      <arg name="ycoordinate" value="-33.0"/>
-      <arg name="zcoordinate" value="0.18"/>
+      <arg name="xcoordinate" value="1.0"/>
+      <arg name="ycoordinate" value="2.0"/>
+      <arg name="zcoordinate" value="0.3"/>
       <arg name="yaw" value="1.57"/>
     </include>
   </group> -->

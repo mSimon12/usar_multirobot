@@ -16,6 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
   exploration_msgs
   genmsg 
   actionlib_msgs
+  joy
+  sensor_msgs
 )
 
 ## System dependencies are found with CMake's conventions

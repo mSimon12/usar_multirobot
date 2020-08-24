@@ -24,6 +24,8 @@
   <!-- NAVIGATION (move_base) --> 
   <include file="$(find pioneer3at_navigation)/launch/move_base.launch">
     <arg name="robot_name" default="$(arg robot_name)"/>
+    <arg name="max_vel" value="0.7"/>
+    <arg name="max_ang_vel" value="2.4"/>
   </include>
 
   <!-- LAUNCH MAPPING -->
@@ -42,6 +44,12 @@
   <!-- <include file="$(find rrt_exploration)/launch/single.launch">	
     <arg name="robot_name"    value="$(arg robot_name)"/>
   </include> -->
+
+
+<!-- ######################### MY PACKAGES ########################################## -->
+
+  <!-- LAUNCH TELEOPERATION SERVER-->
+  <include file="$(find pioneer3at_controllers)/launch/p3at_teleop.launch" />	
 
   <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
   <include file="$(find pioneer3at_controllers)/launch/victim_recognition_system.launch">

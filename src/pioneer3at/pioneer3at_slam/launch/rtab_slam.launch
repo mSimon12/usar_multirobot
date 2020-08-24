@@ -93,7 +93,7 @@
 	  <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0"/> 
 	  <param name="RGBD/OptimizeMaxError" type="string" value="1.0"/>
 
-	  <param name="Kp/MaxDepth" type="string" value="3.5"/>
+	  <param name="Kp/MaxDepth" type="string" value="4.5"/>
 
 	  <param name="Reg/Force3DoF" type="string" value="true"/>
  	  <param name="Reg/Strategy" type="string" value="1"/>      <!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
@@ -111,7 +111,7 @@
 	  <param name="GridGlobal/MinSize" type="string" value="100"/>
           <param name="GridGlobal/OccupancyThr" type="string" value="0.5"/>
 
-	  <param name="Rtabmap/DetectionRate" type="string" value="50"/>
+	  <param name="Rtabmap/DetectionRate" type="string" value="100"/>
  	  
           <param name="Grid/FromDepth" type="string" value="true"/>
 	  <param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>

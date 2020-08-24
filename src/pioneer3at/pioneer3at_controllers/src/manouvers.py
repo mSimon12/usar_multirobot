@@ -17,8 +17,13 @@ from pioneer3at_controllers.msg import events_message
 from geometry_msgs.msg import PolygonStamped, Point32, Pose2D
 from exploration_msgs.msg import ExploreGoal, ExploreAction
 
+# For teleoperation
+from sensor_msgs.msg import Joy
+from geometry_msgs.msg import Twist
+
 ########################################################################
 class Manouver(object):
+    
     def __init__(self,name):
         self.robot_name = name
         self.state = 'IDLE'                                                                                 # Manouver current state
@@ -347,40 +352,92 @@ class return_to_base(Manouver):
         self.state = 'IDLE'
 
 ########################################################################
-class teleoperation(Manouver):
+class teleoperation(object):
     '''
-        Not implemented
+        Allows a human to teleoperate the robot through a joystick.
     '''
-
     def __init__(self, name):
-        super(teleoperation, self).__init__(name)
+        self.robot_name = name
+        self.state = 'IDLE' 
+
+        #Variables to control the speed 
+        self.max_vel = rospy.get_param("move_base/DWAPlannerROS/max_vel_x")
+        self.max_ang_vel = rospy.get_param("move_base/DWAPlannerROS/max_rot_vel")
+        self.current_x_speed = self.max_vel/2
+        self.current_ang_speed = self.max_ang_vel/2
+
+        self.__pub = rospy.Publisher("cmd_vel",Twist, queue_size=10)
+
+        self.pub = rospy.Publisher("/{}/manouvers/out".format(name), events_message, queue_size=10)         # Publisher object
+        self.msg = events_message()                                                                         # Message object
 
     def execute(self):
         rospy.loginfo("Starting Teleoperation!")
         self.state = 'EXE'
 
-        # Start the execution and wait response
-
-        # Verify the reason why the robot stopped moving
-        # if result == 'end':
-        #     self.state = 'IDLE'
-        #     self.msg.event = 'end_teleoperation'
-        #     self.pub.publish(self.msg)
-        # elif result == 'error':
-        #     self.state = 'ERROR'
-        #     self.msg.event = 'teleoperation_error'
-        #     self.pub.publish(self.msg)
-        # elif result == 'susp':
-        #     self.state = 'SUS'
+        # Start teleoperation
+        self.__sub = rospy.Subscriber('joy', Joy, self.Joy_callback)                       # Start receiving messages from joystick
 
     def reset(self):
         rospy.loginfo("Reseting Teleoperation!")
         self.state = 'IDLE'
+    
+    def end(self):
+        self.__sub.unregister()                                         # Stop receiving messages from joystick
+        self.msg.event = 'end_teleoperation'
+        self.pub.publish(self.msg)                                      # Send message signaling the error
+        self.state = 'IDLE'
+
+    def error(self):
+        self.__sub.unregister()                                         # Stop receiving messages from joystick
+        self.msg.event = 'teleoperation_error'
+        self.pub.publish(self.msg)                                      # Send message signaling the error
+        self.state = 'ERROR'
+
+    def Joy_callback(self,msg):
+        speed = msg.axes[1]             # Get speed
+        rot = msg.axes[2]               # Ger angular speed
+        if speed < 0:
+            rot = -rot
+
+        #twist message for moving
+        twist_msg = Twist()
+        twist_msg.linear.x = speed*self.current_x_speed 
+        twist_msg.angular.z = rot*self.current_ang_speed
+
+        self.__pub.publish(twist_msg)          # Publish to cmd_vel
+
+        # Change linear speed
+        if msg.buttons[4]:
+            self.current_x_speed += self.max_vel*0.1
+            if self.current_x_speed > self.max_vel:
+                self.current_x_speed = self.max_vel
+        elif msg.buttons[6]:
+            self.current_x_speed -= self.max_vel*0.1
+            if self.current_x_speed < 0.2:
+                self.current_x_speed = 0.2
+
+        # Change angular speed
+        if msg.buttons[5]:
+            self.current_ang_speed += self.max_ang_vel*0.1
+            if self.current_ang_speed > self.max_ang_vel:
+                self.current_ang_speed = self.max_ang_vel 
+        elif msg.buttons[7]:
+            self.current_ang_speed -= self.max_ang_vel *0.1
+            if self.current_ang_speed < 0.4:
+                self.current_ang_speed = 0.4
+
+        if msg.buttons[9]:
+            # Teleoperation ended
+            self.end()
+        elif all(msg.buttons[4:8]):
+            # Teleoperation error
+            self.error()
 
 
 ########################################################################
 ##### Manouvers events callback ########################################
-def event_receiver(msg):
+def manouver_event(msg):
     global app, exp, rb, vsv, tele
 
     # Verify the received message
@@ -472,9 +529,30 @@ def event_receiver(msg):
             thread.start()                                                                      # Start teleoperation
         elif (msg.event == "reset_teleoperation") and (tele.state == 'ERROR'):
             tele.reset()
+        elif (msg.event == "end_teleoperation") and (tele.state == 'EXE'):
+            # Teleoperation ended
+            tele.end()
+        elif (msg.event == "teleoperation_error") and (tele.state == 'EXE'):
+            # Teleoperation ended
+            tele.error()
         else:
             rospy.logwarn("Command not allowed!")
-    
+
+def victim_event(msg):
+    '''
+        Suspend all manouvers in execution if a victim is found.
+    '''
+    global app, exp, rb, vsv
+    if msg.event == 'victim_recognized':
+        if (app.state == 'EXE'):
+            app.suspend()                       # Suspend approach
+        if (exp.state == 'EXE'):
+            exp.suspend()                       # Suspend exploration
+        if (rb.state == 'EXE'):
+            rb.suspend()                        # Suspend return to base
+        if (vsv.state == 'EXE'):
+            vsv.suspend()                       # Suspend victim surroundings verification
+
 
 if __name__=="__main__":
     global app, exp, rb, vsv, tele
@@ -497,6 +575,7 @@ if __name__=="__main__":
     rb = return_to_base(NAME, x_coord, y_coord)
     tele = teleoperation(NAME)
     
-    rospy.Subscriber("/{}/manouvers/in".format(NAME), events_message, event_receiver, queue_size=10)            # Topic to receive events
+    rospy.Subscriber("manouvers/in", events_message, manouver_event, queue_size=10)            # Topic to receive command events
+    rospy.Subscriber("victim_sensor/out", events_message, victim_event, queue_size=10)         # Topic to receive events from victim sensor
 
     rospy.spin()

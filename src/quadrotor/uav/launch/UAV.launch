@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="name" default="UAV"/>
+  <arg name="model" default="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
+  <arg name="world_frame" default="world"/>
+
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.3"/> 
+
+  <!-- Spawn simulated quadrotor uav -->
+  <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
+    <arg name="name" value="$(arg name)"/>
+    <arg name="tf_prefix" value="$(arg name)" />
+    <arg name="world_frame" value="$(arg world_frame)"/>
+    <arg name="model" value="$(arg model)"/>
+    <arg name="controllers" value="
+        controller/attitude
+        controller/velocity
+        controller/position
+        "/>
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>
+  </include>
+
+  <!-- Publishing tf_static between earth and robot/map. -->
+  <node name="earth_to_world_tf_broadcaster" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 earth $(arg name)/map 40"/> 
+
+  <!-- Start SLAM system 
+  <include file="$(find hector_mapping)/launch/mapping_default.launch">
+    <arg name="base_frame" value="$(arg name)/map"/>
+    <arg name="odom_frame" value="$(arg name)/base_stabilized"/>
+    <arg name="map_frame" value="$(arg name)/map"/>
+  </include> -->
+
+  <!-- Start GeoTIFF mapper 
+  <include file="$(find hector_geotiff)/launch/geotiff_mapper.launch">
+    <arg name="trajectory_publish_rate" value="4"/>
+  </include> -->
+
+  <!-- RTABMAP SLAM -->
+  <include file="$(find rtab_slam)/launch/rtab_slam.launch">
+    <arg name='robot_name' value='$(arg name)'/>
+    <arg name="map_frame"   value="$(arg name)/map"/>
+    <arg name="odom_frame"  value="$(arg name)/world"/>
+    <arg name="base_frame"  value="$(arg name)/base_link"/>
+  </include> 
+
+  <!-- OCTOMAP -->
+  <include file="$(find uav)/launch/octomap_mapping.launch">
+    <arg name='map_frame' value='$(arg name)/grid_map'/>
+    <arg name='base_frame' value='$(arg name)/base_link'/>
+    <arg name='point_cloud' value='rtabmap/cloud_map'/>
+    <arg name='sensor_range' value='4.5'/>
+  </include>
+
+  <!--<include file="$(find hector_quadrotor_teleop)/launch/xbox_controller.launch" >
+    <arg name="control_mode" value="position"/>
+  </include> -->
+
+<!-- ######################### MY PACKAGES ########################################## -->
+
+  <!-- LAUNCH VICTIM RECOGNITION SYSTEM
+  <include file="$(find quadrotor_controllers)/launch/victim_recognition_system.launch">
+    <arg name="robot_name" value="$(arg name)"/>
+    <arg name="sensor_range" value="3.0"/>
+    <arg name="sensor_update_rate" value="2"/>
+  </include> -->
+
+  <!-- LAUNCH BATTERY MONITOR
+  <include file="$(find quadrotor_controllers)/launch/battery_monitor.launch">
+    <arg name="publish_rate" value="0.1"/>
+  </include> -->
+
+  <!-- LAUNCH FAILURES MONITOR
+  <include file="$(find quadrotor_controllers)/launch/failures_monitor.launch"/> -->
+
+  <!-- Launch the node responsible for controlling manouvers -->
+  <include file="$(find quadrotor_controllers)/launch/manouvers.launch">
+    <arg name="robot_name" value="$(arg name)"/>
+  </include>
+
+</launch>

@@ -3,6 +3,9 @@
 <launch>
   <!-- Arguments -->
   <arg name="robot_name" default="robot"/>
+  <arg name="max_vel" default="0.7"/>
+  <arg name="max_ang_vel" default="2.4"/>
+
   <arg name="cmd_vel_topic" default="cmd_vel" />
   <arg name="odom_topic" default="odom" />
 
@@ -54,6 +57,9 @@
     <!-- <param name="~/local_costmap/obstacles_layer/point_cloud_sensor/topic" value="/$(arg robot_name)/camera/depth/points" /> -->
 
     <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    <param name="DWAPlannerROS/max_vel_x" value="$(arg max_vel)"/>
+    <param name="DWAPlannerROS/max_rot_vel" value="$(arg max_ang_vel)"/>
+    <param name="DWAPlannerROS/min_rot_vel" value="-$(arg max_ang_vel)"/>
   </node>
 </launch>
 
