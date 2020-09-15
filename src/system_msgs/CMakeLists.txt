@@ -56,6 +56,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    events_message.msg
+   drone_events_message.msg
    task_message.msg
  )
 

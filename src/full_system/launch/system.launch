@@ -8,8 +8,9 @@
 
 <!-- LAUNCH ROBOTS -->
 
-  <!-- Launch Pioneer3AT 1 -->
+  <!-- Pioneer3AT 1 -->
   <group ns="pioneer3at_1">
+    <!-- Launch Robot Control Level --> 
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
       <arg name="xcoordinate" value="2.0"/>
@@ -18,6 +19,11 @@
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
+    </include>
+
+    <!-- Launch Task Control System --> 
+    <include file="$(find supervisor)/launch/supervisor.launch">
+      <arg name="robot_name" value="pioneer3at_1"/>
     </include>
   </group> 
 
@@ -31,6 +37,11 @@
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
+    </include>
+--> 
+    <!--Launch Task Control System 
+    <include file="$(find supervisor)/launch/supervisor.launch">
+      <arg name="robot_name" value="pioneer3at_1"/>
     </include>
   </group> -->
 

@@ -1,51 +1,68 @@
 # USAR_multirrobot
-This is the implementation of a high-level behavior supervisor for coordination of multirrobots in USAR (Urban Search and Rescue) applications.
+This is an implementation of a high-level behavior supervisor for coordination of multi-robots working on USAR (Urban Search and Rescue) applications.
 
-First install all dependecies required for this project:
+It wa implemented with ROS melodic and Gazebo 9.0.
+
+As the system implements a broad set of packages, we suggest you to first install all required dependecies by the following code:
 ```
 rosdep install --from-paths src --ignore-src -r -y
 ```
 
+After that, run ``` catkin_make``` to build all the packages on the 'usar_multirobot' folder:
 
-To use it you will need to build all the packages on the 'usar_multirobot' folder:
-```
-catkin_make
-```
-
-
-To run the world with multiple robots:
+If all packages have been build with no errors, you can now run the world with multiple robots doing:
 ```
 source devel/setup.bash
 roslaunch full_system system.launch
 ```
 
+By this command you may start:
+ - Simulation of a world with Gazebo;
+ - Rviz with the main components of robots;
+ - A Supervisory Control interface to monitor the robots models and simulate controllable and uncontrollable events.
 
-To control the a pioneer3at position, there is two options:
 
--First option:
-```
-source devel/setup.bash
-rosrun pioneer3at_controllers approach.py robot_name x y rot
-```
-'robot_name' can be:  pioneer3at_1, pioneer3at_2 ...
 
-'x', 'y' and 'rot' represent the desired position and orientation for the pioneer3at
-
--Second option:
-```
-rostopic pub -1 /robot_name/events pioneer3at_controllers/events_message "event: 'approach' param: [x, y, rot]"
+To send a pioneer3at to a position, in a new terminal use:
 
 ```
-
-
-To control the a drone position, in a new terminal:
+rostopic pub -1 /robot/manouvers/in system_msgs/events_message 
+"event: 'start_approach'
+info: ''
+param:
+- 0
+position:
+- x: 10.0
+  y: 10.0
+  theta: 0.0" 
 ```
-source devel/setup.bash
-rosrun quadrotor_controllers drone_system.py drone_name x y z rot
-```
-'drone_name' can be:  UAV_1, UAV_2 ...
+Where:
+'robot' can be:  pioneer3at_1, pioneer3at_2 ...
+'x', 'y' and 'theta' represent the desired position and orientation for the pioneer3at
 
-'x', 'y', 'z' and 'rot' represent the desired position and orientation for the drone
+
+
+To send a drone to a position, in a new terminal use:
+
+```
+rostopic pub -1 /drone/manouvers/in system_msgs/drone_events_message 
+"event: 'start_approach'
+info: ''
+param:
+- 0
+position:
+- linear:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  angular:
+    x: 0.0
+    y: 0.0
+    z: 0.0"
+```
+Where:
+'drone' can be:  UAV_1, UAV_2 ...
+'linear.x', 'linear.y', 'linear.z' and 'angular.z' represent the desired position and orientation for the UAV.
 
 
 To remove a victim:
