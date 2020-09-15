@@ -1,0 +1,32 @@
+// ME_surroundings_verification
+digraph {
+	rankdir=LR
+	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	VSV_ON [label=VSV_ON color=black fillcolor=white shape=circle style=filled]
+	Mi_OFF -> Mi_OFF [label="st_app,
+st_exp,
+st_rb,
+st_tele,
+rsm_app,
+rsm_exp,
+rsm_rb" fontcolor=blue]
+	Mi_OFF -> Mi_OFF [label="end_vsv,
+er_vsv,
+victim_found,
+pos_fail,
+critic_fail,
+bat_LL,
+er_vs,
+er_gs" fontcolor=red style=dashed]
+	Mi_OFF -> VSV_ON [label="st_vsv,
+rsm_vsv" fontcolor=blue]
+	VSV_ON -> Mi_OFF [label=sus_vsv fontcolor=blue]
+	VSV_ON -> Mi_OFF [label="end_vsv,
+er_vsv,
+victim_found,
+pos_fail,
+critic_fail,
+bat_LL,
+er_vs,
+er_gs" fontcolor=red style=dashed]
+}

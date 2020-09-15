@@ -1,0 +1,32 @@
+// ME_exploration
+digraph {
+	rankdir=LR
+	EXP_ON [label=EXP_ON color=black fillcolor=white shape=circle style=filled]
+	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	EXP_ON -> Mi_OFF [label=sus_exp fontcolor=blue]
+	EXP_ON -> Mi_OFF [label="end_exp,
+er_exp,
+victim_found,
+pos_fail,
+critic_fail,
+bat_LL,
+er_vs,
+er_gs" fontcolor=red style=dashed]
+	Mi_OFF -> EXP_ON [label="st_exp,
+rsm_exp" fontcolor=blue]
+	Mi_OFF -> Mi_OFF [label="st_app,
+st_vsv,
+st_rb,
+st_tele,
+rsm_app,
+rsm_vsv,
+rsm_rb" fontcolor=blue]
+	Mi_OFF -> Mi_OFF [label="end_exp,
+er_exp,
+victim_found,
+pos_fail,
+critic_fail,
+bat_LL,
+er_vs,
+er_gs" fontcolor=red style=dashed]
+}

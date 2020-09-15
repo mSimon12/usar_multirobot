@@ -37,7 +37,7 @@ class abort_app(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -127,7 +127,7 @@ class rsm_app(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -163,7 +163,7 @@ class rst_app(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -199,7 +199,7 @@ class st_app(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -245,7 +245,7 @@ class sus_app(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -383,67 +383,13 @@ class call_tele(object):
 		call_tele.__enabled[name] = status
 
 
-##### -- no_rb_pref call & handler -- ########################################
-class no_rb_pref(object):
-	__enabled = {}
-	__type = 'uncontrollable'
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event no_rb_pref...')
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(no_rb_pref.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return no_rb_pref.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		no_rb_pref.__enabled[name] = status
-
-
-##### -- rb_pref call & handler -- ########################################
-class rb_pref(object):
-	__enabled = {}
-	__type = 'uncontrollable'
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event rb_pref...')
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(rb_pref.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return rb_pref.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		rb_pref.__enabled[name] = status
-
-
 ##### -- rep_gas call & handler -- ########################################
 class rep_gas(object):
 	__enabled = {}
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -490,7 +436,7 @@ class rep_victim(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -536,7 +482,7 @@ class req_assist(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -572,7 +518,7 @@ class abort_exp(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -662,7 +608,7 @@ class rsm_exp(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -698,7 +644,7 @@ class rst_exp(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -734,7 +680,7 @@ class st_exp(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -781,7 +727,7 @@ class sus_exp(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -898,7 +844,7 @@ class rst_f(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -988,7 +934,7 @@ class off_gs(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1024,7 +970,7 @@ class on_gs(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1060,7 +1006,7 @@ class rst_gs(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1090,49 +1036,13 @@ class rst_gs(object):
 		rst_gs.__enabled[name] = status
 
 
-##### -- move_to call & handler -- ########################################
-class move_to(object):
-	__enabled = {}
-	__type = 'controllable'
-
-	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
-	output = hl_2_ll(__qualname__)
-	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event move_to...')
-		msg = move_to.module.events_message()
-		msg.event = move_to.output['ll_event']
-		move_to.pub.publish(msg)					#Publish message
-		return True
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(move_to.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return move_to.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		move_to.__enabled[name] = status
-
-
 ##### -- abort_rb call & handler -- ########################################
 class abort_rb(object):
 	__enabled = {}
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1222,7 +1132,7 @@ class rsm_rb(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1258,7 +1168,7 @@ class rst_rb(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1294,7 +1204,7 @@ class st_rb(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1330,7 +1240,7 @@ class sus_rb(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1420,7 +1330,7 @@ class rst_tele(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1456,7 +1366,7 @@ class st_tele(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1492,7 +1402,7 @@ class abort_vsv(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1582,7 +1492,7 @@ class rsm_vsv(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1618,7 +1528,7 @@ class rst_vsv(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1654,7 +1564,7 @@ class st_vsv(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1703,7 +1613,7 @@ class sus_vsv(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1766,7 +1676,7 @@ class off_vs(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1802,7 +1712,7 @@ class on_vs(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1838,7 +1748,7 @@ class rst_vs(object):
 	__type = 'controllable'
 
 	# For ROS
-	module = importlib.import_module('pioneer3at_controllers.msg')
+	module = importlib.import_module('system_msgs.msg')
 	output = hl_2_ll(__qualname__)
 	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
 
@@ -1893,4 +1803,40 @@ class victim_found(object):
 	@classmethod
 	def set_status(cls, name, status):
 		victim_found.__enabled[name] = status
+
+
+##### -- rep_self_pos call & handler -- ########################################
+class rep_self_pos(object):
+	__enabled = {}
+	__type = 'controllable'
+
+	# For ROS
+	module = importlib.import_module('system_msgs.msg')
+	output = hl_2_ll(__qualname__)
+	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
+
+	@classmethod
+	def handler(cls, param = None):
+		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
+		print('Executing event rep_self_pos...')
+		msg = rep_self_pos.module.events_message()
+		msg.event = rep_self_pos.output['ll_event']
+		rep_self_pos.pub.publish(msg)					#Publish message
+		return True
+
+	@classmethod
+	def get_status(cls):
+		'''
+		True: event enabled;
+		False: event not allowed.
+		'''
+		return all(rep_self_pos.__enabled.values())
+
+	@classmethod
+	def is_controllable(cls):
+		return rep_self_pos.__type == 'controllable'
+
+	@classmethod
+	def set_status(cls, name, status):
+		rep_self_pos.__enabled[name] = status
 

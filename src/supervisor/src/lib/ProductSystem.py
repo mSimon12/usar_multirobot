@@ -70,6 +70,7 @@ class ProductSystem(Thread):
 	def run(self):
 
 		while True:
+			result = False
 			# Wait till there is a new event on any buffer
 			g_var.new_event_flag.acquire()
 			while (g_var.next_cont_event == []) and (g_var.uncont_events_buffer == []):

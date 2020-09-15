@@ -37,7 +37,7 @@ class EventReceiver(object):
             if (battery_level < 10) and (self.__last_battery != 'bat_LL'):
                 hl_event = 'bat_LL'
                 self.__last_battery = hl_event
-            elif (battery_level < 50) and (self.__last_battery != 'bat_L'):
+            elif (battery_level > 10) and (battery_level < 50) and (self.__last_battery != 'bat_L'):
                 hl_event = 'bat_L'
                 self.__last_battery = hl_event 
             elif (battery_level >= 50) and (self.__last_battery != 'bat_OK'):

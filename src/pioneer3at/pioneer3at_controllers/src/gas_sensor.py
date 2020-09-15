@@ -8,7 +8,7 @@ from copy import deepcopy
 from gazebo_msgs.srv import GetModelState
 from geometry_msgs.msg import Pose2D
 from nav_msgs.msg import Odometry
-from pioneer3at_controllers.msg import events_message
+from system_msgs.msg import events_message
 
 class GasSensor(object):
 

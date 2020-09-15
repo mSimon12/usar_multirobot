@@ -1,0 +1,23 @@
+// ME_teleoperation
+digraph {
+	rankdir=LR
+	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	TELE_ON [label=TELE_ON color=black fillcolor=white shape=circle style=filled]
+	Mi_OFF -> Mi_OFF [label="st_exp,
+st_app,
+st_vsv,
+st_rb,
+rsm_exp,
+rsm_app,
+rsm_vsv,
+rsm_rb" fontcolor=blue]
+	Mi_OFF -> Mi_OFF [label="end_tele,
+er_tele,
+critic_fail,
+bat_LL" fontcolor=red style=dashed]
+	Mi_OFF -> TELE_ON [label=st_tele fontcolor=blue]
+	TELE_ON -> Mi_OFF [label="end_tele,
+er_tele,
+critic_fail,
+bat_LL" fontcolor=red style=dashed]
+}

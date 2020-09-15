@@ -6,5 +6,12 @@ digraph {
 	G_TO_REPORT -> G_TO_REPORT [label=gas_found fontcolor=red style=dashed]
 	G_TO_REPORT -> NO_G [label=rep_gas fontcolor=blue]
 	NO_G -> G_TO_REPORT [label=gas_found fontcolor=red style=dashed]
-	NO_G -> NO_G [label=move_to fontcolor=blue]
+	NO_G -> NO_G [label="st_app,
+st_exp,
+st_rb,
+st_vsv,
+rsm_app,
+rsm_exp,
+rsm_rb,
+rsm_vsv" fontcolor=blue]
 }

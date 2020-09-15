@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Automata name="Untitled" major="0" minor="9">
+<Automaton name="approach" type="Plant">
+	<Events>
+		<Event id="0" label="end_app" controllable="false"/>
+		<Event id="1" label="off_vs"/>
+		<Event id="2" label="on_vs"/>
+		<Event id="3" label="rsm_app"/>
+		<Event id="4" label="st_app"/>
+	</Events>
+	<States>
+		<State id="0" name="S0" initial="true"/>
+		<State id="1" name="S1"/>
+		<State id="2" name="S2"/>
+		<State id="3" name="S3"/>
+		<State id="4" name="S4" accepting="true"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="2"/>
+		<Transition source="1" dest="2" event="4"/>
+		<Transition source="2" dest="3" event="0"/>
+		<Transition source="2" dest="2" event="3"/>
+		<Transition source="3" dest="4" event="1"/>
+	</Transitions>
+</Automaton>
+</Automata>

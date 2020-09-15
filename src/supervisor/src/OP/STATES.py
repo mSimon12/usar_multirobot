@@ -544,3 +544,276 @@ class vsv_start_condition(object):
 		#Write code here...
 		pass
 
+
+class surroundings_verification(object):
+
+	##### -- VSV_ERROR handler -- ########################################
+	@classmethod
+	def VSV_ERROR_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_EXE handler -- ########################################
+	@classmethod
+	def VSV_EXE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_IDLE handler -- ########################################
+	@classmethod
+	def VSV_IDLE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_SUSP handler -- ########################################
+	@classmethod
+	def VSV_SUSP_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class victims_recognition_system(object):
+
+	##### -- VS_ERROR handler -- ########################################
+	@classmethod
+	def VS_ERROR_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VS_OFF handler -- ########################################
+	@classmethod
+	def VS_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VS_ON handler -- ########################################
+	@classmethod
+	def VS_ON_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class exploration(object):
+
+	##### -- EXP_ERROR handler -- ########################################
+	@classmethod
+	def EXP_ERROR_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- EXP_EXE handler -- ########################################
+	@classmethod
+	def EXP_EXE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- EXP_IDLE handler -- ########################################
+	@classmethod
+	def EXP_IDLE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- EXP_SUSP handler -- ########################################
+	@classmethod
+	def EXP_SUSP_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class victims_surroundings_verification(object):
+
+	##### -- VSV_ERROR handler -- ########################################
+	@classmethod
+	def VSV_ERROR_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_EXE handler -- ########################################
+	@classmethod
+	def VSV_EXE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_IDLE handler -- ########################################
+	@classmethod
+	def VSV_IDLE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_SUSP handler -- ########################################
+	@classmethod
+	def VSV_SUSP_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class bat_operation_modes(object):
+
+	##### -- ALL_M handler -- ########################################
+	@classmethod
+	def ALL_M_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- NO_MI handler -- ########################################
+	@classmethod
+	def NO_Mi_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_RB_TELE handler -- ########################################
+	@classmethod
+	def VSV_RB_TELE_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class critical_failure_operation_mode(object):
+
+	##### -- CRITIC_FAIL handler -- ########################################
+	@classmethod
+	def CRITIC_FAIL_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- OK handler -- ########################################
+	@classmethod
+	def OK_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class ME_approach(object):
+
+	##### -- APP_ON handler -- ########################################
+	@classmethod
+	def APP_ON_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class ME_exploration(object):
+
+	##### -- EXP_ON handler -- ########################################
+	@classmethod
+	def EXP_ON_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class ME_return_to_base(object):
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- RB_ON handler -- ########################################
+	@classmethod
+	def RB_ON_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class ME_surroundings_verification(object):
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- VSV_ON handler -- ########################################
+	@classmethod
+	def VSV_ON_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class ME_teleoperation(object):
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- TELE_ON handler -- ########################################
+	@classmethod
+	def TELE_ON_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class position_failure_operation_mode(object):
+
+	##### -- POS_FAIL handler -- ########################################
+	@classmethod
+	def POS_FAIL_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- POS_OK handler -- ########################################
+	@classmethod
+	def POS_OK_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class sensor_at_critical_battery(object):
+
+	##### -- BAT_DEAD handler -- ########################################
+	@classmethod
+	def BAT_DEAD_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- BAT_NOT_DEAD handler -- ########################################
+	@classmethod
+	def BAT_NOT_DEAD_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class simple_failure_operation_mode(object):
+
+	##### -- OK handler -- ########################################
+	@classmethod
+	def OK_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- SIMPLE_FAIL handler -- ########################################
+	@classmethod
+	def SIMPLE_FAIL_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class teleoperation_pref_and_start_condition(object):
+
+	##### -- AUTO handler -- ########################################
+	@classmethod
+	def AUTO_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- TELE handler -- ########################################
+	@classmethod
+	def TELE_handler(self, param = None):
+		#Write code here...
+		pass
+

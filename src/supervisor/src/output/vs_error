@@ -5,7 +5,6 @@ digraph {
 	VS_NOK_Mi_ON [label=VS_NOK_Mi_ON color=black fillcolor=white shape=circle style=filled]
 	VS_OK_Mi_OFF [label=VS_OK_Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	VS_OK_Mi_ON [label=VS_OK_Mi_ON color=black fillcolor=white shape=circle style=filled]
-	VS_NOK_Mi_OFF -> VS_NOK_Mi_OFF [label=move_to fontcolor=blue]
 	VS_NOK_Mi_OFF -> VS_NOK_Mi_OFF [label="end_app,
 end_exp,
 end_vsv,
@@ -24,8 +23,8 @@ er_exp,
 er_vsv" fontcolor=red style=dashed]
 	VS_NOK_Mi_ON -> VS_OK_Mi_ON [label=rst_vs fontcolor=blue]
 	VS_OK_Mi_OFF -> VS_NOK_Mi_OFF [label=er_vs fontcolor=red style=dashed]
-	VS_OK_Mi_OFF -> VS_OK_Mi_OFF [label=move_to fontcolor=blue]
-	VS_OK_Mi_OFF -> VS_OK_Mi_OFF [label="end_app,
+	VS_OK_Mi_OFF -> VS_OK_Mi_OFF [label="victim_found,
+end_app,
 end_exp,
 end_vsv,
 er_app,
@@ -46,6 +45,6 @@ end_exp,
 end_vsv,
 er_app,
 er_exp,
-er_vsv" fontcolor=red style=dashed]
-	VS_OK_Mi_ON -> VS_OK_Mi_ON [label=move_to fontcolor=blue]
+er_vsv,
+victim_found" fontcolor=red style=dashed]
 }

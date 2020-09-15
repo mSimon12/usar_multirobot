@@ -82,9 +82,4 @@
     <arg name="vsv_n_points" default="8"/>
   </include>
 
-  <!-- Launch Supervisory Control System 
-  <include file="$(find supervisor)/launch/supervisor.launch">
-    <arg name="robot_name" value="$(arg robot_name)"/>
-  </include> -->
-
 </launch>

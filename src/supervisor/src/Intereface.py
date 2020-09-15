@@ -15,7 +15,7 @@ import OP.STATES as states_module
 import rospy
 from actionlib import SimpleActionClient
 from move_base_msgs.msg import MoveBaseAction
-from pioneer3at_controllers.msg import events_message
+from system_msgs.msg import events_message
 
 
 class EventInterface(Thread):

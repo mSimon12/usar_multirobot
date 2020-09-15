@@ -3,7 +3,7 @@ import rospy
 
 from actionlib_msgs.msg import GoalStatusArray
 from actionlib import GoalStatus
-from pioneer3at_controllers.msg import events_message
+from system_msgs.msg import events_message
 
 class FailuresMonitor(object):
 

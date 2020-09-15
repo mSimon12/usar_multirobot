@@ -13,7 +13,6 @@ st_rb,
 rsm_app,
 rsm_exp,
 rsm_rb,
-rsm_vsv,
-move_to" fontcolor=blue]
+rsm_vsv" fontcolor=blue]
 	BAT_NOT_DEAD -> BAT_NOT_DEAD [label=bat_L fontcolor=red style=dashed]
 }

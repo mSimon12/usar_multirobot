@@ -1,9 +1,0 @@
-#Request message type
-
-string name
-int8 value
----
-
-#Response message type
-float result
-

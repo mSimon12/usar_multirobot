@@ -10,10 +10,9 @@ bat_L,battery_level,pioneer3at_1/battery_monitor/out
 bat_LL,battery_level,pioneer3at_1/battery_monitor/out
 bat_OK,battery_level,pioneer3at_1/battery_monitor/out
 call_tele,teleoperation_requisition,ihm/out
-no_rb_pref,all_manouvers_at_low_bat,ihm/out
-rb_pref,rb_preference_at_low_bat,ihm/out
 rep_gas,gas_location,ihm/in
 rep_victim,victim_pose,ihm/in
+rep_self_pos,robot_pose,ihm/in
 req_assist,require_assistance,ihm/in
 abort_exp,abort_exploration,pioneer3at_1/manouvers/in
 end_exp,end_exploration,pioneer3at_1/manouvers/out
@@ -23,7 +22,7 @@ rst_exp,reset_exploration,pioneer3at_1/manouvers/in
 st_exp,start_exploration,pioneer3at_1/manouvers/in
 sus_exp,suspend_exploration,pioneer3at_1/manouvers/in
 critic_fail,critic_failure,pioneer3at_1/failures_monitor/out
-fail,slight_failure,pioneer3at_1/failures_monitor/out
+fail,simple_failure,pioneer3at_1/failures_monitor/out
 pos_fail,position_failure,pioneer3at_1/failures_monitor/out
 rst_f,reset,pioneer3at_1/failures_monitor/in
 er_gs,erro,pioneer3at_1/gas_sensor/out
@@ -31,7 +30,6 @@ gas_found,gas_leak,pioneer3at_1/gas_sensor/out
 off_gs,stop,pioneer3at_1/gas_sensor/in
 on_gs,start,pioneer3at_1/gas_sensor/in
 rst_gs,reset,pioneer3at_1/gas_sensor/in
-move_to,,
 abort_rb,abort_return,pioneer3at_1/manouvers/in
 end_rb,end_return,pioneer3at_1/manouvers/out
 er_rb,return_error,pioneer3at_1/manouvers/out
@@ -55,3 +53,4 @@ off_vs,stop,pioneer3at_1/victim_sensor/in
 on_vs,start,pioneer3at_1/victim_sensor/in
 rst_vs,reset,pioneer3at_1/victim_sensor/in
 victim_found,victim_recognized,pioneer3at_1/victim_sensor/out
+

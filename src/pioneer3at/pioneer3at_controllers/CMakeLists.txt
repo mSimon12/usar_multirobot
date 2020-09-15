@@ -8,7 +8,6 @@ project(pioneer3at_controllers)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
   roscpp
   rospy
   std_msgs
@@ -18,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   joy
   sensor_msgs
+  system_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -53,10 +53,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-   events_message.msg
- )
+# add_message_files(
+#   FILES
+#   events_message.msg
+# )
 
 ## Generate services in the 'srv' folder
 #add_service_files(
@@ -110,7 +110,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES mypack_pkg
-  CATKIN_DEPENDS message_runtime roscpp rospy std_msgs geometry_msgs exploration_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs exploration_msgs
 #  DEPENDS system_lib
 )
 

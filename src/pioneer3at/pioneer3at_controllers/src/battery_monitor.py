@@ -5,7 +5,7 @@ from threading import Thread
 
 from geometry_msgs.msg import Twist
 from actionlib import GoalStatus
-from pioneer3at_controllers.msg import events_message
+from system_msgs.msg import events_message
 
 class BatteryMonitor(Thread):
 

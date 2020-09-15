@@ -8,12 +8,11 @@ project(supervisor)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
   geometry_msgs
-  pioneer3at_controllers
   roscpp
   rospy
   std_msgs
+  system_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -108,7 +107,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES supervisor
-  CATKIN_DEPENDS message_runtime geometry_msgs roscpp rospy std_msgs pioneer3at_controllers
+  CATKIN_DEPENDS geometry_msgs roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 

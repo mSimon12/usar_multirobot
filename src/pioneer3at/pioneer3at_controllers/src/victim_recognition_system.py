@@ -6,7 +6,7 @@ from threading import Thread
 # ROS
 from geometry_msgs.msg import Pose2D
 from gazebo_msgs.srv import GetModelState
-from pioneer3at_controllers.msg import events_message
+from system_msgs.msg import events_message
 
 class VictimSensor(object):
 

@@ -11,7 +11,7 @@ from actionlib import SimpleActionClient, GoalStatus
 from tf.transformations import quaternion_from_euler
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
-from pioneer3at_controllers.msg import events_message
+from system_msgs.msg import events_message
 from exploration_msgs.msg import ExploreGoal, ExploreAction
 
 from geometry_msgs.msg import PolygonStamped, Point32, Pose2D, Twist
@@ -167,7 +167,7 @@ class exploration(object):
             self.region = region_to_explore                              # Save region being explored
 
         # Define boundaries
-        for i in range(0, len(self.region)-1):
+        for i in range(0, len(self.region)):
             p = Point32()
             p.x = self.region[i].x
             p.y = self.region[i].y
@@ -189,7 +189,6 @@ class exploration(object):
         self._frontier_client.send_goal(self._goal)                     # Send the goal
         self._frontier_client.wait_for_result()                         # Wait for the result
         state = self._frontier_client.get_state()                       # Get the state of the action
-        print("State: {}".format(state))
 
         if state == GoalStatus.SUCCEEDED:
             result = "end"                                              # Exploration successfully executed

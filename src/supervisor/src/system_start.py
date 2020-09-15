@@ -7,11 +7,11 @@ from lib.Automaton import MultiAutomata
 from lib.StateMachine import StateMachine, Supervisor
 from lib.ProductSystem import ProductSystem
 from Intereface import EventInterface
-from MissionManager import MissionManager
+from TaskManager import TaskManager
 from lib.EventReceiver import EventReceiver
 
 # ROS libs
-from pioneer3at_controllers.msg import events_message
+from system_msgs.msg import task_message, events_message
 import rospy
 
 #Change to the current directory
@@ -41,9 +41,9 @@ if __name__ == "__main__":
 
 
     #############################################################################
-    #### Start Product System ###################################################
-    ps =  ProductSystem(SM, SUP)
-    ps.start()
+    #### Start the Task Manager  ################################################
+    # tm = TaskManager()
+    # rospy.Subscriber("task", task_message, tm.taskCallback)
 
     #############################################################################
     #### Start the Interface ####################################################
@@ -51,9 +51,9 @@ if __name__ == "__main__":
     interface.start()
 
     #############################################################################
-    #### Start the Mission Manager  #############################################
-    # mm = MissionManager()
-    # mm.start()
+    #### Start Product System ###################################################
+    ps =  ProductSystem(SM, SUP)
+    ps.start()
 
     #############################################################################
     #### Start the Events Receiver  #############################################
