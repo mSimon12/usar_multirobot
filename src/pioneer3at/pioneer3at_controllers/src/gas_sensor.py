@@ -13,7 +13,7 @@ from pioneer3at_controllers.msg import events_message
 class GasSensor(object):
 
     def __init__(self):
-        self.__state = 'IDLE'
+        self.__state = 'GS_OFF'
         self.__current_pose = Pose2D()
         self.__points_with_gas = []                                                                     # Array with points with gas
 
@@ -44,17 +44,17 @@ class GasSensor(object):
         '''
             Callback for received messages. Responsible for changing the sensor state
         '''
-        if (msg.event == 'start') and (self.__state == 'IDLE'):
-            self.__state = 'RUNNING'
+        if (msg.event == 'start') and (self.__state == 'GS_OFF'):
+            self.__state = 'GS_ON'
             thread = Thread(target = self.gs_on)
-            thread.start()                                              # Start the sensor
-        elif (msg.event == 'stop') and (self.__state == 'RUNNING'):
-            self.__state = 'IDLE'                                       # Stop the sensor
-        elif (msg.event == 'erro') and (self.__state == 'RUNNING'):
-            self.__state = 'ERROR'                                      # Stop the sensor to simulate that it is not working
-            self.__pub.publish(msg)                                     # Re-send the msg to the output 
-        elif (msg.event == 'reset') and (self.__state == 'ERROR'):
-            self.__state = 'IDLE'                                       # Reset the sensor
+            thread.start()                                                  # Start the sensor
+        elif (msg.event == 'stop') and (self.__state == 'GS_ON'):
+            self.__state = 'GS_OFF'                                         # Stop the sensor
+        elif (msg.event == 'erro') and (self.__state == 'GS_ON'):
+            self.__state = 'GS_ERROR'                                       # Stop the sensor to simulate that it is not working
+            self.__pub.publish(msg)                                         # Re-send the msg to the output 
+        elif (msg.event == 'reset') and (self.__state == 'GS_ERROR'):
+            self.__state = 'GS_OFF'                                         # Reset the sensor
         else:
             rospy.logwarn("GAS_SENSOR command not allowed!")
 
@@ -63,7 +63,7 @@ class GasSensor(object):
             Function for gas recognition
         '''
         rate = rospy.Rate(self.__sensor_update_rate)
-        while (not rospy.is_shutdown()) and (self.__state == 'RUNNING'): 
+        while (not rospy.is_shutdown()) and (self.__state == 'GS_ON'): 
             sensor = self.__find_gas()
             for g in sensor:
                 if sensor[g]['status'] == True:

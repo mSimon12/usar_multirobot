@@ -3,7 +3,7 @@
 from threading import Thread
 
 import roslib
-from math import sin, cos, pi
+from math import sin, cos, pi, sqrt
 roslib.load_manifest('pioneer3at_controllers')
 import rospy
 from actionlib import SimpleActionClient, GoalStatus
@@ -12,14 +12,11 @@ from tf.transformations import quaternion_from_euler
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 from pioneer3at_controllers.msg import events_message
-
-# Exploration
-from geometry_msgs.msg import PolygonStamped, Point32, Pose2D
 from exploration_msgs.msg import ExploreGoal, ExploreAction
 
-# For teleoperation
+from geometry_msgs.msg import PolygonStamped, Point32, Pose2D, Twist
+from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Joy
-from geometry_msgs.msg import Twist
 
 ########################################################################
 class Manouver(object):
@@ -151,6 +148,17 @@ class exploration(object):
         self.pub = rospy.Publisher("/{}/manouvers/out".format(name), events_message, queue_size=10)                                 # Publisher object
         self.msg = events_message()                                                                                                 # Message object
         
+        self.__current_pose = Pose2D()
+        rospy.Subscriber("odom", Odometry, self.robot_pose)                                              # Topic to monitor robot position
+
+    def robot_pose(self, msg):
+        '''
+            Periodically update robot position according the Odometry
+        '''
+        self.__current_pose.x = msg.pose.pose.position.x 
+        self.__current_pose.y = msg.pose.pose.position.y  
+        self.__current_pose.theta = 0
+    
     def execute(self, region_to_explore = None):
         rospy.loginfo("Starting Exploration!")
         
@@ -165,9 +173,15 @@ class exploration(object):
             p.y = self.region[i].y
             self._goal.boundary.polygon.points.append(p)
 
-        # Start position
-        self._goal.start_point.point.x = self.region[i+1].x
-        self._goal.start_point.point.y = self.region[i+1].y
+        # Start position is the polygon centroid
+        x_sum = 0
+        y_sum = 0
+        for p in self.region:
+            x_sum += p.x
+            y_sum += p.y
+        
+        self._goal.start_point.point.x = x_sum/len(self.region)
+        self._goal.start_point.point.y = y_sum/len(self.region)
 
         self.state = 'EXE'                                              # Set EXE state
 
@@ -175,7 +189,7 @@ class exploration(object):
         self._frontier_client.send_goal(self._goal)                     # Send the goal
         self._frontier_client.wait_for_result()                         # Wait for the result
         state = self._frontier_client.get_state()                       # Get the state of the action
-        print(state)
+        print("State: {}".format(state))
 
         if state == GoalStatus.SUCCEEDED:
             result = "end"                                              # Exploration successfully executed
@@ -467,11 +481,11 @@ def manouver_event(msg):
         # Commands for exploration manouver
         if (msg.event == "start_exploration") and (exp.state == 'IDLE'):
             # Verify paramenters
-            if len(msg.position) > 3:                                                           # Need at least three points to create a polygon
+            if len(msg.position) >= 3:                                                                     # Need at least three points to create a polygon
                 thread = Thread(target=exp.execute, args=[msg.position])
-                thread.start()                                                                  # Start exploration
+                thread.start()                                                                            # Start exploration
             else:
-                rospy.logwarn("Wrong exploration parameters! Must have at least 3 vertices and 1 start position.")             # Missing parameters
+                rospy.logwarn("Wrong exploration parameters! Must have at least 3 vertices!")             # Missing parameters
         
         elif (msg.event == "suspend_exploration") and (exp.state == 'EXE'):
             exp.suspend()
@@ -538,9 +552,9 @@ def manouver_event(msg):
         else:
             rospy.logwarn("Command not allowed!")
 
-def victim_event(msg):
+def victim_event_cb(msg):
     '''
-        Suspend all manouvers in execution if a victim is found.
+        Suspend all manouvers in execution if a victim is found or manouvers that depends on vs if an erro occurs.
     '''
     global app, exp, rb, vsv
     if msg.event == 'victim_recognized':
@@ -552,6 +566,58 @@ def victim_event(msg):
             rb.suspend()                        # Suspend return to base
         if (vsv.state == 'EXE'):
             vsv.suspend()                       # Suspend victim surroundings verification
+    elif msg.event == 'erro':
+        if (app.state == 'EXE'):
+            app.suspend()                       # Suspend approach
+        if (exp.state == 'EXE'):
+            exp.suspend()                       # Suspend exploration
+        if (vsv.state == 'EXE'):
+            vsv.suspend()                       # Suspend victim surroundings verification
+
+def gas_event_cb(msg):
+    '''
+        Suspend manouvers that depends on gs if the sensor has an error.
+    '''
+    global exp, vsv
+    if msg.event == 'erro':
+        if (exp.state == 'EXE'):
+            exp.suspend()                       # Suspend exploration
+        if (vsv.state == 'EXE'):
+            vsv.suspend()                       # Suspend victim surroundings verification
+
+def battery_event_cb(msg):
+    '''
+        Suspend manouvers if battery level gets critic.
+    '''
+    global app, exp, rb, vsv, tele
+    if (msg.event == 'battery_level') and (msg.param <= 10):
+        if (app.state == 'EXE'):
+            app.suspend()                       # Suspend approach
+        if (exp.state == 'EXE'):
+            exp.suspend()                       # Suspend exploration
+        if (rb.state == 'EXE'):
+            rb.suspend()                        # Suspend return to base
+        if (vsv.state == 'EXE'):
+            vsv.suspend()                       # Suspend victim surroundings verification
+        if (tele.state == 'EXE'):
+            tele.suspend()                      # Suspend teleoperation
+
+def failure_event_cb(msg):
+    '''
+        Suspend manouvers if occurs a position failure or a critic failure.
+    '''
+    global app, exp, rb, vsv, tele
+    if (msg.event == 'position_failure') or (msg.event == 'critic_failure'):
+        if (app.state == 'EXE'):
+            app.suspend()                       # Suspend approach
+        if (exp.state == 'EXE'):
+            exp.suspend()                       # Suspend exploration
+        if (rb.state == 'EXE'):
+            rb.suspend()                        # Suspend return to base
+        if (vsv.state == 'EXE'):
+            vsv.suspend()                       # Suspend victim surroundings verification
+    if (msg.event == 'critic_failure') and (tele.state == 'EXE'):
+        tele.suspend()                          # Suspend teleoperation
 
 
 if __name__=="__main__":
@@ -575,7 +641,10 @@ if __name__=="__main__":
     rb = return_to_base(NAME, x_coord, y_coord)
     tele = teleoperation(NAME)
     
-    rospy.Subscriber("manouvers/in", events_message, manouver_event, queue_size=10)            # Topic to receive command events
-    rospy.Subscriber("victim_sensor/out", events_message, victim_event, queue_size=10)         # Topic to receive events from victim sensor
+    rospy.Subscriber("manouvers/in", events_message, manouver_event, queue_size=10)                 # Topic to receive command events
+    rospy.Subscriber("victim_sensor/out", events_message, victim_event_cb, queue_size=10)           # Topic to receive events from victim sensor
+    rospy.Subscriber("gas_sensor/out", events_message, gas_event_cb, queue_size=10)                 # Topic to receive events from gas sensor
+    rospy.Subscriber("battery_monitor/out", events_message, battery_event_cb, queue_size=10)        # Topic to receive events from battery monitor
+    rospy.Subscriber("failures_monitor/out", events_message, failure_event_cb, queue_size=10)       # Topic to receive events from failures monitor
 
     rospy.spin()

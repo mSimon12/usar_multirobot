@@ -28,7 +28,7 @@ class FailuresMonitor(object):
         if (self.state == 'NO_FAIL'):
             if (msg.event == 'position_failure'):
                 self.state = 'POS_F'
-            elif (msg.event == 'slight_failure'):
+            elif (msg.event == 'simple_failure'):
                 self.state = 'SIMP_F'
             elif (msg.event == 'critic_failure'):
                 self.state = 'CRITIC_F'
@@ -36,16 +36,16 @@ class FailuresMonitor(object):
                 rospy.logwarn("Command not allowed!")
                 return
         
-        elif (self.state == 'POS_F'):
-            if (msg.event == 'slight_failure'):
-                self.state = 'SIMP_F'
+        elif (self.state == 'SIMP_F'):
+            if (msg.event == 'position_failure'):
+                self.state = 'POS_F'
             elif (msg.event == 'critic_failure'):
                 self.state = 'CRITIC_F'
             else:
                 rospy.logwarn("Command not allowed!")
                 return
 
-        elif (self.state == 'SIMP_F'):
+        elif (self.state == 'POS_F'):
             if (msg.event == 'critic_failure'):
                 self.state = 'CRITIC_F'
             else:
@@ -61,10 +61,9 @@ class FailuresMonitor(object):
 
 if __name__ == '__main__':
     try:   
-        rospy.init_node('failures_monitor', anonymous=False)                 # Initialize the node of the sensor
+        rospy.init_node('failures_monitor', anonymous=False)                  # Initialize the node of the sensor
 
         fail_monitor = FailuresMonitor()                                      # Failures monitor initialization
-
         rospy.spin()
             
     except rospy.ROSInterruptException:

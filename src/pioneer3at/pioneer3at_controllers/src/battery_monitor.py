@@ -3,7 +3,7 @@ import time
 import rospy
 from threading import Thread
 
-from actionlib_msgs.msg import GoalStatusArray
+from geometry_msgs.msg import Twist
 from actionlib import GoalStatus
 from pioneer3at_controllers.msg import events_message
 
@@ -16,12 +16,12 @@ class BatteryMonitor(Thread):
         self.pub_rate = rospy.get_param('publish_rate', default = 1.0)                   # Rate in which the battery level is published
 
         #Variables for battery consumption simulation
-        self.battery_level = 100                                                    # Battery level percent
+        self.battery_level = 100                                                         # Battery level percent
         # Weights for move and sensors on battery consumption
         self.__weights = {'move': 0.0035,
                           'victim_sensor': 0.0009, 
                           'gas_sensor': 0.0005}                                                 
-        self.__sensors_status = {'move_base': False, 'victim_sensor': False, 'gas_sensor': False}       # Variable to know sensor status
+        self.__sensors_status = {'victim_sensor': False, 'gas_sensor': False}       # Variable to know sensor status
 
         # Message object
         self.msg = events_message()                                                                              
@@ -34,7 +34,10 @@ class BatteryMonitor(Thread):
         rospy.Subscriber("battery_monitor/in", events_message, self.event_receiver)            # Topic to receive occured events
         rospy.Subscriber("victim_sensor/in", events_message, self.victim_sensor_status)        # Topic to monitor victim sensor status
         rospy.Subscriber("gas_sensor/in", events_message, self.gas_sensor_status)              # Topic to monitor gas sensor status
-        rospy.Subscriber("move_base/status", GoalStatusArray, self.move_base_status)           # Topic to monitor move_base status
+
+        self.time = -10
+        rospy.Subscriber("cmd_vel", Twist, self.move_status)                                   # Topic to monitor cmd_vel messages
+        
 
     def run(self):
         #Monitor the battery level
@@ -49,7 +52,9 @@ class BatteryMonitor(Thread):
             if self.__sensors_status['gas_sensor']:
                 bat_delta += self.__weights['gas_sensor']
 
-            if self.__sensors_status['move_base']: 
+            # If the last update of cmd_vel was less then 4 seconds it consider the robot on motion
+            t = rospy.get_time()
+            if (t - self.time) < 4.0: 
                 bat_delta += self.__weights['move']
             
             self.battery_level -= bat_delta                             # Update battery level
@@ -67,26 +72,23 @@ class BatteryMonitor(Thread):
             
             rate.sleep()                                                # Wait to ensure loop frequency
 
+    # Callback to verify victim_sensor status
     def victim_sensor_status(self, msg):
         if msg.event == 'start':
             self.__sensors_status['victim_sensor'] = True
         elif (msg.event == 'stop') or (msg.event == 'reset'):
             self.__sensors_status['victim_sensor'] = False
 
+    # Callback to verify gas_sensor status
     def gas_sensor_status(self, msg):
         if msg.event == 'start':
             self.__sensors_status['gas_sensor'] = True
         elif (msg.event == 'stop') or (msg.event == 'reset'):
             self.__sensors_status['gas_sensor'] = False
 
-    def move_base_status(self, msg):
-        try:
-            if msg.status_list[0].status == GoalStatus.ACTIVE:
-                self.__sensors_status['move_base'] = True
-            else:
-                self.__sensors_status['move_base'] = False
-        except:
-            self.__sensors_status['move_base'] = False
+    # Callback to verify motion status
+    def move_status(self, msg):
+        self.time = rospy.get_time()
 
     def event_receiver(self, msg):
         #Receive battery level
