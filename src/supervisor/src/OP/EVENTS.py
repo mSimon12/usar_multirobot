@@ -211,10 +211,10 @@ class st_app(object):
 		msg.event = st_app.output['ll_event']
 		try:
 			geometry = importlib.import_module('geometry_msgs.msg')
-			point = geometry.Pose2D()
-			point.x = param[0]
-			point.y = param[1]
-			point.theta = param[2]
+			point = geometry.Twist()
+			point.linear.x = param[0]
+			point.linear.y = param[1]
+			point.angular.z = param[2]
 			msg.position.append(point)
 			st_app.pub.publish(msg)									#Publish message
 			return True
@@ -401,10 +401,9 @@ class rep_gas(object):
 		msg.event = rep_gas.output['ll_event']
 		try:
 			geometry = importlib.import_module('geometry_msgs.msg')
-			point = geometry.Pose2D()
-			point.x = param[0]
-			point.y = param[1]
-			point.theta = 0
+			point = geometry.Twist()
+			point.linear.x = param[0]
+			point.linear.y = param[1]
 			msg.position.append(point)
 			rep_gas.pub.publish(msg)									#Publish message
 			return True
@@ -448,10 +447,9 @@ class rep_victim(object):
 		msg.event = rep_victim.output['ll_event']
 		try:
 			geometry = importlib.import_module('geometry_msgs.msg')
-			point = geometry.Pose2D()
-			point.x = param[0]
-			point.y = param[1]
-			point.theta = 0
+			point = geometry.Twist()
+			point.linear.x = param[0]
+			point.linear.y = param[1]
 			msg.position.append(point)
 			rep_victim.pub.publish(msg)									#Publish message
 			return True
@@ -693,10 +691,9 @@ class st_exp(object):
 		try:
 			geometry = importlib.import_module('geometry_msgs.msg')
 			for p in param:
-				point = geometry.Pose2D()
-				point.x = p[0]
-				point.y = p[1]
-				point.theta = 0
+				point = geometry.Twist()
+				point.linear.x = p[0]
+				point.linear.y = p[1]
 				msg.position.append(point)						#Insert polygon points
 			st_exp.pub.publish(msg)									#Publish message
 			return True
@@ -1578,10 +1575,9 @@ class st_vsv(object):
 			msg.info = param[0]
 			
 			geometry = importlib.import_module('geometry_msgs.msg')
-			point = geometry.Pose2D()
-			point.x = param[1]
-			point.y = param[2]
-			point.theta = 0
+			point = geometry.Twist()
+			point.linear.x = param[1]
+			point.linear.y = param[2]
 
 			msg.position.append(point)
 			st_vsv.pub.publish(msg)								#Publish message

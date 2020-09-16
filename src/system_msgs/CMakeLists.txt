@@ -8,16 +8,12 @@ project(system_msgs)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
   roscpp
   rospy
   std_msgs
-  geometry_msgs
-  exploration_msgs
-  genmsg 
-  actionlib_msgs
-  joy
+  geometry_msgs 
   sensor_msgs
+  actionlib_msgs
 )
 
 ## System dependencies are found with CMake's conventions
@@ -56,7 +52,6 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    events_message.msg
-   drone_events_message.msg
    task_message.msg
  )
 
@@ -112,7 +107,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES mypack_pkg
-  CATKIN_DEPENDS message_runtime roscpp rospy std_msgs geometry_msgs exploration_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs sensor_msgs
 #  DEPENDS system_lib
 )
 

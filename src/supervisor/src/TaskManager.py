@@ -9,6 +9,8 @@ from system_msgs.msg import task_message, events_message
 from lib.Automaton import MultiAutomata
 import OP.EVENTS as events_module
 
+P_EVENTS = ['st_app','st_vsv','st_exp']        # List of events that require a parameter
+
 class TaskManager(Thread):
     '''
         This class implements the Task Manager, component responsible for deciding wich 
@@ -21,8 +23,10 @@ class TaskManager(Thread):
     def __init__(self):
         Thread.__init__(self)
 
-        self.__last_id = -1                                             # Variable to control new events received
+        self.update_flag = Condition()          # Flag to signal new cycle
+        self.__last_id = -1                     # Variable to control new events received
 
+        # Get sequece of events for the execution of each possible behavior
         aut = MultiAutomata('Behaviors')
         aut.read_xml('files/behaviors.xml')         # File with multiple Automata
 
@@ -42,12 +46,13 @@ class TaskManager(Thread):
         for x in inspect.getmembers(events_module,inspect.isclass):
             self.events[x[0]] = x[1]  
 
-        # Flag to signal new cycle
-        self.update_flag = Condition()
-
         # Start the TaskManager
         self.start() 
 
+        # Variables from task
+        self.sensors = {'gas':False, 'victim':False}
+        self.main_task_position = []
+ 
         # Start thread for the tracer monitor
         trace_receiver = Thread(target=self.wait_events)              
         trace_receiver.start() 
@@ -57,13 +62,26 @@ class TaskManager(Thread):
         '''
             Callback that subscribe to topic were tasks are received.
         '''
-        self.main_task = task.task
+        self.main_task = task.task                      # Get task name
+
+        # Get sensor status for task
+        self.sensors['gas'] = task.gas_sensor
+        self.sensors['victim'] = task.victim_sensor
+
+        # Get position of the task
+        self.main_task_position = []
+        if len(task.position) > 1:
+            for p in task.position:
+                self.main_task_position.append((p.linear.x, p.linear.y))
+        else:
+            self.main_task_position.append(task.position[0].linear.x)
+            self.main_task_position.append(task.position[0].linear.y)
+            self.main_task_position.append(task.position[0].angular.z)
 
         # Signal that a new task was received
         self.update_flag.acquire()
         self.update_flag.notify()
         self.update_flag.release()
-        pass
 
 
     def wait_events(self):
@@ -80,7 +98,7 @@ class TaskManager(Thread):
             g_var.trace_update_flag.release()
 
             # #Print the event that just occured
-            # last_event = self.current_status['event'].array[0]
+            last_event = self.current_status['event'].array[0]
             # print("\n[Task Manager]: Last event --> {} (param = {})".format(last_event, self.current_status['event_params']))
 
             # # Print enabled events
@@ -91,6 +109,20 @@ class TaskManager(Thread):
             # print("[Task Manager]: Current states: ")
             # for s in self.current_status['states'].values[0]:
             #     print(f"\t{s.upper()}: {self.current_status['states'].values[0][s]}")
+
+            # Update behaviors state
+            for t in self.B.index:
+                new_state = []
+                transitions = self.B.loc[t,'transitions']
+                try:
+                    new_state = transitions.loc[(transitions['st_node'] == self.B.loc[t,'current_state']) &
+                                                    (transitions['event'] == last_event),'end_node'].values[0]
+                except:
+                    pass
+                if new_state:
+                    self.B.loc[t,'current_state'] = new_state
+
+                print("TASK '{}' state -> {}".format(t,self.B.loc[t,'current_state']))
         
             # Signal that a new event was received
             self.update_flag.acquire()
@@ -145,10 +177,14 @@ class TaskManager(Thread):
             self.update_flag.release()
 
             self.updatePriorities()
-
             print(self.events_priority)
 
             next_event = max(self.events_priority,key=self.events_priority.get)
             print(next_event)
             if self.events[next_event].is_controllable():
-                trigger_event(next_event)                                             # Call the execution of the controllable event
+                if next_event in P_EVENTS:
+                    param = self.main_task_position
+                    print(param)
+                    trigger_event(next_event, param)                         # Call the execution of the controllable event
+                else:
+                    trigger_event(next_event)                         # Call the execution of the controllable event

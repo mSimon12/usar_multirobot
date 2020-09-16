@@ -3,4 +3,4 @@
 string task
 bool gas_sensor
 bool victim_sensor
-geometry_msgs/Pose2D[] position
+geometry_msgs/Twist[] position

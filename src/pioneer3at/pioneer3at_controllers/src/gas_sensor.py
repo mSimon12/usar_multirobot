@@ -6,7 +6,7 @@ from copy import deepcopy
 
 # ROS
 from gazebo_msgs.srv import GetModelState
-from geometry_msgs.msg import Pose2D
+from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
 from system_msgs.msg import events_message
 
@@ -14,7 +14,7 @@ class GasSensor(object):
 
     def __init__(self):
         self.__state = 'GS_OFF'
-        self.__current_pose = Pose2D()
+        self.__current_pose = Twist()
         self.__points_with_gas = []                                                                     # Array with points with gas
 
         # Get parameters
@@ -36,9 +36,8 @@ class GasSensor(object):
         '''
             Periodically update robot position according the Odometry
         '''
-        self.__current_pose.x = msg.pose.pose.position.x 
-        self.__current_pose.y = msg.pose.pose.position.y  
-        self.__current_pose.theta = 0
+        self.__current_pose.linear.x = msg.pose.pose.position.x 
+        self.__current_pose.linear.x = msg.pose.pose.position.y  
 
     def event_receiver(self, msg):
         '''

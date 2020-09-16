@@ -4,7 +4,7 @@ import rospy
 from threading import Thread
 
 # ROS
-from geometry_msgs.msg import Pose2D
+from geometry_msgs.msg import Twist
 from gazebo_msgs.srv import GetModelState
 from system_msgs.msg import events_message
 
@@ -56,10 +56,10 @@ class VictimSensor(object):
                     # Send the signal that a victim have been found and her location 
                     pos = self.__models_service(v, '')                                              # Call the service to receive the global victim position
     
-                    # Create pose as pose2D
-                    p = Pose2D()
-                    p.x = pos.pose.position.x
-                    p.y = pos.pose.position.y
+                    # Create pose as Twist
+                    p = Twist()
+                    p.linear.x = pos.pose.position.x
+                    p.linear.y = pos.pose.position.y
                     p.theta = 0
 
                     # Create message

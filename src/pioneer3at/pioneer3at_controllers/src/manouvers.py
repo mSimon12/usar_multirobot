@@ -14,7 +14,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from system_msgs.msg import events_message
 from exploration_msgs.msg import ExploreGoal, ExploreAction
 
-from geometry_msgs.msg import PolygonStamped, Point32, Pose2D, Twist
+from geometry_msgs.msg import PolygonStamped, Point32, Twist
 from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Joy
 
@@ -81,7 +81,7 @@ class approach(Manouver):
             self.__last_goal = pose    
 
         self.state = 'EXE'                                                    # Set EXE state
-        result = self.move_to(pose.x, pose.y, pose.theta)                     # Start the motion and wait for result
+        result = self.move_to(pose.linear.x, pose.linear.y, pose.angular.z)   # Start the motion and wait for result
 
         # Verify the reason why the robot stopped moving
         if self.state == 'SUS':                                             # Approach have been suspended
@@ -148,16 +148,6 @@ class exploration(object):
         self.pub = rospy.Publisher("/{}/manouvers/out".format(name), events_message, queue_size=10)                                 # Publisher object
         self.msg = events_message()                                                                                                 # Message object
         
-        self.__current_pose = Pose2D()
-        rospy.Subscriber("odom", Odometry, self.robot_pose)                                              # Topic to monitor robot position
-
-    def robot_pose(self, msg):
-        '''
-            Periodically update robot position according the Odometry
-        '''
-        self.__current_pose.x = msg.pose.pose.position.x 
-        self.__current_pose.y = msg.pose.pose.position.y  
-        self.__current_pose.theta = 0
     
     def execute(self, region_to_explore = None):
         rospy.loginfo("Starting Exploration!")
@@ -169,16 +159,16 @@ class exploration(object):
         # Define boundaries
         for i in range(0, len(self.region)):
             p = Point32()
-            p.x = self.region[i].x
-            p.y = self.region[i].y
+            p.x = self.region[i].linear.x
+            p.y = self.region[i].linear.y
             self._goal.boundary.polygon.points.append(p)
 
         # Start position is the polygon centroid
         x_sum = 0
         y_sum = 0
         for p in self.region:
-            x_sum += p.x
-            y_sum += p.y
+            x_sum += p.linear.x
+            y_sum += p.linear.y
         
         self._goal.start_point.point.x = x_sum/len(self.region)
         self._goal.start_point.point.y = y_sum/len(self.region)
@@ -253,8 +243,8 @@ class surroundings_verification(Manouver):
         
         if self.state == 'IDLE':
             self.victim['id'] = victim_id
-            self.victim['x'] = victim_pose.x                                                          # Get victim pose
-            self.victim['y'] = victim_pose.y
+            self.victim['x'] = victim_pose.linear.x                                                          # Get victim pose
+            self.victim['y'] = victim_pose.linear.y
 
             # Define points around the victim
             theta_step = 2*pi/self.n_points                                                           # Theta dist between points

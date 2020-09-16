@@ -42,8 +42,8 @@ if __name__ == "__main__":
 
     #############################################################################
     #### Start the Task Manager  ################################################
-    # tm = TaskManager()
-    # rospy.Subscriber("task", task_message, tm.taskCallback)
+    tm = TaskManager()
+    rospy.Subscriber("task", task_message, tm.taskCallback)
 
     #############################################################################
     #### Start the Interface ####################################################
