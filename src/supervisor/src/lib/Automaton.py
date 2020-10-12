@@ -437,7 +437,7 @@ class Automaton(object):
                 # Ros publisher procedures
                 if self.__events.at[event,'controllable'] == True:
                     events_file.write("\n\n\t# For ROS")
-                    events_file.write("\n\tmodule = importlib.import_module('system_msgs')")
+                    events_file.write("\n\tmodule = importlib.import_module('system_msgs.msg')")
                     events_file.write("\n\toutput = hl_2_ll(__qualname__)")
                     events_file.write("\n\tpub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)")
 

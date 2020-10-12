@@ -56,7 +56,15 @@ class EventReceiver(object):
         if msg.param:
             param.append(msg.param)
         if msg.position:
-            param.append(msg.position)
+            if len(msg.position) > 1:
+                # Create a vector of multiple points
+                for p in msg.position:
+                    param.append((p.linear.x, p.linear.y))
+            else:
+                param.append(msg.position[0].linear.x)
+                param.append(msg.position[0].linear.y)
+                param.append(msg.position[0].angular.z)
+            # param.append(msg.position)
 
         if hl_event:
             trigger_event(hl_event, param)                                              # Trigger the received eventparametersparameters

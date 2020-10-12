@@ -1,36 +1,16 @@
 // approach
 digraph {
 	rankdir=LR
-	APP_ERROR [label=APP_ERROR color=blue fillcolor=lightgrey shape=circle style=filled]
-	APP_EXE [label=APP_EXE color=black fillcolor=white shape=circle style=filled]
+	APP_ERROR [label=APP_ERROR color=black fillcolor=white shape=circle style=filled]
+	APP_EXE [label=APP_EXE color=blue fillcolor=lightgrey shape=circle style=filled]
 	APP_IDLE [label=APP_IDLE color=black fillcolor=white shape=doublecircle style=filled]
 	APP_SUSP [label=APP_SUSP color=black fillcolor=white shape=circle style=filled]
-	APP_ERROR -> APP_ERROR [label="er_vs,
-bat_LL,
-critic_fail,
-pos_fail,
-victim_found" fontcolor=red style=dashed]
 	APP_ERROR -> APP_IDLE [label=rst_app fontcolor=blue]
 	APP_EXE -> APP_ERROR [label=er_app fontcolor=red style=dashed]
 	APP_EXE -> APP_IDLE [label=end_app fontcolor=red style=dashed]
 	APP_EXE -> APP_SUSP [label=sus_app fontcolor=blue]
-	APP_EXE -> APP_SUSP [label="victim_found,
-pos_fail,
-critic_fail,
-bat_LL,
-er_vs" fontcolor=red style=dashed]
 	APP_IDLE -> APP_EXE [label=st_app fontcolor=blue]
-	APP_IDLE -> APP_IDLE [label="er_vs,
-bat_LL,
-critic_fail,
-pos_fail,
-victim_found" fontcolor=red style=dashed]
 	APP_SUSP -> APP_ERROR [label=er_app fontcolor=red style=dashed]
 	APP_SUSP -> APP_EXE [label=rsm_app fontcolor=blue]
 	APP_SUSP -> APP_IDLE [label=abort_app fontcolor=blue]
-	APP_SUSP -> APP_SUSP [label="victim_found,
-pos_fail,
-critic_fail,
-bat_LL,
-er_vs" fontcolor=red style=dashed]
 }

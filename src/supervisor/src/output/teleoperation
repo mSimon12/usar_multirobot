@@ -4,14 +4,9 @@ digraph {
 	TELE_ERROR [label=TELE_ERROR color=black fillcolor=white shape=circle style=filled]
 	TELE_EXE [label=TELE_EXE color=black fillcolor=white shape=circle style=filled]
 	TELE_IDLE [label=TELE_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	TELE_ERROR -> TELE_ERROR [label="bat_LL,
-critic_fail" fontcolor=red style=dashed]
 	TELE_ERROR -> TELE_IDLE [label=rst_tele fontcolor=blue]
 	TELE_EXE -> TELE_ERROR [label=er_tele fontcolor=red style=dashed]
-	TELE_EXE -> TELE_IDLE [label="bat_LL,
-critic_fail,
-end_tele" fontcolor=red style=dashed]
+	TELE_EXE -> TELE_IDLE [label=abort_tele fontcolor=blue]
+	TELE_EXE -> TELE_IDLE [label=end_tele fontcolor=red style=dashed]
 	TELE_IDLE -> TELE_EXE [label=st_tele fontcolor=blue]
-	TELE_IDLE -> TELE_IDLE [label="bat_LL,
-critic_fail" fontcolor=red style=dashed]
 }

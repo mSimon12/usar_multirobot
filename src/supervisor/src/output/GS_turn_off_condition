@@ -4,11 +4,7 @@ digraph {
 	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	Mi_ON [label=Mi_ON color=black fillcolor=white shape=circle style=filled]
 	Mi_OFF -> Mi_OFF [label=off_gs fontcolor=blue]
-	Mi_OFF -> Mi_OFF [label="victim_found,
-pos_fail,
-critic_fail,
-bat_LL,
-end_exp,
+	Mi_OFF -> Mi_OFF [label="end_exp,
 end_vsv,
 er_exp,
 er_vsv" fontcolor=red style=dashed]
@@ -18,11 +14,7 @@ rsm_exp,
 rsm_vsv" fontcolor=blue]
 	Mi_ON -> Mi_OFF [label="sus_exp,
 sus_vsv" fontcolor=blue]
-	Mi_ON -> Mi_OFF [label="victim_found,
-pos_fail,
-critic_fail,
-bat_LL,
-end_exp,
+	Mi_ON -> Mi_OFF [label="end_exp,
 end_vsv,
 er_exp,
 er_vsv" fontcolor=red style=dashed]

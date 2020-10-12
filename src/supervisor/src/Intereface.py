@@ -153,8 +153,8 @@ class EventInterface(Thread):
 
                     # Fake uncontrollable events
                     if 'erro' in ll_event:
-                        if 'manouvers/out' in topic:
-                            # Fake manouver error
+                        if 'maneuvers/out' in topic:
+                            # Fake maneuver error
                             move_base_client = SimpleActionClient("{}move_base".format(rospy.get_namespace()), MoveBaseAction)     # Get move_base service
                             move_base_client.wait_for_server()
                             move_base_client.cancel_all_goals()                                         # Cancel the current motion

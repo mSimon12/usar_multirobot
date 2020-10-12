@@ -11,6 +11,12 @@ class g_var():
 	events_trace = pd.DataFrame(columns=['event', 'event_params', 'enabled_events', 'states', 'time'])		# Historic os all events
 	trace_update_flag = Condition()															# Flag for signaling the addition of a new event into the trace	
 
+	# Variable to monitor TM status and the current task status
+	#	status = ['lazy', 'busy', 'unable']
+	# 	tasks contain a dictionary with the status of all received task_ids
+	#	task_status = ['executing', 'suspended', 'finished', 'aborted']
+	manager_info = {'status': 'lazy', 'tasks':{}}
+
 	# Events variables and mutexes for controlling the Product System
 	next_cont_event = []										# Next controllable event 
 	uncont_events_buffer = []									# Buffer with triggered uncontrollable events

@@ -45,7 +45,7 @@
     </include>
   </group> -->
 
-  <!-- Spawn simulated quadrotor uav 1 -->
+  <!-- Spawn simulated quadrotor uav 1 
   <group ns="UAV_1">
     <include file="$(find uav)/launch/UAV.launch">
       <arg name="name" default="UAV_1"/>
@@ -54,7 +54,7 @@
       <arg name="y" value="1.0"/>
       <arg name="z" value="0.7"/> 
     </include>
-  </group>
+  </group>-->
 
   <!-- Spawn simulated quadrotor uav 2
   <group ns="UAV_2">

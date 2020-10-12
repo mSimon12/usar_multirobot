@@ -817,3 +817,18 @@ class teleoperation_pref_and_start_condition(object):
 		#Write code here...
 		pass
 
+
+class mutual_exclusion(object):
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- MI_ON handler -- ########################################
+	@classmethod
+	def Mi_ON_handler(self, param = None):
+		#Write code here...
+		pass
+

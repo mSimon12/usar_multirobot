@@ -1836,39 +1836,3 @@ class rep_self_pos(object):
 	def set_status(cls, name, status):
 		rep_self_pos.__enabled[name] = status
 
-
-##### -- abort_tele call & handler -- ########################################
-class abort_tele(object):
-	__enabled = {}
-	__type = 'controllable'
-
-	# For ROS
-	module = importlib.import_module('system_msgs.msg')
-	output = hl_2_ll(__qualname__)
-	pub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event abort_tele...')
-		msg = abort_tele.module.events_message()
-		msg.event = abort_tele.output['ll_event']
-		abort_tele.pub.publish(msg)					#Publish message
-		return True
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(abort_tele.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return abort_tele.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		abort_tele.__enabled[name] = status
-

@@ -53,7 +53,7 @@
 
   <!-- LAUNCH BATTERY MONITOR -->
   <include file="$(find pioneer3at_controllers)/launch/battery_monitor.launch">
-    <arg name="publish_rate" value="0.1"/>		<!-- Rate at which the battery level is published in Hz -->
+    <arg name="publish_rate" value="1.0"/>		<!-- Rate at which the battery level is published in Hz -->
   </include>
 
   <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
@@ -73,8 +73,8 @@
   <!-- LAUNCH FAILURES MONITOR -->
   <include file="$(find pioneer3at_controllers)/launch/failures_monitor.launch"/>
 
-  <!-- Launch the node responsible for controlling manouvers -->
-  <include file="$(find pioneer3at_controllers)/launch/manouvers.launch">
+  <!-- Launch the node responsible for controlling maneuvers -->
+  <include file="$(find pioneer3at_controllers)/launch/maneuvers.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="xcoordinate" value="$(arg xcoordinate)"/>
     <arg name="ycoordinate" value="$(arg ycoordinate)"/>

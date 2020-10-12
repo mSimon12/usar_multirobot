@@ -7,7 +7,7 @@ from lib.Automaton import MultiAutomata
 from lib.StateMachine import StateMachine, Supervisor
 from lib.ProductSystem import ProductSystem
 from Intereface import EventInterface
-from TaskManager import TaskManager
+from ugv.TaskManager_UGV import TaskManager
 from lib.EventReceiver import EventReceiver
 
 # ROS libs
@@ -64,5 +64,5 @@ if __name__ == "__main__":
     rospy.Subscriber("gas_sensor/out",events_message, receiver.receive_event, '{}/gas_sensor/out'.format(NAME))
     rospy.Subscriber("battery_monitor/out",events_message, receiver.receive_event, '{}/battery_monitor/out'.format(NAME))
     rospy.Subscriber("failures_monitor/out",events_message, receiver.receive_event, '{}/failures_monitor/out'.format(NAME))
-    rospy.Subscriber("manouvers/out",events_message, receiver.receive_event, '{}/manouvers/out'.format(NAME))
+    rospy.Subscriber("maneuvers/out",events_message, receiver.receive_event, '{}/maneuvers/out'.format(NAME))
     rospy.Subscriber("/ihm/out",events_message, receiver.receive_event, 'ihm/out')
