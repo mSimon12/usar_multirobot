@@ -8,17 +8,24 @@ project(quadrotor_controllers)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
   roscpp
   rospy
-  std_msgs
-  geometry_msgs
-  genmsg 
-  actionlib_msgs
+  moveit_core 
+  moveit_commander
+  hector_moveit_actions
+  trajectory_action_pkg
   joy
+  std_msgs
   sensor_msgs
+  geometry_msgs
+  actionlib_msgs
   hector_uav_msgs
+  actionlib
+  genmsg 
+  system_msgs
 )
+
+find_package(octomap REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -53,10 +60,10 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
- add_message_files(
-   FILES
-   drone_events_message.msg
- )
+# add_message_files(
+#   FILES
+#   drone_events_message.msg
+# )
 
 ## Generate services in the 'srv' folder
 #add_service_files(
@@ -110,7 +117,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES mypack_pkg
-  CATKIN_DEPENDS message_runtime roscpp rospy std_msgs geometry_msgs hector_uav_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs hector_uav_msgs moveit_core moveit_ros_planning_interface hector_moveit_actions trajectory_action_pkg
 #  DEPENDS system_lib
 )
 
@@ -121,7 +128,8 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
+  include
+  ${OCTOMAP_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
 

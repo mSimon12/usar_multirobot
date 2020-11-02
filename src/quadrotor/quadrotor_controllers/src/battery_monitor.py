@@ -5,7 +5,7 @@ from threading import Thread
 
 from actionlib_msgs.msg import GoalStatusArray
 from actionlib import GoalStatus
-from quadrotor_controllers.msg import drone_events_message
+from system_msgs.msg import events_message
 
 class BatteryMonitor(Thread):
 
@@ -24,16 +24,16 @@ class BatteryMonitor(Thread):
         self.__sensors_status = {'move_base': False, 'victim_sensor': False, 'gas_sensor': False}       # Variable to know sensor status
 
         # Message object
-        self.msg = drone_events_message()                                                                              
+        self.msg = events_message()                                                                              
         self.msg.event = 'battery_level'
         self.msg.param.append(self.battery_level)
 
         # Publisher object for periodically sending battery level
-        self.pub = rospy.Publisher("battery_monitor/out", drone_events_message, queue_size=10)       
+        self.pub = rospy.Publisher("battery_monitor/out", events_message, queue_size=10)       
 
-        rospy.Subscriber("battery_monitor/in", drone_events_message, self.event_receiver)            # Topic to receive occured events
-        rospy.Subscriber("victim_sensor/in", drone_events_message, self.victim_sensor_status)        # Topic to monitor victim sensor status
-        rospy.Subscriber("gas_sensor/in", drone_events_message, self.gas_sensor_status)              # Topic to monitor gas sensor status
+        rospy.Subscriber("battery_monitor/in", events_message, self.event_receiver)            # Topic to receive occured events
+        rospy.Subscriber("victim_sensor/in", events_message, self.victim_sensor_status)        # Topic to monitor victim sensor status
+        rospy.Subscriber("gas_sensor/in", events_message, self.gas_sensor_status)              # Topic to monitor gas sensor status
         rospy.Subscriber("move_base/status", GoalStatusArray, self.move_base_status)           # Topic to monitor move_base status
 
     def run(self):

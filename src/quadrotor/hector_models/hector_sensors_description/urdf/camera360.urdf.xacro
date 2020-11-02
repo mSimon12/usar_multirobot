@@ -1,15 +1,10 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:property name="M_PI" value="3.1415926535897931" />
-  
-  <xacro:property name="default_collision_radius" value="0.025" />
-  
-  <xacro:property name="visual_radius" value="0.02" />
-  <xacro:property name="cable_collision_length" value="0.05" />
 
-  <xacro:macro name="camera360" params="name right_cam_name left_cam_name parent collision_radius:=${default_collision_radius} *origin *calibration dist_between_cameras ros_topic update_rate res_x res_y image_format fov">
+  <xacro:macro name="camera360" params="name right_cam_name left_cam_name parent *origin *calibration dist_between_cameras ros_topic update_rate res_x res_y image_format fov">
       
     <joint name="${name}_center_joint" type="fixed">
       <xacro:insert_block name="origin" />
@@ -17,50 +12,7 @@
       <child link="${name}_center_link"/>      
     </joint>
     
-    <link name="${name}_center_link">
-      <!-- Sphere body -->
-      <visual>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-          <sphere radius="${visual_radius}"/>
-        </geometry>
-        <material name="Grey">
-          <color rgba="0.5 0.5 0.5 1"/>
-        </material> 
-      </visual>
-      
-      <collision>
-        <origin xyz="0 0 0" rpy="0 0 0"/>
-        <geometry>
-          <sphere radius="${collision_radius}"/>
-        </geometry>
-        <material name="Grey">
-          <color rgba="0.5 0.5 0.5 1"/>
-        </material> 
-      </collision>
-      
-      <!-- Cable -->
-<!--      <visual>
-        <origin xyz="${visual_radius + cable_collision_length/2} 0 0" rpy="0 0 0"/>
-        <geometry>
-          <box size="${cable_collision_length} 0.03 0.03"/>
-        </geometry>
-        <material name="Grey">
-          <color rgba="0.5 0.5 0.5 1"/>
-        </material> 
-      </visual>-->
-      
-      <collision>
-        <origin xyz="${0.011 + cable_collision_length/2} 0 0" rpy="0 0 0"/>
-        <geometry>
-          <box size="${cable_collision_length} 0.03 0.03"/>
-        </geometry>
-        <material name="Grey">
-          <color rgba="0.5 0.5 0.5 1"/>
-        </material> 
-      </collision>
-      
-    </link>
+    <link name="${name}_center_link" />  
       
     <joint name="${name}_${right_cam_name}_joint" type="fixed">
       <origin xyz="0 ${dist_between_cameras/2} 0" rpy="${M_PI*0.5} 0 ${-M_PI*0.5}"/>
@@ -93,19 +45,7 @@
             <near>0.01</near>
             <far>100</far>
           </clip>
-          <lens>            
-            <!--
-            Crashes gazebo on some machines, so revert for now
-            <type>custom</type>
-            <custom_function>
-              <c1>2</c1>
-              <c2>2</c2>
-              <f>1.0</f>
-              <fun>sin</fun>
-            </custom_function>
-            <cutoff_angle>${fov/2}</cutoff_angle>
-            <env_texture_size>1024</env_texture_size>
-            -->
+          <lens>
             <type>stereographic</type>
             <scale_to_hfov>true</scale_to_hfov>
             <cutoff_angle>1.5707</cutoff_angle>
@@ -131,7 +71,7 @@
     <link name="${name}_${left_cam_name}_optical_frame"/>
 
     <joint name="${name}_${left_cam_name}_joint" type="fixed">
-      <origin xyz="0 0 0" rpy="0 ${-M_PI/2} ${M_PI/2}" />
+      <origin xyz="0 0 0" rpy="${M_PI/2} 0.0 ${M_PI/2}" />
       <parent link="${name}_${left_cam_name}_optical_frame"/>
       <child link="${name}_${left_cam_name}_link" />
     </joint>
@@ -155,18 +95,6 @@
             <far>100</far>
           </clip>
           <lens>
-            <!--
-            Crashes gazebo on some machines, so revert for now
-            <type>custom</type>
-            <custom_function>
-              <c1>2</c1>
-              <c2>2</c2>
-              <f>1.0</f>
-              <fun>sin</fun>
-            </custom_function>
-            <cutoff_angle>${fov/2}</cutoff_angle>
-            <env_texture_size>1024</env_texture_size>
-            -->
             <type>stereographic</type>
             <scale_to_hfov>true</scale_to_hfov>
             <cutoff_angle>1.5707</cutoff_angle>

@@ -3,7 +3,7 @@ import rospy
 
 from actionlib_msgs.msg import GoalStatusArray
 from actionlib import GoalStatus
-from quadrotor_controllers.msg import drone_events_message
+from system_msgs.msg import events_message
 
 class FailuresMonitor(object):
 
@@ -11,8 +11,8 @@ class FailuresMonitor(object):
         self.state = 'NO_FAIL'                                                                  # Initial state
         
         # Publisher object for sending failures messages
-        self.pub = rospy.Publisher("failures_monitor/out", drone_events_message, queue_size=10)       
-        rospy.Subscriber("failures_monitor/in", drone_events_message, self.event_receiver)            # Topic to receive occured events
+        self.pub = rospy.Publisher("failures_monitor/out", events_message, queue_size=10)       
+        rospy.Subscriber("failures_monitor/in", events_message, self.event_receiver)            # Topic to receive occured events
 
     def event_receiver(self, msg):
         

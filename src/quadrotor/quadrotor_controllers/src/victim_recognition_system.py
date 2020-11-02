@@ -6,7 +6,7 @@ from threading import Thread
 # ROS
 from geometry_msgs.msg import Pose2D
 from gazebo_msgs.srv import GetModelState
-from quadrotor_controllers.msg import drone_events_message
+from system_msgs.msg import events_message
 
 class VictimSensor(object):
 
@@ -22,8 +22,8 @@ class VictimSensor(object):
         self.__models_service = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)                         # Get model service from Gazebo
         self.__models_service.wait_for_service()
 
-        self.__pub = rospy.Publisher("victim_sensor/out", drone_events_message, queue_size=10)
-        rospy.Subscriber("victim_sensor/in", drone_events_message, self.event_receiver)                                    # Topic to receive occured events
+        self.__pub = rospy.Publisher("victim_sensor/out", events_message, queue_size=10)
+        rospy.Subscriber("victim_sensor/in", events_message, self.event_receiver)                                    # Topic to receive occured events
     
 
     def event_receiver(self, msg):
@@ -63,7 +63,7 @@ class VictimSensor(object):
                     p.theta = 0
 
                     # Create message
-                    msg = drone_events_message()
+                    msg = events_message()
                     msg.event = 'victim_recognized'
                     msg.position.append(p)
                     self.__pub.publish(msg)                                                         # Publish the found victim location 

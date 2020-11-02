@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
     <xacro:include filename="$(find hector_xacro_tools)/urdf/inertia_tensors.urdf.xacro"/>
     <xacro:property name="M_PI" value="3.1415926535897931" />
 
@@ -68,41 +68,26 @@
 
       <gazebo reference="${name}_depth_frame">
         <sensor type="depth" name="${name}">
-          <update_rate>30</update_rate>
+          <update_rate>10</update_rate>
           <camera>
-            <horizontal_fov>${60 * M_PI/180.0}</horizontal_fov>
+            <horizontal_fov>${90 * M_PI/180.0}</horizontal_fov>
             <image>
               <format>B8G8R8</format>
               <width>640</width>
               <height>480</height>
             </image>
             <clip>
-              <near>0.4</near>
-              <far>15</far>
+              <near>0.1</near>
+              <far>100</far>
             </clip>
           </camera>
           <plugin name="${name}_camera_controller" filename="libgazebo_ros_openni_kinect.so">
- 	    <alwaysOn>true</alwaysOn>
-	    <updateRate>0.0</updateRate>
-	    <baseline>0.2</baseline> 
             <imageTopicName>${name}/rgb/image_raw</imageTopicName>
             <cameraInfoTopicName>${name}/rgb/camera_info</cameraInfoTopicName>
             <depthImageTopicName>${name}/depth/image_raw</depthImageTopicName>
             <depthImageCameraInfoTopicName>${name}/depth/camera_info</depthImageCameraInfoTopicName>
             <pointCloudTopicName>${name}/depth/points</pointCloudTopicName>
             <frameName>${name}_depth_optical_frame</frameName>
-            <pointCloudCutoff>0.4</pointCloudCutoff>
-            <pointCloudCutoffMax>4.5</pointCloudCutoffMax>
-	    <hackBaseline>0.07</hackBaseline>
-            <distortionK1>0</distortionK1>
-            <distortionK2>0</distortionK2>
-            <distortionK3>0</distortionK3>
-            <distortionT1>0</distortionT1>
-            <distortionT2>0</distortionT2>
-            <CxPrime>0</CxPrime>
-            <Cx>0</Cx>
-            <Cy>0</Cy>
-            <focalLength>0</focalLength>
           </plugin>
         </sensor>
       </gazebo>

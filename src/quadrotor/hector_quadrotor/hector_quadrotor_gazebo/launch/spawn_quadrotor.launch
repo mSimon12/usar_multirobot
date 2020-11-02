@@ -13,7 +13,7 @@
   <arg name="x" default="0.0"/>
   <arg name="y" default="0.0"/>
   <arg name="z" default="0.3"/>
-
+  <arg name="yaw" default="0.0"/>
   <arg name="use_ground_truth_for_tf" default="true" />
   <arg name="use_ground_truth_for_control" default="true" />
   <arg name="use_pose_estimation" if="$(arg use_ground_truth_for_control)" default="false"/>
@@ -33,7 +33,10 @@
 
   <!-- start robot state publisher -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen" >
-    <param name="publish_frequency" type="double" value="50.0" />
+    <remap from="joint_states" to="/$(arg name)/joint_states"/>
+    <remap from="robot_description" to="/$(arg name)/robot_description"/>
+    <param name="tf_prefix" type="string" value="$(arg name)"/>
+    <param name="publish_frequency" type="double" value="50"/>
   </node>
 
   <!-- publish state and tf -->
@@ -83,6 +86,7 @@
            -x $(arg x)
            -y $(arg y)
            -z $(arg z)
+           -Y $(arg yaw)
            -model $(arg name)"
         respawn="false" output="screen"/>
 

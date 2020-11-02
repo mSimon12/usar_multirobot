@@ -44,7 +44,7 @@ public:
         pose_client_(nh, "action/pose")
   {
     nh.param<double>("action_frequency", frequency_, 10.0);
-    nh.param<double>("takeoff_height", takeoff_height_, 0.3);
+    nh.param<double>("takeoff_height", takeoff_height_, 5.0);
     nh.param<double>("connection_timeout", connection_timeout_, 10.0);
     nh.param<double>("action_timout", action_timeout_, 30.0);
 
@@ -62,6 +62,10 @@ public:
       hector_uav_msgs::PoseGoal pose_goal;
       pose_goal.target_pose = *takeoff_server_.getPose();
       pose_goal.target_pose.pose.position.z = takeoff_height_;
+      if(pose_client_.isServerConnected())
+        ROS_INFO("Pose server is connected for Takeoff Action");
+      else
+        ROS_INFO("Pose Server is not connected for Takeoff action");
       pose_client_.sendGoal(pose_goal);
       pose_client_.waitForResult(ros::Duration(action_timeout_));
 
