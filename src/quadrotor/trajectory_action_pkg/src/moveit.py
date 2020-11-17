@@ -93,7 +93,6 @@ class MoveGroup(object):
         self.move_group_client.send_goal(self.move_group_msg)
         self.move_group_client.wait_for_result()
         result = self.move_group_client.get_result()
-        print(result)
 
         return result
 
@@ -131,10 +130,7 @@ class PlanningScenePublisher(object):
         self.scene_msg.robot_state = robot_state
         self.scene_msg.world.octomap.octomap = self.octomap
 
-        # print("\nPLANNING_SCENE_MSG:")
-        # print(self.scene_msg)
         self.scene_publisher.publish(self.scene_msg)
-
         self.octo_sub.unregister()
 
 

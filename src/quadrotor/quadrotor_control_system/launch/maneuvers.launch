@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<launch>
+   <arg name="robot_name" default="robot"/>
+   <arg name="xcoordinate" default="0.0"/>
+   <arg name="ycoordinate" default="0.0"/>
+   <arg name="zcoordinate" default="0.0"/>
+   <arg name="vsv_safe_dist" default="1.0"/>
+   <arg name="vsv_n_points" default="4"/>
+
+   <param name="robot_name" type="str" value="$(arg robot_name)"/>
+   <param name="xcoordinate" value="$(arg xcoordinate)"/>
+   <param name="ycoordinate" value="$(arg ycoordinate)"/>
+   <param name="vsv_safe_dist" value="$(arg vsv_safe_dist)"/>
+   <param name="vsv_n_points" value="$(arg vsv_n_points)"/>
+
+   <!-- LAUNCH MANEUVERS -->
+   <node name="maneuvers" pkg="quadrotor_control_system" type="maneuvers.py" output="screen"/>
+    
+</launch>	

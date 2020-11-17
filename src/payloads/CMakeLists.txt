@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(trajectory_action_pkg)
+project(payloads)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -8,20 +8,27 @@ project(trajectory_action_pkg)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  actionlib_msgs
-  genmsg
-  geometry_msgs
-  message_generation
+  roscpp
   rospy
+  moveit_core 
+  moveit_commander
+  hector_moveit_actions
+  trajectory_action_pkg
+  joy
   std_msgs
-  hector_moveit_config
-  hector_quadrotor_actions
-  slam
+  sensor_msgs
+  geometry_msgs
+  actionlib_msgs
+  hector_uav_msgs
+  actionlib
+  genmsg 
+  system_msgs
 )
+
+find_package(octomap REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
-
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -55,27 +62,27 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
-#   Message1.msg
-#   Message2.msg
+#   drone_events_message.msg
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
+#add_service_files(
 #   FILES
-#   Service1.srv
-#   Service2.srv
+#   motion.srv
 # )
 
 ## Generate actions in the 'action' folder
- add_action_files(
-   DIRECTORY action
-   FILES ExecuteDroneApproach.action
- )
+# add_action_files(
+#   FILES
+#   action1.action
+# )
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
+generate_messages(
    DEPENDENCIES
-   actionlib_msgs   geometry_msgs   std_msgs
+   #std_msgs
+   geometry_msgs
+   actionlib_msgs
  )
 
 ################################################
@@ -109,8 +116,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES action_pkg
-  CATKIN_DEPENDS actionlib message_generation message_runtime geometry_msgs rospy #genmsg std_msgs
+#  LIBRARIES mypack_pkg
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs hector_uav_msgs moveit_core moveit_ros_planning_interface hector_moveit_actions trajectory_action_pkg
 #  DEPENDS system_lib
 )
 
@@ -121,24 +128,25 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-#  include
+  include
+  ${OCTOMAP_INCLUDE_DIRS}
   ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/action_pkg.cpp
+#   src/${PROJECT_NAME}/mypack_pkg.cpp
 # )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
-# add_dependencies(hector_moveit_config hector_quadrotor_actions)
+#add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/action_pkg_node.cpp)
+# add_executable(${PROJECT_NAME}_node src/mypack_pkg_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -148,7 +156,7 @@ include_directories(
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-#add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 # target_link_libraries(${PROJECT_NAME}_node
@@ -202,7 +210,7 @@ include_directories(
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_action_pkg.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_mypack_pkg.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

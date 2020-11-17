@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-
-<launch>
-   <arg name="publish_rate" default="1.0"/>
-
-   <param name="publish_rate" value="$(arg publish_rate)"/>
-   <node name="battery_monitor" pkg="pioneer3at_controllers" type="battery_monitor.py" output="log"/>
-</launch>	

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<launch>
+   <node name="failures_monitor" pkg="payloads" type="failures_monitor.py" output="log"/>
+</launch>	

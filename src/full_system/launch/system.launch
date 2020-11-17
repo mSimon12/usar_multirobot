@@ -13,44 +13,44 @@
     <!-- Launch Robot Control Level --> 
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
-      <arg name="xcoordinate" value="2.0"/>
-      <arg name="ycoordinate" value="2.0"/>
+      <arg name="xcoordinate" value="3.0"/>
+      <arg name="ycoordinate" value="1.0"/>
       <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
     </include>
 
-    <!-- Launch Task Control System --> 
+    <!-- Launch Task Control System  
     <include file="$(find supervisor)/launch/supervisor.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
-    </include>
+    </include>-->
   </group> 
 
-  <!-- Launch Pioneer3AT 2 
+  <!-- Launch Pioneer3AT 2 --> 
   <group ns="pioneer3at_2">
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_2"/>
-      <arg name="xcoordinate" value="2.0"/>
+      <arg name="xcoordinate" value="3.0"/>
       <arg name="ycoordinate" value="3.0"/>
       <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
     </include>
---> 
-    <!--Launch Task Control System 
+
+    <!--Launch Task Control System
     <include file="$(find supervisor)/launch/supervisor.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
-    </include>
-  </group> -->
+    </include> --> 
+  </group>
 
-  <!-- Spawn simulated quadrotor uav 1 -->
+
   <!-- Spawn simulated quadrotor uav 1 -->
   <group ns="UAV_1">
     <include file="$(find uav)/launch/UAV.launch">
       <arg name="drone_name" value="UAV_1"/>
-      <arg name="x" value="2.0"/>
+      <arg name="x" value="1.0"/>
       <arg name="y" value="1.0"/>
       <arg name="z" value="0.7"/> 
     </include>
@@ -60,11 +60,11 @@
   <group ns="UAV_2">
     <include file="$(find uav)/launch/UAV.launch">
       <arg name="drone_name" default="UAV_2"/>
-      <arg name="x" value="3.0"/>
-      <arg name="y" value="1.0"/>
+      <arg name="x" value="1.0"/>
+      <arg name="y" value="3.0"/>
       <arg name="z" value="0.7"/> 
     </include>
-  </group>  -->
+  </group> -->
 
   <!-- Launch Pioneer2DX 1 
   <group ns="pioneer2dx_1">

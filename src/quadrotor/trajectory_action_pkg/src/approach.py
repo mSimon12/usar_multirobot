@@ -64,7 +64,7 @@ class Approach(object):
         self.trajectory_received = False            # Flag to signal trajectory received
         self.odom_received = False                  # Flag to signal odom received
 
-        self.robot = RobotCommander(robot_description="{}/robot_description".format(name), ns="/UAV_1")
+        self.robot = RobotCommander(robot_description="{}/robot_description".format(name), ns="/{}".format(name))
         self.display_trajectory_publisher = rospy.Publisher('/{}/move_group/display_planned_path'.format(name),
                                                DisplayTrajectory,
                                                queue_size=20)
@@ -73,12 +73,6 @@ class Approach(object):
         self.validity_srv = rospy.ServiceProxy('/{}/check_state_validity'.format(name), GetStateValidity)
         self.validity_srv.wait_for_service()
         self.collision = False
-
-        # Set planning algorithm
-        # self.move = MoveGroupCommander(PLANNING_GROUP, robot_description="{}/robot_description".format(name), ns="/UAV_1")        # Set group from srdf
-        # self.move_group.set_planner_id("RRTConnectkConfigDefault")                      # Set planner type  (RRTConnectkConfigDefault)
-        # self.move_group.set_num_planning_attempts(10)                                   # Set planning attempts
-        # self.move_group.set_workspace([XMIN,YMIN,ZMIN,XMAX,YMAX,ZMAX])                  # Set the workspace size
 
         #Start move_group
         self.move_group = MoveGroup('earth', name)
@@ -156,10 +150,6 @@ class Approach(object):
 
         #Update PlanningSene
         self.scene_pub.publishScene(self.current_pose)
-
-        #Insert start state on move_group
-       
-        # self.move_group.set_start_state_to_current_state()
 
         # Plan a trajectory till the desired target
         plan = self.move_group.plan()

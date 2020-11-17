@@ -83,24 +83,35 @@
 
 <!-- ######################### MY PACKAGES ########################################## -->
 
-  <!-- LAUNCH VICTIM RECOGNITION SYSTEM
-  <include file="$(find quadrotor_controllers)/launch/victim_recognition_system.launch">
+  <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
+  <include file="$(find payloads)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
     <arg name="sensor_range" value="3.0"/>
     <arg name="sensor_update_rate" value="2"/>
-  </include> -->
+  </include>
 
-  <!-- LAUNCH BATTERY MONITOR
-  <include file="$(find quadrotor_controllers)/launch/battery_monitor.launch">
+  <!-- LAUNCH BATTERY MONITOR -->
+  <include file="$(find payloads)/launch/battery_monitor.launch">
+    <arg name="move_topic" value="action/pose/status"/>
     <arg name="publish_rate" value="0.1"/>
-  </include> -->
+  </include>
 
-  <!-- LAUNCH FAILURES MONITOR
-  <include file="$(find quadrotor_controllers)/launch/failures_monitor.launch"/> -->
+  <!-- LAUNCH FAILURES MONITOR -->
+  <include file="$(find payloads)/launch/failures_monitor.launch"/>
+
+  <!-- LAUNCH TRAJECTORY EXECUTOR -->
+  <include file="$(find trajectory_action_pkg)/launch/trajectory_server.launch">
+    <arg name="robot_name" value="$(arg drone_name)"/>
+  </include>
 
   <!-- Launch the node responsible for controlling maneuvers -->
-  <include file="$(find quadrotor_controllers)/launch/maneuvers.launch">
+  <include file="$(find quadrotor_control_system)/launch/maneuvers.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
+    <arg name="xcoordinate" value="$(arg x)"/>
+    <arg name="ycoordinate" value="$(arg y)"/>
+    <arg name="zcoordinate" value="$(arg z)"/>
+    <arg name="vsv_safe_dist" default="1.0"/>
+    <arg name="vsv_n_points" default="4"/>
   </include>
 
 </launch>

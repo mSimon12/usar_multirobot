@@ -52,26 +52,27 @@
   <include file="$(find pioneer3at_controllers)/launch/p3at_teleop.launch" />	
 
   <!-- LAUNCH BATTERY MONITOR -->
-  <include file="$(find pioneer3at_controllers)/launch/battery_monitor.launch">
+  <include file="$(find payloads)/launch/battery_monitor.launch">
+    <arg name="move_topic" value="move_base/status"/>
     <arg name="publish_rate" value="1.0"/>		<!-- Rate at which the battery level is published in Hz -->
   </include>
 
   <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
-  <include file="$(find pioneer3at_controllers)/launch/victim_recognition_system.launch">
+  <include file="$(find payloads)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="sensor_range" value="2.0"/>		<!-- Range the sensor are capable to sense a victim -->
     <arg name="sensor_update_rate" value="2"/>		<!-- Rate at which the sensor verify the presence of victims-->
   </include>
 
   <!-- LAUNCH GAS SENSOR -->
-  <include file="$(find pioneer3at_controllers)/launch/gas_sensor.launch">
+  <include file="$(find payloads)/launch/gas_sensor.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="sensor_range" value="4.0"/>		<!-- Range the sensor are capable to sense a gas leak -->
     <arg name="sensor_update_rate" value="1.0"/>	<!-- Rate at which the sensor verify the presence of gas-->
   </include>  
 
   <!-- LAUNCH FAILURES MONITOR -->
-  <include file="$(find pioneer3at_controllers)/launch/failures_monitor.launch"/>
+  <include file="$(find payloads)/launch/failures_monitor.launch"/>
 
   <!-- Launch the node responsible for controlling maneuvers -->
   <include file="$(find pioneer3at_controllers)/launch/maneuvers.launch">
