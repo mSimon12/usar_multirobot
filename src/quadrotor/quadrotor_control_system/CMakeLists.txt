@@ -72,10 +72,12 @@ find_package(octomap REQUIRED)
 # )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   action1.action
-# )
+add_action_files(
+   FILES
+   ExecuteSearch.action
+   ExecuteAssesst.action
+   ExecuteLand.action
+ )
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(

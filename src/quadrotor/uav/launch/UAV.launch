@@ -81,7 +81,7 @@
   </include> -->
 
 
-<!-- ######################### MY PACKAGES ########################################## -->
+<!-- ######################### PAYLOADS ########################################## -->
 
   <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
   <include file="$(find payloads)/launch/victim_recognition_system.launch">
@@ -99,19 +99,42 @@
   <!-- LAUNCH FAILURES MONITOR -->
   <include file="$(find payloads)/launch/failures_monitor.launch"/>
 
+<!-- ######################### MANEUVERS ########################################## -->
+
   <!-- LAUNCH TRAJECTORY EXECUTOR -->
   <include file="$(find trajectory_action_pkg)/launch/trajectory_server.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
   </include>
 
+  <!-- LAUNCH VICTIM SEARCH EXECUTOR -->
+  <include file="$(find quadrotor_control_system)/launch/search_server.launch">
+    <arg name="robot_name" value="$(arg drone_name)"/>
+    <arg name="sensor_resolution" value="2.5"/>
+    <arg name="height" value="1.0"/>
+  </include>
+
+  <!-- LAUNCH SAFE LAND EXECUTOR -->
+  <include file="$(find quadrotor_control_system)/launch/safe_land_server.launch">
+    <arg name="robot_name" value="$(arg drone_name)"/>
+    <arg name="drone_height" value="0.25"/>
+    <arg name="safe_dist" value="3.0"/>
+  </include>
+
   <!-- Launch the node responsible for controlling maneuvers -->
   <include file="$(find quadrotor_control_system)/launch/maneuvers.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
+
+    <!-- Return to Base parameters --> 
     <arg name="xcoordinate" value="$(arg x)"/>
     <arg name="ycoordinate" value="$(arg y)"/>
     <arg name="zcoordinate" value="$(arg z)"/>
-    <arg name="vsv_safe_dist" default="1.0"/>
-    <arg name="vsv_n_points" default="4"/>
+
+    <!-- Surroundings Verification parameters --> 
+    <arg name="vsv_min_dist" value="1.0"/>
+    <arg name="vsv_max_dist" value="5.0"/>
+    <arg name="vsv_rounds" value="2"/>
+    <arg name="vsv_round_points" value="8"/>
+    <arg name="vsv_height" value="3.0"/>
   </include>
 
 </launch>

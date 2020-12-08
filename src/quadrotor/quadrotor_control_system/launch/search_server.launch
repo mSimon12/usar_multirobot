@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<launch>
+   <arg name="robot_name" default="robot"/>
+   <arg name="sensor_resolution" default="3.0"/>
+   <arg name="height" default="1.0"/>
+
+   <param name="robot_name" type="str" value="$(arg robot_name)"/>
+   <param name="resolution" type="str" value="$(arg sensor_resolution)"/>
+   <param name="height" type="str" value="$(arg height)"/>
+
+   <node name="search_server" pkg="quadrotor_control_system" type="v_search.py" output="screen"/>
+</launch>	

@@ -17,6 +17,7 @@ from hector_uav_msgs.msg import PoseGoal, PoseAction
 
 from geometry_msgs.msg import Pose, Transform
 from nav_msgs.msg import Odometry
+from sensor_msgs.msg import Range
 
 from moveit_commander import RobotCommander, MoveGroupCommander
 from moveit_msgs.msg import RobotState, DisplayTrajectory
@@ -38,11 +39,15 @@ SENSOR_RANGE = 5.0
 
 class Approach(object):
 
-    def __init__(self, name):
+    def __init__(self, name, takeoff_height):
         self.robot_name = name
+        self.takeoff_height = takeoff_height
 
-        # Mutual exclusion odometry
+        # Mutual exclusion 
+        self.sonar_me = Condition()
         self.odometry_me = Condition()
+        self.current_height = None
+        
 
         # Create trajectory server
         self.trajectory_server = SimpleActionServer('approach_server', ExecuteDroneApproachAction, self.goCallback, False)
@@ -74,6 +79,9 @@ class Approach(object):
         self.validity_srv.wait_for_service()
         self.collision = False
 
+        # Subscribe to sonar_height
+        rospy.Subscriber("sonar_height", Range, self.sonar_callback, queue_size=10)
+
         #Start move_group
         self.move_group = MoveGroup('earth', name)
         self.move_group.set_planner()
@@ -87,12 +95,52 @@ class Approach(object):
         # Start trajectory server
         self.trajectory_server.start()
 
+    def sonar_callback(self,msg):
+        '''
+            Function to update drone height
+        '''
+        self.sonar_me.acquire()
+        self.current_height = msg.range
+        self.sonar_me.notify()
+        self.sonar_me.release()
+
 
     def goCallback(self,pose):
         '''
             Require a plan to go to the desired target and try to execute it 5 time or return erro
         '''
         self.target = pose.goal
+
+        ####################################################################
+        # First takeoff if the drone is close to ground
+        self.sonar_me.acquire()
+        while not (self.current_height and self.odometry):
+            self.sonar_me.wait()
+
+        if self.current_height < self.takeoff_height:
+            self.odometry_me.acquire()
+            takeoff_pose = PoseGoal()
+            takeoff_pose.target_pose.header.frame_id = "{}/world".format(self.robot_name)
+            takeoff_pose.target_pose.pose.position.x = self.odometry.position.x
+            takeoff_pose.target_pose.pose.position.y = self.odometry.position.y
+            takeoff_pose.target_pose.pose.position.z = self.odometry.position.z + self.takeoff_height - self.current_height     #Add the heght error to the height
+            takeoff_pose.target_pose.pose.orientation.x = self.odometry.orientation.x
+            takeoff_pose.target_pose.pose.orientation.y = self.odometry.orientation.y
+            takeoff_pose.target_pose.pose.orientation.z = self.odometry.orientation.z
+            takeoff_pose.target_pose.pose.orientation.w = self.odometry.orientation.w
+            self.odometry_me.release()
+            
+            self.move_client.send_goal(takeoff_pose)
+            self.move_client.wait_for_result()
+            result = self.move_client.get_state()
+
+            if result == GoalStatus.ABORTED:
+                rospy.logerr("Abort approach! Unable to execute takeoff!")
+                self.trajectory_server.set_aborted()
+                return
+
+        self.sonar_me.release()
+        ####################################################################
 
         rospy.loginfo("Try to start from [{},{},{}]".format(self.odometry.position.x, self.odometry.position.y, self.odometry.position.z))
         rospy.loginfo("Try to go to [{},{},{}]".format(self.target.position.x, self.target.position.y, self.target.position.z))
@@ -173,7 +221,7 @@ class Approach(object):
                     self.trajectory_received = False
                     self.odom_received = False
                     return 'preempted'
-                
+
                 #Send next pose to move
                 self.next_pose = pose.target_pose.pose
 
@@ -334,8 +382,9 @@ class Approach(object):
 
 if __name__=="__main__":
     NAME = rospy.get_param("robot_name", default = "")
+    height = rospy.get_param("takeoff_height", default = "1.0")
 
     rospy.init_node("trajectory_server", anonymous=False)           # Initialize approach node
-    app = Approach(NAME)
+    app = Approach(NAME, height)
 
     rospy.spin()

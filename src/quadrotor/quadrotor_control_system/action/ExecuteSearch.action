@@ -1,0 +1,10 @@
+# Area to execute search
+geometry_msgs/Point origin
+float32 y
+float32 x
+---
+#Result definition
+geometry_msgs/Pose last_pose
+---
+#Feedback definition
+geometry_msgs/Pose current_pose
