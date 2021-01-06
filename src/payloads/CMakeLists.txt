@@ -12,14 +12,11 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   moveit_core 
   moveit_commander
-  hector_moveit_actions
-  trajectory_action_pkg
   joy
   std_msgs
   sensor_msgs
   geometry_msgs
   actionlib_msgs
-  hector_uav_msgs
   actionlib
   genmsg 
   system_msgs
@@ -117,7 +114,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES mypack_pkg
-  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs hector_uav_msgs moveit_core moveit_ros_planning_interface hector_moveit_actions trajectory_action_pkg
+  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs moveit_core moveit_ros_planning_interface 
 #  DEPENDS system_lib
 )
 

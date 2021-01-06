@@ -48,13 +48,12 @@
 
 <!-- ######################### MY PACKAGES ########################################## -->
 
-  <!-- LAUNCH TELEOPERATION SERVER-->
-  <include file="$(find pioneer3at_controllers)/launch/p3at_teleop.launch" />	
+  <!-- LAUNCH TELEOPERATION SERVER
+  <include file="$(find pioneer3at_controllers)/launch/p3at_teleop.launch" /> -->
 
   <!-- LAUNCH BATTERY MONITOR -->
   <include file="$(find payloads)/launch/battery_monitor.launch">
-    <arg name="move_topic" value="move_base/status"/>
-    <arg name="publish_rate" value="1.0"/>		<!-- Rate at which the battery level is published in Hz -->
+    <arg name="publish_rate" value="0.1"/>		<!-- Rate at which the battery level is published in Hz -->
   </include>
 
   <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->

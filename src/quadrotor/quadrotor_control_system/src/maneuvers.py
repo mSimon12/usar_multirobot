@@ -1,6 +1,6 @@
 #!/usr/bin/env python2.7
 
-from threading import Thread
+from threading import Thread, Condition
 
 import roslib
 from math import sin, cos, pi
@@ -8,22 +8,25 @@ roslib.load_manifest('quadrotor_control_system')
 import rospy
 from actionlib import SimpleActionClient, GoalStatus
 
-from tf.transformations import quaternion_from_euler
+from tf.transformations import quaternion_from_euler, euler_from_quaternion
+
+from hector_uav_msgs.srv import EnableMotors
 
 from trajectory_action_pkg.msg import ExecuteDroneApproachAction, ExecuteDroneApproachGoal
 from quadrotor_control_system.msg import ExecuteSearchAction, ExecuteSearchGoal, ExecuteLandAction,  ExecuteLandGoal
-from geometry_msgs.msg import Pose, Point
+from geometry_msgs.msg import Pose, Point, PoseStamped
 
 # from sensor_msgs.msg import Range
 from system_msgs.msg import events_message
+
 
 # Exploration
 # from geometry_msgs.msg import PolygonStamped, Point32, Pose2D
 # from exploration_msgs.msg import ExploreGoal, ExploreAction
 
 # For teleoperation
-# from sensor_msgs.msg import Joy
-# from geometry_msgs.msg import Twist
+from sensor_msgs.msg import Joy
+from nav_msgs.msg import Odometry
 
 ########################################################################
 class Maneuver(object):
@@ -414,9 +417,6 @@ class surroundings_verification(Maneuver):
         self.points = []                                            # Clear points
         self.state = 'IDLE'                                         # Set IDLE state
 
-    def sonar_cb(self,msg):
-        pass
-
 # ########################################################################
 class return_to_base(Maneuver):
     '''
@@ -471,87 +471,128 @@ class return_to_base(Maneuver):
         self.state = 'IDLE'
 
 # ########################################################################
-# class teleoperation(object):
-    # '''
-    #     Allows a human to teleoperate the robot through a joystick.
-    # '''
-    # def __init__(self, name):
-    #     self.robot_name = name
-    #     self.state = 'IDLE' 
+class teleoperation(object):
+    '''
+        Allows a human to teleoperate the robot through a joystick.
+    '''
+    def __init__(self, name):
+        self.robot_name = name
+        self.state = 'IDLE' 
 
-    #     #Variables to control the speed 
-    #     self.max_vel = rospy.get_param("move_base/DWAPlannerROS/max_vel_x")
-    #     self.max_ang_vel = rospy.get_param("move_base/DWAPlannerROS/max_rot_vel")
-    #     self.current_x_speed = self.max_vel/2
-    #     self.current_ang_speed = self.max_ang_vel/2
+        self.odometry_me = Condition()
 
-    #     self.__pub = rospy.Publisher("cmd_vel",Twist, queue_size=10)
+        #Variables to control the speed 
+        self.max_vel = 6.0                              #rospy.get_param()
+        self.max_ang_vel = 3.0                          #rospy.get_param()
+        self.current_speed = self.max_vel/2
+        self.current_ang_speed = self.max_ang_vel/2
 
-    #     self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
-    #     self.msg = events_message()                                                                         # Message object
+        #Publish msg to execute the motion
+        self.__tele_pub = rospy.Publisher("command/pose", PoseStamped, queue_size=10)
+        self.__tele_msg = PoseStamped()
+        self.__tele_msg.header.frame_id = "{}/world".format(self.robot_name)
 
-    # def execute(self):
-    #     rospy.loginfo("Starting Teleoperation!")
-    #     self.state = 'EXE'
+        self.__last_time = rospy.get_time()
 
-    #     # Start teleoperation
-    #     self.__sub = rospy.Subscriber('joy', Joy, self.Joy_callback)                       # Start receiving messages from joystick
+        self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
+        self.msg = events_message()                                                                         # Message object
 
-    # def reset(self):
-    #     rospy.loginfo("Reseting Teleoperation!")
-    #     self.state = 'IDLE'
+    def execute(self):
+        rospy.loginfo("Starting Teleoperation!")
+        self.state = 'EXE'
+
+        # Start teleoperation
+        self.__sub = rospy.Subscriber('/joy', Joy, self.Joy_callback)                       # Start receiving messages from joystick
+
+        # Subscribe to ground_truth to monitor the current pose of the robot
+        self.__odom_sub = rospy.Subscriber("ground_truth/state", Odometry, self.poseCallback)
+
+    def reset(self):
+        rospy.loginfo("Reseting Teleoperation!")
+        self.state = 'IDLE'
     
-    # def end(self):
-    #     self.__sub.unregister()                                         # Stop receiving messages from joystick
-    #     self.msg.event = 'end_teleoperation'
-    #     self.pub.publish(self.msg)                                      # Send message signaling the error
-    #     self.state = 'IDLE'
+    def end(self):
+        self.__sub.unregister()                                         # Stop receiving messages from joystick
+        self.__odom_sub.unregister()
+        self.msg.event = 'end_teleoperation'
+        self.pub.publish(self.msg)                                      # Send message signaling the error
+        self.state = 'IDLE'
 
-    # def error(self):
-    #     self.__sub.unregister()                                         # Stop receiving messages from joystick
-    #     self.msg.event = 'teleoperation_error'
-    #     self.pub.publish(self.msg)                                      # Send message signaling the error
-    #     self.state = 'ERROR'
+    def error(self):
+        self.__sub.unregister()                                         # Stop receiving messages from joystick
+        self.__odom_sub.unregister()
+        self.msg.event = 'teleoperation_error'
+        self.pub.publish(self.msg)                                      # Send message signaling the error
+        self.state = 'ERROR'
 
-    # def Joy_callback(self,msg):
-    #     speed = msg.axes[1]             # Get speed
-    #     rot = msg.axes[2]               # Ger angular speed
-    #     if speed < 0:
-    #         rot = -rot
+    def poseCallback(self,odometry):
+        '''
+            Monitor the current position of the robot
+        '''
+        self.odometry_me.acquire()
+        self.odometry = odometry.pose.pose
+        self.odometry_me.release()
 
-    #     #twist message for moving
-    #     twist_msg = Twist()
-    #     twist_msg.linear.x = speed*self.current_x_speed 
-    #     twist_msg.angular.z = rot*self.current_ang_speed
+    def Joy_callback(self,msg):
+        z_speed = msg.axes[1]             # Get vertical speed
+        x_speed = msg.axes[3]             # Get horizontal speed
+        rot = - msg.axes[2]                # Get angular speed
 
-    #     self.__pub.publish(twist_msg)          # Publish to cmd_vel
+        time = rospy.get_time()
+        dt = time - self.__last_time
+        self.__last_time = time 
 
-    #     # Change linear speed
-    #     if msg.buttons[4]:
-    #         self.current_x_speed += self.max_vel*0.1
-    #         if self.current_x_speed > self.max_vel:
-    #             self.current_x_speed = self.max_vel
-    #     elif msg.buttons[6]:
-    #         self.current_x_speed -= self.max_vel*0.1
-    #         if self.current_x_speed < 0.2:
-    #             self.current_x_speed = 0.2
+        self.odometry_me.acquire()
+        self.__tele_msg.pose = self.odometry 
+        angles = euler_from_quaternion([self.odometry.orientation.x,self.odometry.orientation.y,self.odometry.orientation.z,self.odometry.orientation.w])
+        self.odometry_me.release()
+        theta = angles[2]
 
-    #     # Change angular speed
-    #     if msg.buttons[5]:
-    #         self.current_ang_speed += self.max_ang_vel*0.1
-    #         if self.current_ang_speed > self.max_ang_vel:
-    #             self.current_ang_speed = self.max_ang_vel 
-    #     elif msg.buttons[7]:
-    #         self.current_ang_speed -= self.max_ang_vel *0.1
-    #         if self.current_ang_speed < 0.4:
-    #             self.current_ang_speed = 0.4
+        #Add z_speed, rotation or planar delta to current pose
+        self.__tele_msg.pose.position.z = self.__tele_msg.pose.position.z + z_speed*self.current_speed*dt
+        self.__tele_msg.pose.position.x = self.__tele_msg.pose.position.x + x_speed*cos(theta)*self.current_speed*dt
+        self.__tele_msg.pose.position.y = self.__tele_msg.pose.position.y + x_speed*sin(theta)*self.current_speed*dt  
+        theta = theta + rot*self.current_ang_speed*dt
 
-    #     if msg.buttons[9]:
-    #         # Teleoperation ended
-    #         self.end()
-    #     elif all(msg.buttons[4:8]):
-    #         # Teleoperation error
-    #         self.error()
+        # Convert oriantation back to quartenion
+        q_angles = quaternion_from_euler(angles[0],angles[1],theta)
+        self.__tele_msg.pose.orientation.x = q_angles[0]
+        self.__tele_msg.pose.orientation.y = q_angles[1]
+        self.__tele_msg.pose.orientation.z = q_angles[2]
+        self.__tele_msg.pose.orientation.w = q_angles[3]
+
+        #Send the desired position
+        self.__tele_pub.publish(self.__tele_msg)
+
+        # Change linear speed
+        if msg.buttons[4]:
+            self.current_speed += self.max_vel*0.1
+            if self.current_speed > self.max_vel:
+                self.current_speed = self.max_vel
+        elif msg.buttons[6]:
+            self.current_speed -= self.max_vel*0.1
+            if self.current_speed < 0.2:
+                self.current_speed = 0.2
+
+        # Change angular speed
+        if msg.buttons[5]:
+            self.current_ang_speed += self.max_ang_vel*0.1
+            if self.current_ang_speed > self.max_ang_vel:
+                self.current_ang_speed = self.max_ang_vel 
+        elif msg.buttons[7]:
+            self.current_ang_speed -= self.max_ang_vel *0.1
+            if self.current_ang_speed < 0.4:
+                self.current_ang_speed = 0.4
+  
+        print("\n\nSPEED: {}".format(self.current_speed))
+        print("ANGULAR SPEED: {}".format(self.current_ang_speed))
+
+        if msg.buttons[9]:
+            # Teleoperation ended
+            self.end()
+        elif all(msg.buttons[4:8]):
+            # Teleoperation error
+            self.error()
 
 
 # ########################################################################
@@ -707,21 +748,21 @@ def maneuver_event(msg):
         else:
             rospy.logwarn("Command not allowed!")
 
-    # elif "teleoperation" in msg.event:
-    #     # Commands for teleoperation maneuver
-    #     if (msg.event == "start_teleoperation") and (tele.state =='IDLE'):
-    #         thread = Thread(target=tele.execute)
-    #         thread.start()                                                                      # Start teleoperation
-    #     elif (msg.event == "reset_teleoperation") and (tele.state == 'ERROR'):
-    #         tele.reset()
-    #     elif (msg.event == "end_teleoperation") and (tele.state == 'EXE'):
-    #         # Teleoperation ended
-    #         tele.end()
-    #     elif (msg.event == "teleoperation_error") and (tele.state == 'EXE'):
-    #         # Teleoperation ended
-    #         tele.error()
-    #     else:
-    #         rospy.logwarn("Command not allowed!")
+    elif "teleoperation" in msg.event:
+        # Commands for teleoperation maneuver
+        if (msg.event == "start_teleoperation") and (tele.state =='IDLE'):
+            thread = Thread(target=tele.execute)
+            thread.start()                                                                      # Start teleoperation
+        elif (msg.event == "reset_teleoperation") and (tele.state == 'ERROR'):
+            tele.reset()
+        elif (msg.event == "end_teleoperation") and (tele.state == 'EXE'):
+            # Teleoperation ended
+            tele.end()
+        elif (msg.event == "teleoperation_error") and (tele.state == 'EXE'):
+            # Teleoperation ended
+            tele.error()
+        else:
+            rospy.logwarn("Command not allowed!")
 
     elif "safe_land" in msg.event:
         # Commands for safe_land maneuver
@@ -750,9 +791,13 @@ if __name__=="__main__":
     vsv_rounds = rospy.get_param("vsv_rounds", default = 2)
     vsv_round_points = rospy.get_param("vsv_round_points", default = 8)
     height = rospy.get_param("vsv_height", default = 8)
-    
 
     rospy.init_node("{}_maneuvers".format(NAME), anonymous=False)           # Initialize maneuvers node
+
+    # Enable the quadrotor motors
+    rospy.wait_for_service("enable_motors")
+    enabler = rospy.ServiceProxy("enable_motors",EnableMotors)
+    enabler(True)
 
     # Create object for each type of maneuver
     app = approach(NAME)
@@ -760,7 +805,7 @@ if __name__=="__main__":
     search = v_search(NAME)
     vsv = surroundings_verification(NAME, min_dist, max_dist, vsv_rounds, vsv_round_points, height)
     rb = return_to_base(NAME, x_coord, y_coord, z_coord)
-    # tele = teleoperation(NAME)
+    tele = teleoperation(NAME)
     land = safe_land(NAME)
 
     # Subscribe to maneuvers in topic

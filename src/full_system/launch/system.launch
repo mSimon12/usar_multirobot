@@ -134,6 +134,9 @@
       <arg name="second_robot_yaw"   value=" 0.0"/> 
   </include> -->
 
+<!-- LAUNCH TELEOPERATION SERVER-->
+  <include file="$(find payloads)/launch/teleop.launch" />
+
 <!-- LAUNCH RVIZ -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
 
