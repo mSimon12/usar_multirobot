@@ -13,16 +13,20 @@ from tf.transformations import quaternion_from_euler, euler_from_quaternion
 from hector_uav_msgs.srv import EnableMotors
 
 from trajectory_action_pkg.msg import ExecuteDroneApproachAction, ExecuteDroneApproachGoal
-from quadrotor_control_system.msg import ExecuteSearchAction, ExecuteSearchGoal, ExecuteLandAction,  ExecuteLandGoal
 from geometry_msgs.msg import Pose, Point, PoseStamped
 
 # from sensor_msgs.msg import Range
 from system_msgs.msg import events_message
 
+# Victim search
+from quadrotor_control_system.msg import ExecuteSearchAction, ExecuteSearchGoal
+
+# Safe Land
+from quadrotor_control_system.msg import ExecuteLandAction,  ExecuteLandGoal
 
 # Exploration
-# from geometry_msgs.msg import PolygonStamped, Point32, Pose2D
-# from exploration_msgs.msg import ExploreGoal, ExploreAction
+from hector_moveit_exploration.msg import ExecuteDroneExplorationAction, ExecuteDroneExplorationGoal
+# from quadrotor_control_system.msg import ExecuteAssesstAction,  ExecuteAssesstGoal
 
 # For teleoperation
 from sensor_msgs.msg import Joy
@@ -131,103 +135,109 @@ class approach(Maneuver):
         self.state = 'IDLE'                                               # Set IDLE state
 
 ########################################################################
-# class assessment(object):
-#     '''
-#         Maneuver responsible for sending a region to the exploration server and starting assessment.
-#         It requires the goal region with at least 3 point, and a start position. 
-#         After suspended the robot can reestart the assessment with the resume command.
+class assessment(object):
+    '''
+        Maneuver responsible for sending a region to the exploration server and starting assessment.
+        It requires the goal region with at least 3 point, and a start position. 
+        After suspended the robot can reestart the assessment with the resume command.
 
-#         If the system is reseted or aborted, the goal region is missed.
-#     '''
-#     def __init__(self, name):
-#         self.robot_name = name
-#         self.state = 'IDLE'                             # Set IDLE state
-#         self.region = []                                # Region to be explored
+        If the system is reseted or aborted, the goal region is missed.
+    '''
+    def __init__(self, name):
+        self.robot_name = name
+        self.state = 'IDLE'                             # Set IDLE state
+        self.region = []                                # Region to be explored
 
-#         # Exploration service                                                                              
-#         self._frontier_client = SimpleActionClient("/{}/exploration_server_node".format(self.robot_name), ExploreAction)            # Create a client to the exploration node
-#         self._frontier_client.wait_for_server()                                                                                     # Wait server to be ready
+        # Exploration service                                                                            
+        self._assess_client = SimpleActionClient("assessment_server", ExecuteDroneExplorationAction)                # Create a client to the v_search server
+        self._assess_client.wait_for_server()                                                                       # Wait server to be ready                                                        
+
+        # Maneuvers out
+        self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)                                 # Publisher object
+        self.msg = events_message()                                                                                                 # Message object
         
-#         self._goal = ExploreGoal()                                                                                                  # Message to send the goal region
-#         self._goal.strategy_plugin = rospy.get_param("plugin_name", default="exploration_server::ExamplePlugin")                    # Select the exploration plugin
-#         self._goal.boundary.header.frame_id = "earth"                                                                               # Set frame wich the points are related to
-#         self._goal.start_point.header.frame_id = "earth"
-
-#         # Maneuvers out
-#         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)                                 # Publisher object
-#         self.msg = events_message()                                                                                                 # Message object
+    def execute(self, region_to_explore = None):
+        rospy.loginfo("Starting assessment!")
         
-#     def execute(self, region_to_explore = None):
-#         rospy.loginfo("Starting assessment!")
+        if self.state == 'IDLE':
+            # Save some variables
+            self.region = region_to_explore                             # Save region being explored
+
+        self._assess_goal = ExecuteDroneExplorationGoal()               # Message to send the goal region 
         
-#         if self.state == 'IDLE':
-#             # Save some variables
-#             self.region = region_to_explore                              # Save region being explored
+        # Define boundaries
+        x_min = 50.0
+        x_max = 0.0
+        y_min = 50.0
+        y_max = 0.0
+        for i in range(0, len(self.region)-1):
+            if self.region[i].linear.x < x_min:
+                x_min = self.region[i].linear.x
+            if self.region[i].linear.x > x_max:
+                x_max = self.region[i].linear.x
 
-#         # Define boundaries
-#         for i in range(0, len(self.region)-1):
-#             p = Point32()
-#             p.x = self.region[i].x
-#             p.y = self.region[i].y
-#             self._goal.boundary.polygon.points.append(p)
+            if self.region[i].linear.y < y_min:
+                y_min = self.region[i].linear.y
+            if self.region[i].linear.y > y_max:
+                y_max = self.region[i].linear.y
 
-#         # Start position
-#         self._goal.start_point.point.x = self.region[i+1].x
-#         self._goal.start_point.point.y = self.region[i+1].y
+        self._assess_goal.x_min = x_min
+        self._assess_goal.x_max = x_max
+        self._assess_goal.y_min = y_min
+        self._assess_goal.y_max = y_max
 
-#         self.state = 'EXE'                                              # Set EXE state
+        self.state = 'EXE'                                              # Set EXE state
 
-#         # Start the execution and wait response
-#         self._frontier_client.send_goal(self._goal)                     # Send the goal
-#         self._frontier_client.wait_for_result()                         # Wait for the result
-#         state = self._frontier_client.get_state()                       # Get the state of the action
-#         print(state)
+        # Start the execution and wait response
+        self._assess_client.send_goal(self._assess_goal)
+        self._assess_client.wait_for_result()
+        state = self._assess_client.get_state()                         # Get the state of the action
+        # print(state)
 
-#         if state == GoalStatus.SUCCEEDED:
-#             result = "end"                                              # Assessment successfully executed
-#         elif state == GoalStatus.PREEMPTED:
-#             result = "susp"                                             # Client cancel the motion
-#         else:
-#             result = "error"                                            # The server aborted the motion
+        if state == GoalStatus.SUCCEEDED:
+            result = "end"                                              # Assessment successfully executed
+        elif state == GoalStatus.PREEMPTED:
+            result = "susp"                                             # Client cancel the motion
+        else:
+            result = "error"                                            # The server aborted the motion
 
-#         # Verify the reason why the robot stopped moving
-#         if self.state == 'SUS':                                             # Assessment have been suspended
-#             return
-#         elif result == 'end':                                               # Robot explored the desired region
-#             self.state = 'IDLE'                                             # Set IDLE state
-#             self.region = []                                                # Clear the region variable
-#             self.msg.event = 'end_assessment'
-#             self.pub.publish(self.msg)                                      # Send the message signaling that the assessment is complete
-#         else:                                                               # An error occured during the maneuver
-#             self.state = 'ERROR'                                            # Set ERROR state
-#             self.msg.event = 'assessment_error'
-#             self.pub.publish(self.msg)                                      # Send message signaling the error   
+        # Verify the reason why the robot stopped moving
+        if self.state == 'SUS':                                             # Assessment have been suspended
+            return
+        elif result == 'end':                                               # Robot explored the desired region
+            self.state = 'IDLE'                                             # Set IDLE state
+            self.region = []                                                # Clear the region variable
+            self.msg.event = 'end_assessment'
+            self.pub.publish(self.msg)                                      # Send the message signaling that the assessment is complete
+        else:                                                               # An error occured during the maneuver
+            self.state = 'ERROR'                                            # Set ERROR state
+            self.msg.event = 'assessment_error'
+            self.pub.publish(self.msg)                                      # Send message signaling the error   
 
-#     def suspend(self):
-#         rospy.loginfo("Suspending Assessment!")
-#         self.state = 'SUS'                                                   # Set SUS state
-#         self._frontier_client.cancel_goal()                                  # Cancel the motion of the robot
+    def suspend(self):
+        rospy.loginfo("Suspending Assessment!")
+        self.state = 'SUS'                                                   # Set SUS state
+        self._assess_client.cancel_goal()                                  # Cancel the motion of the robot
 
-#     def resume(self):
-#         rospy.loginfo("Resuming Assessment!")
-#         # Try to get last region to be explored
-#         if self.region:
-#             self.execute()
-#         else:
-#             self.state = 'ERROR'                                            # Set ERROR state
-#             self.msg.event = 'assessment_error'
-#             self.pub.publish(self.msg)                                      # Send message signaling the error
+    def resume(self):
+        rospy.loginfo("Resuming Assessment!")
+        # Try to get last region to be explored
+        if self.region:
+            self.execute()
+        else:
+            self.state = 'ERROR'                                            # Set ERROR state
+            self.msg.event = 'assessment_error'
+            self.pub.publish(self.msg)                                      # Send message signaling the error
 
-#     def reset(self):
-#         rospy.loginfo("Reseting Assessment!")
-#         self.region = []                                                    # Clear the last region
-#         self.state = 'IDLE'                                                 # Set IDLE state
+    def reset(self):
+        rospy.loginfo("Reseting Assessment!")
+        self.region = []                                                    # Clear the last region
+        self.state = 'IDLE'                                                 # Set IDLE state
 
-#     def abort(self):
-#         rospy.loginfo("Aborting assessment!")
-#         self.region = []                                                    # Clear the last region
-#         self.state = 'IDLE'                                                 # Set IDLE state
-
+    def abort(self):
+        rospy.loginfo("Aborting assessment!")
+        self.region = []                                                    # Clear the last region
+        self.state = 'IDLE'                                                 # Set IDLE state
 
 ########################################################################
 class v_search(object):
@@ -326,7 +336,6 @@ class v_search(object):
         rospy.loginfo("Aborting v_search!")
         self.region = []                                                    # Clear the last region
         self.state = 'IDLE'                                                 # Set IDLE state
-
 
 # ########################################################################
 class surroundings_verification(Maneuver):
@@ -594,7 +603,6 @@ class teleoperation(object):
             # Teleoperation error
             self.error()
 
-
 # ########################################################################
 class safe_land(object):
     '''
@@ -667,27 +675,27 @@ def maneuver_event(msg):
         else:
             rospy.logwarn("Command not allowed!")
 
-    # elif "assessment" in msg.event:
-    #     # Commands for assessment maneuver
-    #     if (msg.event == "start_assessment") and (exp.state == 'IDLE'):
-    #         # Verify paramenters
-    #         if len(msg.position) > 3:                                                           # Need at least three points to create a polygon
-    #             thread = Thread(target=exp.execute, args=[msg.position])
-    #             thread.start()                                                                  # Start assessment
-    #         else:
-    #             rospy.logwarn("Wrong assessment parameters! Must have at least 3 vertices and 1 start position.")             # Missing parameters
+    elif "assessment" in msg.event:
+        # Commands for assessment maneuver
+        if (msg.event == "start_assessment") and (assess.state == 'IDLE'):
+            # Verify paramenters
+            if len(msg.position) > 3:                                                           # Need at least three points to create a polygon
+                thread = Thread(target=assess.execute, args=[msg.position])
+                thread.start()                                                                  # Start assessment
+            else:
+                rospy.logwarn("Wrong assessment parameters! Must have at least 3 vertices and 1 start position.")             # Missing parameters
         
-    #     elif (msg.event == "suspend_assessment") and (exp.state == 'EXE'):
-    #         exp.suspend()
-    #     elif (msg.event == "resume_assessment") and (exp.state == 'SUS'):
-    #         thread = Thread(target=exp.execute)
-    #         thread.start()
-    #     elif (msg.event == "reset_assessment") and (exp.state =='ERROR'):
-    #         exp.reset()
-    #     elif (msg.event == "abort_assessment") and (exp.state == 'SUS'):
-    #         exp.abort()
-    #     else:
-    #         rospy.logwarn("Command not allowed!")
+        elif (msg.event == "suspend_assessment") and (assess.state == 'EXE'):
+            assess.suspend()
+        elif (msg.event == "resume_assessment") and (assess.state == 'SUS'):
+            thread = Thread(target=assess.execute)
+            thread.start()
+        elif (msg.event == "reset_assessment") and (assess.state =='ERROR'):
+            assess.reset()
+        elif (msg.event == "abort_assessment") and (assess.state == 'SUS'):
+            assess.abort()
+        else:
+            rospy.logwarn("Command not allowed!")
 
     elif "v_search" in msg.event:
         # Commands for v_search maneuver
@@ -801,7 +809,7 @@ if __name__=="__main__":
 
     # Create object for each type of maneuver
     app = approach(NAME)
-    # assess = assessment(NAME)
+    assess = assessment(NAME)
     search = v_search(NAME)
     vsv = surroundings_verification(NAME, min_dist, max_dist, vsv_rounds, vsv_round_points, height)
     rb = return_to_base(NAME, x_coord, y_coord, z_coord)

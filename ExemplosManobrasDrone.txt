@@ -1,0 +1,92 @@
+
+############################# APROACH MANEUVER #######################################
+
+START:
+
+rostopic pub -1 /UAV_1/maneuvers/in system_msgs/events_message "event: 'start_approach'
+info: ''
+param:
+- 0
+position:
+- linear:
+    x: 5.0
+    y: 5.0
+    z: 3.0
+  angular:
+    x: 0.0
+    y: 0.0
+    z: 3.0"
+
+-----------------------------
+SUSPEND, RESUME, ABORT, RESET:
+
+rostopic pub -1 /UAV_1/maneuvers/in system_msgs/events_message "event: 'event'
+info: ''
+param:
+- 0
+position: []" 
+
+event = suspend_approach  [SUSPEND]
+event = resume_approach   [RESUME]
+event = abort_approach	  [ABORT]
+event = reset_approach	  [RESET]
+
+-----------------------------
+Eventos de Retorno:
+
+event: "end_approach"
+info: ''
+param: []
+position: []
+-----------------------------
+event: "approach_error"
+info: ''
+param: []
+position: []
+
+
+
+############################# ASSESSMENT MANEUVER #######################################
+
+START:
+**Position must contain values for the four vertices of the square area to be explored
+
+rostopic pub -1 /UAV_1/maneuvers/in system_msgs/events_message "event: 'start_assessment'
+info: ''
+param:
+- 0
+position: [{'linear': {'x': 20.0, 'y': 0.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}, {'linear': {'x': 20.0, 'y': 5.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}, {'linear': {'x': 25.0, 'y': 5.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}, {'linear': {'x': 25.0, 'y': 0.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}]"
+
+-----------------------------
+SUSPEND, RESUME, ABORT, RESET:
+
+rostopic pub -1 /UAV_1/maneuvers/in system_msgs/events_message "event: 'event'
+info: ''
+param:
+- 0
+position: []" 
+
+event = suspend_assessment  [SUSPEND]
+event = resume_assessment   [RESUME]
+event = abort_assessment    [ABORT]
+event = reset_assessment    [RESET]
+
+-----------------------------
+Eventos de Retorno:
+
+event: "end_assessment"
+info: ''
+param: []
+position: []
+
+event: "assessment_error"
+info: ''
+param: []
+position: []
+
+
+############################# VICTIM SEARCH MANEUVER #######################################
+
+
+
+

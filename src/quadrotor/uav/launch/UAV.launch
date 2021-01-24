@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 
 <launch>
-  <node name="gazebo_killer" pkg="hector_moveit_config" type="gazebo_killer.sh"/>
   <arg name="debug" default="false" />
 
   <!-- My args -->
@@ -18,7 +17,6 @@
   <arg name="use_ground_truth_for_control" default="true"/>
   <arg name="use_pose_estimation" if="$(arg use_ground_truth_for_control)" default="false"/>
   <arg name="use_pose_estimation" unless="$(arg use_ground_truth_for_control)" default="true"/>
-
 
   <!-- SPAWN QUADROTOR -->
   <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch">
@@ -43,7 +41,8 @@
   </node> 
 
   <!-- Adjust grid size to have more granular exploration-->
-  <param name="grid_size" type="double" value="13"/> 
+  <param name="grid_size" type="double" value="20"/> 
+  <param name="exploration_altitude" type="double" value="2.5"/> 
 
   <!-- Publishing tf_static between earth and robot/map. -->
   <node name="earth_to_world_tf_broadcaster" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 earth $(arg drone_name)/map 50"/> 
@@ -54,56 +53,68 @@
     <arg name="map_frame"   value="$(arg drone_name)/map"/>
     <arg name="odom_frame"  value="$(arg drone_name)/world"/>
     <arg name="base_frame"  value="$(arg drone_name)/base_link"/>
-    <arg name="publish_rate"  value="0.015"/>
+    <arg name="publish_rate"  value="0.1"/>
   </include>
 
-  <!-- OCTOMAP --> 
+  <!-- OCTOMAP 
   <include file="$(find slam)/launch/octomap_mapping.launch">
     <arg name='map_frame' value='$(arg drone_name)/map'/>
     <arg name='base_frame' value='$(arg drone_name)/world'/>
     <arg name='point_cloud' value='camera/depth/points'/>
     <arg name='sensor_range' value='4.5'/>
-  </include>
+  </include>--> 
 
   <!-- LAUNCH MOVEIT FOR PLANNING TRAJECTORIES -->
   <include file="$(find hector_moveit_config)/launch/move_group.launch">
-    <arg name="drone_name" value='$(arg drone_name)'/>
+    <!--<arg name="drone_name" value='$(arg drone_name)'/>-->
     <arg name="allow_trajectory_execution" value="true"/>
     <arg name="fake_execution" value="true"/>
     <arg name="info" value="false"/>
     <arg name="debug" value="$(arg debug)"/>
 
-    <!--<arg name="octomap_frame" value="$(arg drone_name)/world"/>-->
+    <arg name="octomap_frame" value="$(arg drone_name)/world"/>
   </include>
 
-  <!--<include file="$(find hector_quadrotor_teleop)/launch/xbox_controller.launch" >
-    <arg name="control_mode" value="position"/>
-  </include> -->
+  <!-- LAUNCH FRONTIER EXPLORATION-->
+  <include file="$(find hector_moveit_exploration)/launch/explore.launch"/>
+ 
+  <!--<include file="$(find exploration_server)/launch/exploration.launch">
+    <arg name="robot_name" value="$(arg robot_name)"/>
+    <arg name="sensor_range" value="3.5"/>
+    <arg name="plugin" value="frontier_exploration::FrontierPlugin"/>
+  </include>-->
 
 
 <!-- ######################### PAYLOADS ########################################## -->
 
-  <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
+  <!-- LAUNCH VICTIM RECOGNITION SYSTEM 
   <include file="$(find payloads)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
     <arg name="sensor_range" value="3.0"/>
     <arg name="sensor_update_rate" value="2"/>
-  </include>
+  </include>-->
 
-  <!-- LAUNCH BATTERY MONITOR -->
+  <!-- LAUNCH BATTERY MONITOR
   <include file="$(find payloads)/launch/battery_monitor.launch">
     <arg name="move_topic" value="action/pose/status"/>
     <arg name="publish_rate" value="0.1"/>
-  </include>
+  </include> -->
 
-  <!-- LAUNCH FAILURES MONITOR -->
-  <include file="$(find payloads)/launch/failures_monitor.launch"/>
+  <!-- LAUNCH FAILURES MONITOR 
+  <include file="$(find payloads)/launch/failures_monitor.launch"/>-->
 
 <!-- ######################### MANEUVERS ########################################## -->
 
   <!-- LAUNCH TRAJECTORY EXECUTOR -->
   <include file="$(find trajectory_action_pkg)/launch/trajectory_server.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
+  </include>
+
+  <!-- LAUNCH SAFE LAND EXECUTOR -->
+  <include file="$(find quadrotor_control_system)/launch/safe_land_server.launch">
+    <arg name="robot_name" value="$(arg drone_name)"/>
+    <arg name="drone_height" value="0.25"/>
+    <arg name="safe_dist" value="3.0"/>
   </include>
 
   <!-- LAUNCH VICTIM SEARCH EXECUTOR -->
@@ -113,12 +124,13 @@
     <arg name="height" value="1.0"/>
   </include>
 
-  <!-- LAUNCH SAFE LAND EXECUTOR -->
-  <include file="$(find quadrotor_control_system)/launch/safe_land_server.launch">
+  <!-- LAUNCH ASSESSMENT EXECUTOR
+  <include file="$(find frontiers)/launch/frontiers_server.launch"/>
+
+  <include file="$(find quadrotor_control_system)/launch/assessment_server.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
-    <arg name="drone_height" value="0.25"/>
-    <arg name="safe_dist" value="3.0"/>
-  </include>
+    <arg name="height" value="1.0"/>
+  </include> -->
 
   <!-- Launch the node responsible for controlling maneuvers -->
   <include file="$(find quadrotor_control_system)/launch/maneuvers.launch">

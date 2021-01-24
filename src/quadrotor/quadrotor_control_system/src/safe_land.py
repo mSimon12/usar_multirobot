@@ -20,7 +20,6 @@ from trajectory_action_pkg.msg import ExecuteDroneApproachAction, ExecuteDroneAp
 
 from hector_uav_msgs.srv import EnableMotors, EnableMotorsRequest
 
-
 from system_msgs.msg import events_message
 
 

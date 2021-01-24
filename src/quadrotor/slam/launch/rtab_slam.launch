@@ -91,16 +91,20 @@
 
 	  <param name="Reg/Force3DoF" type="string" value="true"/>
 	  
-	  <param name="GridGlobal/MinSize" type="string" value="20"/>
+	  <param name="GridGlobal/MinSize" type="string" value="200"/>
           <param name="GridGlobal/OccupancyThr" type="string" value="0.5"/>
 
 	  <param name="Rtabmap/DetectionRate" type="string" value="100"/>
  	  
           <param name="Grid/FromDepth" type="string" value="true"/>
-	  <!--<param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>
-	  <param name="Grid/MaxGroundAngle" type="string" value="60.0"/>
-	  <param name="Grid/RayTracing" type="string" value="true"/>-->
+	  <param name="Grid/CellSize" type="string" value="0.05"/>
+          <!--<param name="octomap_tree_depth" type="int" value="16"/>-->
 
+	  <!--<param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>
+	  <param name="Grid/MaxGroundAngle" type="string" value="60.0"/>-->
+	  <param name="Grid/RayTracing" type="string" value="true"/>		<!--Must be true to ensure free space is published into the octomap -->
+
+	  
 	  <!-- localization mode -->
 	  <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
   </node>

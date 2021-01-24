@@ -83,13 +83,15 @@ class V_search(object):
 
         while not rospy.is_shutdown():
 
+            self.odometry_me.acquire()
             self.server_result.last_pose = self.odometry
+            self.server_feedback.current_pose = self.odometry
+            self.odometry_me.release()
 
             if self.search_server.is_preempt_requested():
                 self.search_server.set_preempted(self.server_result)
                 return
 
-            self.server_feedback.current_pose = self.odometry
             self.search_server.publish_feedback(self.server_feedback)
 
             self.sonar_me.acquire()
@@ -110,6 +112,10 @@ class V_search(object):
             if result == GoalStatus.SUCCEEDED:
                 # Verifies if all the area have been searched
                 if (self.next_point.goal.position.x == (start.x + x)) and ((self.next_point.goal.position.y == (start.y + y))):
+                    self.odometry_me.acquire()
+                    self.server_result.last_pose = self.odometry
+                    self.odometry_me.release()
+
                     self.search_server.set_succeeded(self.server_result)
                     return
 

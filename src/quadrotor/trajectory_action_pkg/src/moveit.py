@@ -2,6 +2,7 @@
 
 import copy
 import rospy
+from threading import Condition, Thread
 
 from actionlib import SimpleActionClient, GoalStatus
 from std_msgs.msg import Header
@@ -13,6 +14,7 @@ from moveit_msgs.srv import GetPlanningScene, GetPlanningSceneRequest
 
 from geometry_msgs.msg import Pose
 from octomap_msgs.msg import Octomap
+from nav_msgs.msg import Odometry
 
 
 class MoveGroup(object):
@@ -99,8 +101,9 @@ class MoveGroup(object):
     
 class PlanningScenePublisher(object):
 
-    def __init__(self, name):
+    def __init__(self, name, robot_state):
         self.drone_name = name
+        self.current_state = robot_state
 
         self.scene_publisher = rospy.Publisher('/{}/planning_scene'.format(name), PlanningScene, queue_size=10)
         self.scene_msg = PlanningScene()
@@ -120,20 +123,77 @@ class PlanningScenePublisher(object):
         self.scene_msg.allowed_collision_matrix.entry_values.append(AllowedCollisionEntry())
         self.scene_msg.allowed_collision_matrix.entry_values[2].enabled = [True,False,False]
 
+        self.odometry_me = Condition()
+        self.octomap_me = Condition()
 
-    def publishScene(self,robot_state):
+        # Subscribe to octomap topic
         self.octomap = None
         self.octo_sub = rospy.Subscriber("/{}/octomap_binary".format(self.drone_name),Octomap,self.octomap_callback, queue_size=10)
 
-        while(not self.octomap):
-            pass
-        self.scene_msg.robot_state = robot_state
-        self.scene_msg.world.octomap.octomap = self.octomap
+        # Subscribe to ground_truth to monitor the current pose of the robot
+        self.odometry = None
+        rospy.Subscriber("/{}/ground_truth/state".format(self.drone_name), Odometry, self.poseCallback)
 
+        # x = Thread(target=self.publishScene)
+        # rospy.loginfo("Starting Planning Scene Publisher")
+        # x.start()
+
+
+    def publishScene(self):
+
+        # r = rospy.Rate(0.1)      # 1hz 
+        # while not rospy.is_shutdown():
+        self.odometry_me.acquire()
+        while(not self.odometry):
+            self.odometry_me.wait()
+
+        # Update robot pose
+        self.current_state.multi_dof_joint_state.transforms[0].translation.x = self.odometry.position.x
+        self.current_state.multi_dof_joint_state.transforms[0].translation.y = self.odometry.position.y
+        self.current_state.multi_dof_joint_state.transforms[0].translation.z = self.odometry.position.z
+        self.current_state.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.x
+        self.current_state.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.y
+        self.current_state.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.z
+        self.current_state.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.w
+
+        # Set current scene
+        self.scene_msg.robot_state = self.current_state
+        self.odometry_me.release()
+
+        self.octomap_me.acquire()
+        
+        # Wait updates on robot pose and octomap
+        while(not self.octomap):
+            self.octomap_me.wait()
+
+        self.scene_msg.world.octomap.octomap = self.octomap
+        self.octomap_me.release()
+
+        # Publish the scene
+        # rospy.loginfo("Publishing new scene!")
         self.scene_publisher.publish(self.scene_msg)
-        self.octo_sub.unregister()
+            
+            # Wait time to ensure the rate of the publications
+            # r.sleep()
 
 
     def octomap_callback(self, msg):
+        '''
+            Monitor the current octomap
+        '''
+        self.octomap_me.acquire()
         self.octomap = msg
         self.octomap.id="OcTree"
+        self.octomap_me.notifyAll()
+        self.octomap_me.release()
+
+
+    def poseCallback(self,odometry):
+        '''
+            Monitor the current position of the robot
+        '''
+        self.odometry_me.acquire()
+        self.odometry = odometry.pose.pose
+        # print(self.odometry)
+        self.odometry_me.notifyAll()
+        self.odometry_me.release()

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<launch>
+   <arg name="robot_name" default="robot"/>
+   <arg name="height" default="1.0"/>
+
+   <param name="robot_name" type="str" value="$(arg robot_name)"/>
+   <param name="height" type="str" value="$(arg height)"/> 
+
+   <node name="assessment_server" pkg="quadrotor_control_system" type="assessment.py" output="screen"/>
+</launch>	

@@ -48,7 +48,6 @@ class Approach(object):
         self.odometry_me = Condition()
         self.current_height = None
         
-
         # Create trajectory server
         self.trajectory_server = SimpleActionServer('approach_server', ExecuteDroneApproachAction, self.goCallback, False)
         self.server_feedback = ExecuteDroneApproachFeedback()
@@ -86,12 +85,13 @@ class Approach(object):
         self.move_group = MoveGroup('earth', name)
         self.move_group.set_planner()
 
-        #Start planningScenePublisher
-        self.scene_pub = PlanningScenePublisher(name)
-
         # Get current robot position to define as start planning point
         self.current_pose = self.robot.get_current_state()
 
+        #Start planningScenePublisher
+        self.scene_pub = PlanningScenePublisher(name, self.current_pose)
+
+       
         # Start trajectory server
         self.trajectory_server.start()
 
@@ -103,6 +103,17 @@ class Approach(object):
         self.current_height = msg.range
         self.sonar_me.notify()
         self.sonar_me.release()
+
+
+    def poseCallback(self,odometry):
+        '''
+            Monitor the current position of the robot
+        '''
+        self.odometry_me.acquire()
+        self.odometry = odometry.pose.pose
+        # print(self.odometry)
+        self.odometry_me.release()
+        self.odom_received = True
 
 
     def goCallback(self,pose):
@@ -169,6 +180,7 @@ class Approach(object):
         '''
             Function to plan and execute the trajectory one time
         '''
+
         # Insert goal position on an array
         target = []
         target.append(target_.position.x)
@@ -196,9 +208,6 @@ class Approach(object):
         #Set start state
         self.move_group.set_start_state(self.current_pose)
 
-        #Update PlanningSene
-        self.scene_pub.publishScene(self.current_pose)
-
         # Plan a trajectory till the desired target
         plan = self.move_group.plan()
 
@@ -218,6 +227,8 @@ class Approach(object):
                 # Verify preempt call
                 if self.trajectory_server.is_preempt_requested():
                     self.move_client.send_goal(last_pose)
+                    self.move_client.wait_for_result()
+                    self.scene_pub.publishScene()
                     self.trajectory_received = False
                     self.odom_received = False
                     return 'preempted'
@@ -228,6 +239,8 @@ class Approach(object):
                 self.move_client.send_goal(pose,feedback_cb=self.collisionCallback)
                 self.move_client.wait_for_result()
                 result = self.move_client.get_state()
+
+                self.scene_pub.publishScene()
                 
                 # Abort if the drone can not reach the position
                 if result == GoalStatus.ABORTED:
@@ -314,18 +327,6 @@ class Approach(object):
 
         self.trajectory_received = True
 
-
-    def poseCallback(self,odometry):
-        '''
-            Monitor the current position of the robot
-        '''
-        self.odometry_me.acquire()
-        self.odometry = odometry.pose.pose
-        # print(self.odometry)
-        self.odometry_me.release()
-        self.odom_received = True
-
-
     def collisionCallback(self,feedback):
         '''
             This callback runs on every feedback message received
@@ -362,8 +363,6 @@ class Approach(object):
                 self.current_pose.multi_dof_joint_state.transforms[0] = pose                # Insert the correct odometry value
                 validity_msg.robot_state = self.current_pose
 
-                #Update PlanningSene
-                self.scene_pub.publishScene(self.current_pose)
 
                 # Call service to verify collision
                 collision_res = self.validity_srv.call(validity_msg)
