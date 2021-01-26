@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Automata name="Untitled" major="0" minor="9">
+<Automaton name="bat_operation_modes" type="Specification">
+	<Events>
+		<Event id="0" label="uav_bat_L" controllable="false"/>
+		<Event id="1" label="uav_bat_LL" controllable="false"/>
+		<Event id="2" label="uav_bat_OK" controllable="false"/>
+		<Event id="3" label="uav_rsm_app"/>
+		<Event id="4" label="uav_rsm_assess"/>
+		<Event id="5" label="uav_rsm_rb"/>
+		<Event id="6" label="uav_rsm_v_search"/>
+		<Event id="7" label="uav_rsm_vsv"/>
+		<Event id="8" label="uav_st_app"/>
+		<Event id="9" label="uav_st_assess"/>
+		<Event id="10" label="uav_st_rb"/>
+		<Event id="11" label="uav_st_tele"/>
+		<Event id="12" label="uav_st_v_search"/>
+		<Event id="13" label="uav_st_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="ALL_M" initial="true" accepting="true"/>
+		<State id="1" name="BAT_DEAD"/>
+		<State id="2" name="RB_TELE"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="2" event="0"/>
+		<Transition source="0" dest="0" event="8"/>
+		<Transition source="0" dest="0" event="9"/>
+		<Transition source="0" dest="0" event="12"/>
+		<Transition source="0" dest="0" event="13"/>
+		<Transition source="0" dest="0" event="10"/>
+		<Transition source="0" dest="0" event="11"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="0" dest="0" event="4"/>
+		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="7"/>
+		<Transition source="0" dest="0" event="5"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="1" dest="2" event="0"/>
+		<Transition source="1" dest="1" event="2"/>
+		<Transition source="1" dest="1" event="1"/>
+		<Transition source="2" dest="0" event="2"/>
+		<Transition source="2" dest="2" event="10"/>
+		<Transition source="2" dest="2" event="5"/>
+		<Transition source="2" dest="2" event="11"/>
+		<Transition source="2" dest="2" event="0"/>
+		<Transition source="2" dest="1" event="1"/>
+	</Transitions>
+</Automaton>
+<Automaton name="critical_failure_operation_mode" type="Specification">
+	<Events>
+		<Event id="0" label="uav_critic_fail" controllable="false"/>
+		<Event id="1" label="uav_rsm_app"/>
+		<Event id="2" label="uav_rsm_assess"/>
+		<Event id="3" label="uav_rsm_rb"/>
+		<Event id="4" label="uav_rsm_v_search"/>
+		<Event id="5" label="uav_rsm_vsv"/>
+		<Event id="6" label="uav_rst_f"/>
+		<Event id="7" label="uav_st_app"/>
+		<Event id="8" label="uav_st_assess"/>
+		<Event id="9" label="uav_st_rb"/>
+		<Event id="10" label="uav_st_tele"/>
+		<Event id="11" label="uav_st_v_search"/>
+		<Event id="12" label="uav_st_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="CRITIC_FAIL"/>
+		<State id="1" name="OK" initial="true" accepting="true"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="6"/>
+		<Transition source="0" dest="0" event="0"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="1" event="7"/>
+		<Transition source="1" dest="1" event="8"/>
+		<Transition source="1" dest="1" event="11"/>
+		<Transition source="1" dest="1" event="12"/>
+		<Transition source="1" dest="1" event="9"/>
+		<Transition source="1" dest="1" event="10"/>
+		<Transition source="1" dest="1" event="1"/>
+		<Transition source="1" dest="1" event="2"/>
+		<Transition source="1" dest="1" event="4"/>
+		<Transition source="1" dest="1" event="5"/>
+		<Transition source="1" dest="1" event="3"/>
+		<Transition source="1" dest="1" event="6"/>
+	</Transitions>
+</Automaton>
+<Automaton name="manouvers_ME" type="Specification">
+	<Events>
+		<Event id="0" label="uav_end_app" controllable="false"/>
+		<Event id="1" label="uav_end_assess" controllable="false"/>
+		<Event id="2" label="uav_end_rb" controllable="false"/>
+		<Event id="3" label="uav_end_safe_land" controllable="false"/>
+		<Event id="4" label="uav_end_tele" controllable="false"/>
+		<Event id="5" label="uav_end_v_search" controllable="false"/>
+		<Event id="6" label="uav_end_vsv" controllable="false"/>
+		<Event id="7" label="uav_er_app" controllable="false"/>
+		<Event id="8" label="uav_er_assess" controllable="false"/>
+		<Event id="9" label="uav_er_rb" controllable="false"/>
+		<Event id="10" label="uav_er_safe_land" controllable="false"/>
+		<Event id="11" label="uav_er_tele" controllable="false"/>
+		<Event id="12" label="uav_er_v_search" controllable="false"/>
+		<Event id="13" label="uav_er_vsv" controllable="false"/>
+		<Event id="14" label="uav_rsm_app"/>
+		<Event id="15" label="uav_rsm_assess"/>
+		<Event id="16" label="uav_rsm_rb"/>
+		<Event id="17" label="uav_rsm_v_search"/>
+		<Event id="18" label="uav_rsm_vsv"/>
+		<Event id="19" label="uav_st_app"/>
+		<Event id="20" label="uav_st_assess"/>
+		<Event id="21" label="uav_st_rb"/>
+		<Event id="22" label="uav_st_safe_land"/>
+		<Event id="23" label="uav_st_tele"/>
+		<Event id="24" label="uav_st_v_search"/>
+		<Event id="25" label="uav_st_vsv"/>
+		<Event id="26" label="uav_sus_app"/>
+		<Event id="27" label="uav_sus_assess"/>
+		<Event id="28" label="uav_sus_rb"/>
+		<Event id="29" label="uav_sus_v_search"/>
+		<Event id="30" label="uav_sus_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="Mi_EXE"/>
+		<State id="1" name="NO_Mi" initial="true" accepting="true"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="26"/>
+		<Transition source="0" dest="1" event="27"/>
+		<Transition source="0" dest="1" event="29"/>
+		<Transition source="0" dest="1" event="30"/>
+		<Transition source="0" dest="1" event="28"/>
+		<Transition source="0" dest="1" event="0"/>
+		<Transition source="0" dest="1" event="1"/>
+		<Transition source="0" dest="1" event="5"/>
+		<Transition source="0" dest="1" event="6"/>
+		<Transition source="0" dest="1" event="2"/>
+		<Transition source="0" dest="1" event="3"/>
+		<Transition source="0" dest="1" event="4"/>
+		<Transition source="0" dest="1" event="7"/>
+		<Transition source="0" dest="1" event="8"/>
+		<Transition source="0" dest="1" event="12"/>
+		<Transition source="0" dest="1" event="13"/>
+		<Transition source="0" dest="1" event="9"/>
+		<Transition source="0" dest="1" event="10"/>
+		<Transition source="0" dest="1" event="11"/>
+		<Transition source="1" dest="1" event="0"/>
+		<Transition source="1" dest="1" event="1"/>
+		<Transition source="1" dest="1" event="5"/>
+		<Transition source="1" dest="1" event="6"/>
+		<Transition source="1" dest="1" event="2"/>
+		<Transition source="1" dest="1" event="3"/>
+		<Transition source="1" dest="1" event="4"/>
+		<Transition source="1" dest="1" event="7"/>
+		<Transition source="1" dest="1" event="8"/>
+		<Transition source="1" dest="1" event="12"/>
+		<Transition source="1" dest="1" event="13"/>
+		<Transition source="1" dest="1" event="9"/>
+		<Transition source="1" dest="1" event="10"/>
+		<Transition source="1" dest="1" event="11"/>
+		<Transition source="1" dest="0" event="19"/>
+		<Transition source="1" dest="0" event="20"/>
+		<Transition source="1" dest="0" event="24"/>
+		<Transition source="1" dest="0" event="25"/>
+		<Transition source="1" dest="0" event="21"/>
+		<Transition source="1" dest="0" event="22"/>
+		<Transition source="1" dest="0" event="23"/>
+		<Transition source="1" dest="0" event="14"/>
+		<Transition source="1" dest="0" event="15"/>
+		<Transition source="1" dest="0" event="17"/>
+		<Transition source="1" dest="0" event="18"/>
+		<Transition source="1" dest="0" event="16"/>
+	</Transitions>
+</Automaton>
+<Automaton name="manouvers_vs_dependencies" type="Specification">
+	<Events>
+		<Event id="0" label="uav_er_vs" controllable="false"/>
+		<Event id="1" label="uav_off_vs"/>
+		<Event id="2" label="uav_on_vs"/>
+		<Event id="3" label="uav_rsm_v_search"/>
+		<Event id="4" label="uav_rsm_vsv"/>
+		<Event id="5" label="uav_st_safe_land"/>
+		<Event id="6" label="uav_st_v_search"/>
+		<Event id="7" label="uav_st_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="VS_OFF" initial="true" accepting="true"/>
+		<State id="1" name="VS_ON"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="2"/>
+		<Transition source="1" dest="0" event="1"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="1" event="6"/>
+		<Transition source="1" dest="1" event="7"/>
+		<Transition source="1" dest="1" event="5"/>
+		<Transition source="1" dest="1" event="3"/>
+		<Transition source="1" dest="1" event="4"/>
+	</Transitions>
+</Automaton>
+<Automaton name="motion_assist_request" type="Specification">
+	<Events>
+		<Event id="0" label="uav_er_app" controllable="false"/>
+		<Event id="1" label="uav_er_assess" controllable="false"/>
+		<Event id="2" label="uav_er_rb" controllable="false"/>
+		<Event id="3" label="uav_er_v_search" controllable="false"/>
+		<Event id="4" label="uav_er_vsv" controllable="false"/>
+		<Event id="5" label="uav_fail" controllable="false"/>
+		<Event id="6" label="uav_pos_fail" controllable="false"/>
+		<Event id="7" label="uav_req_assist"/>
+		<Event id="8" label="uav_rst_app"/>
+		<Event id="9" label="uav_rst_assess"/>
+		<Event id="10" label="uav_rst_rb"/>
+		<Event id="11" label="uav_rst_v_search"/>
+		<Event id="12" label="uav_rst_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="ASSIST_ALLOWED"/>
+		<State id="1" name="NO_ASSIT" initial="true" accepting="true"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="7"/>
+		<Transition source="0" dest="1" event="8"/>
+		<Transition source="0" dest="1" event="9"/>
+		<Transition source="0" dest="1" event="11"/>
+		<Transition source="0" dest="1" event="12"/>
+		<Transition source="0" dest="1" event="10"/>
+		<Transition source="0" dest="0" event="0"/>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="0" dest="0" event="4"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="5"/>
+		<Transition source="1" dest="1" event="8"/>
+		<Transition source="1" dest="1" event="9"/>
+		<Transition source="1" dest="1" event="11"/>
+		<Transition source="1" dest="1" event="12"/>
+		<Transition source="1" dest="1" event="10"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="0" event="1"/>
+		<Transition source="1" dest="0" event="3"/>
+		<Transition source="1" dest="0" event="4"/>
+		<Transition source="1" dest="0" event="2"/>
+		<Transition source="1" dest="0" event="6"/>
+		<Transition source="1" dest="0" event="5"/>
+	</Transitions>
+</Automaton>
+<Automaton name="position_failure_operation_mode" type="Specification">
+	<Events>
+		<Event id="0" label="uav_pos_fail" controllable="false"/>
+		<Event id="1" label="uav_rsm_app"/>
+		<Event id="2" label="uav_rsm_assess"/>
+		<Event id="3" label="uav_rsm_rb"/>
+		<Event id="4" label="uav_rsm_v_search"/>
+		<Event id="5" label="uav_rsm_vsv"/>
+		<Event id="6" label="uav_rst_f"/>
+		<Event id="7" label="uav_st_app"/>
+		<Event id="8" label="uav_st_assess"/>
+		<Event id="9" label="uav_st_rb"/>
+		<Event id="10" label="uav_st_v_search"/>
+		<Event id="11" label="uav_st_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="POS_FAIL"/>
+		<State id="1" name="POS_OK" initial="true" accepting="true"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="6"/>
+		<Transition source="0" dest="0" event="0"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="1" event="7"/>
+		<Transition source="1" dest="1" event="8"/>
+		<Transition source="1" dest="1" event="10"/>
+		<Transition source="1" dest="1" event="11"/>
+		<Transition source="1" dest="1" event="9"/>
+		<Transition source="1" dest="1" event="1"/>
+		<Transition source="1" dest="1" event="2"/>
+		<Transition source="1" dest="1" event="4"/>
+		<Transition source="1" dest="1" event="5"/>
+		<Transition source="1" dest="1" event="3"/>
+		<Transition source="1" dest="1" event="6"/>
+	</Transitions>
+</Automaton>
+<Automaton name="report_victim_found" type="Specification">
+	<Events>
+		<Event id="0" label="uav_rep_victim"/>
+		<Event id="1" label="uav_rsm_app"/>
+		<Event id="2" label="uav_rsm_assess"/>
+		<Event id="3" label="uav_rsm_rb"/>
+		<Event id="4" label="uav_rsm_v_search"/>
+		<Event id="5" label="uav_rsm_vsv"/>
+		<Event id="6" label="uav_st_app"/>
+		<Event id="7" label="uav_st_assess"/>
+		<Event id="8" label="uav_st_rb"/>
+		<Event id="9" label="uav_st_v_search"/>
+		<Event id="10" label="uav_st_vsv"/>
+		<Event id="11" label="uav_victim_found" controllable="false"/>
+	</Events>
+	<States>
+		<State id="0" name="NO_V" initial="true" accepting="true"/>
+		<State id="1" name="V_TO_REPORT"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="11"/>
+		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="7"/>
+		<Transition source="0" dest="0" event="9"/>
+		<Transition source="0" dest="0" event="10"/>
+		<Transition source="0" dest="0" event="8"/>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="0" dest="0" event="4"/>
+		<Transition source="0" dest="0" event="5"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="1" event="11"/>
+	</Transitions>
+</Automaton>
+<Automaton name="sensors_at_critical_battery" type="Specification">
+	<Events>
+		<Event id="0" label="uav_bat_L" controllable="false"/>
+		<Event id="1" label="uav_bat_LL" controllable="false"/>
+		<Event id="2" label="uav_on_vs"/>
+	</Events>
+	<States>
+		<State id="0" name="BAT_DEAD"/>
+		<State id="1" name="BAT_NOT_DEAD" initial="true" accepting="true"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="1" event="0"/>
+		<Transition source="1" dest="1" event="2"/>
+		<Transition source="1" dest="1" event="0"/>
+		<Transition source="1" dest="0" event="1"/>
+	</Transitions>
+</Automaton>
+<Automaton name="simple_failure_operation_mode" type="Specification">
+	<Events>
+		<Event id="0" label="uav_fail" controllable="false"/>
+		<Event id="1" label="uav_rsm_app"/>
+		<Event id="2" label="uav_rsm_assess"/>
+		<Event id="3" label="uav_rsm_v_search"/>
+		<Event id="4" label="uav_rsm_vsv"/>
+		<Event id="5" label="uav_rst_f"/>
+		<Event id="6" label="uav_st_app"/>
+		<Event id="7" label="uav_st_assess"/>
+		<Event id="8" label="uav_st_v_search"/>
+		<Event id="9" label="uav_st_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="OK" initial="true" accepting="true"/>
+		<State id="1" name="SIMPLE_FAIL"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="0"/>
+		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="7"/>
+		<Transition source="0" dest="0" event="8"/>
+		<Transition source="0" dest="0" event="9"/>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="0" dest="0" event="4"/>
+		<Transition source="0" dest="0" event="5"/>
+		<Transition source="1" dest="0" event="5"/>
+		<Transition source="1" dest="1" event="0"/>
+	</Transitions>
+</Automaton>
+<Automaton name="teleoperation_pref_and_start_conditions" type="Specification">
+	<Events>
+		<Event id="0" label="uav_call_tele" controllable="false"/>
+		<Event id="1" label="uav_req_assist"/>
+		<Event id="2" label="uav_rsm_app"/>
+		<Event id="3" label="uav_rsm_assess"/>
+		<Event id="4" label="uav_rsm_rb"/>
+		<Event id="5" label="uav_rsm_v_search"/>
+		<Event id="6" label="uav_rsm_vsv"/>
+		<Event id="7" label="uav_st_app"/>
+		<Event id="8" label="uav_st_assess"/>
+		<Event id="9" label="uav_st_rb"/>
+		<Event id="10" label="uav_st_tele"/>
+		<Event id="11" label="uav_st_v_search"/>
+		<Event id="12" label="uav_st_vsv"/>
+	</Events>
+	<States>
+		<State id="0" name="AUTO" initial="true" accepting="true"/>
+		<State id="1" name="TELE"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="1"/>
+		<Transition source="0" dest="1" event="0"/>
+		<Transition source="0" dest="0" event="7"/>
+		<Transition source="0" dest="0" event="8"/>
+		<Transition source="0" dest="0" event="11"/>
+		<Transition source="0" dest="0" event="12"/>
+		<Transition source="0" dest="0" event="9"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="0" dest="0" event="5"/>
+		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="4"/>
+		<Transition source="1" dest="0" event="10"/>
+		<Transition source="1" dest="1" event="0"/>
+	</Transitions>
+</Automaton>
+<Automaton name="VS_turn_off_condition1" type="Specification">
+	<Events>
+		<Event id="0" label="uav_bat_LL" controllable="false"/>
+		<Event id="1" label="uav_critic_fail" controllable="false"/>
+		<Event id="2" label="uav_end_v_search" controllable="false"/>
+		<Event id="3" label="uav_end_vsv" controllable="false"/>
+		<Event id="4" label="uav_er_v_search" controllable="false"/>
+		<Event id="5" label="uav_er_vs" controllable="false"/>
+		<Event id="6" label="uav_er_vsv" controllable="false"/>
+		<Event id="7" label="uav_off_vs"/>
+		<Event id="8" label="uav_pos_fail" controllable="false"/>
+		<Event id="9" label="uav_rsm_v_search"/>
+		<Event id="10" label="uav_rsm_vsv"/>
+		<Event id="11" label="uav_st_v_search"/>
+		<Event id="12" label="uav_st_vsv"/>
+		<Event id="13" label="uav_sus_v_search"/>
+		<Event id="14" label="uav_sus_vsv"/>
+		<Event id="15" label="uav_victim_found" controllable="false"/>
+	</Events>
+	<States>
+		<State id="0" name="Mi_OFF" initial="true" accepting="true"/>
+		<State id="1" name="Mi_ON"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="11"/>
+		<Transition source="0" dest="1" event="12"/>
+		<Transition source="0" dest="1" event="10"/>
+		<Transition source="0" dest="1" event="9"/>
+		<Transition source="0" dest="0" event="7"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="0" dest="0" event="4"/>
+		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="15"/>
+		<Transition source="0" dest="0" event="8"/>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="0" event="0"/>
+		<Transition source="0" dest="0" event="5"/>
+		<Transition source="1" dest="0" event="2"/>
+		<Transition source="1" dest="0" event="3"/>
+		<Transition source="1" dest="0" event="4"/>
+		<Transition source="1" dest="0" event="6"/>
+		<Transition source="1" dest="0" event="13"/>
+		<Transition source="1" dest="0" event="14"/>
+		<Transition source="1" dest="0" event="15"/>
+		<Transition source="1" dest="0" event="8"/>
+		<Transition source="1" dest="0" event="1"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="0" event="5"/>
+	</Transitions>
+</Automaton>
+<Automaton name="VS_turn_off_condition2" type="Specification">
+	<Events>
+		<Event id="0" label="uav_end_safe_land" controllable="false"/>
+		<Event id="1" label="uav_er_safe_land" controllable="false"/>
+		<Event id="2" label="uav_er_vs" controllable="false"/>
+		<Event id="3" label="uav_off_vs"/>
+		<Event id="4" label="uav_st_safe_land"/>
+	</Events>
+	<States>
+		<State id="0" name="Mi_OFF" initial="true" accepting="true"/>
+		<State id="1" name="SAFE_LAND_ON"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="4"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="0" dest="0" event="0"/>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="0" event="1"/>
+		<Transition source="1" dest="0" event="2"/>
+	</Transitions>
+</Automaton>
+<Automaton name="vsv_pref_after_victim_found" type="Specification">
+	<Events>
+		<Event id="0" label="uav_rsm_app"/>
+		<Event id="1" label="uav_rsm_assess"/>
+		<Event id="2" label="uav_rsm_v_search"/>
+		<Event id="3" label="uav_st_app"/>
+		<Event id="4" label="uav_st_assess"/>
+		<Event id="5" label="uav_st_v_search"/>
+		<Event id="6" label="uav_st_vsv"/>
+		<Event id="7" label="uav_victim_found" controllable="false"/>
+	</Events>
+	<States>
+		<State id="0" name="ALL_M" initial="true" accepting="true"/>
+		<State id="1" name="VSV_PREF"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="7"/>
+		<Transition source="0" dest="0" event="3"/>
+		<Transition source="0" dest="0" event="4"/>
+		<Transition source="0" dest="0" event="5"/>
+		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="0"/>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="0" event="2"/>
+		<Transition source="1" dest="0" event="6"/>
+		<Transition source="1" dest="1" event="7"/>
+	</Transitions>
+</Automaton>
+<Automaton name="vsv_start_condition" type="Specification">
+	<Events>
+		<Event id="0" label="uav_st_vsv"/>
+		<Event id="1" label="uav_victim_found" controllable="false"/>
+	</Events>
+	<States>
+		<State id="0" name="VSV_NOK" initial="true" accepting="true"/>
+		<State id="1" name="VSV_OK"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="1" event="1"/>
+		<Transition source="1" dest="0" event="0"/>
+		<Transition source="1" dest="1" event="1"/>
+	</Transitions>
+</Automaton>
+</Automata>

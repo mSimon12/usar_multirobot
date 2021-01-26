@@ -7,12 +7,13 @@ from lib.Automaton import MultiAutomata
 from lib.StateMachine import StateMachine, Supervisor
 from lib.ProductSystem import ProductSystem
 from Intereface import EventInterface
-from ugv.TaskManager_UGV import TaskManager
+# from ugv.TaskManager_UGV import TaskManager
 from lib.EventReceiver import EventReceiver
 
 # ROS libs
 from system_msgs.msg import task_message, events_message
 import rospy
+import importlib
 
 #Change to the current directory
 path = os.path.dirname(os.path.abspath(__file__))
@@ -20,12 +21,26 @@ os.chdir(path)
 
 if __name__ == "__main__":
     NAME = rospy.get_param("robot_name", default="")
-    rospy.init_node("{}_supervisor".format(NAME), anonymous=False)
+    ROBOT_TYPE = rospy.get_param("supervisor/robot_type", default="")
+
+    rospy.init_node("supervisor", anonymous=False)
+
+    # Set the models to be applied
+    if ROBOT_TYPE == "pioneer3at":
+        PLANT_FILE = "plant_pioneer3at"
+        SUP_FILE = "sup_pioneer3at"
+        module = importlib.import_module('ugv.TaskManager_UGV')
+        TaskManager = module.TaskManager
+    elif ROBOT_TYPE == "UAV":
+        PLANT_FILE = "plant_uav"
+        SUP_FILE = "sup_uav"
+        module = importlib.import_module('agv.TaskManager_AGV')
+        TaskManager = module.TaskManager
 
     #############################################################################
     #### Create Multiple State Machines from one file  #################
-    G = MultiAutomata('Plant')
-    G.read_xml('files/plant.xml')         # File with multiple Automata
+    G = MultiAutomata("{}_Plant".format(NAME))
+    G.read_xml("files/{}.xml".format(PLANT_FILE))         # File with multiple Automata
     SM = {}
     for aut in G.get_automata().values():
         SM[aut.get_name()] = StateMachine(aut)
@@ -33,8 +48,8 @@ if __name__ == "__main__":
 
     #############################################################################
     #### Create Multiple Supervisors from one file  ###################
-    S = MultiAutomata('Supervisors')
-    S.read_xml('files/supervisors.xml')         # File with multiple Automata
+    S = MultiAutomata("Supervisors")
+    S.read_xml("files/{}.xml".format(SUP_FILE))         # File with multiple Automata
     SUP = {}
     for aut in S.get_automata().values():
         SUP[aut.get_name()] = Supervisor(aut)
@@ -47,8 +62,8 @@ if __name__ == "__main__":
 
     #############################################################################
     #### Start the Interface ####################################################
-    interface = EventInterface()
-    interface.start()
+    # interface = EventInterface()
+    # interface.start()
 
     #############################################################################
     #### Start Product System ###################################################
@@ -60,9 +75,12 @@ if __name__ == "__main__":
     receiver = EventReceiver()
     #Start a subscrier for all topics that may generate an event
     # namespace = rospy.get_namespace()
-    rospy.Subscriber("victim_sensor/out",events_message, receiver.receive_event, '{}/victim_sensor/out'.format(NAME))
-    rospy.Subscriber("gas_sensor/out",events_message, receiver.receive_event, '{}/gas_sensor/out'.format(NAME))
+
     rospy.Subscriber("battery_monitor/out",events_message, receiver.receive_event, '{}/battery_monitor/out'.format(NAME))
     rospy.Subscriber("failures_monitor/out",events_message, receiver.receive_event, '{}/failures_monitor/out'.format(NAME))
     rospy.Subscriber("maneuvers/out",events_message, receiver.receive_event, '{}/maneuvers/out'.format(NAME))
+    rospy.Subscriber("victim_sensor/out",events_message, receiver.receive_event, '{}/victim_sensor/out'.format(NAME))
+    if(ROBOT_TYPE == "pioneer3at"):
+        rospy.Subscriber("gas_sensor/out",events_message, receiver.receive_event, '{}/gas_sensor/out'.format(NAME))
+
     rospy.Subscriber("/ihm/out",events_message, receiver.receive_event, 'ihm/out')

@@ -832,3 +832,123 @@ class mutual_exclusion(object):
 		#Write code here...
 		pass
 
+
+class assessment(object):
+
+	##### -- ASSESS_ERROR handler -- ########################################
+	@classmethod
+	def ASSESS_ERROR_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- ASSESS_EXE handler -- ########################################
+	@classmethod
+	def ASSESS_EXE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- ASSESS_IDLE handler -- ########################################
+	@classmethod
+	def ASSESS_IDLE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- ASSESS_SUSP handler -- ########################################
+	@classmethod
+	def ASSESS_SUSP_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class safe_land(object):
+
+	##### -- LAND_ERROR handler -- ########################################
+	@classmethod
+	def LAND_ERROR_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- LAND_EXE handler -- ########################################
+	@classmethod
+	def LAND_EXE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- LAND_IDLE handler -- ########################################
+	@classmethod
+	def LAND_IDLE_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class victims_search(object):
+
+	##### -- SEARCH_ERROR handler -- ########################################
+	@classmethod
+	def SEARCH_ERROR_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- SEARCH_EXE handler -- ########################################
+	@classmethod
+	def SEARCH_EXE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- SEARCH_IDLE handler -- ########################################
+	@classmethod
+	def SEARCH_IDLE_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- SEARCH_SUSP handler -- ########################################
+	@classmethod
+	def SEARCH_SUSP_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class teleoperation_pref_and_start_conditions(object):
+
+	##### -- AUTO handler -- ########################################
+	@classmethod
+	def AUTO_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- TELE handler -- ########################################
+	@classmethod
+	def TELE_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class VS_turn_off_condition1(object):
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- MI_ON handler -- ########################################
+	@classmethod
+	def Mi_ON_handler(self, param = None):
+		#Write code here...
+		pass
+
+
+class VS_turn_off_condition2(object):
+
+	##### -- MI_OFF handler -- ########################################
+	@classmethod
+	def Mi_OFF_handler(self, param = None):
+		#Write code here...
+		pass
+
+	##### -- SAFE_LAND_ON handler -- ########################################
+	@classmethod
+	def SAFE_LAND_ON_handler(self, param = None):
+		#Write code here...
+		pass
+

@@ -21,10 +21,10 @@ from lib.Automaton import Automaton, MultiAutomata
 ################################################################
 # Example for a file with multiple Automata
 G = MultiAutomata('Plant')
-G.read_xml('files/plant.xml')
+G.read_xml('files/plant_uav.xml')
 G.generate_calls()
 
 S = MultiAutomata('Supervisors')
-S.read_xml('files/supervisors.xml')
+S.read_xml('files/sup_uav.xml')
 S.generate_calls()
 

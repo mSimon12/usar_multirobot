@@ -1,3 +1,5 @@
+import rospy
+
 import inspect
 import pandas as pd
 from datetime import datetime
@@ -63,10 +65,19 @@ class ProductSystem(Thread):
 		self.__SMs = plants																		# Dictionary with all Sub-plants
 		self.__SUPs = supervisors																# Dictionary with Modular Supervisors
 
+		filename = 'OP/translation_table.csv'
+		translation_table = pd.read_csv(filename)
+
+		current_robot = rospy.get_param("supervisor/robot_type", default="")
+
 		# Get all possible events names into a dictionary 
 		self.__events = {}																		
 		for x in inspect.getmembers(events_module, inspect.isclass):
-			self.__events[x[0]]=x[1]
+
+			#create objects only of events from the current robot type
+			event_robot_type = translation_table[(translation_table['high-level']==x[0])]['robot_type'].array[0]		    # Get robot type
+			if current_robot == event_robot_type:
+				self.__events[x[0]]=x[1]
     
 		self.__cont_e = [e for e in self.__events if self.__events[e].is_controllable()] 		# Get list of 'controllable' events names
 

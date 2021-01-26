@@ -405,12 +405,14 @@ class Automaton(object):
             events_file.write("\n\tpath = os.path.dirname(os.path.abspath(__file__))")
             events_file.write("\n\tos.chdir(path)")
 
+            events_file.write("\n\tnamespace = rospy.get_namespace())")
+
             events_file.write("\n\n\t# Get translation table (high-level -> low-level)")
             events_file.write("\n\tfilename = 'translation_table.csv'")
             events_file.write("\n\ttranslation_table = pd.read_csv(filename)")
             events_file.write("\n\tanswer = {}")
             events_file.write("\n\tanswer['ll_event'] = translation_table[(translation_table['high-level']==hl_event)]['low-level'].array[0]		# Translate event")
-            events_file.write("\n\tanswer['topic'] = translation_table[(translation_table['high-level']==hl_event)]['topic'].array[0]				# Get topic")
+            events_file.write("\n\tanswer['topic'] = namespace + translation_table[(translation_table['high-level']==hl_event)]['topic'].array[0]				# Get topic")
             
             events_file.write("\n\treturn answer\n\n")
 
@@ -439,7 +441,7 @@ class Automaton(object):
                     events_file.write("\n\n\t# For ROS")
                     events_file.write("\n\tmodule = importlib.import_module('system_msgs.msg')")
                     events_file.write("\n\toutput = hl_2_ll(__qualname__)")
-                    events_file.write("\n\tpub = rospy.Publisher('/{}'.format(output['topic']), module.events_message, queue_size=10)")
+                    events_file.write("\n\tpub = rospy.Publisher('{}'.format(output['topic']), module.events_message, queue_size=10)")
 
                 # Insert event handler
                 events_file.write("\n\n\t@classmethod")
