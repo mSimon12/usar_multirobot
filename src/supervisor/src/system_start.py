@@ -31,29 +31,36 @@ if __name__ == "__main__":
         SUP_FILE = "sup_pioneer3at"
         module = importlib.import_module('ugv.TaskManager_UGV')
         TaskManager = module.TaskManager
-    elif ROBOT_TYPE == "UAV":
+    elif ROBOT_TYPE == "uav":
         PLANT_FILE = "plant_uav"
         SUP_FILE = "sup_uav"
-        module = importlib.import_module('agv.TaskManager_AGV')
+        module = importlib.import_module('uav.TaskManager_UAV')
         TaskManager = module.TaskManager
+
 
     #############################################################################
     #### Create Multiple State Machines from one file  #################
-    G = MultiAutomata("{}_Plant".format(NAME))
+    G = MultiAutomata("{}_PLANT".format(NAME))
     G.read_xml("files/{}.xml".format(PLANT_FILE))         # File with multiple Automata
     SM = {}
     for aut in G.get_automata().values():
-        SM[aut.get_name()] = StateMachine(aut)
-
+        size = len("{}_PLANT-".format(NAME))
+        name = aut.get_name()
+        if name.startswith("{}_PLANT".format(NAME)):
+            name = name[size:]
+        SM[name] = StateMachine(aut)
 
     #############################################################################
     #### Create Multiple Supervisors from one file  ###################
-    S = MultiAutomata("Supervisors")
+    S = MultiAutomata("{}_SUP".format(NAME))
     S.read_xml("files/{}.xml".format(SUP_FILE))         # File with multiple Automata
     SUP = {}
     for aut in S.get_automata().values():
-        SUP[aut.get_name()] = Supervisor(aut)
-
+        size = len("{}_SUP-".format(NAME))
+        name = aut.get_name()
+        if name.startswith("{}_SUP".format(NAME)):
+            name = name[size:]
+        SUP[name] = Supervisor(aut)
 
     #############################################################################
     #### Start the Task Manager  ################################################

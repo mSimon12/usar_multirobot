@@ -222,45 +222,6 @@ class UGV_return(Task):
                 return 'task_done'
 
 
-# class UGV_teleoperation(Task):
-
-#     def __init__(self, param, vs_req = False, gs_req = False):
-#         super().__init__(param, vs_req, gs_req)
-
-#     def next_event(self, states, last_event, event_param = []):
-#         '''
-#             Teleoperation sequence:  st_tele -> (rsm_tele, end_tele)
-#         '''
-#         if (not self._motion_done) and (last_event == 'end_tele'):
-#             self._motion_done = True
-#         elif (not self._motion_done):
-#             # Before the motion have been considered as executed
-
-#             # Verify if the last maneuver must be aborted 
-#             event_to_abort = self._abort_last_M(states)
-#             if event_to_abort:
-#                 return event_to_abort
-
-#             # Verify if required sensors are ON
-#             events = self._sensors2turnON(states)
-#             if events:
-#                 return events
-#             else:
-#                 # Start motion after the required sensors have been activated
-#                 if 'TELE_IDLE' in states:
-#                     return ['st_tele']
-#                 else:
-#                     return ['end_tele']
-
-#         if self._motion_done:
-#             # After the motion have been executed
-#             events = self._sensors2turnOFF(states)
-#             if events:
-#                 return events
-#             else:
-#                 return 'task_done'
-
-
 ##########################################################################################################
 # --- BACKUP BEHAVIORS ---
 
@@ -298,13 +259,16 @@ class AbortM(Task):
         self.pose_reported = False
 
     def next_event(self, states, last_event, event_param = []):
-        # abort any maneuver
-        for i in ['APP_EXE','EXP_EXE','VSV_EXE','TELE_EXE','RB_EXE']:
-            if i in states:
-                return ['sus_app', 'sus_exp', 'sus_vsv', 'sus_rb', 'abort_tele']
-        for i in ['APP_SUSP','EXP_SUSP','VSV_SUSP','TELE_SUSP','RB_SUSP']:
-            if i in states:
-                return ['abort_app', 'abort_exp', 'abort_vsv', 'abort_rb']
+        # Verify if the last maneuver must be aborted 
+        event_to_abort = self._abort_last_M(states)
+        if event_to_abort:
+            return event_to_abort
+        # for i in ['APP_EXE','EXP_EXE','VSV_EXE','TELE_EXE','RB_EXE']:
+        #     if i in states:
+        #         return ['sus_app', 'sus_exp', 'sus_vsv', 'sus_rb', 'abort_tele']
+        # for i in ['APP_SUSP','EXP_SUSP','VSV_SUSP','TELE_SUSP','RB_SUSP']:
+        #     if i in states:
+        #         return ['abort_app', 'abort_exp', 'abort_vsv', 'abort_rb']
         
         if last_event == 'rep_self_pos':
             self.pose_reported = True

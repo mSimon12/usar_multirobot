@@ -25,7 +25,7 @@ class MultiAutomata(object):
         '''
         aut = ut.parse(file)       #Automaton object
         for a in aut.Automata.Automaton:
-            G = Automaton(a['name'])
+            G = Automaton(self.__name + "-" + a['name'])
             G.read_xml(file, a['name'])
             self.__Automata[a['name']] = G
 
@@ -41,10 +41,10 @@ class MultiAutomata(object):
         '''
             Create the calls of all events and states present on the set of automata
         '''
-        for a in self.__Automata.values():
-            a.gen_events_calls()
-            a.gen_states_calls()
-            a.gen_translation_table()
+        for a in self.__Automata:
+            self.__Automata[a].gen_events_calls()
+            self.__Automata[a].gen_states_calls(a)
+            self.__Automata[a].gen_translation_table()
 
 
 ######################################################################################################### 
@@ -479,7 +479,7 @@ class Automaton(object):
         events_file.close()                                             
 
 
-    def gen_states_calls(self):
+    def gen_states_calls(self, SM_name):
         '''
             Generate a file containing calls for the execution of the states 
             present on this Automaton
@@ -495,7 +495,7 @@ class Automaton(object):
         states_file.seek(0, os.SEEK_SET)                                    # Move the cursor to first line
         content = states_file.read()                                        # Read the content of the file
 
-        class_name = "class " + self.__name.replace(" ","_") + "(object):"
+        class_name = "class " + SM_name.replace(" ","_") + "(object):"
         if class_name not in content:
             states_file.write("\n" + class_name)
 

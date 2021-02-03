@@ -36,7 +36,8 @@ from nav_msgs.msg import Odometry
 class Maneuver(object):
     
     def __init__(self,name):
-        self.state = 'IDLE'              
+        self.state = 'IDLE'           
+        self.suspending = False   
         self.trajectory_client = SimpleActionClient("approach_server", ExecuteDroneApproachAction)
         self.trajectory_client.wait_for_server()
 
@@ -83,12 +84,14 @@ class approach(Maneuver):
         super(approach, self).__init__(name)                                  # Initialize object
         self.__last_goal = None                                               # The last goal position
 
-    def execute(self, pose):
+    def execute(self, pose, received_msg = None):
         '''
             Require de robot to move to a specific point (x,y,theta)
         '''
 
         if self.state == 'IDLE':
+            self.msg = received_msg
+
             rospy.loginfo("Starting Approach!")
             # Save the assigned goal
             self.__last_goal = pose    
@@ -97,7 +100,8 @@ class approach(Maneuver):
         result = self.move_to(pose.linear.x, pose.linear.y, pose.linear.z, pose.angular.z)         # Start the motion and wait for result
 
         # Verify the reason why the robot stopped moving
-        if self.state == 'SUS':                                             # Approach have been suspended
+        if self.suspending:                                                 # Approach have been suspended
+            self.suspending = False   
             return
         elif result == 'end':                                               # Robot arrive to the desired position
             self.state = 'IDLE'                                             # Set IDLE state
@@ -111,8 +115,9 @@ class approach(Maneuver):
    
     def suspend(self):
         rospy.loginfo("Suspending Approach!")
+        self.suspending = True
         self.state = 'SUS'                                                  # Set SUS state
-        self.trajectory_client.cancel_goal()                                     # Cancel the motion of the robot
+        self.trajectory_client.cancel_goal()                                # Cancel the motion of the robot
 
     def resume(self):
         rospy.loginfo("Resuming Approach!")
@@ -156,35 +161,22 @@ class assessment(object):
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)                                 # Publisher object
         self.msg = events_message()                                                                                                 # Message object
         
-    def execute(self, region_to_explore = None):
+    def execute(self, region_to_explore = None, received_msg = None):
         rospy.loginfo("Starting assessment!")
         
         if self.state == 'IDLE':
+            self.msg = received_msg
+
             # Save some variables
             self.region = region_to_explore                             # Save region being explored
 
         self._assess_goal = ExecuteDroneExplorationGoal()               # Message to send the goal region 
         
         # Define boundaries
-        x_min = 50.0
-        x_max = 0.0
-        y_min = 50.0
-        y_max = 0.0
-        for i in range(0, len(self.region)-1):
-            if self.region[i].linear.x < x_min:
-                x_min = self.region[i].linear.x
-            if self.region[i].linear.x > x_max:
-                x_max = self.region[i].linear.x
-
-            if self.region[i].linear.y < y_min:
-                y_min = self.region[i].linear.y
-            if self.region[i].linear.y > y_max:
-                y_max = self.region[i].linear.y
-
-        self._assess_goal.x_min = x_min
-        self._assess_goal.x_max = x_max
-        self._assess_goal.y_min = y_min
-        self._assess_goal.y_max = y_max
+        self._assess_goal.x_min = self.region[0].linear.x
+        self._assess_goal.x_max = self.region[0].linear.x + self.region[1].linear.x
+        self._assess_goal.y_min = self.region[0].linear.y
+        self._assess_goal.y_max = self.region[0].linear.y + self.region[1].linear.y
 
         self.state = 'EXE'                                              # Set EXE state
 
@@ -202,7 +194,8 @@ class assessment(object):
             result = "error"                                            # The server aborted the motion
 
         # Verify the reason why the robot stopped moving
-        if self.state == 'SUS':                                             # Assessment have been suspended
+        if self.suspending:                                             # Assessment have been suspended
+            self.suspending = False
             return
         elif result == 'end':                                               # Robot explored the desired region
             self.state = 'IDLE'                                             # Set IDLE state
@@ -216,6 +209,7 @@ class assessment(object):
 
     def suspend(self):
         rospy.loginfo("Suspending Assessment!")
+        self.suspending = True
         self.state = 'SUS'                                                   # Set SUS state
         self._assess_client.cancel_goal()                                  # Cancel the motion of the robot
 
@@ -263,9 +257,11 @@ class v_search(object):
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)                  # Publisher object
         self.msg = events_message()                                                                                  # Message object
         
-    def execute(self, region_to_search = None):
+    def execute(self, region_to_search = None, received_msg = None):
         
         if self.state == 'IDLE':
+            self.msg = received_msg
+
             rospy.loginfo("Starting v_search!")
             # Save some variables
             self.region = region_to_search                              # Save region being explored
@@ -300,7 +296,8 @@ class v_search(object):
             result = "error"                                            # The server aborted the motion
 
         # Verify the reason why the robot stopped moving
-        if self.state == 'SUS':                                             # v_search have been suspended
+        if self.suspending:                                                 # v_search have been suspended
+            self.suspending = False
             return
         elif result == 'end':                                               # Robot explored the desired region
             self.state = 'IDLE'                                             # Set IDLE state
@@ -314,6 +311,7 @@ class v_search(object):
 
     def suspend(self):
         rospy.loginfo("Suspending v_search!")
+        self.suspending = True
         self.state = 'SUS'                                                   # Set SUS state
         self._search_client.cancel_goal()                                  # Cancel the motion of the robot
 
@@ -355,12 +353,14 @@ class surroundings_verification(Maneuver):
         self.points = []                                                                             # Points to visit arround the victim
         self.victim = {}                                                                             # Victim info                                                                        
         
-    def execute(self, victim_id = 'victim', victim_pose = None):
+    def execute(self, victim_id = 'victim', victim_pose = None, received_msg = None):
         
         
         delta = (self.max_dist - self.min_dist)/(self.rounds*self.n_points)
         
         if self.state == 'IDLE':
+            self.msg = received_msg
+            
             rospy.loginfo("Starting Surroundings Verification!")
             self.victim['id'] = victim_id
             self.victim['x'] = victim_pose.linear.x                                                         # Get victim pose
@@ -386,7 +386,8 @@ class surroundings_verification(Maneuver):
             result = self.move_to(self.points[0][0], self.points[0][1], self.points[0][2], self.points[0][3])
 
             # Verify the reason why the robot stopped moving
-            if self.state == 'SUS':
+            if self.suspending:
+                self.suspending = False
                 return
             elif result == 'end':
                 self.points.pop(0)                                 # Remove visited point
@@ -403,6 +404,7 @@ class surroundings_verification(Maneuver):
 
     def suspend(self):
         rospy.loginfo("Suspending Surroundings Verification!")
+        self.suspending = True
         self.state = 'SUS'
         self.trajectory_client.cancel_goal()                             # Stop current motion
 
@@ -445,7 +447,8 @@ class return_to_base(Maneuver):
         result = self.move_to(self.base_pos['x'], self.base_pos['y'], self.base_pos['z'], 0)            # Start the motion and wait for result
 
         # Verify the reason why the robot stopped moving
-        if self.state == 'SUS':
+        if self.suspending:
+            self.suspending = False
             return
         elif result == 'end':
             self.state = 'IDLE'
@@ -458,6 +461,7 @@ class return_to_base(Maneuver):
 
     def suspend(self):
         rospy.loginfo("Suspending Return to Base!")
+        self.suspending = True
         self.state = 'SUS'
         self.trajectory_client.cancel_goal()
 
@@ -629,7 +633,7 @@ class safe_land(object):
         self._land_client.send_goal(self._land_goal)
         self._land_client.wait_for_result()
         state = self._land_client.get_state()                       # Get the state of the action
-        # print(state)
+        print(state)
 
         if state == GoalStatus.SUCCEEDED:
             # safe_land successfully executed
@@ -658,10 +662,10 @@ def maneuver_event(msg):
         if (msg.event == "start_approach") and (app.state == 'IDLE'):
             # Verify paramenters
             if msg.position:
-                thread = Thread(target=app.execute,args=[msg.position[0]])
+                thread = Thread(target=app.execute,args=[msg.position[0], msg])
                 thread.start()                                                              # Start approach
             else:
-                rospy.logwarn("Wrong approach parameters! Must be [x,y,theta]")             # Missing parameters
+                rospy.logwarn("Wrong approach parameters! Must be [x,y,z,theta]")             # Missing parameters
         
         elif (msg.event == "suspend_approach") and (app.state == 'EXE'):
             app.suspend()
@@ -680,7 +684,7 @@ def maneuver_event(msg):
         if (msg.event == "start_assessment") and (assess.state == 'IDLE'):
             # Verify paramenters
             if len(msg.position) > 3:                                                           # Need at least three points to create a polygon
-                thread = Thread(target=assess.execute, args=[msg.position])
+                thread = Thread(target=assess.execute, args=[msg.position, msg])
                 thread.start()                                                                  # Start assessment
             else:
                 rospy.logwarn("Wrong assessment parameters! Must have at least 3 vertices and 1 start position.")             # Missing parameters
@@ -702,7 +706,7 @@ def maneuver_event(msg):
         if (msg.event == "start_v_search") and (search.state == 'IDLE'):
             # Verify paramenters
             if len(msg.position) == 2:                                                           # Need at least three points to create a polygon
-                thread = Thread(target=search.execute, args=[msg.position])
+                thread = Thread(target=search.execute, args=[msg.position, msg])
                 thread.start()                                                                   # Start v_search
             else:
                 rospy.logwarn("Wrong v_search parameters! Must have at least 3 vertices.")             # Missing parameters
@@ -723,7 +727,7 @@ def maneuver_event(msg):
         # Commands for victim surroundings verification maneuver
         if (msg.event == "start_verification") and (vsv.state == 'IDLE'):
             if msg.position:
-                thread = Thread(target=vsv.execute, args=[msg.info, msg.position[0]])
+                thread = Thread(target=vsv.execute, args=[msg.info, msg.position[0], msg])
                 thread.start()                                                                  # Start victim surroundings verification
             else:
                 rospy.logerr("Null victim pose!!!")

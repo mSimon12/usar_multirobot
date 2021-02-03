@@ -455,8 +455,9 @@ class rep_victim(object):
 		try:
 			geometry = importlib.import_module('geometry_msgs.msg')
 			point = geometry.Twist()
-			point.linear.x = param[0]
-			point.linear.y = param[1]
+			msg.info = param[0]
+			point.linear.x = param[1]
+			point.linear.y = param[2]
 			msg.position.append(point)
 			rep_victim.pub.publish(msg)									#Publish message
 			return True
@@ -2058,8 +2059,20 @@ class uav_st_app(object):
 		print('Executing event uav_st_app...')
 		msg = uav_st_app.module.events_message()
 		msg.event = uav_st_app.output['ll_event']
-		uav_st_app.pub.publish(msg)					#Publish message
-		return True
+		try:
+			geometry = importlib.import_module('geometry_msgs.msg')
+			point = geometry.Twist()
+			point.linear.x = param[0]
+			point.linear.y = param[1]
+			point.linear.z = param[2]
+			point.angular.z = param[3]
+			msg.position.append(point)
+			uav_st_app.pub.publish(msg)									#Publish message
+			return True
+		except:
+			rospy.logwarn("ERRO!!!!\nUAV Approach need four paramenters -> [x,y,z,theta].")
+			return False
+
 
 	@classmethod
 	def get_status(cls):
@@ -2292,8 +2305,19 @@ class uav_st_assess(object):
 		print('Executing event uav_st_assess...')
 		msg = uav_st_assess.module.events_message()
 		msg.event = uav_st_assess.output['ll_event']
-		uav_st_assess.pub.publish(msg)					#Publish message
-		return True
+		try:
+			geometry = importlib.import_module('geometry_msgs.msg')
+			for p in param:
+				point = geometry.Twist()
+				point.linear.x = p[0]
+				point.linear.y = p[1]
+				msg.position.append(point)						#Insert polygon points
+			uav_st_assess.pub.publish(msg)						#Publish message
+			return True
+		except:
+			rospy.logwarn("ERRO!!!!\nAssessment need at least two points. (start_position, sizes)")
+			return False
+
 
 	@classmethod
 	def get_status(cls):
@@ -2509,7 +2533,19 @@ class uav_rep_victim(object):
 		msg = uav_rep_victim.module.events_message()
 		msg.event = uav_rep_victim.output['ll_event']
 		uav_rep_victim.pub.publish(msg)					#Publish message
-		return True
+		try:
+			geometry = importlib.import_module('geometry_msgs.msg')
+			point = geometry.Twist()
+			msg.info = param[0]
+			point.linear.x = param[1]
+			point.linear.y = param[2]
+			point.linear.z = param[3]
+			msg.position.append(point)
+			uav_rep_victim.pub.publish(msg)									#Publish message
+			return True
+		except:
+			rospy.logwarn("ERRO!!!!\nReport victim need victim position [x,y,z].")
+			return False
 
 	@classmethod
 	def get_status(cls):
@@ -3220,7 +3256,21 @@ class uav_st_vsv(object):
 		msg = uav_st_vsv.module.events_message()
 		msg.event = uav_st_vsv.output['ll_event']
 		uav_st_vsv.pub.publish(msg)					#Publish message
-		return True
+		try:
+			msg.info = param[0]
+			
+			geometry = importlib.import_module('geometry_msgs.msg')
+			point = geometry.Twist()
+			point.linear.x = param[1]
+			point.linear.y = param[2]
+			point.linear.y = param[3]
+
+			msg.position.append(point)
+			uav_st_vsv.pub.publish(msg)								#Publish message
+			return True
+		except:
+			rospy.logwarn("ERRO!!!!\nSurroundings verification need at a victim id and position -> [id,x,y,z]")
+			return False
 
 	@classmethod
 	def get_status(cls):
@@ -3715,7 +3765,19 @@ class uav_st_v_search(object):
 		msg = uav_st_v_search.module.events_message()
 		msg.event = uav_st_v_search.output['ll_event']
 		uav_st_v_search.pub.publish(msg)					#Publish message
-		return True
+		try:
+			geometry = importlib.import_module('geometry_msgs.msg')
+			for p in param:
+				point = geometry.Twist()
+				point.linear.x = p[0]
+				point.linear.y = p[1]
+				msg.position.append(point)						#Insert polygon points
+			uav_st_assess.pub.publish(msg)						#Publish message
+			return True
+		except:
+			rospy.logwarn("ERRO!!!!\nVictim Search need at least two points. (start_position, sizes)")
+			return False
+
 
 	@classmethod
 	def get_status(cls):

@@ -102,12 +102,10 @@ class TaskManager(Thread):
             self.main_task = tasks.UGV_approach(task_position, task.victim_sensor, task.gas_sensor)              #Create object of the main task
         elif task.task == 'exploration':
             self.main_task = tasks.UGV_exploration(task_position, task.victim_sensor, task.gas_sensor)           #Create object of the main task
-        elif task.task == 'verification':
-            self.main_task = tasks.UGV_verification(task_position, task.victim_sensor, task.gas_sensor)          #Create object of the main task
+        # elif task.task == 'verification':
+        #     self.main_task = tasks.UGV_verification(task_position, task.victim_sensor, task.gas_sensor)          #Create object of the main task
         elif task.task == 'return':
             self.main_task = tasks.UGV_return(task_position, task.victim_sensor, task.gas_sensor)                #Create object of the main task
-        # elif task.task == 'teleoperation':
-        #     self.main_task = tasks.UGV_teleoperation(task_position, task.victim_sensor, task.gas_sensor)         #Create object of the main task
 
         # Signal that a new task was received
         self.update_flag.acquire()

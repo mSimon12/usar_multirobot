@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(pioneer3at_description)
 
 find_package(catkin REQUIRED COMPONENTS 
-#  libgazebo7-dev
+#  libgazebo9-dev
   gazebo_msgs
   gazebo_ros
   sensor_msgs 

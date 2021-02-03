@@ -28,7 +28,7 @@
   <depend>hector_moveit_actions</depend>
   <depend>trajectory_action_pkg</depend>
   <depend>joy</depend>
-
+  <depend>hector_moveit_config</depend>
   <depend>std_msgs</depend>
   <depend>sensor_msgs</depend>
   <depend>geometry_msgs</depend>

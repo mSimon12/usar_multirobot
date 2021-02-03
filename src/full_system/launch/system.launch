@@ -55,6 +55,12 @@
       <arg name="y" value="1.0"/>
       <arg name="z" value="0.7"/> 
     </include>
+
+    <!-- Launch Task Control System -->
+    <include file="$(find supervisor)/launch/supervisor.launch">
+      <arg name="robot_name" value="UAV_1"/>
+      <arg name="robot_type" value="uav"/>
+    </include>
   </group>
 
   <!-- Spawn simulated quadrotor uav 2

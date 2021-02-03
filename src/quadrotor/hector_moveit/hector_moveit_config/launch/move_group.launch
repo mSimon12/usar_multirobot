@@ -42,13 +42,13 @@
   </include>
 
   <!-- Node responsible for changing topics-->
-  <node name="changer" pkg="hector_moveit_config" type="changer.py" output="screen"/>
+  <node name="changer" pkg="hector_moveit_config" type="changer.py" output="log"/>
 
   <param name="move_group/octomap_frame" value="$(arg octomap_frame)"/>
   <param name="move_group/octomap_resolution" value="1" />
 
   <!-- Start the actual move_group node/action server -->
-  <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="screen" args="$(arg command_args)">
+  <node name="move_group" launch-prefix="$(arg launch_prefix)" pkg="moveit_ros_move_group" type="move_group" respawn="false" output="log" args="$(arg command_args)">
     <!-- Set the display variable, in case OpenGL code is used internally -->
     <env name="DISPLAY" value="$(optenv DISPLAY :0)" />
 

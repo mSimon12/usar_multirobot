@@ -91,9 +91,9 @@ class Approach(object):
         #Start planningScenePublisher
         self.scene_pub = PlanningScenePublisher(name, self.current_pose)
 
-       
         # Start trajectory server
         self.trajectory_server.start()
+
 
     def sonar_callback(self,msg):
         '''

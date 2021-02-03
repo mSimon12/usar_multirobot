@@ -1,0 +1,14 @@
+// UAV_1_SUP-manouvers_vs_dependencies
+digraph {
+	rankdir=LR
+	VS_OFF [label=VS_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	VS_ON [label=VS_ON color=black fillcolor=white shape=circle style=filled]
+	VS_OFF -> VS_ON [label=uav_on_vs fontcolor=blue]
+	VS_ON -> VS_OFF [label=uav_off_vs fontcolor=blue]
+	VS_ON -> VS_OFF [label=uav_er_vs fontcolor=red style=dashed]
+	VS_ON -> VS_ON [label="uav_st_v_search,
+uav_st_vsv,
+uav_st_safe_land,
+uav_rsm_v_search,
+uav_rsm_vsv" fontcolor=blue]
+}

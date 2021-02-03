@@ -1,7 +1,5 @@
-teste = None
+x = {'a': [1,2,3], 'b': "cabeca"}
 
-if teste:
-    print('ola')
-else:
-    print('bazinga')
-
+for t in x:
+    print(t)
+    print(x[t])

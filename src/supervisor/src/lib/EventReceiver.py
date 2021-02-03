@@ -1,6 +1,8 @@
 import pandas as pd
 import inspect
 
+import rospy
+
 from lib.ProductSystem import trigger_event
 
 class EventReceiver(object):
@@ -18,8 +20,14 @@ class EventReceiver(object):
         filename = "OP/translation_table.csv"
         self.__translation_table = pd.read_csv(filename)
 
+        self.NAME = rospy.get_param("robot_name", default="")
+        self.ROBOT_TYPE = rospy.get_param("supervisor/robot_type", default="")
+
         # Variables for conversion control
-        self.__last_battery = 'bat_OK'
+        if self.ROBOT_TYPE == 'uav':
+            self.__last_battery = 'uav_bat_OK'
+        else:
+            self.__last_battery = 'bat_OK'
 
     def receive_event(self, msg, topic):
         '''
@@ -31,40 +39,106 @@ class EventReceiver(object):
         hl_event = None
         ll_event = msg.event                                                        # Get the name of the low-level event
 
-        if (ll_event == 'battery_level') and (topic == self.__translation_table[(self.__translation_table['low-level']==ll_event)]['topic'].array[0]):
-            # Convert battery level to high_level event
-            battery_level = msg.param[0]                                            # Get battery level            
-            if (battery_level < 10) and (self.__last_battery != 'bat_LL'):
-                hl_event = 'bat_LL'
-                self.__last_battery = hl_event
-            elif (battery_level > 10) and (battery_level < 50) and (self.__last_battery != 'bat_L'):
-                hl_event = 'bat_L'
-                self.__last_battery = hl_event 
-            elif (battery_level >= 50) and (self.__last_battery != 'bat_OK'):
-                hl_event = 'bat_OK'
-                self.__last_battery = hl_event 
-        else:
-            try:
-                hl_event = self.__translation_table[(self.__translation_table['low-level']==ll_event) & (self.__translation_table['topic']==topic)]['high-level'].array[0]        # Translate event
-            except:
-                pass
-            
-        # Get the parameters
-        param = []
-        if msg.info:
-            param.append(msg.info)
-        if msg.param:
-            param.append(msg.param)
-        if msg.position:
-            if len(msg.position) > 1:
-                # Create a vector of multiple points
-                for p in msg.position:
-                    param.append((p.linear.x, p.linear.y))
+        # rospy.loginfo("LOW EVENT: {}".format(ll_event))
+        # rospy.loginfo("FROM TOPIC: {}".format(topic))
+
+        size = len("{}/".format(self.NAME))
+        if topic.startswith("{}/".format(self.NAME)):
+            topic = topic[size:]
+
+        # The topic from table that is ralated to the current event and robot type
+        try:
+            topic_on_table = self.__translation_table[(self.__translation_table['low-level']==ll_event) &
+                            (self.__translation_table['robot_type']==self.ROBOT_TYPE)]['topic'].array[0]
+        except:
+            rospy.logwarn("No match for received low level event!!!")
+
+
+        ############################### UGV procedures ######################################
+        if (self.ROBOT_TYPE == 'pioneer3at'):
+            if (ll_event == 'battery_level') and (topic == topic_on_table):
+                # Convert battery level to high_level event
+                battery_level = msg.param[0]                                            # Get battery level            
+                if (battery_level < 10) and (self.__last_battery != 'bat_LL'):
+                    hl_event = 'bat_LL'
+                    self.__last_battery = hl_event
+                elif (battery_level > 10) and (battery_level < 50) and (self.__last_battery != 'bat_L'):
+                    hl_event = 'bat_L'
+                    self.__last_battery = hl_event 
+                elif (battery_level >= 50) and (self.__last_battery != 'bat_OK'):
+                    hl_event = 'bat_OK'
+                    self.__last_battery = hl_event 
             else:
-                param.append(msg.position[0].linear.x)
-                param.append(msg.position[0].linear.y)
-                param.append(msg.position[0].angular.z)
-            # param.append(msg.position)
+                try:
+                    size = len("/{}/".format(self.NAME))
+                    if topic.startswith("/{}/".format(self.NAME)):
+                        topic = topic[size:]
+                    hl_event = self.__translation_table[(self.__translation_table['low-level']==ll_event) & (self.__translation_table['topic']==topic)
+                                                                    & (self.__translation_table['robot_type']==self.ROBOT_TYPE)]['high-level'].array[0]        # Translate event
+                except:
+                    pass
+
+            # Get the parameters
+            param = []
+            if msg.info:
+                param.append(msg.info)
+            if msg.param:
+                param.append(msg.param)
+            if msg.position:
+                if len(msg.position) > 1:
+                    # Create a vector of multiple points
+                    for p in msg.position:
+                        param.append((p.linear.x, p.linear.y))
+                else:
+                    param.append(msg.position[0].linear.x)
+                    param.append(msg.position[0].linear.y)
+                    param.append(msg.position[0].angular.z)
+                # param.append(msg.position)
+
+
+        ############################### UAV procedures ######################################
+        elif (self.ROBOT_TYPE == 'uav'):
+            if (ll_event == 'battery_level') and (topic == topic_on_table):
+                # Convert battery level to high_level event
+                battery_level = msg.param[0]                                            # Get battery level            
+                if (battery_level < 10) and (self.__last_battery != 'uav_bat_LL'):
+                    hl_event = 'uav_bat_LL'
+                    self.__last_battery = hl_event
+                elif (battery_level > 10) and (battery_level < 50) and (self.__last_battery != 'uav_bat_L'):
+                    hl_event = 'uav_bat_L'
+                    self.__last_battery = hl_event 
+                elif (battery_level >= 50) and (self.__last_battery != 'uav_bat_OK'):
+                    hl_event = 'uav_bat_OK'
+                    self.__last_battery = hl_event 
+            else:
+                try:
+                    size = len("/{}/".format(self.NAME))
+                    if topic.startswith("/{}/".format(self.NAME)):
+                        topic = topic[size:]
+                    hl_event = self.__translation_table[(self.__translation_table['low-level']==ll_event) & (self.__translation_table['topic']==topic)
+                                                                    & (self.__translation_table['robot_type']==self.ROBOT_TYPE)]['high-level'].array[0]        # Translate event
+                except:
+                    pass
+
+            # Get the parameters
+            param = []
+            if msg.info:
+                param.append(msg.info)
+            if msg.param:
+                param.append(msg.param)
+            if msg.position:
+                if len(msg.position) > 1:
+                    # Create a vector of multiple points
+                    for p in msg.position:
+                        param.append((p.linear.x, p.linear.y))
+                else:
+                    param.append(msg.position[0].linear.x)
+                    param.append(msg.position[0].linear.y)
+                    param.append(msg.position[0].linear.z)
+                    param.append(msg.position[0].angular.z)
+                # param.append(msg.position)
+
+        # rospy.loginfo("EVENT: {}".format(hl_event))
 
         if hl_event:
             trigger_event(hl_event, param)                                              # Trigger the received eventparametersparameters

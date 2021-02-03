@@ -57,7 +57,7 @@ class StateMachine(object):
         if event in self.__alpha:
             # Verify if the event trigger a transition
             if self.__trans[(self.__trans['st_node'] == self.__current_state) & (self.__trans['event'] == event)].empty:
-                print("[SM - " + self.__name + "]: ALERT!!!!\tThis transition is not modeled!")         # Alert if the last event was not modeled by this plant, but on its alphabet
+                print("[SM - " + self.__name + "]: ALERT!!!!\tThis transition is not modeled!\nEvent: " + event)         # Alert if the last event was not modeled by this plant, but on its alphabet
             else:
                 # Update current state
                 self.__current_state = self.__trans.at[self.__trans[(self.__trans['st_node'] == self.__current_state) & (self.__trans['event'] == event)].index[0],'end_node']
@@ -130,7 +130,7 @@ class Supervisor(object):
         if event in self.__alpha:
             # Verify if the event trigger a transition
             if self.__trans[(self.__trans['st_node'] == self.__current_state) & (self.__trans['event'] == event)].empty:
-                print("[SUP - " + self.__name + "]: ALERT!!!!\tThis transition is not modeled!")         # Alert if the last event was not modeled by this plant, but on its alphabet
+                print("[SUP - " + self.__name + "]: ALERT!!!!\tThis transition is not modeled!\nEvent: " + event)         # Alert if the last event was not modeled by this plant, but on its alphabet
             else:
                 # Update current state
                 self.__current_state = self.__trans.at[self.__trans[(self.__trans['st_node'] == self.__current_state) & (self.__trans['event'] == event)].index[0],'end_node']

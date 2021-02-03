@@ -1,0 +1,17 @@
+// pioneer3at_1_PLANT-failures
+digraph {
+	rankdir=LR
+	CRITIC_FAILURE [label=CRITIC_FAILURE color=black fillcolor=white shape=circle style=filled]
+	NO_FAILURE [label=NO_FAILURE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	POS_FAILURE [label=POS_FAILURE color=black fillcolor=white shape=circle style=filled]
+	SIMPLE_FAILURE [label=SIMPLE_FAILURE color=black fillcolor=white shape=circle style=filled]
+	CRITIC_FAILURE -> NO_FAILURE [label=rst_f fontcolor=blue]
+	NO_FAILURE -> CRITIC_FAILURE [label=critic_fail fontcolor=red style=dashed]
+	NO_FAILURE -> POS_FAILURE [label=pos_fail fontcolor=red style=dashed]
+	NO_FAILURE -> SIMPLE_FAILURE [label=fail fontcolor=red style=dashed]
+	POS_FAILURE -> CRITIC_FAILURE [label=critic_fail fontcolor=red style=dashed]
+	POS_FAILURE -> NO_FAILURE [label=rst_f fontcolor=blue]
+	SIMPLE_FAILURE -> CRITIC_FAILURE [label=critic_fail fontcolor=red style=dashed]
+	SIMPLE_FAILURE -> NO_FAILURE [label=rst_f fontcolor=blue]
+	SIMPLE_FAILURE -> POS_FAILURE [label=pos_fail fontcolor=red style=dashed]
+}

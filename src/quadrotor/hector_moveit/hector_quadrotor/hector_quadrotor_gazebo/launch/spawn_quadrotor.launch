@@ -65,10 +65,8 @@
   <!-- load controllers -->
   <include file="$(find hector_quadrotor_controllers)/launch/controller.launch">
     <arg name="controllers" value="$(arg controllers)"/>
+    <arg name="drone_name" value="$(arg name)"/>
   </include>
-
-  <!-- load actions -->
-  <include file="$(find hector_quadrotor_actions)/launch/actions.launch" />
 
   <!-- load aerodynamic and motor parameters -->
   <arg name="motors" default="robbe_2827-34_epp1045" />
@@ -85,5 +83,8 @@
            -Y $(arg yaw)
            -model $(arg name)"
         respawn="false" output="screen"/>
+
+  <!-- load actions -->
+  <include file="$(find hector_quadrotor_actions)/launch/actions.launch" />
 
 </launch>

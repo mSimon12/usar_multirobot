@@ -55,7 +55,10 @@ public:
 
   void poseActionCb(const hector_uav_msgs::PoseGoalConstPtr &goal)
   {
-    pose_server_.enableMotors(true);
+    bool res = pose_server_.enableMotors(true);
+
+    if (res==true) ROS_INFO("\n\nREsult of enable motors is TRUE\n\n");
+    else ROS_INFO("\n\nREsult of enable motors is FALSE\n\n");
 
     geometry_msgs::PoseStamped pose = goal->target_pose;
 

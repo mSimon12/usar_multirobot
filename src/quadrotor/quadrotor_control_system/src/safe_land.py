@@ -87,8 +87,8 @@ class SafeLand(object):
         self.sonar_me.release()
 
         state = None
-        while not (state in [GoalStatus.SUCCEEDED,GoalStatus.ABORTED]): 
-            print(self.point_to_go)
+        while not (state in [GoalStatus.SUCCEEDED, GoalStatus.ABORTED]): 
+            # print(self.point_to_go)
 
             self.trajectory_client.send_goal(self.point_to_go)
             self.trajectory_client.wait_for_result()                                                # Wait for the result
@@ -97,7 +97,14 @@ class SafeLand(object):
             if state == GoalStatus.SUCCEEDED:
                 self.sonar_me.acquire()
                 self.odometry_me.acquire()
-                if self.current_height > self.quadrotor_height*1.10:
+                if self.current_height > (self.quadrotor_height*1.20):
+
+                    if not self.current_height:
+                        self.sonar_me.wait()
+
+                    if not self.odometry:
+                        self.odometry_me.wait()
+
                     # quadrotor is too high from ground
                     self.point_to_go.goal.position.z = self.odometry.position.z - self.current_height + self.quadrotor_height
                     state = None
@@ -132,7 +139,7 @@ class SafeLand(object):
         self.sonar_me.acquire()
         self.current_height = msg.range
 
-        if self.current_height < self.quadrotor_height:
+        if self.current_height < self.quadrotor_height*0.8:
             self.odometry_me.acquire()
             self.point_to_go.goal.position.z = self.odometry.position.z - self.current_height + self.quadrotor_height
             self.odometry_me.release()

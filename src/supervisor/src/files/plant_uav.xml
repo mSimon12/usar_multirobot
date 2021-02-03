@@ -61,15 +61,15 @@
 		<Event id="2" label="uav_bat_OK" controllable="false"/>
 	</Events>
 	<States>
-		<State id="0" name="BAT_OK" initial="true" accepting="true"/>
-		<State id="1" name="CRITICAL"/>
-		<State id="2" name="LOW"/>
+		<State id="0" name="BAT_CRITICAL"/>
+		<State id="1" name="BAT_LOW"/>
+		<State id="2" name="BAT_OK" initial="true" accepting="true"/>
 	</States>
 	<Transitions>
-		<Transition source="0" dest="2" event="0"/>
-		<Transition source="1" dest="2" event="0"/>
-		<Transition source="2" dest="1" event="1"/>
-		<Transition source="2" dest="0" event="2"/>
+		<Transition source="0" dest="1" event="0"/>
+		<Transition source="1" dest="0" event="1"/>
+		<Transition source="1" dest="2" event="2"/>
+		<Transition source="2" dest="1" event="0"/>
 	</Transitions>
 </Automaton>
 <Automaton name="communication" type="Plant">
@@ -97,10 +97,10 @@
 		<Event id="3" label="uav_rst_f"/>
 	</Events>
 	<States>
-		<State id="0" name="CRITIC_F"/>
+		<State id="0" name="CRITIC_FAILURE"/>
 		<State id="1" name="NO_FAIL" initial="true" accepting="true"/>
-		<State id="2" name="POS_F"/>
-		<State id="3" name="SIMP_F"/>
+		<State id="2" name="POS_FAILURE"/>
+		<State id="3" name="SIMPLE_FAILURE"/>
 	</States>
 	<Transitions>
 		<Transition source="0" dest="1" event="3"/>

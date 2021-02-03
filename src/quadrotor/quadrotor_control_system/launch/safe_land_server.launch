@@ -2,7 +2,7 @@
 
 <launch>
    <arg name="robot_name" default="robot"/>
-   <arg name="drone_height" default="0.5"/>
+   <arg name="drone_height" default="0.35"/>
    <arg name="safe_dist" default="3.0"/>
 
    <param name="robot_name" type="str" value="$(arg robot_name)"/>

@@ -1,0 +1,9 @@
+// UAV_1_SUP-vsv_start_condition
+digraph {
+	rankdir=LR
+	VSV_NOK [label=VSV_NOK color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	VSV_OK [label=VSV_OK color=black fillcolor=white shape=circle style=filled]
+	VSV_NOK -> VSV_OK [label=uav_victim_found fontcolor=red style=dashed]
+	VSV_OK -> VSV_NOK [label=uav_st_vsv fontcolor=blue]
+	VSV_OK -> VSV_OK [label=uav_victim_found fontcolor=red style=dashed]
+}

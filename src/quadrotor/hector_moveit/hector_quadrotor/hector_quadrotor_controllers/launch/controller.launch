@@ -1,4 +1,7 @@
+<?xml version="1.0"?>
+
 <launch>
+  <arg name="drone_name" default="quadrotor"/>
 
   <!-- Order is important! -->
   <arg name="controllers" default="
@@ -10,11 +13,14 @@
   <rosparam ns="controller" file="$(find hector_quadrotor_controllers)/params/controller.yaml" />
   <rosparam file="$(find hector_quadrotor_controllers)/params/params.yaml" />
 
-  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
-    $(arg controllers) --shutdown-timeout 3"/>
+  <!--<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+    $(arg controllers) shutdown-timeout 3"/>-->
+
+   <node name="controller_spawner_$(arg drone_name)" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/$(arg drone_name)" args="--namespace=/$(arg drone_name) $(arg controllers) --shutdown-timeout 3" />
 
   <node name="estop_relay" pkg="topic_tools" type="relay" args="/estop estop">
     <param name="lazy" value="true" />
   </node>
 
 </launch>
+

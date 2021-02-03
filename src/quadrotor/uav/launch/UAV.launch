@@ -56,14 +56,6 @@
     <arg name="publish_rate"  value="0.1"/>
   </include>
 
-  <!-- OCTOMAP 
-  <include file="$(find slam)/launch/octomap_mapping.launch">
-    <arg name='map_frame' value='$(arg drone_name)/map'/>
-    <arg name='base_frame' value='$(arg drone_name)/world'/>
-    <arg name='point_cloud' value='camera/depth/points'/>
-    <arg name='sensor_range' value='4.5'/>
-  </include>--> 
-
   <!-- LAUNCH MOVEIT FOR PLANNING TRAJECTORIES -->
   <include file="$(find hector_moveit_config)/launch/move_group.launch">
     <!--<arg name="drone_name" value='$(arg drone_name)'/>-->
@@ -87,21 +79,21 @@
 
 <!-- ######################### PAYLOADS ########################################## -->
 
-  <!-- LAUNCH VICTIM RECOGNITION SYSTEM 
+  <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
   <include file="$(find payloads)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
     <arg name="sensor_range" value="3.0"/>
     <arg name="sensor_update_rate" value="2"/>
-  </include>-->
+  </include>
 
-  <!-- LAUNCH BATTERY MONITOR
+  <!-- LAUNCH BATTERY MONITOR -->
   <include file="$(find payloads)/launch/battery_monitor.launch">
     <arg name="move_topic" value="action/pose/status"/>
     <arg name="publish_rate" value="0.1"/>
-  </include> -->
+  </include>
 
-  <!-- LAUNCH FAILURES MONITOR 
-  <include file="$(find payloads)/launch/failures_monitor.launch"/>-->
+  <!-- LAUNCH FAILURES MONITOR -->
+  <include file="$(find payloads)/launch/failures_monitor.launch"/>
 
 <!-- ######################### MANEUVERS ########################################## -->
 
@@ -123,14 +115,6 @@
     <arg name="sensor_resolution" value="2.5"/>
     <arg name="height" value="1.0"/>
   </include>
-
-  <!-- LAUNCH ASSESSMENT EXECUTOR
-  <include file="$(find frontiers)/launch/frontiers_server.launch"/>
-
-  <include file="$(find quadrotor_control_system)/launch/assessment_server.launch">
-    <arg name="robot_name" value="$(arg drone_name)"/>
-    <arg name="height" value="1.0"/>
-  </include> -->
 
   <!-- Launch the node responsible for controlling maneuvers -->
   <include file="$(find quadrotor_control_system)/launch/maneuvers.launch">
