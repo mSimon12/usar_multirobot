@@ -115,10 +115,8 @@ class SafeLand(object):
                     self.motors.call(motors_msg)
 
                     # Send landed pose as result
-                    self.odometry_me.acquire()
                     self.odometry_me.wait()
                     self.server_result.land_pose = self.odometry
-                    self.odometry_me.release()
                     self.land_server.set_succeeded(self.server_result)
                 self.odometry_me.release()
                 self.sonar_me.release()
@@ -129,6 +127,7 @@ class SafeLand(object):
         sonar_sub.unregister()
         odom_sub.unregister()
         sensor_sub.unregister()
+        # rospy.logwarn("ENDING safe land!")
 
         return
 
@@ -141,6 +140,8 @@ class SafeLand(object):
 
         if self.current_height < self.quadrotor_height*0.8:
             self.odometry_me.acquire()
+            if not self.odometry:
+                self.odometry_me.wait()
             self.point_to_go.goal.position.z = self.odometry.position.z - self.current_height + self.quadrotor_height
             self.odometry_me.release()
             self.trajectory_client.cancel_goal()
@@ -153,6 +154,7 @@ class SafeLand(object):
         '''
         self.odometry_me.acquire()
         self.odometry = odometry.pose.pose
+        self.odometry_me.notify_all()
         self.odometry_me.release()
 
     def v_sensor_callback(self,msg):

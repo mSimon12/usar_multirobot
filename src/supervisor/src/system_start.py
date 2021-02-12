@@ -90,4 +90,4 @@ if __name__ == "__main__":
     if(ROBOT_TYPE == "pioneer3at"):
         rospy.Subscriber("gas_sensor/out",events_message, receiver.receive_event, '{}/gas_sensor/out'.format(NAME))
 
-    rospy.Subscriber("/ihm/out",events_message, receiver.receive_event, 'ihm/out')
+    rospy.Subscriber("ihm/out",events_message, receiver.receive_event, 'ihm/out')

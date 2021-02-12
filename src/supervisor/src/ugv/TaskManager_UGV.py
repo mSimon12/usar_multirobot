@@ -202,6 +202,8 @@ class TaskManager(Thread):
 
         # BEHAVIOR 1 -> System on Critical state
         if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
+                if self.current_task != self.Abort:  
+                    self.Abort.restart()
                 self.current_task = self.Abort
                 g_var.manager_info['status'] = 'unable'
                 if self.main_task:

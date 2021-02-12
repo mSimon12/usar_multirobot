@@ -370,7 +370,7 @@ class surroundings_verification(Maneuver):
             # Define points around the victim
             theta_step = 2*pi/self.n_points                                                                 # Theta dist between points
             self.points.append([self.victim['x'], self.victim['y'] - self.min_dist, self.height, 1.57])     # First point to visit
-            
+
             count = 0
             for i in range(0,self.rounds):
                 for j in range(1, self.n_points):                                                       
@@ -492,6 +492,7 @@ class teleoperation(object):
         self.robot_name = name
         self.state = 'IDLE' 
 
+        self.odometry = None
         self.odometry_me = Condition()
 
         #Variables to control the speed 
@@ -544,6 +545,7 @@ class teleoperation(object):
         '''
         self.odometry_me.acquire()
         self.odometry = odometry.pose.pose
+        self.odometr_me.notifyAll()
         self.odometry_me.release()
 
     def Joy_callback(self,msg):
@@ -556,6 +558,8 @@ class teleoperation(object):
         self.__last_time = time 
 
         self.odometry_me.acquire()
+        while not self.odometry:
+            self.odometry_me.wait()
         self.__tele_msg.pose = self.odometry 
         angles = euler_from_quaternion([self.odometry.orientation.x,self.odometry.orientation.y,self.odometry.orientation.z,self.odometry.orientation.w])
         self.odometry_me.release()
@@ -798,8 +802,8 @@ if __name__=="__main__":
     z_coord = rospy.get_param("zcoordinate", default = 0.0)
     
     # VSV parameters
-    min_dist = rospy.get_param("min_dist", default = 1.0)
-    max_dist = rospy.get_param("max_dist", default = 5.0)
+    min_dist = rospy.get_param("vsv_min_dist", default = 1.0)
+    max_dist = rospy.get_param("vsv_max_dist", default = 5.0)
     vsv_rounds = rospy.get_param("vsv_rounds", default = 2)
     vsv_round_points = rospy.get_param("vsv_round_points", default = 8)
     height = rospy.get_param("vsv_height", default = 8)

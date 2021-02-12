@@ -11,7 +11,7 @@ from system_msgs.msg import task_message, events_message
 import OP.EVENTS as events_module
 
 # List of events that require a parameter
-P_EVENTS = ['uav_st_app', 'uav_st_assess', 'uav_st_v_search','uav_st_vsv',]        
+P_EVENTS = ['uav_st_app', 'uav_st_assess', 'uav_st_v_search','uav_st_vsv','uav_rep_victim']        
 
 class TaskManager(Thread):
     '''
@@ -37,6 +37,7 @@ class TaskManager(Thread):
         #BACKUP BEHAVIORS
         self.BB = tasks.GoBackToBase()
         self.Abort = tasks.AbortM()
+        self.SafeLand = tasks.SafeLand()
         self.teleoperation = None
 
         # Variable to control events priorities
@@ -111,16 +112,16 @@ class TaskManager(Thread):
             last_event = self.current_status['event'].array[0]
             states = self.current_status['states'].values[0]
             param = self.current_status['event_params'].values[0]
-            # print("\n[Task Manager]: Last event --> {} (param = {})".format(last_event, self.current_status['event_params']))
+            print("\n[Task Manager]: Last event --> {} (param = {})".format(last_event, self.current_status['event_params']))
 
-            # # Print enabled events
-            # enabled_events = self.current_status['enabled_events'].array[0]
-            # print("[Task Manager]: Enabled_events --> ", enabled_events)
+            # Print enabled events
+            enabled_events = self.current_status['enabled_events'].array[0]
+            print("[Task Manager]: Enabled_events --> ", enabled_events)
 
-            # # Print current states
-            # print("[Task Manager]: Current states: ")
-            # for s in self.current_status['states'].values[0]:
-            #     print(f"\t{s.upper()}: {self.current_status['states'].values[0][s]}")
+            # Print current states
+            print("[Task Manager]: Current states: ")
+            for s in self.current_status['states'].values[0]:
+                print(f"\t{s.upper()}: {self.current_status['states'].values[0][s]}")
 
             #Verify if the task has been acomplished
             if self.main_task and (self.main_task.next_event(states.values(), last_event, param) == 'task_done'):
@@ -159,11 +160,11 @@ class TaskManager(Thread):
         param = self.current_status['event_params'].values[0]
 
         # Verify events that afect the behavior
-        if (last_event == 'victim_found'):
+        if (last_event == 'uav_victim_found'):
             self.foundV = tasks.V_Found(param) 
-        elif (last_event == 'call_tele'):
+        elif (last_event == 'uav_call_tele'):
             self.teleoperation = tasks.TeleCalled()
-        elif (last_event == 'er_tele') or (self.teleoperation and (not self.teleoperation.next_event(states.values(), last_event, param))):
+        elif (last_event == 'uav_er_tele') or (self.teleoperation and (not self.teleoperation.next_event(states.values(), last_event, param))):
             self.teleoperation = None
 
         # Verify if 'Found behaviors' have been accomplished
@@ -174,7 +175,9 @@ class TaskManager(Thread):
 
         # BEHAVIOR 1 -> System on Critical state
         if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
-                self.current_task = tasks.SafeLand()
+                if self.current_task != self.SafeLand:  
+                    self.SafeLand.restart()
+                self.current_task = self.SafeLand
                 g_var.manager_info['status'] = 'unable'
                 if self.main_task:
                     g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
@@ -194,19 +197,19 @@ class TaskManager(Thread):
                     self.current_task = self.teleoperation
                     g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                 else:
-                    # BEHAVIOR 4 -> report victim pose and execute VSV
-                    if self.foundV:        
-                        self.current_task = self.foundV  
-                        g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
+                    # BEHAVIOR 4 -> finish the last task and return to base
+                    if (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
+                        g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
+                        if self.current_task != self.BB:
+                            self.BB.atBase = False
+                            self.current_task = self.BB
+                            if self.main_task:
+                                self.main_task.restart()
                     else:
-                        # BEHAVIOR 5 -> finish the last task and return to base
-                        if (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
-                            g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
-                            if self.current_task != self.BB:
-                                self.BB.atBase = False
-                                self.current_task = self.BB
-                                if self.main_task:
-                                    self.main_task.restart()
+                        # BEHAVIOR 5 -> report victim pose and execute VSV
+                        if self.foundV:        
+                            self.current_task = self.foundV  
+                            g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                         else:
                             # BEHAVIOR 6 -> execute the task assigned by the Task Alocator
                             if self.main_task:
@@ -228,6 +231,9 @@ class TaskManager(Thread):
                     g_var.manager_info['status'] = 'lazy'
                     g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                     self.main_task = None
+                
+                if self.current_task != self.Abort:  
+                    self.Abort.restart()
                 self.current_task = self.Abort
 
         ##########################################################################################################

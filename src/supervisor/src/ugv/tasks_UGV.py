@@ -272,8 +272,8 @@ class AbortM(Task):
         
         if last_event == 'rep_self_pos':
             self.pose_reported = True
-        elif not (('BAT_CRITICAL' in states) or ('CRITIC_FAILURE' in states)):
-            self.pose_reported = False
+        # elif not (('BAT_CRITICAL' in states) or ('CRITIC_FAILURE' in states)):
+        #     self.pose_reported = False
 
         if self.pose_reported:
             return []
@@ -284,6 +284,10 @@ class AbortM(Task):
                 return events
             else:
                 return ['rep_self_pos']
+
+    def restart(self):
+        super().restart()
+        self.pose_reported = False
 
 
 class V_Found(Task):

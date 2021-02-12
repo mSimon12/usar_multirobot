@@ -60,6 +60,7 @@ class VictimSensor(object):
                     p = Twist()
                     p.linear.x = pos.pose.position.x
                     p.linear.y = pos.pose.position.y
+                    p.linear.z = pos.pose.position.z
 
                     # Create message
                     msg = events_message()

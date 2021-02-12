@@ -96,7 +96,7 @@
 		<Event id="0" label="critic_fail" controllable="false"/>
 		<Event id="1" label="fail" controllable="false"/>
 		<Event id="2" label="pos_fail" controllable="false"/>
-		<Event id="3" label="rst_f"/>
+		<Event id="3" label="rst_f" controllable="false"/>
 	</Events>
 	<States>
 		<State id="0" name="CRITIC_FAILURE"/>

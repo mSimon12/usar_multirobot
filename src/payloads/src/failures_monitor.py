@@ -19,6 +19,7 @@ class FailuresMonitor(object):
         # Reset failure monitor system
         if (msg.event == 'reset') and (self.state != 'NO_FAIL'):
             self.state = 'NO_FAIL'
+            self.pub.publish(msg)                                                # Republish the message to the output
             return
         elif (msg.event == 'reset'):
             rospy.logwarn("Command not allowed!")

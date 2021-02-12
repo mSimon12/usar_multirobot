@@ -1,0 +1,25 @@
+// Supervisors-motion_assist_request
+digraph {
+	rankdir=LR
+	ASSIST_ALLOWED [label=ASSIST_ALLOWED color=black fillcolor=white shape=circle style=filled]
+	NO_ASSIT [label=NO_ASSIT color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	ASSIST_ALLOWED -> ASSIST_ALLOWED [label="er_app,
+er_exp,
+er_rb,
+er_vsv,
+pos_fail" fontcolor=red style=dashed]
+	ASSIST_ALLOWED -> NO_ASSIT [label="req_assist,
+rst_app,
+rst_exp,
+rst_rb,
+rst_vsv" fontcolor=blue]
+	NO_ASSIT -> ASSIST_ALLOWED [label="er_app,
+er_exp,
+er_rb,
+er_vsv,
+pos_fail" fontcolor=red style=dashed]
+	NO_ASSIT -> NO_ASSIT [label="rst_app,
+rst_exp,
+rst_rb,
+rst_vsv" fontcolor=blue]
+}

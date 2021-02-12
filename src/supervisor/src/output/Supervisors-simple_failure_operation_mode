@@ -1,0 +1,16 @@
+// Supervisors-simple_failure_operation_mode
+digraph {
+	rankdir=LR
+	OK [label=OK color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	SIMPLE_FAIL [label=SIMPLE_FAIL color=black fillcolor=white shape=circle style=filled]
+	OK -> OK [label="st_app,
+st_exp,
+st_vsv,
+rsm_app,
+rsm_exp,
+rsm_vsv,
+rst_f" fontcolor=blue]
+	OK -> SIMPLE_FAIL [label=fail fontcolor=red style=dashed]
+	SIMPLE_FAIL -> OK [label=rst_f fontcolor=blue]
+	SIMPLE_FAIL -> SIMPLE_FAIL [label=fail fontcolor=red style=dashed]
+}

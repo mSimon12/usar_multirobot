@@ -264,16 +264,17 @@ class SafeLand(Task):
 
     def __init__(self, param = [], vs_req = False, gs_req = False):
         super().__init__(param, True, False)
-        self.Landed = False
         self.pose_reported = False
 
     def next_event(self, states, last_event, event_param = []):
         '''
             Safe Land sequence:  st_safe_land -> (rsm_safe_land, end_safe_land)
         '''
-        if (last_event == 'end_safe_land'):
-            self.Landed = True
-        elif (not self.Landed):
+        if (last_event == 'uav_end_safe_land'):
+            self._motion_done = True
+        elif (last_event == 'uav_er_safe_land'):
+            return["uav_rst_safe_land"]
+        elif (not self._motion_done):
             # Before the motion have been considered as executed
 
             # Verify if the last maneuver must be aborted 
@@ -294,10 +295,10 @@ class SafeLand(Task):
 
         if last_event == 'uav_rep_self_pos':
             self.pose_reported = True
-        elif not (('BAT_CRITICAL' in states) or ('CRITIC_FAILURE' in states)):
-            self.pose_reported = False
+        # elif not (('BAT_CRITICAL' in states) or ('CRITIC_FAILURE' in states)):
+        #     self.pose_reported = False
 
-        if self.Landed:
+        if self._motion_done:
             # After the motion have been executed
             if self.pose_reported:
                 return []
@@ -308,6 +309,10 @@ class SafeLand(Task):
                     return events
                 else:
                     return ['uav_rep_self_pos']
+
+    def restart(self):
+        super().restart()
+        self.pose_reported = False
 
 
 class GoBackToBase(Task):
@@ -345,17 +350,19 @@ class AbortM(Task):
 
     def next_event(self, states, last_event, event_param = []):
         # abort any maneuver
-        for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','TELE_EXE','RB_EXE']:
-            if i in states:
-                return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_vsv', 'uav_sus_rb', 'uav_abort_tele']
-        for i in ['APP_SUSP','ASSESS_SUSP','VSV_SUSP','TELE_SUSP','RB_SUSP']:
-            if i in states:
-                return ['uav_abort_app', 'uav_abort_assess', 'uav_abort_vsv', 'uav_abort_rb']
+        event_to_abort = self._abort_last_M(states)
+        if event_to_abort:
+            return event_to_abort
+
+        # for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','SEARCH_EXE','RB_EXE']:
+        #     if i in states:
+        #         return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_vsv', 'uav_sus_rb', 'uav_sus_v_search']
+        # for i in ['APP_SUSP','ASSESS_SUSP','VSV_SUSP','SEARCH_SUSP','RB_SUSP']:
+        #     if i in states:
+        #         return ['uav_abort_app', 'uav_abort_assess', 'uav_abort_vsv', 'uav_abort_rb','uav_abort_v_search']
         
         if last_event == 'uav_rep_self_pos':
             self.pose_reported = True
-        elif not (('BAT_CRITICAL' in states) or ('CRITIC_FAILURE' in states)):
-            self.pose_reported = False
 
         if self.pose_reported:
             return []
@@ -366,6 +373,10 @@ class AbortM(Task):
                 return events
             else:
                 return ['uav_rep_self_pos']
+
+    def restart(self):
+        super().restart()
+        self.pose_reported = False
 
 
 class V_Found(Task):
@@ -394,9 +405,9 @@ class V_Found(Task):
                 self.v_reported = True
                 
             # Suspend current task
-            for i in ['APP_EXE','ASSESS_EXE','RB_EXE']:
+            for i in ['APP_EXE','ASSESS_EXE','RB_EXE', 'SEARCH_EXE']:
                 if i in states:
-                    return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_rb']
+                    return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_rb', 'uav_sus_v_search']
             
             # Verify if the victim position was informed to the Commander
             if self.v_reported:
@@ -424,6 +435,8 @@ class ReqHelp(Task):
             self._assit_required = True
         elif last_event == 'uav_end_tele':
             self._tele_executed = True
+        elif last_event == 'uav_er_tele':
+            return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb','uav_rst_tele']
         elif last_event in ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb']:
             return []
         

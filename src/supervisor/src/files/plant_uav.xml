@@ -94,7 +94,7 @@
 		<Event id="0" label="uav_critic_fail" controllable="false"/>
 		<Event id="1" label="uav_fail" controllable="false"/>
 		<Event id="2" label="uav_pos_fail" controllable="false"/>
-		<Event id="3" label="uav_rst_f"/>
+		<Event id="3" label="uav_rst_f" controllable="false"/>
 	</Events>
 	<States>
 		<State id="0" name="CRITIC_FAILURE"/>

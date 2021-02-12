@@ -64,7 +64,7 @@ class BatteryMonitor(Thread):
                 self.msg.param[0] = self.battery_level
                 self.pub.publish(self.msg)                              # Publish the battery level
                 count = 0
-            
+        
             rate.sleep()                                                # Wait to ensure loop frequency
 
     def victim_sensor_status(self, msg):

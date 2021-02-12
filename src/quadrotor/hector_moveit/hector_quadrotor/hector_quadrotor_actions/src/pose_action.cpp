@@ -57,9 +57,6 @@ public:
   {
     bool res = pose_server_.enableMotors(true);
 
-    if (res==true) ROS_INFO("\n\nREsult of enable motors is TRUE\n\n");
-    else ROS_INFO("\n\nREsult of enable motors is FALSE\n\n");
-
     geometry_msgs::PoseStamped pose = goal->target_pose;
 
     ros::Rate r(frequency_);
