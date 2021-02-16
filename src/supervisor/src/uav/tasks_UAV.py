@@ -73,7 +73,7 @@ class UAV_approach(Task):
 
     def next_event(self, states, last_event, event_param):
         '''
-            Approach sequence: on_vs -> uav_st_app -> (uav_rsm_app, uav_end_app) -> off_vs
+            Approach sequence: on_vs -> uav_st_app -> (uav_rsm_app, uav_end_app) -> uav_off_vs
         '''
         if (not self._motion_done) and (last_event == 'uav_end_app') and (event_param == self._param):
             self._motion_done = True
@@ -227,7 +227,7 @@ class UAV_return(Task):
         '''
             Return to Base sequence:  st_rb -> (rsm_rb, end_rb)
         '''
-        if (not self._motion_done) and (last_event == 'end_rb'):
+        if (not self._motion_done) and (last_event == 'uav_end_rb'):
             self._motion_done = True
         elif (not self._motion_done):
             # Before the motion have been considered as executed

@@ -28,6 +28,9 @@ from quadrotor_control_system.msg import ExecuteLandAction,  ExecuteLandGoal
 from hector_moveit_exploration.msg import ExecuteDroneExplorationAction, ExecuteDroneExplorationGoal
 # from quadrotor_control_system.msg import ExecuteAssesstAction,  ExecuteAssesstGoal
 
+# Return to base
+from hector_uav_msgs.srv import EnableMotors, EnableMotorsRequest
+
 # For teleoperation
 from sensor_msgs.msg import Joy
 from nav_msgs.msg import Odometry
@@ -150,6 +153,7 @@ class assessment(object):
     '''
     def __init__(self, name):
         self.robot_name = name
+        self.suspending = False 
         self.state = 'IDLE'                             # Set IDLE state
         self.region = []                                # Region to be explored
 
@@ -244,6 +248,7 @@ class v_search(object):
     '''
     def __init__(self, name):
         self.robot_name = name
+        self.suspending = False 
         self.state = 'IDLE'                             # Set IDLE state
         self.region = []                                # Region to be explored
 
@@ -439,12 +444,23 @@ class return_to_base(Maneuver):
         self.base_pos = {'x': base_x, 'y': base_y, 'z': base_z}                               # Position of the base
         super(return_to_base, self).__init__(name)
 
+        # quadrotor motion service
+        self.motors = rospy.ServiceProxy('enable_motors', EnableMotors)
+        self.motors.wait_for_service()
+
     def execute(self):
         if self.state == 'IDLE':
             rospy.loginfo("Starting Return to Base!")
             self.state = 'EXE'
 
-        result = self.move_to(self.base_pos['x'], self.base_pos['y'], self.base_pos['z'], 0)            # Start the motion and wait for result
+        result = self.move_to(self.base_pos['x'], self.base_pos['y'], self.base_pos['z'] + 1.0, 0)            # Start the motion and wait for result
+
+        if result == 'end':
+            result = self.move_to(self.base_pos['x'], self.base_pos['y'], self.base_pos['z'] + 0.2, 0)            # Start the motion and wait for result
+            
+            motors_msg = EnableMotorsRequest()
+            motors_msg.enable = False                   # Disable motors to make the drone land
+            self.motors.call(motors_msg)
 
         # Verify the reason why the robot stopped moving
         if self.suspending:
@@ -545,7 +561,7 @@ class teleoperation(object):
         '''
         self.odometry_me.acquire()
         self.odometry = odometry.pose.pose
-        self.odometr_me.notifyAll()
+        self.odometry_me.notifyAll()
         self.odometry_me.release()
 
     def Joy_callback(self,msg):
@@ -687,11 +703,11 @@ def maneuver_event(msg):
         # Commands for assessment maneuver
         if (msg.event == "start_assessment") and (assess.state == 'IDLE'):
             # Verify paramenters
-            if len(msg.position) > 3:                                                           # Need at least three points to create a polygon
+            if len(msg.position) > 1:                                                           # Need at least three points to create a polygon
                 thread = Thread(target=assess.execute, args=[msg.position, msg])
                 thread.start()                                                                  # Start assessment
             else:
-                rospy.logwarn("Wrong assessment parameters! Must have at least 3 vertices and 1 start position.")             # Missing parameters
+                rospy.logwarn("Wrong assessment parameters! Must have a initial vertice and size of square.")             # Missing parameters
         
         elif (msg.event == "suspend_assessment") and (assess.state == 'EXE'):
             assess.suspend()

@@ -138,6 +138,7 @@ class exploration(object):
     '''
     def __init__(self, name):
         self.robot_name = name
+        self.suspending = False
         self.state = 'IDLE'                             # Set IDLE state
         self.region = []                                # Region to be explored
 
@@ -164,22 +165,40 @@ class exploration(object):
             # Save some variables
             self.region = region_to_explore                              # Save region being explored
 
-        # Define boundaries
-        for i in range(0, len(self.region)):
-            p = Point32()
-            p.x = self.region[i].linear.x
-            p.y = self.region[i].linear.y
-            self._goal.boundary.polygon.points.append(p)
+        # Define boundaries    
+        # Vertice 1
+        p = Point32()
+        p.x = self.region[0].linear.x
+        p.y = self.region[0].linear.y
+        self._goal.boundary.polygon.points.append(p)
+
+        # Vertice 2
+        p = Point32()
+        p.x = self.region[0].linear.x + self.region[1].linear.x
+        p.y = self.region[0].linear.y
+        self._goal.boundary.polygon.points.append(p)
+
+        # Vertice 3
+        p = Point32()
+        p.x = self.region[0].linear.x
+        p.y = self.region[0].linear.y + self.region[1].linear.y
+        self._goal.boundary.polygon.points.append(p)
+
+        # Vertice 4
+        p = Point32()
+        p.x = self.region[0].linear.x + self.region[1].linear.x
+        p.y = self.region[0].linear.y + self.region[1].linear.y
+        self._goal.boundary.polygon.points.append(p)
 
         # Start position is the polygon centroid
         x_sum = 0
         y_sum = 0
-        for p in self.region:
-            x_sum += p.linear.x
-            y_sum += p.linear.y
+        for p in self._goal.boundary.polygon.points:
+            x_sum += p.x
+            y_sum += p.y
         
-        self._goal.start_point.point.x = x_sum/len(self.region)
-        self._goal.start_point.point.y = y_sum/len(self.region)
+        self._goal.start_point.point.x = x_sum/4
+        self._goal.start_point.point.y = y_sum/4
 
         self.state = 'EXE'                                              # Set EXE state
 
@@ -489,11 +508,11 @@ def maneuver_event(msg):
         # Commands for exploration maneuver
         if (msg.event == "start_exploration") and (exp.state == 'IDLE'):
             # Verify paramenters
-            if len(msg.position) >= 3:                                                                     # Need at least three points to create a polygon
+            if len(msg.position) >= 2:                                                                          # Need at least three points to create a polygon
                 thread = Thread(target=exp.execute, args=[msg.position, msg])
-                thread.start()                                                                            # Start exploration
+                thread.start()                                                                                  # Start exploration
             else:
-                rospy.logwarn("Wrong exploration parameters! Must have at least 3 vertices!")             # Missing parameters
+                rospy.logwarn("Wrong exploration parameters! Must have at least 1 vertice and area size!")      # Missing parameters
         
         elif (msg.event == "suspend_exploration") and (exp.state == 'EXE'):
             exp.suspend()

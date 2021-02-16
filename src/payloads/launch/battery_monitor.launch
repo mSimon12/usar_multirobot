@@ -2,9 +2,15 @@
 
 <launch>
    <arg name="move_topic" default="move_base/status"/>
+   <arg name="motion_w" default="0.0035"/>
+   <arg name="victim_w" default="0.0009"/>
+   <arg name="gas_w" default="0.0005"/>
    <arg name="publish_rate" default="1.0"/>
 
    <param name="move_topic" value="$(arg move_topic)"/>
+   <param name="move_consuption_weight" value="$(arg motion_w)"/>
+   <param name="v_sensor_consuption_weight" value="$(arg victim_w)"/>
+   <param name="g_sensor_consuption_weight" value="$(arg gas_w)"/>
    <param name="publish_rate" value="$(arg publish_rate)"/>
    <node name="battery_monitor" pkg="payloads" type="battery_monitor.py" output="log"/>
 </launch>	

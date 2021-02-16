@@ -90,6 +90,9 @@
   <include file="$(find payloads)/launch/battery_monitor.launch">
     <arg name="move_topic" value="action/pose/status"/>
     <arg name="publish_rate" value="0.1"/>
+    <arg name="motion_w" value="0.010"/>
+    <arg name="victim_w" value="0.0009"/>
+    <arg name="gas_w" value="0.0005"/>
   </include>
 
   <!-- LAUNCH FAILURES MONITOR -->

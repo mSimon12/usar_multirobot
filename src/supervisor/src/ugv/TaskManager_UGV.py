@@ -84,7 +84,7 @@ class TaskManager(Thread):
             # Create a vector of multiple points
             for p in task.position:
                 task_position.append((p.linear.x, p.linear.y))
-        else:
+        elif len(task.position) == 1:
             task_position.append(task.position[0].linear.x)
             task_position.append(task.position[0].linear.y)
             task_position.append(task.position[0].angular.z)

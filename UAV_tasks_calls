@@ -1,0 +1,44 @@
+
+This file present the tasks calls for executing each one of the UAV maneuvers:
+
+############################# APPROACH TASK ###############################
+
+rostopic pub -1 /UAV_1/task system_msgs/task_message "id: 'task_id'
+task: 'approach'
+gas_sensor: false
+victim_sensor: true				<--- true if the movement must be done with the victim recognition system ON 
+position:
+- linear: {x: 10.0, y: 10.0, z: 3.0}		<--- position to travel to
+  angular: {x: 0.0, y: 0.0, z: 0.0}" 
+
+
+############################# ASSESSMENT TASK ###############################
+
+rostopic pub -1 /UAV_1/task system_msgs/task_message "id: 'task_id'
+task: 'assessment'
+gas_sensor: false
+victim_sensor: false				<--- true if the movement must be done with the victim recognition system ON 
+position: [{'linear':{'x': 5.0, 'y': 5.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}, {'linear':{'x': 10.0, 'y': 10.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}]" 
+
+	** The position paramenter must contain 2 elements: First the minimum vertice of the area to be explored; Second is the x and y sizes
+
+
+############################# VICTIM SEARCH TASK ###############################
+
+rostopic pub -1 /UAV_1/task system_msgs/task_message "id: 'task_id'
+task: 'victim_search'
+gas_sensor: false
+victim_sensor: false				<--- true if the movement must be done with the victim recognition system ON 
+position: [{'linear':{'x': 15.0, 'y': 15.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}, {'linear':{'x': 10.0, 'y': 10.0, 'z': 0.0}, 'angular': {'x': 0.0, 'y': 0.0, 'z': 0.0}}]"
+
+	** The position paramenter must contain 2 elements: First the minimum vertice of the area to be explored; Second is the x and y sizes
+
+
+############################# RETURN TO BASE TASK ###############################
+
+rostopic pub -1 /UAV_1/task system_msgs/task_message "id: 'task_id'
+task: 'return'
+gas_sensor: false
+victim_sensor: true				<--- true if the movement must be done with the victim recognition system ON 
+position: []" 
+

@@ -9,8 +9,14 @@ from system_msgs.msg import events_message
 
 class BatteryMonitor(Thread):
 
-    def __init__(self, motion_topic):
+    def __init__(self):
         Thread.__init__(self)
+
+        motion_topic = rospy.get_param("move_topic",default="move_base/status")         # Get name of topic to know that the robot is moving
+        motion_w = rospy.get_param("move_consuption_weight",default="0.0035")        # Get the weight of motion on battery consuption
+        victim_w = rospy.get_param("v_sensor_consuption_weight",default="0.0009")       # Get the weight of victim sensor on battery consuption
+        gas_w = rospy.get_param("g_sensor_consuption_weight",default="0.0005")       # Get the weight of gas sensor on battery consuption
+
         # Get parameters
         self.upd_rate = 10.0                                                             # Rate in which the battery level is updated
         self.pub_rate = rospy.get_param('publish_rate', default = 1.0)                   # Rate in which the battery level is published
@@ -18,9 +24,9 @@ class BatteryMonitor(Thread):
         #Variables for battery consumption simulation
         self.battery_level = 100                                                        # Battery level percent
         # Weights for move and sensors on battery consumption
-        self.__weights = {'move': 0.0035,
-                          'victim_sensor': 0.0009, 
-                          'gas_sensor': 0.0005}                                                 
+        self.__weights = {'move': motion_w,
+                          'victim_sensor': victim_w, 
+                          'gas_sensor': gas_w}                                                 
         self.__sensors_status = {'move_base': False, 'victim_sensor': False, 'gas_sensor': False}       # Variable to know sensor status
 
         # Message object
@@ -98,11 +104,9 @@ class BatteryMonitor(Thread):
 
 if __name__ == '__main__':
     try:  
-        topic = rospy.get_param("move_topic",default="move_base/status")    # Get name of topic to know that the robot is moving
-
         rospy.init_node('battery_monitor', anonymous=False)                 # Initialize the node of the battery monitor
 
-        bat_monitor = BatteryMonitor(topic)
+        bat_monitor = BatteryMonitor()
         bat_monitor.start()                                                 # Start battery monitor thread
 
         rospy.spin()

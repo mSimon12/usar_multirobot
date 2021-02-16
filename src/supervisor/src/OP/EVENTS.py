@@ -3699,7 +3699,7 @@ class uav_st_v_search(object):
 				point.linear.x = p[0]
 				point.linear.y = p[1]
 				msg.position.append(point)						#Insert polygon points
-			uav_st_assess.pub.publish(msg)						#Publish message
+			uav_st_v_search.pub.publish(msg)						#Publish message
 			return True
 		except:
 			rospy.logwarn("ERRO!!!!\nVictim Search need at least two points. (start_position, sizes)")
