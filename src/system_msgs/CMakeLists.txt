@@ -53,6 +53,7 @@ find_package(catkin REQUIRED COMPONENTS
    FILES
    events_message.msg
    task_message.msg
+   abstractions.msg
  )
 
 ## Generate services in the 'srv' folder

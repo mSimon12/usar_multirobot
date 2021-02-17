@@ -89,10 +89,17 @@ class TaskManager(Thread):
             task_position.append(task.position[0].linear.y)
             task_position.append(task.position[0].angular.z)
 
-        
         # Subscribe the last task by the new one, flaging that the last one is aborted
+        g_var.manager_info_flag.acquire()
+
+        #Update last task
         if self.main_task:
             g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+
+        #Update new task
+        g_var.manager_info['current_task'] = task.id
+        g_var.manager_info_flag.notify()
+        g_var.manager_info_flag.release()
 
         # Save the new id of the task
         self.main_task_id = task.id
@@ -146,7 +153,10 @@ class TaskManager(Thread):
             #Verify if the main task has been acomplished
             if self.main_task and (self.main_task.next_event(states.values(), last_event, param) == 'task_done'):
                 print("[Task Manager]: TASK '{}' accomplished!!!!!!".format(self.main_task_id))
+                g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'finished'
+                g_var.manager_info_flag.notify()
+                g_var.manager_info_flag.release()
 
                 # Reset task
                 self.main_task = None
@@ -200,6 +210,8 @@ class TaskManager(Thread):
 
         ##### Select the task to be executed (the main_task or backup behaviors) #####
 
+        g_var.manager_info_flag.acquire()
+
         # BEHAVIOR 1 -> System on Critical state
         if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
                 if self.current_task != self.Abort:  
@@ -213,6 +225,7 @@ class TaskManager(Thread):
             # BEHAVIOR 2 -> teleoperation required by the Commander
             if self.teleoperation:
                 self.current_task = self.teleoperation
+                g_var.manager_info['status'] = 'busy'
                 g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
             else:
                 # BEHAVIOR 3 -> human assistance due to maneuvers errors
@@ -222,11 +235,13 @@ class TaskManager(Thread):
                     if not self.current_task == self.teleoperation:
                         self.teleoperation = tasks.ReqHelp()
                     self.current_task = self.teleoperation
+                    g_var.manager_info['status'] = 'busy'
                     g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                 else:
                     # BEHAVIOR 4 -> report victim pose and execute VSV
                     if self.foundV:        
                         self.current_task = self.foundV  
+                        g_var.manager_info['status'] = 'busy'
                         g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                     # BEHAVIOR 5 -> report gas leak position                           
                     elif self.foundG:            
@@ -239,7 +254,7 @@ class TaskManager(Thread):
                             if self.current_task != self.BB:
                                 self.BB.atBase = False
                                 self.current_task = self.BB
-                                if self.main_task:
+                                if self.main_task and (last_event == 'st_rb'):
                                     self.main_task.restart()
                         else:
                             # BEHAVIOR 7 -> execute the task assigned by the Task Alocator
@@ -264,6 +279,9 @@ class TaskManager(Thread):
                     g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                     self.main_task = None
                 self.current_task = self.Abort
+
+        g_var.manager_info_flag.notify()
+        g_var.manager_info_flag.release()
 
         ##########################################################################################################
 

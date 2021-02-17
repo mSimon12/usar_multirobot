@@ -238,7 +238,7 @@ class GoBackToBase(Task):
         if last_event == 'end_rb':
             self.atBase = True
             return []
-        else:
+        elif not self.atBase:
             for i in ['APP_EXE','EXP_EXE','VSV_EXE','TELE_EXE','RB_EXE']:
                 if i in states:
                     return ['end_app', 'end_exp', 'end_vsv', 'end_tele', 'end_rb']

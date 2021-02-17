@@ -28,7 +28,9 @@ class TaskManager(Thread):
         self.update_flag = Condition()              # Flag to signal new cycle
         self.__last_id = -1                         # Variable to control new events received
 
+        # Variables to control current task and main task (task required by the commander)
         self.main_task = None
+        self.main_task_id = None
         self.current_task = None
 
         # Varible to activate a behavior when something is found
@@ -62,6 +64,7 @@ class TaskManager(Thread):
         '''      
         # Get position of the task
         task_position = []
+
         if len(task.position) > 1:
             # Create a vector of multiple points
             for p in task.position:
@@ -72,7 +75,21 @@ class TaskManager(Thread):
             task_position.append(task.position[0].linear.z)
             task_position.append(task.position[0].angular.z)  
 
+        # Subscribe the last task by the new one, flaging that the last one is aborted
+        g_var.manager_info_flag.acquire()
+
+        #Update last task
+        if self.main_task:
+            g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+
+        # Save the new id of the task
         self.main_task_id = task.id
+        g_var.manager_info['tasks'][self.main_task_id] = 'executing'
+
+        #Update new task
+        g_var.manager_info['current_task'] = task.id
+        g_var.manager_info_flag.notify()
+        g_var.manager_info_flag.release()
 
         if task.task == 'approach':
             self.main_task = tasks.UAV_approach(task_position, task.victim_sensor, task.gas_sensor)              #Create object of the main task
@@ -86,8 +103,6 @@ class TaskManager(Thread):
             self.main_task = tasks.UAV_return(task_position, task.victim_sensor, task.gas_sensor)                #Create object of the main task
         # elif task.task == 'teleoperation':
         #     self.main_task = tasks.UAV_teleoperation(task_position, task.victim_sensor, task.gas_sensor)         #Create object of the main task
-
-        # Make a historic of the tasks executed by the robot
 
         # Signal that a new task was received
         self.update_flag.acquire()
@@ -112,21 +127,25 @@ class TaskManager(Thread):
             last_event = self.current_status['event'].array[0]
             states = self.current_status['states'].values[0]
             param = self.current_status['event_params'].values[0]
-            print("\n[Task Manager]: Last event --> {} (param = {})".format(last_event, self.current_status['event_params']))
 
-            # Print enabled events
-            enabled_events = self.current_status['enabled_events'].array[0]
-            print("[Task Manager]: Enabled_events --> ", enabled_events)
+            # print("\n[Task Manager]: Last event --> {} (param = {})".format(last_event, self.current_status['event_params']))
 
-            # Print current states
-            print("[Task Manager]: Current states: ")
-            for s in self.current_status['states'].values[0]:
-                print(f"\t{s.upper()}: {self.current_status['states'].values[0][s]}")
+            # # Print enabled events
+            # enabled_events = self.current_status['enabled_events'].array[0]
+            # print("[Task Manager]: Enabled_events --> ", enabled_events)
+
+            # # Print current states
+            # print("[Task Manager]: Current states: ")
+            # for s in self.current_status['states'].values[0]:
+            #     print(f"\t{s.upper()}: {self.current_status['states'].values[0][s]}")
 
             #Verify if the task has been acomplished
             if self.main_task and (self.main_task.next_event(states.values(), last_event, param) == 'task_done'):
                 print("[Task Manager]: TASK '{}' accomplished!!!!!!".format(self.main_task_id))
+                g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'finished'
+                g_var.manager_info_flag.notify()
+                g_var.manager_info_flag.release()
 
                 # Reset task
                 self.main_task = None
@@ -173,6 +192,8 @@ class TaskManager(Thread):
 
         ##### Select the task to be executed (the main_task or backup behaviors) #####
 
+        g_var.manager_info_flag.acquire()
+
         # BEHAVIOR 1 -> System on Critical state
         if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
                 if self.current_task != self.SafeLand:  
@@ -186,6 +207,7 @@ class TaskManager(Thread):
             # BEHAVIOR 2 -> teleoperation required by the Commander
             if self.teleoperation:
                 self.current_task = self.teleoperation
+                g_var.manager_info['status'] = 'busy'
                 g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
             else:
                 # BEHAVIOR 3 -> human assistance due to maneuvers errors
@@ -195,6 +217,7 @@ class TaskManager(Thread):
                     if not self.current_task == self.teleoperation:
                         self.teleoperation = tasks.ReqHelp()
                     self.current_task = self.teleoperation
+                    g_var.manager_info['status'] = 'busy'
                     g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                 else:
                     # BEHAVIOR 4 -> finish the last task and return to base
@@ -204,11 +227,13 @@ class TaskManager(Thread):
                             self.BB.atBase = False
                             self.current_task = self.BB
                             if self.main_task:
+                                g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                                 self.main_task.restart()
                     else:
                         # BEHAVIOR 5 -> report victim pose and execute VSV
                         if self.foundV:        
                             self.current_task = self.foundV  
+                            g_var.manager_info['status'] = 'busy'
                             g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                         else:
                             # BEHAVIOR 6 -> execute the task assigned by the Task Alocator
@@ -235,6 +260,9 @@ class TaskManager(Thread):
                 if self.current_task != self.Abort:  
                     self.Abort.restart()
                 self.current_task = self.Abort
+
+        g_var.manager_info_flag.notify()
+        g_var.manager_info_flag.release()
 
         ##########################################################################################################
         

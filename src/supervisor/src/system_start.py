@@ -9,6 +9,7 @@ from lib.ProductSystem import ProductSystem
 from Intereface import EventInterface
 # from ugv.TaskManager_UGV import TaskManager
 from lib.EventReceiver import EventReceiver
+from lib.EventsFilter import EventsFilter
 
 # ROS libs
 from system_msgs.msg import task_message, events_message
@@ -66,6 +67,10 @@ if __name__ == "__main__":
     #### Start the Task Manager  ################################################
     tm = TaskManager()
     rospy.Subscriber("task", task_message, tm.taskCallback)
+
+    #############################################################################
+    #### Start the Events Filter ####################################################
+    e_filter = EventsFilter()
 
     #############################################################################
     #### Start the Interface ####################################################

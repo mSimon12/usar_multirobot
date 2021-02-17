@@ -328,10 +328,15 @@ class GoBackToBase(Task):
         if last_event == 'uav_end_rb':
             self.atBase = True
             return []
-        else:
-            for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','TELE_EXE','RB_EXE']:
-                if i in states:
-                    return ['uav_end_app', 'uav_end_assess', 'uav_end_vsv', 'uav_end_tele', 'uav_end_rb']
+        elif not self.atBase:
+            # Verify if the last maneuver must be aborted 
+            event_to_abort = self._abort_last_M(states)
+            if event_to_abort:
+                return event_to_abort
+
+            # for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','TELE_EXE','RB_EXE']:
+            #     if i in states:
+            #         return ['uav_end_app', 'uav_end_assess', 'uav_end_vsv', 'uav_end_tele', 'uav_end_rb']
             # After the maneuver have been executed
             events = self._sensors2turnOFF(states)
             if events:
