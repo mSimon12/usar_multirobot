@@ -56,7 +56,7 @@
 		<Event id="3" label="uav_rsm_rb"/>
 		<Event id="4" label="uav_rsm_v_search"/>
 		<Event id="5" label="uav_rsm_vsv"/>
-		<Event id="6" label="uav_rst_f"/>
+		<Event id="6" label="uav_rst_f" controllable="false"/>
 		<Event id="7" label="uav_st_app"/>
 		<Event id="8" label="uav_st_assess"/>
 		<Event id="9" label="uav_st_rb"/>
@@ -254,7 +254,7 @@
 		<Event id="3" label="uav_rsm_rb"/>
 		<Event id="4" label="uav_rsm_v_search"/>
 		<Event id="5" label="uav_rsm_vsv"/>
-		<Event id="6" label="uav_rst_f"/>
+		<Event id="6" label="uav_rst_f" controllable="false"/>
 		<Event id="7" label="uav_st_app"/>
 		<Event id="8" label="uav_st_assess"/>
 		<Event id="9" label="uav_st_rb"/>
@@ -342,7 +342,7 @@
 		<Event id="2" label="uav_rsm_assess"/>
 		<Event id="3" label="uav_rsm_v_search"/>
 		<Event id="4" label="uav_rsm_vsv"/>
-		<Event id="5" label="uav_rst_f"/>
+		<Event id="5" label="uav_rst_f" controllable="false"/>
 		<Event id="6" label="uav_st_app"/>
 		<Event id="7" label="uav_st_assess"/>
 		<Event id="8" label="uav_st_v_search"/>

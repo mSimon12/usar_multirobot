@@ -1,0 +1,16 @@
+<mission>
+  <id>test_mission</id>
+  <priority>2</priority>
+  <task>
+    <agent>pioneer3at_1</agent>
+    <position>
+      <x>1.0</x>
+      <y>5.0</y>
+      <z>0.0</z>
+    </position>
+    <region/>
+    <vs>on</vs>
+    <gs>off</gs>
+    <maneuver>approach</maneuver>
+  </task>
+</mission>

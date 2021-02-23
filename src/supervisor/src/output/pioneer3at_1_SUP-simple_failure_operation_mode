@@ -8,9 +8,9 @@ st_exp,
 st_vsv,
 rsm_app,
 rsm_exp,
-rsm_vsv,
-rst_f" fontcolor=blue]
+rsm_vsv" fontcolor=blue]
+	OK -> OK [label=rst_f fontcolor=red style=dashed]
 	OK -> SIMPLE_FAIL [label=fail fontcolor=red style=dashed]
-	SIMPLE_FAIL -> OK [label=rst_f fontcolor=blue]
+	SIMPLE_FAIL -> OK [label=rst_f fontcolor=red style=dashed]
 	SIMPLE_FAIL -> SIMPLE_FAIL [label=fail fontcolor=red style=dashed]
 }

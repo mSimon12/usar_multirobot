@@ -48,7 +48,7 @@
 		<Event id="2" label="rsm_exp"/>
 		<Event id="3" label="rsm_rb"/>
 		<Event id="4" label="rsm_vsv"/>
-		<Event id="5" label="rst_f"/>
+		<Event id="5" label="rst_f" controllable="false"/>
 		<Event id="6" label="st_app"/>
 		<Event id="7" label="st_exp"/>
 		<Event id="8" label="st_rb"/>
@@ -278,7 +278,7 @@
 		<Event id="2" label="rsm_exp"/>
 		<Event id="3" label="rsm_rb"/>
 		<Event id="4" label="rsm_vsv"/>
-		<Event id="5" label="rst_f"/>
+		<Event id="5" label="rst_f" controllable="false"/>
 		<Event id="6" label="st_app"/>
 		<Event id="7" label="st_exp"/>
 		<Event id="8" label="st_rb"/>
@@ -391,7 +391,7 @@
 		<Event id="1" label="rsm_app"/>
 		<Event id="2" label="rsm_exp"/>
 		<Event id="3" label="rsm_vsv"/>
-		<Event id="4" label="rst_f"/>
+		<Event id="4" label="rst_f" controllable="false"/>
 		<Event id="5" label="st_app"/>
 		<Event id="6" label="st_exp"/>
 		<Event id="7" label="st_vsv"/>

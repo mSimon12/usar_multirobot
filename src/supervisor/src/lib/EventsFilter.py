@@ -83,11 +83,13 @@ class EventsFilter(object):
                 if g_var.manager_info['current_task'] != last_task_info['id']:
                     # Send last status of last task
                     if last_task_info['id'] != None:
-                        self.msg.event = 'last_task_' + g_var.manager_info['tasks'][last_task_info['id']]
+                        self.msg.event = 'task_' + g_var.manager_info['tasks'][last_task_info['id']]
+                        self.msg.task_id = last_task_info['id']
                         self.pub.publish(self.msg)
                     
                     # Send status of current task
-                    self.msg.event = 'current_task_' + g_var.manager_info['tasks'][g_var.manager_info['current_task']]
+                    self.msg.event = 'task_' + g_var.manager_info['tasks'][g_var.manager_info['current_task']]
+                    self.msg.task_id = g_var.manager_info['current_task']
                     self.pub.publish(self.msg)
 
                     # Update info of last changes
@@ -97,7 +99,8 @@ class EventsFilter(object):
                 # Verifies if the current tasks has a status change
                 elif g_var.manager_info['tasks'][g_var.manager_info['current_task']] != last_task_info['status']:
                     # Send status of current task
-                    self.msg.event = 'current_task_' + g_var.manager_info['tasks'][g_var.manager_info['current_task']]
+                    self.msg.event = 'task_' + g_var.manager_info['tasks'][g_var.manager_info['current_task']]
+                    self.msg.task_id = g_var.manager_info['current_task']
                     self.pub.publish(self.msg)
 
                     # Update info of last changes

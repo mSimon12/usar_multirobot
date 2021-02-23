@@ -122,7 +122,7 @@
 		<Event id="1" label="gas_found" controllable="false"/>
 		<Event id="2" label="off_gs"/>
 		<Event id="3" label="on_gs"/>
-		<Event id="4" label="rst_gs"/>
+		<Event id="4" label="rst_gs" controllable="false"/>
 	</Events>
 	<States>
 		<State id="0" name="GS_ERROR"/>
@@ -190,7 +190,7 @@
 		<Event id="0" label="er_vs" controllable="false"/>
 		<Event id="1" label="off_vs"/>
 		<Event id="2" label="on_vs"/>
-		<Event id="3" label="rst_vs"/>
+		<Event id="3" label="rst_vs" controllable="false"/>
 		<Event id="4" label="victim_found" controllable="false"/>
 	</Events>
 	<States>

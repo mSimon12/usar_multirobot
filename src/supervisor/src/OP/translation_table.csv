@@ -29,7 +29,7 @@ er_gs,erro,gas_sensor/out,pioneer3at
 gas_found,gas_leak,gas_sensor/out,pioneer3at
 off_gs,stop,gas_sensor/in,pioneer3at
 on_gs,start,gas_sensor/in,pioneer3at
-rst_gs,reset,gas_sensor/in,pioneer3at
+rst_gs,reset,gas_sensor/out,pioneer3at
 abort_rb,abort_return,maneuvers/in,pioneer3at
 end_rb,end_return,maneuvers/out,pioneer3at
 er_rb,return_error,maneuvers/out,pioneer3at
@@ -51,7 +51,7 @@ sus_vsv,suspend_verification,maneuvers/in,pioneer3at
 er_vs,erro,victim_sensor/out,pioneer3at
 off_vs,stop,victim_sensor/in,pioneer3at
 on_vs,start,victim_sensor/in,pioneer3at
-rst_vs,reset,victim_sensor/in,pioneer3at
+rst_vs,reset,victim_sensor/out,pioneer3at
 victim_found,victim_recognized,victim_sensor/out,pioneer3at
 abort_tele,abort_teleoperation,maneuvers/in,uav
 uav_abort_app,abort_approach,maneuvers/in,uav
@@ -104,7 +104,7 @@ uav_st_tele,start_teleoperation,maneuvers/in,uav
 uav_er_vs,erro,victim_sensor/out,uav
 uav_off_vs,stop,victim_sensor/in,uav
 uav_on_vs,start,victim_sensor/in,uav
-uav_rst_vs,reset,victim_sensor/in,uav
+uav_rst_vs,reset,victim_sensor/out,uav
 uav_abort_v_search,abort_v_search,maneuvers/in,uav
 uav_end_v_search,end_v_search,maneuvers/out,uav
 uav_er_v_search,v_search_error,maneuvers/out,uav

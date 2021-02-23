@@ -3,23 +3,29 @@ digraph {
 	rankdir=LR
 	ASSIST_ALLOWED [label=ASSIST_ALLOWED color=black fillcolor=white shape=circle style=filled]
 	NO_ASSIT [label=NO_ASSIT color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	ASSIST_ALLOWED -> ASSIST_ALLOWED [label="er_app,
-er_exp,
-er_rb,
-er_vsv,
-pos_fail" fontcolor=red style=dashed]
-	ASSIST_ALLOWED -> NO_ASSIT [label="req_assist,
-rst_app,
-rst_exp,
-rst_rb,
-rst_vsv" fontcolor=blue]
-	NO_ASSIT -> ASSIST_ALLOWED [label="er_app,
-er_exp,
-er_rb,
-er_vsv,
-pos_fail" fontcolor=red style=dashed]
-	NO_ASSIT -> NO_ASSIT [label="rst_app,
-rst_exp,
-rst_rb,
-rst_vsv" fontcolor=blue]
+	ASSIST_ALLOWED -> ASSIST_ALLOWED [label="uav_er_app,
+uav_er_assess,
+uav_er_v_search,
+uav_er_vsv,
+uav_er_rb,
+uav_pos_fail,
+uav_fail" fontcolor=red style=dashed]
+	ASSIST_ALLOWED -> NO_ASSIT [label="uav_req_assist,
+uav_rst_app,
+uav_rst_assess,
+uav_rst_v_search,
+uav_rst_vsv,
+uav_rst_rb" fontcolor=blue]
+	NO_ASSIT -> ASSIST_ALLOWED [label="uav_er_app,
+uav_er_assess,
+uav_er_v_search,
+uav_er_vsv,
+uav_er_rb,
+uav_pos_fail,
+uav_fail" fontcolor=red style=dashed]
+	NO_ASSIT -> NO_ASSIT [label="uav_rst_app,
+uav_rst_assess,
+uav_rst_v_search,
+uav_rst_vsv,
+uav_rst_rb" fontcolor=blue]
 }

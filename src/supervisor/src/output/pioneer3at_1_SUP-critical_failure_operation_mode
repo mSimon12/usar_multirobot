@@ -4,7 +4,7 @@ digraph {
 	CRITIC_FAIL [label=CRITIC_FAIL color=black fillcolor=white shape=circle style=filled]
 	OK [label=OK color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	CRITIC_FAIL -> CRITIC_FAIL [label=critic_fail fontcolor=red style=dashed]
-	CRITIC_FAIL -> OK [label=rst_f fontcolor=blue]
+	CRITIC_FAIL -> OK [label=rst_f fontcolor=red style=dashed]
 	OK -> CRITIC_FAIL [label=critic_fail fontcolor=red style=dashed]
 	OK -> OK [label="st_app,
 st_exp,
@@ -14,6 +14,6 @@ st_vsv,
 rsm_app,
 rsm_exp,
 rsm_rb,
-rsm_vsv,
-rst_f" fontcolor=blue]
+rsm_vsv" fontcolor=blue]
+	OK -> OK [label=rst_f fontcolor=red style=dashed]
 }

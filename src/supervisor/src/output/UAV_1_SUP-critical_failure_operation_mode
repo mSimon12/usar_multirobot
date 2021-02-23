@@ -4,7 +4,7 @@ digraph {
 	CRITIC_FAIL [label=CRITIC_FAIL color=black fillcolor=white shape=circle style=filled]
 	OK [label=OK color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	CRITIC_FAIL -> CRITIC_FAIL [label=uav_critic_fail fontcolor=red style=dashed]
-	CRITIC_FAIL -> OK [label=uav_rst_f fontcolor=blue]
+	CRITIC_FAIL -> OK [label=uav_rst_f fontcolor=red style=dashed]
 	OK -> CRITIC_FAIL [label=uav_critic_fail fontcolor=red style=dashed]
 	OK -> OK [label="uav_st_app,
 uav_st_assess,
@@ -16,6 +16,6 @@ uav_rsm_app,
 uav_rsm_assess,
 uav_rsm_v_search,
 uav_rsm_vsv,
-uav_rsm_rb,
-uav_rst_f" fontcolor=blue]
+uav_rsm_rb" fontcolor=blue]
+	OK -> OK [label=uav_rst_f fontcolor=red style=dashed]
 }

@@ -4,7 +4,7 @@ digraph {
 	POS_FAIL [label=POS_FAIL color=black fillcolor=white shape=circle style=filled]
 	POS_OK [label=POS_OK color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	POS_FAIL -> POS_FAIL [label=pos_fail fontcolor=red style=dashed]
-	POS_FAIL -> POS_OK [label=rst_f fontcolor=blue]
+	POS_FAIL -> POS_OK [label=rst_f fontcolor=red style=dashed]
 	POS_OK -> POS_FAIL [label=pos_fail fontcolor=red style=dashed]
 	POS_OK -> POS_OK [label="st_app,
 st_exp,
@@ -13,6 +13,6 @@ st_vsv,
 rsm_app,
 rsm_exp,
 rsm_rb,
-rsm_vsv,
-rst_f" fontcolor=blue]
+rsm_vsv" fontcolor=blue]
+	POS_OK -> POS_OK [label=rst_f fontcolor=red style=dashed]
 }

@@ -41,6 +41,7 @@ class VictimSensor(object):
             self.__pub.publish(msg)                                     # Re-send the msg to the output 
         elif (msg.event == 'reset') and (self.__state == 'ERROR'):
             self.__state = 'IDLE'                                       # Reset the sensor
+            self.__pub.publish(msg)                                     # Re-send the msg to the output 
         else:
             rospy.logwarn("VICTIM_SENSOR command not allowed!")
 

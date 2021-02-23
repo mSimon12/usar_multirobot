@@ -144,6 +144,13 @@
 <!-- LAUNCH TELEOPERATION SERVER-->
   <include file="$(find payloads)/launch/teleop.launch" />
 
+<!-- TASK TASKS DISPATCHER -->
+  <include file="$(find task_dispatcher)/launch/launch_dispatcher.launch">
+      <arg name="uavs" default="[UAV_1]"/>
+      <arg name="ugvs" default="[pioneer3at_1]"/>
+  </include>
+
+
 <!-- LAUNCH RVIZ -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
 

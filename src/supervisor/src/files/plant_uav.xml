@@ -211,7 +211,7 @@
 		<Event id="0" label="uav_er_vs" controllable="false"/>
 		<Event id="1" label="uav_off_vs"/>
 		<Event id="2" label="uav_on_vs"/>
-		<Event id="3" label="uav_rst_vs"/>
+		<Event id="3" label="uav_rst_vs" controllable="false"/>
 		<Event id="4" label="uav_victim_found" controllable="false"/>
 	</Events>
 	<States>

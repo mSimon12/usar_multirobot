@@ -89,31 +89,39 @@ class TaskManager(Thread):
             task_position.append(task.position[0].linear.y)
             task_position.append(task.position[0].angular.z)
 
-        # Subscribe the last task by the new one, flaging that the last one is aborted
-        g_var.manager_info_flag.acquire()
-
-        #Update last task
-        if self.main_task:
-            g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
-
-        #Update new task
-        g_var.manager_info['current_task'] = task.id
-        g_var.manager_info_flag.notify()
-        g_var.manager_info_flag.release()
-
-        # Save the new id of the task
-        self.main_task_id = task.id
+        valid_task = False
 
         # Create the main_task according the type of action required by the Commander
         if task.task == 'approach':
             self.main_task = tasks.UGV_approach(task_position, task.victim_sensor, task.gas_sensor)              #Create object of the main task
+            valid_task = True
         elif task.task == 'exploration':
             self.main_task = tasks.UGV_exploration(task_position, task.victim_sensor, task.gas_sensor)           #Create object of the main task
+            valid_task = True
         # elif task.task == 'verification':
         #     self.main_task = tasks.UGV_verification(task_position, task.victim_sensor, task.gas_sensor)          #Create object of the main task
         elif task.task == 'return':
             self.main_task = tasks.UGV_return(task_position, task.victim_sensor, task.gas_sensor)                #Create object of the main task
+            valid_task = True
 
+        if valid_task:
+            # Subscribe the last task by the new one, flaging that the last one is aborted
+            g_var.manager_info_flag.acquire()
+
+            #Update last task
+            if self.main_task:
+                g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+
+            # Save the new id of the task
+            self.main_task_id = task.id
+            g_var.manager_info['tasks'][self.main_task_id] = 'executing'
+
+            #Update new task
+            g_var.manager_info['current_task'] = self.main_task_id
+            g_var.manager_info_flag.notify()
+            g_var.manager_info_flag.release()
+
+        ###############################################################
         # Signal that a new task was received
         self.update_flag.acquire()
         self.update_flag.notify()

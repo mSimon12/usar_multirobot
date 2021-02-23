@@ -54,6 +54,7 @@ class GasSensor(object):
             self.__pub.publish(msg)                                         # Re-send the msg to the output 
         elif (msg.event == 'reset') and (self.__state == 'GS_ERROR'):
             self.__state = 'GS_OFF'                                         # Reset the sensor
+            self.__pub.publish(msg)                                         # Re-send the msg to the output
         else:
             rospy.logwarn("GAS_SENSOR command not allowed!")
 

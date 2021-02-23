@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+   <arg name="uavs" default="[]"/>
+   <arg name="ugvs" default="[]"/>
+
+   <rosparam param="uavs_names" subst_value="True">$(arg uavs)</rosparam>
+   <rosparam param="ugvs_names" subst_value="True">$(arg ugvs)</rosparam>
+
+   <node name="task_dispatcher" pkg="task_dispatcher" type="task_allocation_system.py" output="screen"/>
+    
+</launch>	

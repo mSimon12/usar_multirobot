@@ -969,42 +969,6 @@ class on_gs(object):
 		on_gs.__enabled[name] = status
 
 
-##### -- rst_gs call & handler -- ########################################
-class rst_gs(object):
-	__enabled = {}
-	__type = 'controllable'
-
-	# For ROS
-	module = importlib.import_module('system_msgs.msg')
-	output = hl_2_ll(__qualname__)
-	pub = rospy.Publisher('{}'.format(output['topic']), module.events_message, queue_size=10)
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event rst_gs...')
-		msg = rst_gs.module.events_message()
-		msg.event = rst_gs.output['ll_event']
-		rst_gs.pub.publish(msg)					#Publish message
-		return True
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(rst_gs.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return rst_gs.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		rst_gs.__enabled[name] = status
-
-
 ##### -- abort_rb call & handler -- ########################################
 class abort_rb(object):
 	__enabled = {}
@@ -1708,42 +1672,6 @@ class on_vs(object):
 	@classmethod
 	def set_status(cls, name, status):
 		on_vs.__enabled[name] = status
-
-
-##### -- rst_vs call & handler -- ########################################
-class rst_vs(object):
-	__enabled = {}
-	__type = 'controllable'
-
-	# For ROS
-	module = importlib.import_module('system_msgs.msg')
-	output = hl_2_ll(__qualname__)
-	pub = rospy.Publisher('{}'.format(output['topic']), module.events_message, queue_size=10)
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event rst_vs...')
-		msg = rst_vs.module.events_message()
-		msg.event = rst_vs.output['ll_event']
-		rst_vs.pub.publish(msg)					#Publish message
-		return True
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(rst_vs.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return rst_vs.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		rst_vs.__enabled[name] = status
 
 
 ##### -- victim_found call & handler -- ########################################
@@ -3477,42 +3405,6 @@ class uav_on_vs(object):
 		uav_on_vs.__enabled[name] = status
 
 
-##### -- uav_rst_vs call & handler -- ########################################
-class uav_rst_vs(object):
-	__enabled = {}
-	__type = 'controllable'
-
-	# For ROS
-	module = importlib.import_module('system_msgs.msg')
-	output = hl_2_ll(__qualname__)
-	pub = rospy.Publisher('{}'.format(output['topic']), module.events_message, queue_size=10)
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event uav_rst_vs...')
-		msg = uav_rst_vs.module.events_message()
-		msg.event = uav_rst_vs.output['ll_event']
-		uav_rst_vs.pub.publish(msg)					#Publish message
-		return True
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(uav_rst_vs.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return uav_rst_vs.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		uav_rst_vs.__enabled[name] = status
-
-
 ##### -- uav_abort_v_search call & handler -- ########################################
 class uav_abort_v_search(object):
 	__enabled = {}
@@ -3786,6 +3678,87 @@ class uav_victim_found(object):
 		uav_victim_found.__enabled[name] = status
 
 
+##### -- rst_f call & handler -- ########################################
+class rst_f(object):
+	__enabled = {}
+	__type = 'uncontrollable'
+
+	@classmethod
+	def handler(cls, param = None):
+		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
+		print('Executing event rst_f...')
+
+	@classmethod
+	def get_status(cls):
+		'''
+		True: event enabled;
+		False: event not allowed.
+		'''
+		return all(rst_f.__enabled.values())
+
+	@classmethod
+	def is_controllable(cls):
+		return rst_f.__type == 'controllable'
+
+	@classmethod
+	def set_status(cls, name, status):
+		rst_f.__enabled[name] = status
+
+
+##### -- rst_gs call & handler -- ########################################
+class rst_gs(object):
+	__enabled = {}
+	__type = 'uncontrollable'
+
+	@classmethod
+	def handler(cls, param = None):
+		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
+		print('Executing event rst_gs...')
+
+	@classmethod
+	def get_status(cls):
+		'''
+		True: event enabled;
+		False: event not allowed.
+		'''
+		return all(rst_gs.__enabled.values())
+
+	@classmethod
+	def is_controllable(cls):
+		return rst_gs.__type == 'controllable'
+
+	@classmethod
+	def set_status(cls, name, status):
+		rst_gs.__enabled[name] = status
+
+
+##### -- rst_vs call & handler -- ########################################
+class rst_vs(object):
+	__enabled = {}
+	__type = 'uncontrollable'
+
+	@classmethod
+	def handler(cls, param = None):
+		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
+		print('Executing event rst_vs...')
+
+	@classmethod
+	def get_status(cls):
+		'''
+		True: event enabled;
+		False: event not allowed.
+		'''
+		return all(rst_vs.__enabled.values())
+
+	@classmethod
+	def is_controllable(cls):
+		return rst_vs.__type == 'controllable'
+
+	@classmethod
+	def set_status(cls, name, status):
+		rst_vs.__enabled[name] = status
+
+
 ##### -- uav_rst_f call & handler -- ########################################
 class uav_rst_f(object):
 	__enabled = {}
@@ -3813,15 +3786,15 @@ class uav_rst_f(object):
 		uav_rst_f.__enabled[name] = status
 
 
-##### -- rst_f call & handler -- ########################################
-class rst_f(object):
+##### -- uav_rst_vs call & handler -- ########################################
+class uav_rst_vs(object):
 	__enabled = {}
 	__type = 'uncontrollable'
 
 	@classmethod
 	def handler(cls, param = None):
 		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event rst_f...')
+		print('Executing event uav_rst_vs...')
 
 	@classmethod
 	def get_status(cls):
@@ -3829,13 +3802,13 @@ class rst_f(object):
 		True: event enabled;
 		False: event not allowed.
 		'''
-		return all(rst_f.__enabled.values())
+		return all(uav_rst_vs.__enabled.values())
 
 	@classmethod
 	def is_controllable(cls):
-		return rst_f.__type == 'controllable'
+		return uav_rst_vs.__type == 'controllable'
 
 	@classmethod
 	def set_status(cls, name, status):
-		rst_f.__enabled[name] = status
+		uav_rst_vs.__enabled[name] = status
 
