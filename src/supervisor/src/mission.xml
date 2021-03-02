@@ -1,0 +1,31 @@
+<mission>
+  <id>recognition</id>
+  <priority>2</priority>
+  <task>
+    <agent>pioneer3at_1</agent>
+    <position>
+      <x>1.0</x>
+      <y>5.0</y>
+      <z>0.0</z>
+    </position>
+    <region/>
+    <vs>on</vs>
+    <gs>off</gs>
+    <maneuver>approach</maneuver>
+  </task>
+  <task>
+    <agent>None</agent>
+    <position/>
+    <region>
+      <origin_x>0.0</origin_x>
+      <origin_y>0.0</origin_y>
+      <origin_z>0.0</origin_z>
+      <x_size>10.0</x_size>
+      <y_size>10.0</y_size>
+      <z_size>0.0</z_size>
+    </region>
+    <vs>off</vs>
+    <gs>off</gs>
+    <maneuver>assessment</maneuver>
+  </task>
+</mission>

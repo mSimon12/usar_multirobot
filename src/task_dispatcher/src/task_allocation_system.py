@@ -5,17 +5,20 @@ import pandas as pd
 import rospy
 
 from Mission import Mission
+from DFS import DFS
 
-from system_msgs.msg import abstractions, events_message, mission
+from std_msgs.msg import String
+from geometry_msgs.msg import Twist
+from system_msgs.msg import abstractions, events_message, mission, task_message
 from nav_msgs.msg import Odometry
 
 # Global Variables
 robots_info_me = Condition()
 robots_info = pd.DataFrame(columns=['bat', 'pose', 'vs', 'gs', 'status', 'last_task_id', 'current_task_id'])
 
+missions = pd.DataFrame(columns = ['priority', 'tasks', 'current_task'])
+
 replan_flag = Condition()           #Signal the requirement of a replanning
-
-
 
 class AllocationSystem(object):
 
@@ -60,22 +63,113 @@ class AllocationSystem(object):
         m = Mission()
         m.load(msg.filename)
 
-        print("\nMISSION TASKS: \n{}\n\n".format(m.tasks))
+        # Add the new mission to the dataframe
+        missions.loc[m.id] = [float(m.priority), m.tasks, 0]
 
+        # Signal the need of replanning due to the new mission received
+        replan_flag.acquire()
+        replan_flag.notify()
+        replan_flag.release()
 
     def execute(self):
         '''
             Loop where the allocation is executed
         '''
-        rate = rospy.Rate(0.2)
         while not rospy.is_shutdown():
-            print("\n\n")
+            replan_flag.acquire()
+            replan_flag.wait()
+
+            # print("\n\n")
+            # robots_info_me.acquire()
+            # print(robots_info)
+            # robots_info_me.release()
+            # print("\n\n")
+
+            print("\n\nMISSION TASKS:")
+            print("{}\n\n".format(missions))
+
+            ################### Select the next tasks of the sequence of each mission #####################
+            current_tasks = Mission().tasks
+            for i in missions.index:
+                # Get current task description of the mission i
+                task_name = i + "_{}".format(missions.loc[i,'current_task'])
+                current_tasks.loc[task_name] = missions.loc[i,'tasks'].loc[missions.loc[i,'current_task']]  
+                current_tasks.loc[task_name,'priority'] = missions.loc[i,'priority']
+            ###############################################################################################
+
+            #Select robots that can execute the tasks
             robots_info_me.acquire()
-            print(robots_info)
+            robots = robots_info
             robots_info_me.release()
-            print("\n\n")
+
+            # Require replanning
+            self.allocate(robots, current_tasks)
+
+            replan_flag.release()
+
+
+    def allocate(self, robots, tasks):
+        '''
+            Allocate tasks to robots
+        '''
+        rospy.loginfo("Searching for best robots allocation!")
+        # print("\nROBOTS\n{}\n".format(robots))
+        # print("\nTASKS:\n{}\n\n\n".format(tasks))
+
+        # Sort tasks by priority
+        tasks.sort_values(by=['priority'], ascending=True, inplace=True)
+
+        # Build the Tree with all possible options
+        search = DFS(robots,tasks)
+
+        # Receive a node containing allocated tasks
+        tasks_node = search.run()
+
+        print("\n\nSelected tasks: {}\n".format(tasks_node.getValue()))
+
+        for t in tasks_node.getValue():
+            task_pub = rospy.Publisher("/{}/task".format(t[1]),task_message, queue_size=10)
             
-            rate.sleep()
+            # Build the message for task requisition
+            task_msg = task_message()
+            task_msg.id = t[0]
+            task_msg.task = tasks.loc[t[0],'maneuver']
+            task_msg.gas_sensor = tasks.loc[t[0],'gs']
+            task_msg.victim_sensor = tasks.loc[t[0],'vs']
+
+            # Define task position or region
+            if tasks.loc[t[0],'maneuver'] == 'approach':
+                pos = Twist()
+                pos.linear.x = tasks.loc[t[0],'position']['x']
+                pos.linear.y = tasks.loc[t[0],'position']['y']
+                pos.linear.z = tasks.loc[t[0],'position']['z']
+                pos.angular.z = tasks.loc[t[0],'position']['z']
+                task_msg.position.append(pos)
+            elif tasks.loc[t[0],'maneuver'] in ['assessment', 'search']:
+                pos = Twist()
+                pos.linear.x = tasks.loc[t[0],'region']['x0']
+                pos.linear.y = tasks.loc[t[0],'region']['y0']
+                pos.linear.z = tasks.loc[t[0],'region']['z0']
+                task_msg.position.append(pos)
+                
+                pos = Twist()
+                pos.linear.x = tasks.loc[t[0],'region']['x1']
+                pos.linear.y = tasks.loc[t[0],'region']['y1']
+                pos.linear.z = tasks.loc[t[0],'region']['z1']
+                task_msg.position.append(pos)
+
+            r = rospy.Rate(20)
+            while(task_pub.get_num_connections()<1):
+                r.sleep()
+                print("Connections: {}".format(task_pub.get_num_connections()))
+            task_pub.publish(task_msg)
+            # task_pub.unregister()
+
+            #Update robot info
+            robots_info.loc[t[1],'last_task_id'] = robots_info.loc[t[1],'current_task_id']
+            robots_info.loc[t[1],'current_task_id'] = t[0]
+
+        print(robots_info)
 
 
 class RobotStateMachine(object):
@@ -84,9 +178,6 @@ class RobotStateMachine(object):
         self.name = name
 
         self.trace = {}
-
-        # self.odometry_me = Condition()
-        # self.odometry = None
 
     def events_callback(self,msg):
         '''
@@ -130,6 +221,27 @@ class RobotStateMachine(object):
             print("\n\nSUSPENDED {}.\n\n".format(msg.task_id))
         elif "task_finished" in msg.event:
             print("\n\nFINISHED {}.\n\n".format(msg.task_id))
+            # Signal the need of replanning due to the new mission received
+            if robots_info.loc[self.name,'current_task_id'] == msg.task_id:
+                # Get mission name
+                try:
+                    msg_mission = [m for m in missions.index if m in msg.task_id][0]
+                except:
+                    pass
+                # Move to next task
+                missions.loc[msg_mission,'current_task'] += 1
+
+                #Update robot info
+                robots_info.loc[t[1],'last_task_id'] = robots_info.loc[t[1],'current_task_id']
+                robots_info.loc[t[1],'current_task_id'] = None
+                
+                # Remove mission from the list if all tasks have been finished
+                if missions.loc[msg_mission,'current_task'] > len(missions.loc[msg_mission,'tasks'].index):
+                    missions.drop(index = msg_mission, inplace = True)
+
+            replan_flag.acquire()
+            replan_flag.notify()
+            replan_flag.release()
         elif "task_aborted" in msg.event:
             print("\n\nABORTED {}.\n\n".format(msg.task_id))
 
@@ -149,7 +261,7 @@ class RobotStateMachine(object):
             Updates the battery level of the robot
         '''
         robots_info_me.acquire()
-        robots_info.loc[self.name,'bat'] = msg.param
+        robots_info.loc[self.name,'bat'] = msg.param[0]
         robots_info_me.release()
 
 

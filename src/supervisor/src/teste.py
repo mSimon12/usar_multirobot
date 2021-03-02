@@ -2,6 +2,7 @@
 from lxml import etree as ET
 import pandas as pd
 
+
 class Mission(object):
     '''
         Class to create missions, save into a xml file and read it from xml files
@@ -140,23 +141,24 @@ class Mission(object):
                 
                 
 if __name__ == '__main__':
+
     mission = Mission("recognition",2)
 
-    # task = mission.get_std_task()
-    # task['agent'] = "pioneer3at_1"
-    # task['position'] = {'x': 1.0, 'y': 5.0, 'z': 0.0}
-    # task['vs'] = 'on'
-    # task['maneuver'] = 'approach'
+    task = mission.get_std_task()
+    task['agent'] = "pioneer3at_1"
+    task['position'] = {'x': 1.0, 'y': 5.0, 'z': 0.0}
+    task['vs'] = 'on'
+    task['maneuver'] = 'approach'
 
-    # mission.add_task(task)
+    mission.add_task(task)
 
-    # task = mission.get_std_task()
-    # task['maneuver'] = 'assessment'
-    # task['region'] = {'x0': 0.0, 'y0': 0.0, 'z0': 0.0, 'x1': 10.0, 'y1': 10.0, 'z1': 0.0}
-    # mission.add_task(task)
+    task = mission.get_std_task()
+    task['maneuver'] = 'assessment'
+    task['region'] = {'x0': 0.0, 'y0': 0.0, 'z0': 0.0, 'x1': 10.0, 'y1': 10.0, 'z1': 0.0}
+    mission.add_task(task)
 
-    # mission.save("mission.xml")
+    mission.save(path + "/mission.xml")
 
-    mission.load("mission.xml")
+    # mission.load("mission.xml")
 
     print(mission.tasks)

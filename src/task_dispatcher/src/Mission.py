@@ -38,6 +38,7 @@ class Mission(object):
             ET.SubElement(pos,"x").text = "{}".format(dic['position']['x'])
             ET.SubElement(pos,"y").text = "{}".format(dic['position']['y'])
             ET.SubElement(pos,"z").text = "{}".format(dic['position']['z'])
+            ET.SubElement(pos,"theta").text = "{}".format(dic['position']['theta'])
 
         # Get region of the maneuver
         reg = ET.SubElement(task,"region")
@@ -64,7 +65,7 @@ class Mission(object):
         '''
             Return a dictionary with an standard task
         '''
-        return {'agent': None, 'position': None, 'region': None, 'vs': 'off', 'gs': 'off', 'maneuver': None}
+        return {'agent': None, 'position': None, 'region': None, 'vs': False, 'gs': False, 'maneuver': None}
 
     
     def save(self, filename):
@@ -76,6 +77,7 @@ class Mission(object):
 
         myfile = open(filename,"w")
         myfile.write(pretty_xml)
+        myfile.close()
   
     
     def load(self, filename):
@@ -96,7 +98,7 @@ class Mission(object):
 
             if m_child.tag == 'id':
                 self.id = m_child.text
-            elif m_child.tag == 'id':
+            elif m_child.tag == 'priority':
                 self.priority = m_child.text
             elif m_child.tag == 'task':
 
@@ -108,8 +110,8 @@ class Mission(object):
                 task = self.get_std_task()
 
                 task['agent'] = texts['agent']
-                task['vs'] = texts['vs']
-                task['gs'] = texts['gs']
+                task['vs'] = texts['vs'] == 'True'
+                task['gs'] = texts['gs'] == 'True'
                 task['maneuver'] = texts['maneuver']
 
                 # Get position values if it exist
@@ -121,6 +123,7 @@ class Mission(object):
                     task['position']['x'] = float(pos.find('x').text)
                     task['position']['y'] = float(pos.find('y').text)
                     task['position']['z'] = float(pos.find('z').text)
+                    task['position']['theta'] = float(pos.find('theta').text)
 
                 # Get region values if it exist
                 reg = m_child.find("region")
