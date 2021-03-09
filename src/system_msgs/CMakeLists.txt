@@ -18,6 +18,8 @@ find_package(catkin REQUIRED COMPONENTS
    task_message.msg
    abstractions.msg
    mission.msg
+   m_status.msg
+   missions_feedback.msg
  )
 
 ## Generate added messages and services with any dependencies listed here

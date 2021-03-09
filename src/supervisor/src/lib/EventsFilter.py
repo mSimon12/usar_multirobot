@@ -82,7 +82,7 @@ class EventsFilter(object):
             if g_var.manager_info['current_task'] != None:
                 if g_var.manager_info['current_task'] != last_task_info['id']:
                     # Send last status of last task
-                    if last_task_info['id'] != None:
+                    if (last_task_info['id'] != None) and (last_task_info['status'] != g_var.manager_info['tasks'][last_task_info['id']]):
                         self.msg.event = 'task_' + g_var.manager_info['tasks'][last_task_info['id']]
                         self.msg.task_id = last_task_info['id']
                         self.pub.publish(self.msg)

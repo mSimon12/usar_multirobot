@@ -89,18 +89,19 @@ class VictimSensor(object):
                 v_status[v]['x_pos'] = answer.pose.position.x
                 v_status[v]['y_pos'] = answer.pose.position.y
                 v_status[v]['z_pos'] = answer.pose.position.z
+
+                # Find the distance between robot and victim
+                hip = (v_status[v]['x_pos']**2 + v_status[v]['y_pos']**2)**(1/2)
+                dist = (hip**2 + v_status[v]['z_pos']**2)**(1/2)
+
+                # Mark the victim as found if it is into the range
+                if dist < self.__sensor_range:
+                    v_status[v]['status'] = True
+                else:
+                    v_status[v]['status'] = False
+                    
             except rospy.ServiceException as e:
                 rospy.loginfo("Get Model State service call failed:  {}".format(e))
-
-            # Find the distance between robot and victim
-            hip = (v_status[v]['x_pos']**2 + v_status[v]['y_pos']**2)**(1/2)
-            dist = (hip**2 + v_status[v]['z_pos']**2)**(1/2)
-
-            # Mark the victim as found if it is into the range
-            if dist < self.__sensor_range:
-                v_status[v]['status'] = True
-            else:
-                v_status[v]['status'] = False
 
         return v_status                                                               # Return the status of all victims
 

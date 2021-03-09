@@ -1,15 +1,31 @@
-x = []
+import pandas as pd
+import time
 
-x.append(('t1',100))
+import os
 
-x.append(('t2',20))
 
-print(x)
+path = os.path.dirname(os.path.abspath(__file__))
+filename = path + '/missions_sequences/{}.csv'.format(time.strftime("%b-%d-%Y  %H:%M:%S"))
 
-x.sort(key=lambda tup: tup[1], reverse=True)
+print(filename)
 
-print(x)
+time.sleep(1)
 
-print(x.pop())
+df = pd.DataFrame(columns=['time', 'c1', 'c2', 'c3'])
+df.index.name="Time"
 
-print(x)
+df = df.append({ 'time': time.strftime("%H:%M:%S"),'c1': 1.0, 'c2': 'b','c3': 'carro'}, ignore_index=True)
+time.sleep(1)
+
+# df.loc[time.strftime("%H:%M:%S")] = [5.5, 'k', 'moto']
+# time.sleep(1)
+
+# df.loc[time.strftime("%H:%M:%S")] = [10.5, 'x', 'onibus']
+# time.sleep(1)
+
+
+
+print(df.iloc[0]['c1'])
+
+
+# df.to_csv(filename,)

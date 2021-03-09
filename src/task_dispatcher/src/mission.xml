@@ -1,11 +1,11 @@
 <mission>
-  <id>m3</id>
-  <priority>0</priority>
+  <id>m6</id>
+  <priority>2</priority>
   <task>
     <agent></agent>
     <position>
-      <x>10.0</x>
-      <y>10.0</y>
+      <x>15.0</x>
+      <y>5.0</y>
       <z>2.0</z>
       <theta>0.0</theta>
     </position>

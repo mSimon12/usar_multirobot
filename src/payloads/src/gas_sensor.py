@@ -111,18 +111,19 @@ class GasSensor(object):
                 g_status[v]['x_pos'] = answer.pose.position.x
                 g_status[v]['y_pos'] = answer.pose.position.y
                 g_status[v]['z_pos'] = answer.pose.position.z
+
+                # Find the distance between robot and victim
+                hip = (g_status[v]['x_pos']**2 + g_status[v]['y_pos']**2)**(1/2)
+                dist = (hip**2 + g_status[v]['z_pos']**2)**(1/2)
+
+                # Mark the victim as found if it is into the range
+                if dist < self.__sensor_range:
+                    g_status[v]['status'] = True
+                else:
+                    g_status[v]['status'] = False
+
             except rospy.ServiceException as e:
                 rospy.loginfo("Get Model State service call failed:  {}".format(e))
-
-            # Find the distance between robot and victim
-            hip = (g_status[v]['x_pos']**2 + g_status[v]['y_pos']**2)**(1/2)
-            dist = (hip**2 + g_status[v]['z_pos']**2)**(1/2)
-
-            # Mark the victim as found if it is into the range
-            if dist < self.__sensor_range:
-                g_status[v]['status'] = True
-            else:
-                g_status[v]['status'] = False
 
         return g_status                                                               # Return the status of all victims
 

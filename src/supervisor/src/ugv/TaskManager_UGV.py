@@ -2,6 +2,7 @@ import time
 import inspect
 import pandas as pd
 from threading import Thread, Condition
+import rospy
 
 import ugv.tasks_UGV as tasks
 from lib.ProductSystem import g_var, trigger_event
@@ -77,6 +78,7 @@ class TaskManager(Thread):
         '''
             Callback that subscribe to topic were tasks are received.
         '''      
+
         # Get position of the task
         task_position = []
 
@@ -104,12 +106,21 @@ class TaskManager(Thread):
             self.main_task = tasks.UGV_return(task_position, task.victim_sensor, task.gas_sensor)                #Create object of the main task
             valid_task = True
 
+        elif not task.id:
+            if self.main_task_id:
+                g_var.manager_info_flag.acquire()
+                g_var.manager_info['tasks'][self.main_task_id] = 'aborted'      # Update info about last task status
+                g_var.manager_info_flag.notify()
+                g_var.manager_info_flag.release()
+            self.main_task = tasks.AbortM()                                    # Select abort as current task
+            self.main_task_id = None
+
         if valid_task:
             # Subscribe the last task by the new one, flaging that the last one is aborted
             g_var.manager_info_flag.acquire()
 
             #Update last task
-            if self.main_task:
+            if self.main_task_id:
                 g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
 
             # Save the new id of the task
@@ -122,6 +133,8 @@ class TaskManager(Thread):
             g_var.manager_info_flag.release()
 
         ###############################################################
+        
+
         # Signal that a new task was received
         self.update_flag.acquire()
         self.update_flag.notify()
@@ -160,14 +173,16 @@ class TaskManager(Thread):
 
             #Verify if the main task has been acomplished
             if self.main_task and (self.main_task.next_event(states.values(), last_event, param) == 'task_done'):
-                print("[Task Manager]: TASK '{}' accomplished!!!!!!".format(self.main_task_id))
+                rospy.loginfo("[Task Manager]: TASK '{}' accomplished!!!!!!".format(self.main_task_id))
                 g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'finished'
+                # Reset task
+                self.main_task = None
+                self.main_task_id = None
                 g_var.manager_info_flag.notify()
                 g_var.manager_info_flag.release()
 
-                # Reset task
-                self.main_task = None
+                
 
             # Signal that a new event was received
             self.update_flag.acquire()
@@ -215,68 +230,66 @@ class TaskManager(Thread):
         elif (self.foundG) and (not self.foundG.next_event(states.values(), last_event)):
             self.foundV = None
 
-
         ##### Select the task to be executed (the main_task or backup behaviors) #####
-
-        g_var.manager_info_flag.acquire()
-
-        # BEHAVIOR 1 -> System on Critical state
-        if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
-                if self.current_task != self.Abort:  
-                    self.Abort.restart()
-                self.current_task = self.Abort
-                g_var.manager_info['status'] = 'unable'
-                if self.main_task:
-                    g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
-                    self.main_task = None
-        else:
-            # BEHAVIOR 2 -> teleoperation required by the Commander
-            if self.teleoperation:
-                self.current_task = self.teleoperation
-                g_var.manager_info['status'] = 'busy'
-                g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
+        if self.main_task_id:
+            g_var.manager_info_flag.acquire()
+            # BEHAVIOR 1 -> System on Critical state
+            if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
+                    if self.current_task != self.Abort:  
+                        self.Abort.restart()
+                    self.current_task = self.Abort
+                    g_var.manager_info['status'] = 'unable'
+                    if self.main_task:
+                        g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                        self.main_task = None
             else:
-                # BEHAVIOR 3 -> human assistance due to maneuvers errors
-                if any([states['approach'] == 'APP_ERROR', states['exploration'] == 'EXP_ERROR',
-                    states['victims_surroundings_verification'] == 'VSV_ERROR', states['return_to_base'] == 'RB_ERROR', 
-                    states['failures'] == 'POS_FAILURE']):
-                    if not self.current_task == self.teleoperation:
-                        self.teleoperation = tasks.ReqHelp()
+                # BEHAVIOR 2 -> teleoperation required by the Commander
+                if self.teleoperation:
                     self.current_task = self.teleoperation
                     g_var.manager_info['status'] = 'busy'
                     g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                 else:
-                    # BEHAVIOR 4 -> report victim pose and execute VSV
-                    if self.foundV:        
-                        self.current_task = self.foundV  
+                    # BEHAVIOR 3 -> human assistance due to maneuvers errors
+                    if any([states['approach'] == 'APP_ERROR', states['exploration'] == 'EXP_ERROR',
+                        states['victims_surroundings_verification'] == 'VSV_ERROR', states['return_to_base'] == 'RB_ERROR', 
+                        states['failures'] == 'POS_FAILURE']):
+                        if not self.current_task == self.teleoperation:
+                            self.teleoperation = tasks.ReqHelp()
+                        self.current_task = self.teleoperation
                         g_var.manager_info['status'] = 'busy'
                         g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
-                    # BEHAVIOR 5 -> report gas leak position                           
-                    elif self.foundG:            
-                        self.current_task = self.foundG
-                        g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                     else:
-                        # BEHAVIOR 6 -> finish the last task and return to base
-                        if (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
-                            g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
-                            if self.current_task != self.BB:
-                                self.BB.atBase = False
-                                self.current_task = self.BB
-                                if self.main_task and (last_event == 'st_rb'):
-                                    self.main_task.restart()
+                        # BEHAVIOR 4 -> report victim pose and execute VSV
+                        if self.foundV:        
+                            self.current_task = self.foundV  
+                            g_var.manager_info['status'] = 'busy'
+                            g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
+                        # BEHAVIOR 5 -> report gas leak position                           
+                        elif self.foundG:            
+                            self.current_task = self.foundG
+                            g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                         else:
-                            # BEHAVIOR 7 -> execute the task assigned by the Task Alocator
-                            if self.main_task:
-                                # Execute main task
-                                self.current_task = self.main_task
-                                
-                                # Update task variable
-                                g_var.manager_info['status'] = 'busy'
-                                g_var.manager_info['tasks'][self.main_task_id] = 'executing'
+                            # BEHAVIOR 6 -> finish the last task and return to base
+                            if (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
+                                g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
+                                if self.current_task != self.BB:
+                                    self.BB.atBase = False
+                                    self.current_task = self.BB
+                                    if self.main_task and (last_event == 'st_rb'):
+                                        self.main_task.restart()
                             else:
-                                self.current_task = None
-                                g_var.manager_info['status'] = 'lazy'
-        
+                                # BEHAVIOR 7 -> execute the task assigned by the Task Alocator
+                                if self.main_task:
+                                    # Execute main task
+                                    self.current_task = self.main_task
+                                    
+                                    # Update task variable
+                                    g_var.manager_info['status'] = 'busy'
+                                    g_var.manager_info['tasks'][self.main_task_id] = 'executing'
+                                else:
+                                    self.current_task = None
+                                    g_var.manager_info['status'] = 'lazy'
+            
             # Verify if the current task can be executed due to Sensor ERRORS
             if any([(states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()), 
                         (states['gas_sensor'] == 'GS_ERROR') and ('gs' in self.current_task.getSensors())]):
@@ -288,8 +301,10 @@ class TaskManager(Thread):
                     self.main_task = None
                 self.current_task = self.Abort
 
-        g_var.manager_info_flag.notify()
-        g_var.manager_info_flag.release()
+            g_var.manager_info_flag.notify()
+            g_var.manager_info_flag.release()
+        else:
+             self.current_task = self.main_task
 
         ##########################################################################################################
 
@@ -298,7 +313,7 @@ class TaskManager(Thread):
             next_task_events = self.current_task.next_event(states.values(), last_event, param)
         else:
             next_task_events = []
-        print("Next required events: {}".format(next_task_events))
+        rospy.loginfo("Next required events: {}".format(next_task_events))
 
         # Set priorities according status of the events
         for e in next_task_events:
@@ -322,7 +337,7 @@ class TaskManager(Thread):
             # print(next_event)
             if self.events[next_event].is_controllable():
                 if next_event in P_EVENTS:
-                    print(self.current_task.getTaskParam())
+                    rospy.loginfo(self.current_task.getTaskParam())
                     trigger_event(next_event, self.current_task.getTaskParam())          # Call the execution of the controllable event
                 else:
                     trigger_event(next_event)                                            # Call the execution of the controllable event

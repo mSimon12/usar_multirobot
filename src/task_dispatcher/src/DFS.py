@@ -68,8 +68,8 @@ class DFS(object):
         '''
             Execute the search in depth on the tree
         '''
-        print("\nTASKS:\n{}".format(self.tasks))
-        print("\nROBOTS:\n{}".format(self.robots))
+        # print("\nTASKS:\n{}".format(self.tasks))
+        # print("\nROBOTS:\n{}".format(self.robots))
         
         # Variable that returns the allocated tasks
         allocation = {}
