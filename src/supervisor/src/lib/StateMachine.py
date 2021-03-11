@@ -46,7 +46,12 @@ class StateMachine(object):
             Get the current state of this State Machine
         '''
         return self.__current_state
-    
+
+    def get_allowed_events(self):
+        '''
+            Return events allowed on the SM
+        '''    
+        return self.__trans.loc[self.__trans['st_node'] == self.__current_state, 'event'].values
 
     def state_update(self, event):
         '''

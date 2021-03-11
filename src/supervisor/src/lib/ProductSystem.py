@@ -2,10 +2,12 @@ import rospy
 
 import inspect
 import pandas as pd
+import numpy
 from datetime import datetime
 from threading import Thread, Condition
 
 import OP.EVENTS as events_module
+from interfaces.msg import trace_events
 
 ######################################################################################################### 
 ##### -- Global variables and mutexes -- ################################################################
@@ -82,6 +84,11 @@ class ProductSystem(Thread):
     
 		self.__cont_e = [e for e in self.__events if self.__events[e].is_controllable()] 		# Get list of 'controllable' events names
 
+		self.trace_pub = rospy.Publisher("/events_trigger_ihm_in", trace_events, queue_size=10)
+		rate = rospy.Rate(10)
+		while self.trace_pub.get_num_connections() < 1:
+			rate.sleep()
+
 		self.update_trace([None, None, None])													# Update trace of events
 
 
@@ -151,4 +158,25 @@ class ProductSystem(Thread):
 		g_var.trace_update_flag.acquire()
 		g_var.trace_update_flag.notifyAll()
 		g_var.trace_update_flag.release()
+
+		## Send message for interface
+		trace_msg = trace_events()
+		trace_msg.robot = rospy.get_namespace().replace('/','')
+		if event[0]:
+			trace_msg.last_event = event[0]
+		trace_msg.event_time = time
+
+		if event[2]:
+			for p in event[2]:
+				trace_msg.param.append(float(p))
+
+		events = []
+		for sm in self.__SMs:
+			e = self.__SMs[sm].get_allowed_events().tolist()
+			events += e
+
+		for e in events:
+			trace_msg.possible_events.append(e)
+
+		self.trace_pub.publish(trace_msg)
 		

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>  
+   <arg name="robots" default="[]"/>
+   <rosparam param="robots" subst_value="True">$(arg robots)</rosparam>
+
+  <!-- Launch events interace -->
+  <node name="events_trigger_interface" pkg="interfaces" type="events_trigger.py" output="screen"/>
+
+</launch>

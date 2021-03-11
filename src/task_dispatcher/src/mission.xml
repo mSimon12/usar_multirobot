@@ -1,6 +1,6 @@
 <mission>
-  <id>m6</id>
-  <priority>2</priority>
+  <id>m2</id>
+  <priority>3</priority>
   <task>
     <agent></agent>
     <position>

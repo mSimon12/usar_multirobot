@@ -4,7 +4,7 @@
   <arg name="robot_name"  default="robot"/>
   <arg name="robot_type"  default="pioneer3at"/>
   
-  <!-- Launch events interace -->
+  <!-- Launch Supervisor -->
   <node name="supervisor" pkg="supervisor" type="system_start.py" output="screen">
     <param name="robot_name" value="$(arg robot_name)" />
     <param name="robot_type" value="$(arg robot_type)" />
