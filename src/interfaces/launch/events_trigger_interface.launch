@@ -5,6 +5,8 @@
    <rosparam param="robots" subst_value="True">$(arg robots)</rosparam>
 
   <!-- Launch events interace -->
-  <node name="events_trigger_interface" pkg="interfaces" type="events_trigger.py" output="screen"/>
+  <node name="events_trigger_interface" pkg="interfaces" type="events_trigger.py" output="screen">
+	<param name="sm_path" value="$(find supervisor)/src/output/" />
+  </node>
 
 </launch>

@@ -1,10 +1,10 @@
 <mission>
-  <id>m2</id>
+  <id>m1</id>
   <priority>3</priority>
   <task>
     <agent></agent>
     <position>
-      <x>15.0</x>
+      <x>10.0</x>
       <y>5.0</y>
       <z>2.0</z>
       <theta>0.0</theta>

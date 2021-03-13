@@ -265,7 +265,7 @@ class TaskManager(Thread):
                                     g_var.manager_info['status'] = 'lazy'
             
             # Verify if the current task can be executed due to Sensor ERRORS
-            if (states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()):
+            if self.current_task and (states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()):
                 
                 if self.main_task and (self.current_task == self.main_task):
                     # Set the main task as aborted but does not make the robot unable to execute missions

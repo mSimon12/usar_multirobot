@@ -83,7 +83,8 @@ class EventReceiver(object):
             if msg.info:
                 param.append(msg.info)
             if msg.param:
-                param.append(msg.param)
+                for p in msg.param:
+                    param.append(p)
             if msg.position:
                 if len(msg.position) > 1:
                     # Create a vector of multiple points

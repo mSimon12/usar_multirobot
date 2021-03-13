@@ -1,9 +1,0 @@
-// Plant-communication
-digraph {
-	rankdir=LR
-	COMMUNICATION [label=COMMUNICATION color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	COMMUNICATION -> COMMUNICATION [label="uav_rep_victim,
-uav_req_assist,
-uav_rep_self_pos" fontcolor=blue]
-	COMMUNICATION -> COMMUNICATION [label=uav_call_tele fontcolor=red style=dashed]
-}

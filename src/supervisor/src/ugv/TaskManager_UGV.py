@@ -291,7 +291,7 @@ class TaskManager(Thread):
                                     g_var.manager_info['status'] = 'lazy'
             
             # Verify if the current task can be executed due to Sensor ERRORS
-            if any([(states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()), 
+            if self.current_task and any([(states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()), 
                         (states['gas_sensor'] == 'GS_ERROR') and ('gs' in self.current_task.getSensors())]):
                 
                 if self.main_task and (self.current_task == self.main_task):

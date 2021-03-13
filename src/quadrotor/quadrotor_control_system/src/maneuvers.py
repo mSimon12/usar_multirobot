@@ -142,6 +142,11 @@ class approach(Maneuver):
         self.__last_goal = None                                           # Clear the last goal
         self.state = 'IDLE'                                               # Set IDLE state
 
+    def erro(self):
+        rospy.loginfo("Approach Erro!")
+        self.state = 'ERROR'                                                # Set ERROR state
+        self.trajectory_client.cancel_goal()                                # Cancel the motion of the robot
+
 ########################################################################
 class assessment(object):
     '''
@@ -233,9 +238,14 @@ class assessment(object):
         self.state = 'IDLE'                                                 # Set IDLE state
 
     def abort(self):
-        rospy.loginfo("Aborting assessment!")
+        rospy.loginfo("Aborting Assessment!")
         self.region = []                                                    # Clear the last region
         self.state = 'IDLE'                                                 # Set IDLE state
+
+    def erro(self):
+        rospy.loginfo("Assessment Erro!")
+        self.state = 'ERROR'                                                # Set ERROR state
+        self._assess_client.cancel_goal()                                  # Cancel the motion of the robot
 
 ########################################################################
 class v_search(object):
@@ -315,13 +325,13 @@ class v_search(object):
             self.pub.publish(self.msg)                                      # Send message signaling the error   
 
     def suspend(self):
-        rospy.loginfo("Suspending v_search!")
+        rospy.loginfo("Suspending V_Search!")
         self.suspending = True
         self.state = 'SUS'                                                   # Set SUS state
         self._search_client.cancel_goal()                                  # Cancel the motion of the robot
 
     def resume(self):
-        rospy.loginfo("Resuming v_search!")
+        rospy.loginfo("Resuming V_Search!")
         # Try to get last region to be explored
         if self.region:
             self.execute()
@@ -331,14 +341,18 @@ class v_search(object):
             self.pub.publish(self.msg)                                      # Send message signaling the error
 
     def reset(self):
-        rospy.loginfo("Reseting v_search!")
+        rospy.loginfo("Reseting V_Search!")
         self.region = []                                                    # Clear the last region
         self.state = 'IDLE'                                                 # Set IDLE state
 
     def abort(self):
-        rospy.loginfo("Aborting v_search!")
+        rospy.loginfo("Aborting V_Search!")
         self.region = []                                                    # Clear the last region
         self.state = 'IDLE'                                                 # Set IDLE state
+
+    def erro(self):
+        rospy.loginfo("V_Search Erro!")
+        self._search_client.cancel_goal()                                  # Cancel the motion of the robot
 
 # ########################################################################
 class surroundings_verification(Maneuver):
@@ -433,6 +447,10 @@ class surroundings_verification(Maneuver):
         self.points = []                                            # Clear points
         self.state = 'IDLE'                                         # Set IDLE state
 
+    def erro(self):
+        rospy.loginfo("Surroundings Verification Erro!")
+        self.trajectory_client.cancel_goal()                                # Cancel the motion of the robot
+
 # ########################################################################
 class return_to_base(Maneuver):
     '''
@@ -498,6 +516,11 @@ class return_to_base(Maneuver):
     def abort(self):
         rospy.loginfo("Aborting Return to Base!")
         self.state = 'IDLE'
+
+    def erro(self):
+        rospy.loginfo("Return to Base Erro!")
+        self.state = 'ERROR'                                                # Set ERROR state
+        self.trajectory_client.cancel_goal()                                # Cancel the motion of the robot
 
 # ########################################################################
 class teleoperation(object):
@@ -696,6 +719,8 @@ def maneuver_event(msg):
             app.reset()
         elif (msg.event == "abort_approach") and (app.state == 'SUS'):
             app.abort()
+        elif (msg.event == "approach_error") and (app.state in ['SUS','EXE']):
+            app.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -718,6 +743,8 @@ def maneuver_event(msg):
             assess.reset()
         elif (msg.event == "abort_assessment") and (assess.state == 'SUS'):
             assess.abort()
+        elif (msg.event == "assessment_error") and (app.state in ['SUS','EXE']):
+            assess.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -740,6 +767,8 @@ def maneuver_event(msg):
             search.reset()
         elif (msg.event == "abort_v_search") and (search.state == 'SUS'):
             search.abort()
+        elif (msg.event == "v_search_error") and (app.state in ['SUS','EXE']):
+            search.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -760,6 +789,8 @@ def maneuver_event(msg):
             vsv.reset()
         elif (msg.event == "abort_verification") and (vsv.state == 'SUS'):
             vsv.abort()
+        elif (msg.event == "verification_error") and (app.state in ['SUS','EXE']):
+            vsv.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -777,6 +808,8 @@ def maneuver_event(msg):
             rb.reset()
         elif (msg.event == "abort_return") and (rb.state == 'SUS'):
             rb.abort()
+        elif (msg.event == "return_error") and (app.state in ['SUS','EXE']):
+            rb.erro()
         else:
             rospy.logwarn("Command not allowed!")
 

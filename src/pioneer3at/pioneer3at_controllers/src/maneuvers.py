@@ -127,6 +127,10 @@ class approach(Maneuver):
         self.__last_goal = None                                           # Clear the last goal
         self.state = 'IDLE'                                               # Set IDLE state
 
+    def erro(self):
+        rospy.loginfo("Approach Error!")
+        self._move_client.cancel_goal()
+
 ########################################################################
 class exploration(object):
     '''
@@ -254,6 +258,10 @@ class exploration(object):
         self.region = []                                                    # Clear the last region
         self.state = 'IDLE'                                                 # Set IDLE state
 
+    def erro(self):
+        rospy.loginfo("Exploration Error!")
+        self._frontier_client.cancel_goal()                                  # Cancel the motion of the robot
+
 ########################################################################
 class surroundings_verification(Maneuver):
     '''
@@ -335,6 +343,10 @@ class surroundings_verification(Maneuver):
         self.points = []                                            # Clear points
         self.state = 'IDLE'                                         # Set IDLE state
 
+    def erro(self):
+        rospy.loginfo("Surroundings Verification Error!")
+        self._move_client.cancel_goal()
+
 ########################################################################
 class return_to_base(Maneuver):
     '''
@@ -388,6 +400,10 @@ class return_to_base(Maneuver):
     def abort(self):
         rospy.loginfo("Aborting Return to Base!")
         self.state = 'IDLE'
+
+    def erro(self):
+        rospy.loginfo("Return to Base Error!")
+        self._move_client.cancel_goal()
 
 ########################################################################
 class teleoperation(object):
@@ -501,6 +517,8 @@ def maneuver_event(msg):
             app.reset()
         elif (msg.event == "abort_approach") and (app.state == 'SUS'):
             app.abort()
+        elif (msg.event == "approach_error") and (app.state in ['SUS','EXE']):
+            app.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -523,6 +541,8 @@ def maneuver_event(msg):
             exp.reset()
         elif (msg.event == "abort_exploration") and (exp.state == 'SUS'):
             exp.abort()
+        elif (msg.event == "exploration_error") and (app.state in ['SUS','EXE']):
+            exp.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -543,6 +563,8 @@ def maneuver_event(msg):
             vsv.reset()
         elif (msg.event == "abort_verification") and (vsv.state == 'SUS'):
             vsv.abort()
+        elif (msg.event == "verification_error") and (app.state in ['SUS','EXE']):
+            vsv.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -560,6 +582,8 @@ def maneuver_event(msg):
             rb.reset()
         elif (msg.event == "abort_return") and (rb.state == 'SUS'):
             rb.abort()
+        elif (msg.event == "return_error") and (app.state in ['SUS','EXE']):
+            rb.erro()
         else:
             rospy.logwarn("Command not allowed!")
 
@@ -578,73 +602,6 @@ def maneuver_event(msg):
             tele.error()
         else:
             rospy.logwarn("Command not allowed!")
-
-# def victim_event_cb(msg):
-#     '''
-#         Suspend all maneuvers in execution if a victim is found or maneuvers that depends on vs if an erro occurs.
-#     '''
-#     global app, exp, rb, vsv
-#     if msg.event == 'victim_recognized':
-#         if (app.state == 'EXE'):
-#             app.suspend()                       # Suspend approach
-#         if (exp.state == 'EXE'):
-#             exp.suspend()                       # Suspend exploration
-#         if (rb.state == 'EXE'):
-#             rb.suspend()                        # Suspend return to base
-#         if (vsv.state == 'EXE'):
-#             vsv.suspend()                       # Suspend victim surroundings verification
-#     elif msg.event == 'erro':
-#         if (app.state == 'EXE'):
-#             app.suspend()                       # Suspend approach
-#         if (exp.state == 'EXE'):
-#             exp.suspend()                       # Suspend exploration
-#         if (vsv.state == 'EXE'):
-#             vsv.suspend()                       # Suspend victim surroundings verification
-
-# def gas_event_cb(msg):
-#     '''
-#         Suspend maneuvers that depends on gs if the sensor has an error.
-#     '''
-#     global exp, vsv
-#     if msg.event == 'erro':
-#         if (exp.state == 'EXE'):
-#             exp.suspend()                       # Suspend exploration
-#         if (vsv.state == 'EXE'):
-#             vsv.suspend()                       # Suspend victim surroundings verification
-
-# def battery_event_cb(msg):
-#     '''
-#         Suspend maneuvers if battery level gets critic.
-#     '''
-#     global app, exp, rb, vsv, tele
-#     if (msg.event == 'battery_level') and (msg.param <= 10):
-#         if (app.state == 'EXE'):
-#             app.suspend()                       # Suspend approach
-#         if (exp.state == 'EXE'):
-#             exp.suspend()                       # Suspend exploration
-#         if (rb.state == 'EXE'):
-#             rb.suspend()                        # Suspend return to base
-#         if (vsv.state == 'EXE'):
-#             vsv.suspend()                       # Suspend victim surroundings verification
-#         if (tele.state == 'EXE'):
-#             tele.suspend()                      # Suspend teleoperation
-
-# def failure_event_cb(msg):
-#     '''
-#         Suspend maneuvers if occurs a position failure or a critic failure.
-#     '''
-#     global app, exp, rb, vsv, tele
-#     if (msg.event == 'position_failure') or (msg.event == 'critic_failure'):
-#         if (app.state == 'EXE'):
-#             app.suspend()                       # Suspend approach
-#         if (exp.state == 'EXE'):
-#             exp.suspend()                       # Suspend exploration
-#         if (rb.state == 'EXE'):
-#             rb.suspend()                        # Suspend return to base
-#         if (vsv.state == 'EXE'):
-#             vsv.suspend()                       # Suspend victim surroundings verification
-#     if (msg.event == 'critic_failure') and (tele.state == 'EXE'):
-#         tele.suspend()                          # Suspend teleoperation
 
 
 if __name__=="__main__":
@@ -669,9 +626,5 @@ if __name__=="__main__":
     tele = teleoperation(NAME)
     
     rospy.Subscriber("maneuvers/in", events_message, maneuver_event, queue_size=10)                 # Topic to receive command events
-    # rospy.Subscriber("victim_sensor/out", events_message, victim_event_cb, queue_size=10)           # Topic to receive events from victim sensor
-    # rospy.Subscriber("gas_sensor/out", events_message, gas_event_cb, queue_size=10)                 # Topic to receive events from gas sensor
-    # rospy.Subscriber("battery_monitor/out", events_message, battery_event_cb, queue_size=10)        # Topic to receive events from battery monitor
-    # rospy.Subscriber("failures_monitor/out", events_message, failure_event_cb, queue_size=10)       # Topic to receive events from failures monitor
 
     rospy.spin()
