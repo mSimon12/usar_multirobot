@@ -1,8 +1,8 @@
 // pioneer3at_1_SUP-motion_assist_request
 digraph {
 	rankdir=LR
-	ASSIST_ALLOWED [label=ASSIST_ALLOWED color=black fillcolor=white shape=circle style=filled]
-	NO_ASSIT [label=NO_ASSIT color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	ASSIST_ALLOWED [label=ASSIST_ALLOWED color=blue fillcolor=lightgrey shape=circle style=filled]
+	NO_ASSIT [label=NO_ASSIT color=black fillcolor=white shape=doublecircle style=filled]
 	ASSIST_ALLOWED -> ASSIST_ALLOWED [label="er_app,
 er_exp,
 er_rb,

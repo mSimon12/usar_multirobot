@@ -136,50 +136,51 @@ class AllocationSystem(object):
         robots_info_me.acquire()
 
         ###### Send TASKS to ROBOTS ############################################################
-        for t in tasks_node.getValue():
-            task_pub = rospy.Publisher("/{}/task".format(t[1]),task_message, queue_size=10)
-            
-            if t[0] != robots_info.loc[t[1],'current_task_id']:
-                # Build the message for task requisition
-                task_msg = task_message()
-                task_msg.id = t[0]
-                task_msg.task = tasks.loc[t[0],'maneuver']
-                task_msg.gas_sensor = tasks.loc[t[0],'gs']
-                task_msg.victim_sensor = tasks.loc[t[0],'vs']
+        if tasks_node:
+            for t in tasks_node.getValue():
+                task_pub = rospy.Publisher("/{}/task".format(t[1]),task_message, queue_size=10)
+                
+                if t[0] != robots_info.loc[t[1],'current_task_id']:
+                    # Build the message for task requisition
+                    task_msg = task_message()
+                    task_msg.id = t[0]
+                    task_msg.task = tasks.loc[t[0],'maneuver']
+                    task_msg.gas_sensor = tasks.loc[t[0],'gs']
+                    task_msg.victim_sensor = tasks.loc[t[0],'vs']
 
-                # Define task position or region
-                if tasks.loc[t[0],'maneuver'] == 'approach':
-                    pos = Twist()
-                    pos.linear.x = tasks.loc[t[0],'position']['x']
-                    pos.linear.y = tasks.loc[t[0],'position']['y']
-                    pos.linear.z = tasks.loc[t[0],'position']['z']
-                    pos.angular.z = tasks.loc[t[0],'position']['z']
-                    task_msg.position.append(pos)
-                elif tasks.loc[t[0],'maneuver'] in ['assessment', 'search']:
-                    pos = Twist()
-                    pos.linear.x = tasks.loc[t[0],'region']['x0']
-                    pos.linear.y = tasks.loc[t[0],'region']['y0']
-                    pos.linear.z = tasks.loc[t[0],'region']['z0']
-                    task_msg.position.append(pos)
-                    
-                    pos = Twist()
-                    pos.linear.x = tasks.loc[t[0],'region']['x1']
-                    pos.linear.y = tasks.loc[t[0],'region']['y1']
-                    pos.linear.z = tasks.loc[t[0],'region']['z1']
-                    task_msg.position.append(pos)
+                    # Define task position or region
+                    if tasks.loc[t[0],'maneuver'] == 'approach':
+                        pos = Twist()
+                        pos.linear.x = tasks.loc[t[0],'position']['x']
+                        pos.linear.y = tasks.loc[t[0],'position']['y']
+                        pos.linear.z = tasks.loc[t[0],'position']['z']
+                        pos.angular.z = tasks.loc[t[0],'position']['z']
+                        task_msg.position.append(pos)
+                    elif tasks.loc[t[0],'maneuver'] in ['assessment', 'search']:
+                        pos = Twist()
+                        pos.linear.x = tasks.loc[t[0],'region']['x0']
+                        pos.linear.y = tasks.loc[t[0],'region']['y0']
+                        pos.linear.z = tasks.loc[t[0],'region']['z0']
+                        task_msg.position.append(pos)
+                        
+                        pos = Twist()
+                        pos.linear.x = tasks.loc[t[0],'region']['x1']
+                        pos.linear.y = tasks.loc[t[0],'region']['y1']
+                        pos.linear.z = tasks.loc[t[0],'region']['z1']
+                        task_msg.position.append(pos)
 
-                # Wait till it recognizes the subscribers
-                r = rospy.Rate(20)
-                while(task_pub.get_num_connections()<1):
-                    r.sleep()
+                    # Wait till it recognizes the subscribers
+                    r = rospy.Rate(20)
+                    while(task_pub.get_num_connections()<1):
+                        r.sleep()
 
-                # Publish the task
-                task_pub.publish(task_msg)
-                # task_pub.unregister()
+                    # Publish the task
+                    task_pub.publish(task_msg)
+                    # task_pub.unregister()
 
-                #Update robot info
-                robots_info.loc[t[1],'last_task_id'] = robots_info.loc[t[1],'current_task_id']
-                robots_info.loc[t[1],'current_task_id'] = t[0]
+                    #Update robot info
+                    robots_info.loc[t[1],'last_task_id'] = robots_info.loc[t[1],'current_task_id']
+                    robots_info.loc[t[1],'current_task_id'] = t[0]
 
         ########################################################################################
 

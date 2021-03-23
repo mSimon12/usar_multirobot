@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<launch>  
+   <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+   <rosparam param="robots" subst_value="True">$(arg robots)</rosparam>
+
+  <!-- Launch events interace -->
+  <node name="commander_ihm" pkg="interfaces" type="commander_ihm.py" output="screen"/>
+
+</launch>

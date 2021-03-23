@@ -15,7 +15,6 @@ from system_msgs.msg import events_message
 from exploration_msgs.msg import ExploreGoal, ExploreAction
 
 from geometry_msgs.msg import PolygonStamped, Point32, Twist
-from nav_msgs.msg import Odometry
 from sensor_msgs.msg import Joy
 
 ########################################################################

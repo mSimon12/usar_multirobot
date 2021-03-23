@@ -98,7 +98,7 @@ class EventInterface(object):
         
         # start the Window
         # self.window = sg.Window("EVENTS TRIGGER INTERFACE", size=(650,500)).layout(self.main)
-        self.window = sg.Window("EVENTS TRIGGER INTERFACE", size=(650,500),layout = self.main)
+        self.window = sg.Window("EVENTS TRIGGER INTERFACE", size=(650,500),layout = self.main, resizable = True)
 
         self.models_window = None
         
@@ -151,7 +151,7 @@ class EventInterface(object):
             if self.models_window:
                 event, m_values = self.models_window.Read(timeout=10)
                 if event in (None, 'Cancel'): 
-                    self.models_window
+                    self.models_window.Close()
                 else:
                     values = {**values, **m_values}
 
@@ -167,7 +167,7 @@ class EventInterface(object):
                     [sg.Text("Model: "), sg.InputCombo(values = initial_values, default_value = initial_model, key = 'selected_model', size = (30,10), enable_events = True)],
                     [sg.Image(filename = initial_path, key="_IMAGE_", background_color="white")],
                 ] 
-                self.models_window = sg.Window("MODELS VISUALIZER", size=(650,500),layout = self.models_layout, finalize = True)
+                self.models_window = sg.Window("MODELS VISUALIZER", size=(650,500),layout = self.models_layout, finalize = True, resizable = True)
 
             elif event == 'plant_model':
                 self.models_window.Element('selected_model').update(values = [e for e in self.models if (values['models_robot_selected'] + '_PLANT') in e])

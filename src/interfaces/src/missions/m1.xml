@@ -1,0 +1,30 @@
+<mission>
+  <id>m1</id>
+  <priority>2.0</priority>
+  <task>
+    <agent>UAV_1</agent>
+    <position/>
+    <region>
+      <origin_x>0.0</origin_x>
+      <origin_y>0.0</origin_y>
+      <x_size>50.0</x_size>
+      <y_size>50.0</y_size>
+    </region>
+    <vs>True</vs>
+    <gs>False</gs>
+    <maneuver>assessment</maneuver>
+  </task>
+  <task>
+    <agent>pioneer3at_1</agent>
+    <position>
+      <x>10.0</x>
+      <y>10.0</y>
+      <z>2.0</z>
+      <theta>3.0</theta>
+    </position>
+    <region/>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>approach</maneuver>
+  </task>
+</mission>

@@ -154,6 +154,11 @@
       <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
   </include>
 
+<!-- TASK COMMANDER INTERFACE -->
+  <include file="$(find interfaces)/launch/commander_interface.launch">
+      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+  </include>
+
 <!-- LAUNCH RVIZ -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
 
