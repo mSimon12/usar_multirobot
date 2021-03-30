@@ -1,0 +1,30 @@
+<mission>
+  <id>m2</id>
+  <priority>2</priority>
+  <task>
+    <agent></agent>
+    <position>
+      <x>5.0</x>
+      <y>5.0</y>
+      <z>1.0</z>
+      <theta>3.14</theta>
+    </position>
+    <region/>
+    <vs>True</vs>
+    <gs>False</gs>
+    <maneuver>approach</maneuver>
+  </task>
+  <task>
+    <agent></agent>
+    <position/>
+    <region>
+      <origin_x>5.0</origin_x>
+      <origin_y>5.0</origin_y>
+      <x_size>10.0</x_size>
+      <y_size>10.0</y_size>
+    </region>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>search</maneuver>
+  </task>
+</mission>

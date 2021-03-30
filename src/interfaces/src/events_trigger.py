@@ -2,6 +2,7 @@
 
 # General libs
 import os
+import time
 import inspect
 import glob
 
@@ -20,6 +21,8 @@ from geometry_msgs.msg import Twist
 from interfaces.msg import trace_events
 from system_msgs.msg import events_message
 
+
+trace_filename = None
 
 class EventInterface(object):
     '''
@@ -329,6 +332,8 @@ class EventInterface(object):
                     text = self.trace.tail(1).drop(columns=['event_type','enabled_events']).to_string(header=False, justify='left')
                     self.window['tracer'].print(text, text_color=color)     
 
+                self.trace.to_csv(trace_filename)
+
             if self.update_allowed_events:
                 self.update_allowed_events = False
 
@@ -351,6 +356,8 @@ if __name__ == '__main__':
         #Change to the current directory
         path = os.path.dirname(os.path.abspath(__file__))
         os.chdir(path)
+
+        trace_filename = path + '/events_log/{}.csv'.format(time.strftime("%b-%d-%Y  %H:%M:%S"))
 
         robots = rospy.get_param("robots", default = [])
         state_machines = rospy.get_param("/events_trigger_interface/sm_path", default = '')

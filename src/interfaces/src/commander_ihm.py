@@ -2,6 +2,7 @@
 
 # General libs
 import os
+import time
 
 import pandas as pd
 import PySimpleGUI as sg
@@ -28,7 +29,7 @@ class CommanderInterface(object):
 
         self.path = os.path.dirname(os.path.abspath(__file__))
 
-        # self.mission_pub = rospy.Publisher('/missions', mission, queue_size=10)
+        self.mission_pub = rospy.Publisher('/missions', mission, queue_size=10)
         self.missions = pd.DataFrame(columns = ['priority', 'n_tasks', 'current_task', 'progress', 'status', 'object'])
         self.missions_details = {}
         self.sended_missions = []
@@ -48,7 +49,7 @@ class CommanderInterface(object):
         self.main = [
             # MISSIONS:
             [sg.Frame('MISSIONS:',[
-                [sg.Table(values = [['','','','','','']], size = (70,18), background_color='white', text_color='black', col_widths=[15,15,15,15,15,15], auto_size_columns=False,
+                [sg.Table(values = [['','','','','','']], size = (70,18), background_color='white', text_color='black', col_widths=[5,15,15,15,15,30], auto_size_columns=False,
                           justification='left', key='missions', headings = self.header_list, right_click_menu = ['&Right', ['Add', 'Load', 'View/Edit', 'Send', 'Remove']])],
                           [sg.Button('ADD', key='Add', size=(5,1)),
                            sg.Button('LOAD', key='Load', size=(5,1)),
@@ -73,8 +74,14 @@ class CommanderInterface(object):
         self.window = sg.Window("COMMANDER IHM", size=(950,400),layout = self.main, resizable= True)
         ###############################################################################################
 
+        self.last_time = {}
+        for r in self.robots:
+            self.last_time[r] = time.time()
 
         #### TOPICS SUBSCRIPTIONS
+        # Missions feedback
+        rospy.Subscriber('/missions_feedback',missions_feedback, self.missionsCallback)
+
         # Pose topics
         self.robots_info = {}
         self.status = {}
@@ -113,10 +120,15 @@ class CommanderInterface(object):
         '''
             Monitor the current position of the robot
         '''
-        self.odometry_me.acquire()
-        self.robots_info[robot][2] = "x: {:.2f}  y: {:.2f}  z: {:.2f}".format(odometry.pose.pose.position.x, odometry.pose.pose.position.y, odometry.pose.pose.position.z)
-        self.update_robot_info = True
-        self.odometry_me.release()
+        t = time.time()
+
+        if t - self.last_time[robot] > 1.0:
+            self.last_time[robot] = t
+
+            self.odometry_me.acquire()
+            self.robots_info[robot][2] = "x: {:.2f}  y: {:.2f}  z: {:.2f}".format(odometry.pose.pose.position.x, odometry.pose.pose.position.y, odometry.pose.pose.position.z)
+            self.update_robot_info = True
+            self.odometry_me.release()
 
 
     def batCallback(self, msg, robot):
@@ -184,21 +196,39 @@ class CommanderInterface(object):
         self.update_robot_info = True
         self.odometry_me.release()
 
+    def missionsCallback(self, msg):
+        '''
+            Monitors updates on missions status.
+        '''
+        for m in msg.missions:
+            self.missions.loc[m.id, 'progress'] = m.progress
+            
+            if m.status == 'finished':
+                self.missions.loc[m.id, 'status'] = 'mission complete'
+                self.missions.loc[m.id, 'current_task'] = '-'
+            else:
+                self.missions.loc[m.id, 'current_task'] = int(m.status.replace(m.id + '_', ''))
+                if m.robot:
+                    self.missions.loc[m.id, 'status'] = m.robot + ' executing task'
+                else:
+                    self.missions.loc[m.id, 'status'] = 'idle'
+        
+        self.update_missions = True
+
 
     def run(self):
         '''
             Main loop of the interface for generating events
         '''
-        update_missions = False                     # Flag the need of update of the table
+        self.update_missions = False                     # Flag the need of update of the table
         edit_mission_window = None                  # Singal if the Edit window is ON
         selected_mission = None                     # Current selected mission ID
-        current_mission = None                      # Current mission on Edition object
 
         while not rospy.is_shutdown():
             #Get data from the Window
             event, values = self.window.Read(timeout=100)
             if event in (None, 'Cancel'):                                   # If user closes window or clicks cancel
-                print('\nCLOSING EVENT INTERFACE ...\n')
+                print('\nCLOSING COMMANDER INTERFACE ...\n')
                 break
 
             if edit_mission_window:
@@ -206,7 +236,6 @@ class CommanderInterface(object):
                 if event in (None, 'Cancel'): 
                     edit_mission_window.Close()
                     edit_mission_window = None
-                    current_mission = None
                 else:
                     values = {**values, **m_values}
 
@@ -221,7 +250,7 @@ class CommanderInterface(object):
                 for b in self.robots_buttons[values['robot_to_call']]:
                     self.window[b].update(disabled = not self.robots_buttons[values['robot_to_call']][b])
             elif event == 'tele':
-                msg.event = 'reset_teleoperation'
+                msg.event = 'call_teleoperation'
                 self.publishers.loc[values['robot_to_call'],'fail_monitor'].publish(msg)
                 pass
             elif event == 'rst_f':
@@ -246,9 +275,9 @@ class CommanderInterface(object):
 
                 if add_event == 'OK':
                     if add_values['m_id'] not in self.missions.index:
-                        if (float(add_values['m_p']) < 10) and (float(add_values['m_p']) >= 0): 
-                            self.missions.loc[add_values['m_id']] = [float(add_values['m_p']),0,0,0,'empty', Mission(add_values['m_id'], float(add_values['m_p']))]
-                            update_missions = True
+                        if (int(float(add_values['m_p'])) < 10) and (int(float(add_values['m_p'])) >= 0): 
+                            self.missions.loc[add_values['m_id']] = [int(float(add_values['m_p'])),0,0,0,'empty', Mission(add_values['m_id'], int(float(add_values['m_p'])))]
+                            self.update_missions = True
 
                             self.missions_details[add_values['m_id']] = []      
                         else:
@@ -259,36 +288,40 @@ class CommanderInterface(object):
             elif event == 'Load':
                 load_path = sg.popup_get_file('Mission to load')
 
-                loaded_mission = Mission()
-                loaded_mission.load(load_path)
+                if load_path:
+                    loaded_mission = Mission()
+                    loaded_mission.load(load_path)
 
-                mission_id = loaded_mission.id
-                mission_priority = loaded_mission.priority
-                n_tasks = len(loaded_mission.tasks.index)
+                    mission_id = loaded_mission.id
+                    mission_priority = loaded_mission.priority
+                    n_tasks = len(loaded_mission.tasks.index)
 
-                self.missions.loc[mission_id] = [float(mission_priority),n_tasks,0,0,'not sended', Mission(mission_id, float(mission_priority))]
-                self.missions_details[mission_id] = [] 
-                seq = 0
-                for t in loaded_mission.tasks.index:
-                    agent = loaded_mission.tasks.loc[t,'agent']
-                    maneuver = loaded_mission.tasks.loc[t,'maneuver']
-                    vs = loaded_mission.tasks.loc[t,'vs']
-                    gs = loaded_mission.tasks.loc[t,'gs']
-                
-                    if maneuver == 'approach':
-                        p = loaded_mission.tasks.loc[t,'position']
-                        pos = [p['x'], p['y'], p['z'], p['theta']]
-                        reg = []
-                    elif maneuver in ['assessment','search']:
-                        r = loaded_mission.tasks.loc[t,'region']
-                        pos = []
-                        reg = [r['x0'], r['y0'], r['x1'], r['y1']]
-                    task = [seq, maneuver, agent, pos, reg, vs, gs]
-                    seq += 1
+                    self.missions.loc[mission_id] = [int(float(mission_priority)),n_tasks,0,0,'not sended', Mission(mission_id, int(float(mission_priority)))]
+                    self.missions_details[mission_id] = [] 
+                    seq = 0
+                    for t in loaded_mission.tasks.index:
+                        if not loaded_mission.tasks.loc[t,'agent']:
+                            agent = ''
+                        else:
+                            agent = loaded_mission.tasks.loc[t,'agent']
+                        maneuver = loaded_mission.tasks.loc[t,'maneuver']
+                        vs = loaded_mission.tasks.loc[t,'vs']
+                        gs = loaded_mission.tasks.loc[t,'gs']
+                    
+                        if maneuver == 'approach':
+                            p = loaded_mission.tasks.loc[t,'position']
+                            pos = [p['x'], p['y'], p['z'], p['theta']]
+                            reg = []
+                        elif maneuver in ['assessment','search']:
+                            r = loaded_mission.tasks.loc[t,'region']
+                            pos = []
+                            reg = [r['x0'], r['y0'], r['x1'], r['y1']]
+                        task = [seq, maneuver, agent, pos, reg, vs, gs]
+                        seq += 1
 
-                    self.missions_details[mission_id].append(task)
+                        self.missions_details[mission_id].append(task)
 
-                update_missions = True
+                    self.update_missions = True
             
             elif (event == 'View/Edit') and (not edit_mission_window) and selected_mission: 
                 edit_m_layout = [
@@ -328,19 +361,33 @@ class CommanderInterface(object):
 
                     #Send mission to task allocator
                     path = os.path.dirname(os.path.abspath(__file__))
-                    self.missions.loc[selected_mission, 'object'].save(path + '/missions/{}.xml'.format(selected_mission))
+                    mission_path = path + '/missions/{}.xml'.format(selected_mission)
+                    self.missions.loc[selected_mission, 'object'].save(mission_path)
 
                     self.missions.at[selected_mission,'status'] = 'idle'
-                    update_missions = True
+
+                    msg = mission()
+                    msg.id = selected_mission
+                    msg.filename = mission_path
+                    msg.priority = self.missions.at[selected_mission,'priority']
+                    self.mission_pub.publish(msg)
+
+                    self.update_missions = True
                 else:
                     sg.popup_error('EMPTY MISSION','Can not send empty mission!')
 
             elif (event == 'Remove') and selected_mission:
                 # Send abort mission to task allocator
 
+                if selected_mission in self.sended_missions:
+                    msg = mission()
+                    msg.id = selected_mission
+                    msg.priority = -1
+                    self.mission_pub.publish(msg)
+
                 self.missions.drop(selected_mission, inplace = True)
                 self.missions_details.pop(selected_mission)
-                update_missions = True
+                self.update_missions = True
 
 
             ## EDIT MISSION Window events ####################
@@ -407,6 +454,7 @@ class CommanderInterface(object):
                                 else:
                                     pos = []
                                     reg = []
+
                                 task = [seq, v['maneuver'], v['agent'], pos, reg, v['vs_status'], v['gs_status']]
                                 self.missions_details[selected_mission].append(task)
                                 self.missions.loc[selected_mission, 'n_tasks'] += 1
@@ -414,7 +462,7 @@ class CommanderInterface(object):
                                 add_window.Close()
 
                                 edit_mission_window.Element('tasks').update(values = self.missions_details[selected_mission])
-                                update_missions = True
+                                self.update_missions = True
                             else:
                                 sg.popup_error('WRONG VALUES ATTRIBUTION','Position and Region must be a number!')
 
@@ -471,7 +519,7 @@ class CommanderInterface(object):
                     edit_mission_window.Element('tasks').update(values = self.missions_details[selected_mission])
                     if not self.missions_details[selected_mission]:
                         self.missions.loc[selected_mission, 'status']  = 'empty'
-                    update_missions = True
+                    self.update_missions = True
             
                 elif event == 'task_up' and selected_task != None:
                     if selected_task > 0:
@@ -498,8 +546,8 @@ class CommanderInterface(object):
 
             ##################################################
 
-            if update_missions:
-                update_missions = False
+            if self.update_missions:
+                self.update_missions = False
                 table = []
 
                 self.window.Element('missions').update(values = [])

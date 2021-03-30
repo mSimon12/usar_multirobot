@@ -1,5 +1,4 @@
-x = ['OK','OK','OK']
+x = ''
 
-
-if all([i == 'OK' for i in x]):
-    print("OLA")
+if not x:
+    print("hello")

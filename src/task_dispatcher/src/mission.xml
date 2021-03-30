@@ -1,5 +1,5 @@
 <mission>
-  <id>m1</id>
+  <id>m</id>
   <priority>5</priority>
   <task>
     <agent></agent>

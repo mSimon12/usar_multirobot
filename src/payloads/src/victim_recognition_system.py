@@ -83,6 +83,7 @@ class VictimSensor(object):
         # Get position of the victims related to the robot position
         v_status = {}                                                                # Dictionary with the status of each victim and xyz position
         for v in self.__victims:
+            v_status[v]['status'] = False
             try:
                 v_status[v] = {}
                 answer = self.__models_service(v, self.__robot_name)                        # Call the service to receive the victim position
@@ -97,8 +98,6 @@ class VictimSensor(object):
                 # Mark the victim as found if it is into the range
                 if dist < self.__sensor_range:
                     v_status[v]['status'] = True
-                else:
-                    v_status[v]['status'] = False
                     
             except rospy.ServiceException as e:
                 rospy.loginfo("Get Model State service call failed:  {}".format(e))

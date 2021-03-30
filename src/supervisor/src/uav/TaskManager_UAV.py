@@ -98,6 +98,7 @@ class TaskManager(Thread):
             if self.main_task_id:
                 g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'aborted'      # Update info about last task status
+                g_var.manager_info['status'] = 'idle'
                 g_var.manager_info_flag.notify()
                 g_var.manager_info_flag.release()
             self.main_task = tasks.AbortM()                                    # Select abort as current task
@@ -117,6 +118,7 @@ class TaskManager(Thread):
 
             #Update new task
             g_var.manager_info['current_task'] = self.main_task_id
+            g_var.manager_info['status'] = 'busy'
             g_var.manager_info_flag.notify()
             g_var.manager_info_flag.release()
 
@@ -161,6 +163,7 @@ class TaskManager(Thread):
                 rospy.loginfo("[Task Manager]: TASK '{}' accomplished!!!!!!".format(self.main_task_id))
                 g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'finished'
+                g_var.manager_info['status'] = 'idle'
                 # Reset task
                 self.main_task = None
                 self.main_task_id = None
@@ -262,14 +265,14 @@ class TaskManager(Thread):
                                     g_var.manager_info['tasks'][self.main_task_id] = 'executing'
                                 else:
                                     self.current_task = None
-                                    g_var.manager_info['status'] = 'lazy'
+                                    g_var.manager_info['status'] = 'idle'
             
             # Verify if the current task can be executed due to Sensor ERRORS
             if self.current_task and (states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()):
                 
                 if self.main_task and (self.current_task == self.main_task):
                     # Set the main task as aborted but does not make the robot unable to execute missions
-                    g_var.manager_info['status'] = 'lazy'
+                    g_var.manager_info['status'] = 'idle'
                     g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                     self.main_task = None
                 

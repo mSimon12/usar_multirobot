@@ -56,12 +56,12 @@ class EventsFilter(object):
     def status_monitor(self):
         '''
             Monitor changes on the robot and mission status through g_var.manager_info
-            status = ['lazy', 'busy', 'unable']
+            status = ['idle', 'busy', 'unable']
             tasks contain a dictionary with the status of all received task_ids
             task_status = ['executing', 'suspended', 'finished', 'aborted']
 		'''
         g_var.manager_info_flag.acquire()
-        last_status = g_var.manager_info['status']                             # Get initial status
+        last_status = g_var.manager_info['status']          # Get initial status
         last_task_info = {'id': None , 'status': None}      # Get initial task status
         g_var.manager_info_flag.release()
         

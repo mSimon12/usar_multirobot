@@ -42,7 +42,7 @@ class AllocationSystem(object):
         for uav in self.uavs_names:
             # Initialize UAV monitor
             robots_info_me.acquire()
-            robots_info.loc[uav] = [100, {'x': None, 'y': None, 'z': None}, 'ok', 'nok', 'lazy', None, None]
+            robots_info.loc[uav] = [100, {'x': None, 'y': None, 'z': None}, 'ok', 'nok', 'idle', None, None]
             robots_info_me.release()
 
             uav_SM = RobotStateMachine(uav)
@@ -54,7 +54,7 @@ class AllocationSystem(object):
         for ugv in self.ugvs_names:
             # Initialize UGV monitor
             robots_info_me.acquire()
-            robots_info.loc[ugv] = [100, {'x': None, 'y': None, 'z': None}, 'ok', 'ok', 'lazy', None, None]
+            robots_info.loc[ugv] = [100, {'x': None, 'y': None, 'z': None}, 'ok', 'ok', 'idle', None, None]
             robots_info_me.release()
 
             ugv_SM = RobotStateMachine(ugv)
@@ -72,10 +72,14 @@ class AllocationSystem(object):
             Callback for new received missions
         '''
         m = Mission()
-        m.load(msg.filename)
+        if msg.priority >= 0:
+            m.load(msg.filename)
 
-        # Add the new mission to the dataframe
-        missions.loc[m.id] = [float(m.priority), m.tasks, 0, 0]
+            # Add the new mission to the dataframe
+            missions.loc[m.id] = [float(m.priority), m.tasks, 0, 0]
+        
+        else:
+            missions.drop(msg.id, inplace=True)         # Remove the mission
 
         # Signal the need of replanning due to the new mission received
         replan_flag.acquire()
@@ -105,11 +109,12 @@ class AllocationSystem(object):
 
             #Select robots that can execute the tasks
             robots_info_me.acquire()
-            robots = robots_info.loc[robots_info['status'] != 'unable']           # Get only robots enabled (lazy or busy)
+            robots = robots_info.loc[robots_info['status'] != 'unable']           # Get only robots enabled (idle or busy)
             robots_info_me.release()
 
             # Require replanning and send tasks to robots
-            self.allocate(robots, current_tasks)
+            if not missions.empty:
+                self.allocate(robots, current_tasks)
 
             replan_flag.release()
 
@@ -131,12 +136,11 @@ class AllocationSystem(object):
         # Receive a node containing allocated tasks
         tasks_node = search.run()
 
-        rospy.loginfo("\n\nSelected tasks: {}\n".format(tasks_node.getValue()))
-
         robots_info_me.acquire()
 
         ###### Send TASKS to ROBOTS ############################################################
         if tasks_node:
+            rospy.loginfo("\n\nSelected tasks: {}\n".format(tasks_node.getValue()))
             for t in tasks_node.getValue():
                 task_pub = rospy.Publisher("/{}/task".format(t[1]),task_message, queue_size=10)
                 
@@ -144,7 +148,14 @@ class AllocationSystem(object):
                     # Build the message for task requisition
                     task_msg = task_message()
                     task_msg.id = t[0]
-                    task_msg.task = tasks.loc[t[0],'maneuver']
+
+                    if tasks.loc[t[0],'maneuver'] == 'search':
+                        if 'pioneer3at' in t[1]:
+                            task_msg.task = 'exploration'
+                        elif 'UAV' in t[1]:
+                            task_msg.task = 'victim_search'
+                    else:
+                        task_msg.task = tasks.loc[t[0],'maneuver']
                     task_msg.gas_sensor = tasks.loc[t[0],'gs']
                     task_msg.victim_sensor = tasks.loc[t[0],'vs']
 
@@ -154,19 +165,19 @@ class AllocationSystem(object):
                         pos.linear.x = tasks.loc[t[0],'position']['x']
                         pos.linear.y = tasks.loc[t[0],'position']['y']
                         pos.linear.z = tasks.loc[t[0],'position']['z']
-                        pos.angular.z = tasks.loc[t[0],'position']['z']
+                        pos.angular.z = tasks.loc[t[0],'position']['theta']
                         task_msg.position.append(pos)
                     elif tasks.loc[t[0],'maneuver'] in ['assessment', 'search']:
                         pos = Twist()
                         pos.linear.x = tasks.loc[t[0],'region']['x0']
                         pos.linear.y = tasks.loc[t[0],'region']['y0']
-                        pos.linear.z = tasks.loc[t[0],'region']['z0']
+                        # pos.linear.z = tasks.loc[t[0],'region']['z0']
                         task_msg.position.append(pos)
                         
                         pos = Twist()
                         pos.linear.x = tasks.loc[t[0],'region']['x1']
                         pos.linear.y = tasks.loc[t[0],'region']['y1']
-                        pos.linear.z = tasks.loc[t[0],'region']['z1']
+                        # pos.linear.z = tasks.loc[t[0],'region']['z1']
                         task_msg.position.append(pos)
 
                     # Wait till it recognizes the subscribers
@@ -186,7 +197,7 @@ class AllocationSystem(object):
 
         ## Abort tasks of unallocated robots
         for r in robots_info.index:
-            if not [t for t in tasks_node.getValue() if t[1] == r]:
+            if (not [t for t in tasks_node.getValue() if t[1] == r]) and (robots_info.loc[r,'current_task_id']):
                 # Send empty message
                 task_pub = rospy.Publisher("/{}/task".format(r),task_message, queue_size=10)
                 task_msg = task_message()
@@ -235,7 +246,7 @@ class RobotStateMachine(object):
                 1 - Sensor allowed to use;
                 2 - Sensor not allowed to use.
             * Robot working status:
-                1 - Robot lazy: capable of executing tasks but currently doing nothing;
+                1 - Robot idle: capable of executing tasks but currently doing nothing;
                 2 - Robot busy: robot executing some maneuver;
                 3 - Robot unable: robot not capable of accepting tasks. 
             * Tasks updates:
@@ -257,8 +268,14 @@ class RobotStateMachine(object):
             robots_info.loc[self.name,'gs'] = 'ok'
 
         # Update robot working status
-        elif msg.event == 'robot_lazy':
-            robots_info.loc[self.name,'status'] = 'lazy'
+        elif msg.event == 'robot_idle':
+            if robots_info.loc[self.name,'status'] == 'unable':
+                # Signal the need of replanning due to the new mission received
+                replan_flag.acquire()
+                replan_flag.notify()
+                replan_flag.release()
+
+            robots_info.loc[self.name,'status'] = 'idle'
         elif msg.event == 'robot_busy':
             robots_info.loc[self.name,'status'] = 'busy'
         elif msg.event == 'robot_unable':
@@ -331,7 +348,7 @@ class RobotStateMachine(object):
             trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'aborted'}, ignore_index = True)
             trace.to_csv(trace_filename)
         trace_me.release()
-        rospy.logwarn("\n\n{}".format(trace))
+        # rospy.logwarn("\n\n{}".format(trace))
 
 
     def pose_callback(self,msg):

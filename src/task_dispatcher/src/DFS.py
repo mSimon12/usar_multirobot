@@ -122,7 +122,8 @@ class DFS(object):
 
         # Increase cost due to replacing current task of the robot
         if self.robots.loc[robot,'current_task_id']:
-            cost += (10 - self.tasks.loc[self.robots.loc[robot,'current_task_id'],'priority']) * WEIGHTS[1] 
+            if self.robots.loc[robot,'current_task_id'] in self.tasks.index:
+                cost += (10 - self.tasks.loc[self.robots.loc[robot,'current_task_id'],'priority']) * WEIGHTS[1] 
 
         # Increase cost due to batery level
         cost += (100 - self.robots.loc[robot,'bat'])/100 * WEIGHTS[2]
@@ -139,9 +140,9 @@ class DFS(object):
         elif self.tasks.loc[task,'region']:
             x_dif = self.robots.loc[robot,'pose']['x'] - self.tasks.loc[task,'region']['x0']
             y_dif = self.robots.loc[robot,'pose']['y'] - self.tasks.loc[task,'region']['y0']
-            z_dif = self.robots.loc[robot,'pose']['z'] - self.tasks.loc[task,'region']['z0']
+            # z_dif = self.robots.loc[robot,'pose']['z'] - self.tasks.loc[task,'region']['z0']
 
-            dist = (x_dif**2 + y_dif**2 + z_dif**2)**(1/2)
+            dist = (x_dif**2 + y_dif**2)**(1/2)
 
         cost += dist* WEIGHTS[3]
         

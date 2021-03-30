@@ -17,10 +17,10 @@ class g_var():
 	manager_info_flag = Condition()
 
 	# Variable to monitor TM status and the current task status
-	#	status = ['lazy', 'busy', 'unable']
+	#	status = ['idle', 'busy', 'unable']
 	# 	tasks contain a dictionary with the status of all received task_ids
 	#	task_status = ['executing', 'suspended', 'finished', 'aborted']
-	manager_info = {'status': 'lazy', 'tasks':{}, 'current_task': None}
+	manager_info = {'status': 'idle', 'tasks':{}, 'current_task': None}
 
 	# Events variables and mutexes for controlling the Product System
 	next_cont_event = []										# Next controllable event 
@@ -36,7 +36,7 @@ def trigger_event(event_name, param={}):
 		Function responsible for adding events on the buffer, it separates between controllable and
 		uncontrollable events.
 	''' 
-	# Get event class instance (event[0] = event_name / event[0] = event_class instance)
+	# Get event class instance (event[0] = event_name / event[1] = event_class instance)
 	event = [x for x in inspect.getmembers(events_module,inspect.isclass) if x[0] == event_name][0]			
 
 	# Verify if event_name exist
@@ -168,7 +168,11 @@ class ProductSystem(Thread):
 
 		if event[2]:
 			for p in event[2]:
-				trace_msg.param.append(float(p))
+				if type(p) == tuple:
+					for point in p:
+						trace_msg.param.append(float(point))
+				else:
+					trace_msg.param.append(float(p))
 
 		events = []
 		for sm in self.__SMs:
