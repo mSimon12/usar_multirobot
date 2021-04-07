@@ -136,7 +136,7 @@ class CommanderInterface(object):
             Monitor the battery level of the robot
         '''
         self.odometry_me.acquire()
-        self.robots_info[robot][1] = "{}%".format(msg.param[0])
+        self.robots_info[robot][1] = "{:.2f}%".format(msg.param[0])
         self.update_robot_info = True
         self.odometry_me.release()
 

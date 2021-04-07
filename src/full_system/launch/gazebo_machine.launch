@@ -3,52 +3,85 @@
 <launch>
 
    <!--Launch the world with the robots on Gazebo  -->	
-   <include file="$(find usar_gazebo)/launch/base_scene.launch"/>
+   <include file="$(find usar_gazebo)/launch/landslide.launch"/>
    <!--<include file="$(find usar_gazebo)/launch/post-disaster.launch"/> -->
 
 <!-- LAUNCH ROBOTS -->
-  <!-- Spawn simulated quadrotor uav 1 -->
-  <group ns="UAV_1">
-    <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
-      <arg name="name" default="UAV_1"/>
-      <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
-      <arg name="controllers" value="
-    	  controller/position
-    	  controller/velocity
-    	  controller/attitude
-          "/>
-      <arg name="x" default="0.0"/>
-      <arg name="y" default="1.0"/>
-      <arg name="z" default="1.44"/> 
+  <!-- Pioneer3AT 1 -->
+  <group ns="pioneer3at_1">
+    <!-- Launch Robot Control Level --> 
+    <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
+      <arg name="robot_name" value="pioneer3at_1"/>
+      <arg name="xcoordinate" value="3.0"/>
+      <arg name="ycoordinate" value="1.0"/>
+      <arg name="zcoordinate" value="0.6"/>
+      <arg name="roll" value="0.0"/>
+      <arg name="pitch" value="0.0"/>
+      <arg name="yaw" value="0.0"/>
+    </include>
+
+    <!-- Launch Task Control System -->
+    <include file="$(find supervisor)/launch/supervisor.launch">
+      <arg name="robot_name" value="pioneer3at_1"/>
+      <arg name="robot_type" value="pioneer3at"/>
     </include>
   </group> 
 
-  <!-- Spawn simulated quadrotor uav 2 
+  <!-- Launch Pioneer3AT 2 
+  <group ns="pioneer3at_2">
+    <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
+      <arg name="robot_name" value="pioneer3at_2"/>
+      <arg name="xcoordinate" value="3.0"/>
+      <arg name="ycoordinate" value="3.0"/>
+      <arg name="zcoordinate" value="0.6"/>
+      <arg name="roll" value="0.0"/>
+      <arg name="pitch" value="0.0"/>
+      <arg name="yaw" value="0.0"/>
+    </include>--> 
+
+    <!--Launch Task Control System
+    <include file="$(find supervisor)/launch/supervisor.launch">
+      <arg name="robot_name" value="pioneer3at_1"/>
+    </include> --> 
+  <!--</group>-->
+
+
+  <!-- Spawn simulated quadrotor uav 1 -->
+  <group ns="UAV_1">
+    <include file="$(find uav)/launch/UAV.launch">
+      <arg name="drone_name" value="UAV_1"/>
+      <arg name="x" value="1.0"/>
+      <arg name="y" value="1.0"/>
+      <arg name="z" value="0.7"/> 
+    </include>
+
+    <!-- Launch Task Control System -->
+    <include file="$(find supervisor)/launch/supervisor.launch">
+      <arg name="robot_name" value="UAV_1"/>
+      <arg name="robot_type" value="uav"/>
+    </include>
+  </group>
+
+  <!-- Spawn simulated quadrotor uav 2
   <group ns="UAV_2">
-    <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch" >
-      <arg name="name" default="UAV_2"/>
-      <arg name="model" value="$(find hector_quadrotor_description)/urdf/quadrotor_hokuyo_utm30lx.gazebo.xacro"/>
-      <arg name="controllers" value="
-    	  controller/position
-    	  controller/velocity
-    	  controller/attitude
-          "/>
-      <arg name="x" default="0.0"/>
-      <arg name="y" default="2.0"/>
-      <arg name="z" default="1.46"/> 
+    <include file="$(find uav)/launch/UAV.launch">
+      <arg name="drone_name" default="UAV_2"/>
+      <arg name="x" value="1.0"/>
+      <arg name="y" value="3.0"/>
+      <arg name="z" value="0.7"/> 
     </include>
   </group> -->
 
-  <!-- Launch Pioneer2DX 1
+  <!-- Launch Pioneer2DX 1 
   <group ns="pioneer2dx_1">
     <include file="$(find pioneer2dx_ros)/launch/pioneer2dx.launch">
       <arg name="robot_name" value="pioneer2dx_1"/>
-      <arg name="xcoordinate" value="20.0"/>
-      <arg name="ycoordinate" value="-30.0"/>
-      <arg name="zcoordinate" value="1.3"/>
+      <arg name="xcoordinate" value="0.0"/>
+      <arg name="ycoordinate" value="7.0"/>
+      <arg name="zcoordinate" value="1.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
-      <arg name="yaw" value="1.57"/>
+      <arg name="yaw" value="0.0"/>
     </include>
   </group> -->
 
@@ -56,50 +89,80 @@
   <group ns="pioneer2dx_2">
     <include file="$(find pioneer2dx_ros)/launch/pioneer2dx.launch">
       <arg name="robot_name" value="pioneer2dx_2"/>
-      <arg name="xcoordinate" value="19.0"/>
-      <arg name="ycoordinate" value="-30.0"/>
-      <arg name="zcoordinate" value="1.3"/>
+      <arg name="xcoordinate" value="2.0"/>
+      <arg name="ycoordinate" value="5.0"/>
+      <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
+      <arg name="yaw" value="0.0"/>
+    </include>
+  </group> -->
+
+<!-- LAUNCH HUMAN TEAMS -->
+
+  <!-- Launch fireman1 
+  <group ns="human1">
+    <include file="$(find human_teams)/launch/fireman1.launch">
+      <arg name="human_name" value="human1"/>
+      <arg name="xcoordinate" value="1.0"/>
+      <arg name="ycoordinate" value="1.0"/>
+      <arg name="zcoordinate" value="0.3"/>
       <arg name="yaw" value="1.57"/>
     </include>
   </group> -->
 
-  <!-- Include MYROBOT 
-  <include file="$(find myrobot_description)/launch/myrobot.launch">
-    <arg name="robot_name" value="myrobot"/>
-    <arg name="xcoordinate" value="5.0"/>
-    <arg name="ycoordinate" value="0.0"/>
-    <arg name="zcoordinate" value="2.0"/>
-    <arg name="roll" value="0.0"/>
-    <arg name="pitch" value="0.0"/>
-    <arg name="yaw" value="0.0"/>
-  </include>-->
-
-
-<!-- LAUNCH HUMAN TEAMS -->
-
-  <!-- Launch fireman1 -->
-  <group ns="human1"> 
-    <include file="$(find human_teams)/launch/fireman1.launch">
-      <arg name="human_name" value="human1"/>
-      <arg name="xcoordinate" value="-2.0"/>
-      <arg name="ycoordinate" value="0.0"/>
-      <arg name="zcoordinate" value="1.15"/>
-      <arg name="yaw" value="1.57"/>
-    </include>
-  </group> 
-
-  <!-- Launch fireman2 -->
+  <!-- Launch fireman2 
   <group ns="human2">
     <include file="$(find human_teams)/launch/fireman2.launch">
       <arg name="human_name" value="human2"/>
-      <arg name="xcoordinate" value="-2.0"/>
+      <arg name="xcoordinate" value="1.0"/>
       <arg name="ycoordinate" value="2.0"/>
-      <arg name="zcoordinate" value="1.15"/>
+      <arg name="zcoordinate" value="0.3"/>
       <arg name="yaw" value="1.57"/>
     </include>
-  </group> 
+  </group> -->
 
-</launch>	
+  
+<!--LAUNCH MAP_MERGE
+  <include file="$(find pioneer3at_slam)/launch/multi_map_merge.launch">
+      <arg name="namespace" value="pioneer3at"/>
+      <arg name="first_robot"  value="pioneer3at_1"/>
+      <arg name="second_robot" value="pioneer3at_2"/>
 
+      <arg name="first_robot_x_pos" value=" -33.0"/>
+      <arg name="first_robot_y_pos" value=" -30.0"/>
+      <arg name="first_robot_z_pos" value=" 0.45"/>
+      <arg name="first_robot_yaw"   value=" 0.0"/>
+
+      <arg name="second_robot_x_pos" value="-33.0"/>
+      <arg name="second_robot_y_pos" value="-31.0"/>
+      <arg name="second_robot_z_pos" value=" 0.45"/>
+      <arg name="second_robot_yaw"   value=" 0.0"/> 
+  </include> -->
+
+<!-- LAUNCH TELEOPERATION SERVER
+  <include file="$(find payloads)/launch/teleop.launch" /> -->
+
+<!-- TASK TASKS DISPATCHER
+  <include file="$(find task_dispatcher)/launch/launch_dispatcher.launch">
+      <arg name="uavs" default="[UAV_1]"/>
+      <arg name="ugvs" default="[pioneer3at_1]"/>
+  </include> -->
+
+<!-- TASK EVENTS TRIGGER INTERFACE
+  <include file="$(find interfaces)/launch/events_trigger_interface.launch">
+      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+  </include> -->
+
+<!-- TASK COMMANDER INTERFACE
+  <include file="$(find interfaces)/launch/commander_interface.launch">
+      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+  </include> -->
+
+<!-- LAUNCH RVIZ
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
+
+  <master auto="start"/>
+  <param name="/use_sim_time" value="true"/> -->
+
+</launch>
