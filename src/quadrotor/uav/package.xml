@@ -1,4 +1,5 @@
-<package>
+<?xml version="1.0"?>
+<package format="2">
   <name>uav</name>
   <version>0.3.5</version>
   <description>hector_quadrotor_demo contains various launch files and needed dependencies for demonstration of the hector_quadrotor stack (indoor/outdoor flight in gazebo etc.)</description>
@@ -14,15 +15,7 @@
   <!-- Dependencies which this package needs to build itself. -->
   <buildtool_depend>catkin</buildtool_depend>
 
-  <!-- Dependencies needed to compile this package. -->
-
   <!-- Dependencies needed after this package is compiled. -->
-  <run_depend>hector_quadrotor_gazebo</run_depend>
-  <run_depend>hector_gazebo_worlds</run_depend>
-  <run_depend>hector_mapping</run_depend>
-  <run_depend>hector_geotiff</run_depend>
-  <run_depend>hector_trajectory_server</run_depend>
-
-  <!-- Dependencies needed only for running tests. -->
+  <depend>usar_gazebo</depend>
 
 </package>

@@ -4,7 +4,9 @@ project(hector_moveit_config)
 set (CMAKE_CXX_STANDARD 11)
 
 find_package(catkin REQUIRED COMPONENTS 
-            roscpp std_msgs hector_uav_msgs)
+   roscpp std_msgs 
+   hector_uav_msgs
+)
 
 
 catkin_package(CATKIN_DEPENDS roscpp std_msgs hector_uav_msgs)

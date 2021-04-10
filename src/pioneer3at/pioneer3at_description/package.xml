@@ -71,6 +71,7 @@
   <!-- When moved to format 2, this can be turned test_depend -->
   <build_depend>rostest</build_depend>
   <exec_depend>rostest</exec_depend>
+  <depend>usar_gazebo</depend>
 <!--
 
   <build_depend>gazebo_msgs</build_depend>
