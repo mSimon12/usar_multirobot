@@ -2,8 +2,8 @@
 
 <launch>
 
-   <!--Launch the world with the robots on Gazebo  -->	
-   <include file="$(find usar_gazebo)/launch/landslide.launch"/>
+   <!--Launch the world with the robots on Gazebo	
+   <include file="$(find usar_gazebo)/launch/landslide.launch"/>  -->
    <!--<include file="$(find usar_gazebo)/launch/post-disaster.launch"/> -->
 
 <!-- LAUNCH ROBOTS -->
@@ -159,8 +159,8 @@
       <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
   </include>
 
-<!-- LAUNCH RVIZ -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
+<!-- LAUNCH RVIZ
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/>  -->
 
   <master auto="start"/>
   <param name="/use_sim_time" value="true"/> 

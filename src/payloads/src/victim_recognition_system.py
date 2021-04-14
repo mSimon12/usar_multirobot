@@ -83,9 +83,9 @@ class VictimSensor(object):
         # Get position of the victims related to the robot position
         v_status = {}                                                                # Dictionary with the status of each victim and xyz position
         for v in self.__victims:
+            v_status[v] = {}
             v_status[v]['status'] = False
             try:
-                v_status[v] = {}
                 answer = self.__models_service(v, self.__robot_name)                        # Call the service to receive the victim position
                 v_status[v]['x_pos'] = answer.pose.position.x
                 v_status[v]['y_pos'] = answer.pose.position.y

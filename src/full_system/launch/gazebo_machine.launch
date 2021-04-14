@@ -159,10 +159,10 @@
       <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
   </include> -->
 
-<!-- LAUNCH RVIZ
+<!-- LAUNCH RVIZ -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
 
   <master auto="start"/>
-  <param name="/use_sim_time" value="true"/> -->
+  <param name="/use_sim_time" value="true"/> 
 
 </launch>
