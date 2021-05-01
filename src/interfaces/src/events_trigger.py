@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # General libs
 import os
@@ -31,7 +31,7 @@ class EventInterface(object):
     def __init__(self, robots_names, sm_path):
 
         # Set environment variable required for the Interface execution
-        os.environ["DISPLAY"]=":0"
+        # os.environ["DISPLAY"]=":0"
 
         # Events trace
         self.trace = pd.DataFrame(columns = ['robot', 'event', 'event_type', 'param', 'enabled_events', 'time'])

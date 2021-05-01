@@ -111,7 +111,7 @@
 	  <param name="GridGlobal/MinSize" type="string" value="100"/>
           <param name="GridGlobal/OccupancyThr" type="string" value="0.5"/>
 
-	  <param name="Rtabmap/DetectionRate" type="string" value="100"/>
+	  <param name="Rtabmap/DetectionRate" type="string" value="2"/>
  	  
           <param name="Grid/FromDepth" type="string" value="true"/>
 	  <param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>
