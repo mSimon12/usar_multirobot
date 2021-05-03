@@ -1,9 +1,9 @@
 // pioneer3at_1_SUP-bat_operation_modes
 digraph {
 	rankdir=LR
-	ALL_M [label=ALL_M color=black fillcolor=white shape=doublecircle style=filled]
+	ALL_M [label=ALL_M color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	NO_Mi [label=NO_Mi color=black fillcolor=white shape=circle style=filled]
-	VSV_RB_TELE [label=VSV_RB_TELE color=blue fillcolor=lightgrey shape=circle style=filled]
+	VSV_RB_TELE [label=VSV_RB_TELE color=black fillcolor=white shape=circle style=filled]
 	ALL_M -> ALL_M [label="st_app,
 st_exp,
 st_vsv,

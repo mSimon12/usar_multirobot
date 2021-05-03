@@ -305,6 +305,8 @@ class TaskManager(Thread):
             if self.events[e].is_controllable() and (e in self.current_status['enabled_events'].array[0]):
                     self.events_priority[e] = 2                     # Controllable and enabled event
         
+        rospy.loginfo("Events priorities: {}".format(self.events_priority))
+
 
     def run(self):
         '''
