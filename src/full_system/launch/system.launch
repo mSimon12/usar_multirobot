@@ -7,9 +7,9 @@
    <!--<include file="$(find usar_gazebo)/launch/post-disaster.launch"/> -->
 
 <!-- LAUNCH ROBOTS -->
-  <!-- Pioneer3AT 1 
-  <group ns="pioneer3at_1"> -->
-    <!-- Launch Robot Control Level 
+  <!-- Pioneer3AT 1 -->
+  <group ns="pioneer3at_1">
+    <!-- Launch Robot Control Level -->
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
       <arg name="xcoordinate" value="3.0"/>
@@ -18,14 +18,14 @@
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
-    </include> -->
+    </include>
 
-    <!-- Launch Task Control System
+    <!-- Launch Task Control System -->
     <include file="$(find supervisor)/launch/supervisor.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
       <arg name="robot_type" value="pioneer3at"/>
     </include>
-  </group>  -->
+  </group>
 
   <!-- Launch Pioneer3AT 2 -->
   <group ns="pioneer3at_2">
@@ -149,32 +149,24 @@
 <!-- LAUNCH TELEOPERATION SERVER
   <include file="$(find payloads)/launch/teleop.launch" />-->
 
-<!-- TASK TASKS DISPATCHER
+<!-- TASK TASKS DISPATCHER -->
   <include file="$(find task_dispatcher)/launch/launch_dispatcher.launch">
-<<<<<<< HEAD
       <arg name="uavs" default="[UAV_1, UAV_2]"/>
       <arg name="ugvs" default="[pioneer3at_1, pioneer3at_2]"/>
   </include>
-=======
-      <arg name="uavs" default="[UAV_1]"/>
-      <arg name="ugvs" default="[pioneer3at_1]"/>
-  </include> -->
->>>>>>> 8c52e83bbbe98a2e9698a6c6bfd1b0b35f1cd21f
+
+
 
 <!-- TASK EVENTS TRIGGER INTERFACE -->
   <include file="$(find interfaces)/launch/events_trigger_interface.launch">
       <arg name="robots" default="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/>
   </include>
 
-<!-- TASK COMMANDER INTERFACE
+<!-- TASK COMMANDER INTERFACE -->
   <include file="$(find interfaces)/launch/commander_interface.launch">
-<<<<<<< HEAD
       <arg name="robots" default="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/>
   </include>
-=======
-      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
-  </include> -->
->>>>>>> 8c52e83bbbe98a2e9698a6c6bfd1b0b35f1cd21f
+
 
 <!-- LAUNCH RVIZ  -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
