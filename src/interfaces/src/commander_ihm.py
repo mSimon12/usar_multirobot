@@ -25,7 +25,7 @@ class CommanderInterface(object):
     def __init__(self, robots_names):
 
         # Set environment variable required for the Interface execution
-        os.environ["DISPLAY"]=":0"
+        # os.environ["DISPLAY"]=":0"
 
         self.path = os.path.dirname(os.path.abspath(__file__))
 

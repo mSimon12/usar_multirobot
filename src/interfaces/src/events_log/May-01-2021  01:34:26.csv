@@ -1,0 +1,2 @@
+,robot,event,event_type,param,enabled_events,time
+1,pioneer3at_1,bat_L,uncontrollable,"(30.0,)","['st_app', 'bat_LL', 'bat_OK', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'rep_self_pos', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'on_vs', 'st_vsv']",01:34:58

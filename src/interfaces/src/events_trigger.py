@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # General libs
 import os
@@ -31,7 +31,7 @@ class EventInterface(object):
     def __init__(self, robots_names, sm_path):
 
         # Set environment variable required for the Interface execution
-        os.environ["DISPLAY"]=":0"
+        # os.environ["DISPLAY"]=":0"
 
         # Events trace
         self.trace = pd.DataFrame(columns = ['robot', 'event', 'event_type', 'param', 'enabled_events', 'time'])
@@ -155,6 +155,7 @@ class EventInterface(object):
                 event, m_values = self.models_window.Read(timeout=10)
                 if event in (None, 'Cancel'): 
                     self.models_window.Close()
+                    self.models_window = None
                 else:
                     values = {**values, **m_values}
 
@@ -247,11 +248,11 @@ class EventInterface(object):
                     pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
                     msg = events_message()
                     msg.event = ll_event
-                    if event == 'bat_OK':
+                    if (event == 'bat_OK') or (event == 'uav_bat_OK'):
                         msg.param.append(60.0)                                                      # At level = 60 the system consider bat_OK
-                    elif event == 'bat_L':
+                    elif (event == 'bat_L') or (event == 'uav_bat_L'):
                         msg.param.append(30.0)                                                      # At level = 30 the system consider bat_L
-                    elif event == 'bat_LL':
+                    elif (event == 'bat_LL') or (event == 'uav_bat_LL'):
                         msg.param.append(9.0)                                                       # At level = 9 the system consider bat_LL
 
                 elif 'failure' in ll_event:

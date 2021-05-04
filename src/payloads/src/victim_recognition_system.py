@@ -92,8 +92,8 @@ class VictimSensor(object):
                 v_status[v]['z_pos'] = answer.pose.position.z
 
                 # Find the distance between robot and victim
-                hip = (v_status[v]['x_pos']**2 + v_status[v]['y_pos']**2)**(1/2)
-                dist = (hip**2 + v_status[v]['z_pos']**2)**(1/2)
+                hip = (v_status[v]['x_pos']**2 + v_status[v]['y_pos']**2)**(0.5)
+                dist = (hip**2 + v_status[v]['z_pos']**2)**(0.5)
 
                 # Mark the victim as found if it is into the range
                 if dist < self.__sensor_range:

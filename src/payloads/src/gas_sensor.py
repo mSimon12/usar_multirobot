@@ -71,7 +71,7 @@ class GasSensor(object):
                     if self.__points_with_gas:
                         count = 0
                         for point in self.__points_with_gas:
-                            dist = ((self.__current_pose.x - point.x)**2 + (self.__current_pose.y - point.y)**2)**(1/2)
+                            dist = ((self.__current_pose.x - point.x)**2 + (self.__current_pose.y - point.y)**2)**(0.5)
                             if dist < self.__update_radius:
                                 break
                             else:
@@ -113,8 +113,8 @@ class GasSensor(object):
                 g_status[v]['z_pos'] = answer.pose.position.z
 
                 # Find the distance between robot and victim
-                hip = (g_status[v]['x_pos']**2 + g_status[v]['y_pos']**2)**(1/2)
-                dist = (hip**2 + g_status[v]['z_pos']**2)**(1/2)
+                hip = (g_status[v]['x_pos']**2 + g_status[v]['y_pos']**2)**(0.5)
+                dist = (hip**2 + g_status[v]['z_pos']**2)**(0.5)
 
                 # Mark the victim as found if it is into the range
                 if dist < self.__sensor_range:

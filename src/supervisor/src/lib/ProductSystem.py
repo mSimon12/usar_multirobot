@@ -86,6 +86,7 @@ class ProductSystem(Thread):
 
 		self.trace_pub = rospy.Publisher("/events_trigger_ihm_in", trace_events, queue_size=10)
 		rate = rospy.Rate(10)
+
 		while self.trace_pub.get_num_connections() < 1:
 			rate.sleep()
 
