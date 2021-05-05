@@ -1,0 +1,17 @@
+<mission>
+  <id>app</id>
+  <priority>4</priority>
+  <task>
+    <agent></agent>
+    <position>
+      <x>5.0</x>
+      <y>25.0</y>
+      <z>2.0</z>
+      <theta>0.0</theta>
+    </position>
+    <region/>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>approach</maneuver>
+  </task>
+</mission>

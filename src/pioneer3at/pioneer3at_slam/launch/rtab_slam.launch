@@ -102,7 +102,7 @@
 	  <param name="Vis/MinInliers" type="string" value="15"/>      <!-- 3D visual words minimum inliers to accept loop closure -->
 	  <param name="Vis/InlierDistance" type="string" value="0.1"/>    <!-- 3D visual words correspondence distance -->
 	  
-	  <param name="Rtabmap/TimeThr" type="string" value="700"/>
+	  <param name="Rtabmap/TimeThr" type="string" value="0"/>
 
 	  <param name="Mem/RehearsalSimilarity" type="string" value="0.30"/>
 
@@ -111,7 +111,7 @@
 	  <param name="GridGlobal/MinSize" type="string" value="100"/>
           <param name="GridGlobal/OccupancyThr" type="string" value="0.5"/>
 
-	  <param name="Rtabmap/DetectionRate" type="string" value="2"/>
+	  <param name="Rtabmap/DetectionRate" type="string" value="100"/>
  	  
           <param name="Grid/FromDepth" type="string" value="true"/>
 	  <param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>

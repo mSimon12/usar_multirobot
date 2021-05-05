@@ -1,0 +1,6 @@
+,time,robot,robot_status,task,task_status
+0,02:03:50,pioneer3at_2,busy,m2_0,executing
+1,02:03:54,pioneer3at_1,busy,approaches_0,executing
+2,02:04:36,pioneer3at_2,idle,m2_0,finished
+3,02:06:50,pioneer3at_1,idle,approaches_0,finished
+4,02:06:50,pioneer3at_1,busy,approaches_1,executing

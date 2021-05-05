@@ -65,13 +65,13 @@ class CommanderInterface(object):
                 [sg.Button('reset gas sensor', key = 'rst_gs', button_color = ('white', 'green'), disabled_button_color = ('white', 'red'), use_ttk_buttons=True, disabled= True, size = (30,1))]
             ], vertical_alignment= "top")],
             [sg.Frame('ROBOTS:',[
-                [sg.Table(values = [['','','']], size = (90,20), background_color='white', text_color='black', col_widths=[15,12,28,35], auto_size_columns=False,
+                [sg.Table(values = [['','','']], size = (90,10), background_color='white', text_color='black', col_widths=[15,12,28,35], auto_size_columns=False,
                           justification='left', key='robots_info', headings = ['robot', 'battery (%)', 'pose (m)', 'status'])],
             ])]
         ]
         
         # start the Window
-        self.window = sg.Window("COMMANDER IHM", size=(950,400),layout = self.main, resizable= True)
+        self.window = sg.Window("COMMANDER IHM", size=(1150,550),layout = self.main, resizable= True)
         ###############################################################################################
 
         self.last_time = {}
@@ -265,11 +265,11 @@ class CommanderInterface(object):
 
             elif event == 'Add':
                 add_layout = [
-                    [sg.Text('Mission ID:', size = (15,1)), sg.Input(key='m_id')],
-                    [sg.Text('Mission PRIORITY:', size = (15,1)), sg.Input(key='m_p')],
+                    [sg.Text('Mission ID:', size = (17,1)), sg.Input(key='m_id', size=(10,1))],
+                    [sg.Text('Mission PRIORITY:', size = (17,1)), sg.Input(key='m_p', size=(10,1))],
                     [sg.OK(), sg.Cancel()]
                 ]
-                add_window = sg.Window('NEW MISSION', layout = add_layout, size = (300,80))
+                add_window = sg.Window('NEW MISSION', layout = add_layout, size = (250,100))
                 add_event, add_values = add_window.Read()
                 add_window.Close()
 
@@ -332,7 +332,7 @@ class CommanderInterface(object):
                     sg.Button('/\\', key='task_up', size=(3,1), button_color=('white','purple')), 
                     sg.Button('\\/', key='task_down', size=(3,1), button_color=('white','purple'))]
                 ]
-                edit_mission_window = sg.Window('MISSION DETAILS', layout = edit_m_layout, size=(820,300), finalize = True, resizable= True)
+                edit_mission_window = sg.Window('MISSION DETAILS', layout = edit_m_layout, size=(1050,370), finalize = True, resizable= True)
 
                 if self.missions_details[selected_mission]:
                     edit_mission_window.Element('tasks').update(values = self.missions_details[selected_mission])
@@ -423,7 +423,7 @@ class CommanderInterface(object):
                         [sg.Text('Gas Sensor Status:', size = (21,1)), sg.InputCombo([False, True], default_value = 'False', key = 'gs_status')],
                         [sg.OK(), sg.Cancel()]
                     ]
-                    add_window = sg.Window('NEW TASK', layout = add_t_layout, size = (250,250), finalize=True)
+                    add_window = sg.Window('NEW TASK', layout = add_t_layout, size = (250,300), finalize=True)
                     
                     # ['sequence', 'maneuver', 'agent', 'position', 'region', 'victim sensor', 'gas sensor']
                     while True:

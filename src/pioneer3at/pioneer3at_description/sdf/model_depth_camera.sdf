@@ -38,7 +38,7 @@
       </visual>
     </link>
     <link name="right_front_wheel">
-      <pose>0.125 -0.201 -0.06 1.5707 0 0</pose>
+      <pose>0.125 -0.201 -0.06 0 0 0</pose>
 
       <inertial>
         <mass>1.5</mass>
@@ -79,7 +79,7 @@
       </visual>
     </link>
     <link name="left_front_wheel">
-      <pose>0.125 0.201 -0.06 1.5707 0 0</pose>
+      <pose>0.125 0.201 -0.06 0 0 0</pose>
 
       <inertial>
         <mass>1.5</mass>
@@ -120,7 +120,7 @@
       </visual>
     </link>
     <link name="right_rear_wheel">
-      <pose>-0.125 -0.201 -0.06 1.5707 0 0</pose>
+      <pose>-0.125 -0.201 -0.06 0 0 0</pose>
 
       <inertial>
         <mass>1.5</mass>
@@ -161,7 +161,7 @@
       </visual>
     </link>
     <link name="left_rear_wheel">
-      <pose>-0.125 0.201 -0.06 1.5707 0 0</pose>
+      <pose>-0.125 0.201 -0.06 0 0 0</pose>
 
       <inertial>
         <mass>1.5</mass>
@@ -293,7 +293,7 @@
           </image>
           <clip>
             <near>0.4</near>
-            <far>15</far>
+            <far>150</far>
           </clip>
         </camera>
 	<plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
