@@ -233,14 +233,9 @@ class TaskManager(Thread):
         elif (self.foundG) and (not self.foundG.next_event(states.values(), last_event)):
             self.foundV = None
 
-        print("\n\n")
-        print(states)
-        print("\n\n")
-
         ##### Select the task to be executed (the main_task or backup behaviors) #####
         # if self.main_task_id:
         g_var.manager_info_flag.acquire()
-        print("HERE")
         # BEHAVIOR 1 -> System on Critical state
         if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
                 if self.current_task != self.Abort:  
