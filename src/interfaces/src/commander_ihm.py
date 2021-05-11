@@ -104,16 +104,17 @@ class CommanderInterface(object):
         self.update_robot_info = True
 
         #### TOPICS PUBLISHERS
-        self.publishers = pd.DataFrame(columns = ['fail_monitor', 'vs', 'gs'])
+        self.publishers = pd.DataFrame(columns = ['fail_monitor', 'vs', 'gs', 'communication'])
         self.update_calls = False
         for r in self.robots:
+            com_pub = rospy.Publisher("/{}/ihm/out".format(r), events_message, queue_size = 10)
             f_pub = rospy.Publisher("/{}/failures_monitor/in".format(r), events_message, queue_size = 10)
             vs_pub = rospy.Publisher("/{}/victim_sensor/in".format(r), events_message, queue_size = 10)
             gs_pub = None
             if 'pioneer3at' in r:
                 gs_pub = rospy.Publisher("/{}/gas_sensor/in".format(r), events_message, queue_size = 10)
 
-            self.publishers.loc[r] = [f_pub, vs_pub, gs_pub]
+            self.publishers.loc[r] = [f_pub, vs_pub, gs_pub, com_pub]
     
 
     def poseCallback(self, odometry, robot):
@@ -250,9 +251,8 @@ class CommanderInterface(object):
                 for b in self.robots_buttons[values['robot_to_call']]:
                     self.window[b].update(disabled = not self.robots_buttons[values['robot_to_call']][b])
             elif event == 'tele':
-                msg.event = 'call_teleoperation'
-                self.publishers.loc[values['robot_to_call'],'fail_monitor'].publish(msg)
-                pass
+                msg.event = 'teleoperation_requisition'
+                self.publishers.loc[values['robot_to_call'],'communication'].publish(msg)
             elif event == 'rst_f':
                 msg.event = 'reset'
                 self.publishers.loc[values['robot_to_call'],'fail_monitor'].publish(msg)

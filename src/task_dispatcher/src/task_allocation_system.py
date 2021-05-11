@@ -113,7 +113,7 @@ class AllocationSystem(object):
             robots_info_me.release()
 
             # Require replanning and send tasks to robots
-            if not missions.empty:
+            if (not current_tasks.empty) and (not robots.empty):
                 self.allocate(robots, current_tasks)
 
             replan_flag.release()

@@ -1,6 +1,7 @@
 #!/usr/bin/env python2.7
 
 from threading import Thread, Condition
+import copy
 
 import roslib
 from math import sin, cos, pi
@@ -93,7 +94,7 @@ class approach(Maneuver):
         '''
 
         if self.state == 'IDLE':
-            self.msg = received_msg
+            self.msg = copy.deepcopy(received_msg)
 
             rospy.loginfo("Starting Approach!")
             # Save the assigned goal
@@ -174,7 +175,7 @@ class assessment(object):
         rospy.loginfo("Starting assessment!")
         
         if self.state == 'IDLE':
-            self.msg = received_msg
+            self.msg = copy.deepcopy(received_msg)
 
             # Save some variables
             self.region = region_to_explore                             # Save region being explored
@@ -275,7 +276,7 @@ class v_search(object):
     def execute(self, region_to_search = None, received_msg = None):
         
         if self.state == 'IDLE':
-            self.msg = received_msg
+            self.msg = copy.deepcopy(received_msg)
 
             rospy.loginfo("Starting v_search!")
             # Save some variables
@@ -378,7 +379,7 @@ class surroundings_verification(Maneuver):
         delta = (self.max_dist - self.min_dist)/(self.rounds*self.n_points)
         
         if self.state == 'IDLE':
-            self.msg = received_msg
+            self.msg = copy.deepcopy(received_msg)
             
             rospy.loginfo("Starting Surroundings Verification!")
             self.victim['id'] = victim_id
@@ -756,7 +757,7 @@ def maneuver_event(msg):
                 thread = Thread(target=search.execute, args=[msg.position, msg])
                 thread.start()                                                                   # Start v_search
             else:
-                rospy.logwarn("Wrong v_search parameters! Must have at least 3 vertices.")             # Missing parameters
+                rospy.logwarn("Wrong v_search parameters! Must have a initial vertice and size of square.")             # Missing parameters
         
         elif (msg.event == "suspend_v_search") and (search.state == 'EXE'):
             search.suspend()

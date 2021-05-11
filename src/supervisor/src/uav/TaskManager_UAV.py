@@ -164,6 +164,9 @@ class TaskManager(Thread):
                 g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'finished'
                 g_var.manager_info['status'] = 'idle'
+
+                print("\n\nTask finished\n\n")
+
                 # Reset task
                 self.main_task = None
                 self.main_task_id = None
@@ -304,8 +307,6 @@ class TaskManager(Thread):
         for e in next_task_events:
             if self.events[e].is_controllable() and (e in self.current_status['enabled_events'].array[0]):
                     self.events_priority[e] = 2                     # Controllable and enabled event
-        
-        rospy.loginfo("Events priorities: {}".format(self.events_priority))
 
 
     def run(self):

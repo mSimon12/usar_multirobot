@@ -140,8 +140,11 @@
       <arg name="second_robot_yaw"   value=" 0.0"/> 
   </include> -->
 
-<!-- LAUNCH TELEOPERATION SERVER
-  <include file="$(find payloads)/launch/teleop.launch" />-->
+<!-- LAUNCH TELEOPERATION SERVER -->
+  <include file="$(find payloads)/launch/teleop.launch">
+     <arg name="teleop_type" default="kbr"/>
+  </include>
+
 
 <!-- TASK TASKS DISPATCHER -->
   <include file="$(find task_dispatcher)/launch/launch_dispatcher.launch">

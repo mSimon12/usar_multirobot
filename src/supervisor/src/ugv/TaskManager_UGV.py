@@ -231,7 +231,7 @@ class TaskManager(Thread):
         if (self.foundV) and (not self.foundV.next_event(states.values(), last_event)):
             self.foundV = None
         elif (self.foundG) and (not self.foundG.next_event(states.values(), last_event)):
-            self.foundV = None
+            self.foundG = None
 
         ##### Select the task to be executed (the main_task or backup behaviors) #####
         # if self.main_task_id:

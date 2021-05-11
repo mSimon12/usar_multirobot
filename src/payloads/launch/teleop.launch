@@ -1,12 +1,17 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="teleop_type" default="joy"/>	<!-- joy, kbr, fake-->
+
   <arg name="joy_dev" default="/dev/input/js0" />
   
-  <!-- joy -->
-  <node name="joy_node" pkg="joy" type="joy_node" >
+  <!-- Joystick control -->
+  <node name="joy_node" pkg="joy" type="joy_node" if="$(eval teleop_type == 'joy')">
     <param name="dev" value="$(arg joy_dev)" />
     <param name="deadzone" value="0.3" />
     <param name="autorepeat_rate" value="5" />
   </node>
+
+  <!-- Keyboard control -->
+  <node name="keyboard" pkg="payloads" type="kbr_teleop.py" if="$(eval teleop_type == 'kbr')" output="screen"/>
 
 </launch>
