@@ -1,6 +1,0 @@
-,time,robot,robot_status,task,task_status
-0,00:16:31,pioneer3at_1,busy,m4_0,executing
-1,00:16:56,UAV_1,busy,m2_0,executing
-2,00:17:20,UAV_1,idle,m2_0,finished
-3,00:17:20,UAV_1,busy,m2_1,executing
-4,00:18:05,pioneer3at_1,busy,m4_0,suspended

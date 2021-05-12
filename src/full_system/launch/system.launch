@@ -142,24 +142,24 @@
 
 <!-- LAUNCH TELEOPERATION SERVER -->
   <include file="$(find payloads)/launch/teleop.launch">
-     <arg name="teleop_type" default="kbr"/>
+     <arg name="teleop_type" value="kbr"/>
   </include>
 
 
 <!-- TASK TASKS DISPATCHER -->
   <include file="$(find task_dispatcher)/launch/launch_dispatcher.launch">
-      <arg name="uavs" default="[UAV_1]"/>
-      <arg name="ugvs" default="[pioneer3at_1]"/>
+      <arg name="uavs" value="[UAV_1]"/>
+      <arg name="ugvs" value="[pioneer3at_1]"/>
   </include>
 
 <!-- TASK EVENTS TRIGGER INTERFACE -->
   <include file="$(find interfaces)/launch/events_trigger_interface.launch">
-      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+      <arg name="robots" value="[pioneer3at_1, UAV_1]"/>
   </include>
 
 <!-- TASK COMMANDER INTERFACE -->
   <include file="$(find interfaces)/launch/commander_interface.launch">
-      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+      <arg name="robots" value="[pioneer3at_1, UAV_1]"/>
   </include>
 
 <!-- LAUNCH RVIZ  -->
@@ -167,6 +167,12 @@
 
   <master auto="start"/>
   <param name="/use_sim_time" value="true"/>
+
+<!--MONITOR -->
+  <include file="$(find full_system)/launch/monitor.launch">
+      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+      <arg name="sample_period" value="10"/>
+  </include>
 
 <!-- LAUNCH RQT
   <node name="rqt_topic" pkg="rqt_topic" type="rqt_topic" output="screen" /> 

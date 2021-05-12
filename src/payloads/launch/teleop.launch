@@ -12,6 +12,6 @@
   </node>
 
   <!-- Keyboard control -->
-  <node name="keyboard" pkg="payloads" type="kbr_teleop.py" if="$(eval teleop_type == 'kbr')" output="screen"/>
+  <node name="keyboard" pkg="payloads" type="kbr_teleop.py" if="$(eval teleop_type == 'kbr')" output="log"/>
 
 </launch>

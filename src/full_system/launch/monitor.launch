@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<launch>
+   <arg name="robots" default="[]"/>
+   <arg name="sample_period" default="10"/>
+   <rosparam param="robots" subst_value="True">$(arg robots)</rosparam>
+
+  <!-- Launch events interace -->
+  <node name="system_monitor" pkg="full_system" type="validation.py" output="screen">
+	<param name="sample_period" value="$(arg sample_period)"/>
+  </node>
+
+
+</launch>
