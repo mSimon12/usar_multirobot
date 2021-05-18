@@ -1,16 +1,16 @@
 <mission>
-  <id>t</id>
-  <priority>5</priority>
+  <id>external1</id>
+  <priority>0</priority>
   <task>
-    <agent>UAV_1</agent>
+    <agent></agent>
     <position/>
     <region>
-      <origin_x>5.0</origin_x>
-      <origin_y>5.0</origin_y>
+      <origin_x>25.0</origin_x>
+      <origin_y>18.0</origin_y>
       <x_size>10.0</x_size>
       <y_size>10.0</y_size>
     </region>
-    <vs>False</vs>
+    <vs>True</vs>
     <gs>False</gs>
     <maneuver>search</maneuver>
   </task>

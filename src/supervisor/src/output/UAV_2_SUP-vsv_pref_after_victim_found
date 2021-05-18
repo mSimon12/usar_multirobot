@@ -1,0 +1,16 @@
+// UAV_2_SUP-vsv_pref_after_victim_found
+digraph {
+	rankdir=LR
+	ALL_M [label=ALL_M color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	VSV_PREF [label=VSV_PREF color=black fillcolor=white shape=circle style=filled]
+	ALL_M -> ALL_M [label="uav_st_app,
+uav_st_assess,
+uav_st_v_search,
+uav_st_vsv,
+uav_rsm_app,
+uav_rsm_assess,
+uav_rsm_v_search" fontcolor=blue]
+	ALL_M -> VSV_PREF [label=uav_victim_found fontcolor=red style=dashed]
+	VSV_PREF -> ALL_M [label=uav_st_vsv fontcolor=blue]
+	VSV_PREF -> VSV_PREF [label=uav_victim_found fontcolor=red style=dashed]
+}

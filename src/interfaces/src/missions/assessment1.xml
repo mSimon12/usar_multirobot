@@ -1,0 +1,17 @@
+<mission>
+  <id>assessment1</id>
+  <priority>1</priority>
+  <task>
+    <agent></agent>
+    <position/>
+    <region>
+      <origin_x>2.0</origin_x>
+      <origin_y>2.0</origin_y>
+      <x_size>33.0</x_size>
+      <y_size>38.0</y_size>
+    </region>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>assessment</maneuver>
+  </task>
+</mission>

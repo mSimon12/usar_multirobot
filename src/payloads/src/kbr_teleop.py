@@ -45,8 +45,7 @@ if __name__=="__main__":
 
     rospy.init_node("keyboard", anonymous=False)           # Initialize keyboard node
 
-    speed = 1.0
-    key_timeout = 0.1
+    key_timeout = 0.01
 
     joy_pub = rospy.Publisher('/joy', Joy, queue_size=10)
     joy_msg = Joy()

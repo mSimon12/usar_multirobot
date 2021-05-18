@@ -1,0 +1,20 @@
+// UAV_2_SUP-teleoperation_pref_and_start_conditions
+digraph {
+	rankdir=LR
+	AUTO [label=AUTO color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	TELE [label=TELE color=black fillcolor=white shape=circle style=filled]
+	AUTO -> AUTO [label="uav_st_app,
+uav_st_assess,
+uav_st_v_search,
+uav_st_vsv,
+uav_st_rb,
+uav_rsm_app,
+uav_rsm_assess,
+uav_rsm_v_search,
+uav_rsm_vsv,
+uav_rsm_rb" fontcolor=blue]
+	AUTO -> TELE [label=uav_req_assist fontcolor=blue]
+	AUTO -> TELE [label=uav_call_tele fontcolor=red style=dashed]
+	TELE -> AUTO [label=uav_st_tele fontcolor=blue]
+	TELE -> TELE [label=uav_call_tele fontcolor=red style=dashed]
+}

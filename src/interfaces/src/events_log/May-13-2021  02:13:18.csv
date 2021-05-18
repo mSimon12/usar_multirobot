@@ -1,0 +1,3 @@
+,robot,event,event_type,param,enabled_events,time
+1,pioneer3at_2,on_vs,controllable,(),"['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'rep_self_pos', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'off_vs', 'victim_found', 'er_vs', 'st_vsv']",02:14:00
+2,pioneer3at_2,st_app,controllable,"(16.0, 16.0, 0.699999988079071)","['er_app', 'sus_app', 'end_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'rep_self_pos', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'off_vs', 'victim_found', 'er_vs', 'st_vsv']",02:14:03

@@ -10,6 +10,7 @@ from threading import Condition
 import rospy
 from interfaces.msg import trace_events
 from system_msgs.msg import abstractions
+from rosgraph_msgs.msg import Clock
 
 MANEUVERS_START = {
     'st_app' : 'approach',
@@ -40,8 +41,10 @@ class Validation(object):
         self.robots = robots_names
         self.samples_period = period 
         self.filename = filename
+        self.time = 0
 
         self.new_sample_flag = Condition()
+        self.time_me = Condition()
 
         # Defines collumns names related to desired informations
         cols = ['allocated_robots', 'available_robots', 'teleoperations']
@@ -72,7 +75,12 @@ class Validation(object):
             rospy.Subscriber("/{}/events_abstractions".format(r), abstractions, self.abs_cbk, r)
         
         rospy.Subscriber("/events_trigger_ihm_in", trace_events, self.trace_cbk)
+        rospy.Subscriber("/clock", Clock, self.time_update)
 
+    def time_update(self, msg):
+        self.time_me.acquire()
+        self.time = msg.clock.secs
+        self.time_me.release()
 
     def abs_cbk(self, msg, robot):
         '''
@@ -143,7 +151,11 @@ class Validation(object):
             for r in self.robots:
                 sample.append(self.r_cur_task[r])                       # robot current task
                 sample.append(self.robots_counter[r])                   # robot tasks counter
-            self.samples.loc[time.strftime("%H:%M:%S")] = sample
+            
+            self.time_me.acquire()
+            # self.samples.loc[time.strftime("%H:%M:%S")] = sample
+            self.samples.loc[self.time] = sample
+            self.time_me.release()
 
             # print(self.samples)
             self.samples.to_csv(self.filename)

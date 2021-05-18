@@ -27,7 +27,7 @@
     </include>
   </group> 
 
-  <!-- Launch Pioneer3AT 2 
+  <!-- Launch Pioneer3AT 2 --> 
   <group ns="pioneer3at_2">
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_2"/>
@@ -37,13 +37,14 @@
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
       <arg name="yaw" value="0.0"/>
-    </include>--> 
+    </include>
 
-    <!--Launch Task Control System
+    <!--Launch Task Control System --> 
     <include file="$(find supervisor)/launch/supervisor.launch">
-      <arg name="robot_name" value="pioneer3at_1"/>
-    </include> --> 
-  <!--</group>-->
+      <arg name="robot_name" value="pioneer3at_2"/>
+      <arg name="robot_type" value="pioneer3at"/>
+    </include> 
+  </group>
 
 
   <!-- Spawn simulated quadrotor uav 1 -->
@@ -62,15 +63,23 @@
     </include>
   </group>
 
-  <!-- Spawn simulated quadrotor uav 2
+
+  <!-- Spawn simulated quadrotor uav 2 -->
   <group ns="UAV_2">
     <include file="$(find uav)/launch/UAV.launch">
-      <arg name="drone_name" default="UAV_2"/>
+      <arg name="drone_name" value="UAV_2"/>
       <arg name="x" value="1.0"/>
       <arg name="y" value="3.0"/>
       <arg name="z" value="0.7"/> 
     </include>
-  </group> -->
+
+    <!-- Launch Task Control System -->
+    <include file="$(find supervisor)/launch/supervisor.launch">
+      <arg name="robot_name" value="UAV_2"/>
+      <arg name="robot_type" value="uav"/>
+    </include>
+  </group>
+
 
   <!-- Launch Pioneer2DX 1 
   <group ns="pioneer2dx_1">
@@ -148,18 +157,18 @@
 
 <!-- TASK TASKS DISPATCHER -->
   <include file="$(find task_dispatcher)/launch/launch_dispatcher.launch">
-      <arg name="uavs" value="[UAV_1]"/>
-      <arg name="ugvs" value="[pioneer3at_1]"/>
+      <arg name="uavs" value="[UAV_1,UAV_2]"/>
+      <arg name="ugvs" value="[pioneer3at_1,pioneer3at_2]"/>
   </include>
 
 <!-- TASK EVENTS TRIGGER INTERFACE -->
   <include file="$(find interfaces)/launch/events_trigger_interface.launch">
-      <arg name="robots" value="[pioneer3at_1, UAV_1]"/>
+      <arg name="robots" value="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/>
   </include>
 
 <!-- TASK COMMANDER INTERFACE -->
   <include file="$(find interfaces)/launch/commander_interface.launch">
-      <arg name="robots" value="[pioneer3at_1, UAV_1]"/>
+      <arg name="robots" value="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/>
   </include>
 
 <!-- LAUNCH RVIZ  -->
@@ -170,7 +179,7 @@
 
 <!--MONITOR -->
   <include file="$(find full_system)/launch/monitor.launch">
-      <arg name="robots" default="[pioneer3at_1, UAV_1]"/>
+      <arg name="robots" default="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/>
       <arg name="sample_period" value="10"/>
   </include>
 

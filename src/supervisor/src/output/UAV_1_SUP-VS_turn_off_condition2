@@ -1,8 +1,8 @@
 // UAV_1_SUP-VS_turn_off_condition2
 digraph {
 	rankdir=LR
-	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	Mi_ON [label=Mi_ON color=black fillcolor=white shape=circle style=filled]
+	Mi_OFF [label=Mi_OFF color=black fillcolor=white shape=doublecircle style=filled]
+	Mi_ON [label=Mi_ON color=blue fillcolor=lightgrey shape=circle style=filled]
 	Mi_OFF -> Mi_OFF [label=uav_off_vs fontcolor=blue]
 	Mi_OFF -> Mi_OFF [label="uav_end_safe_land,
 uav_er_safe_land" fontcolor=red style=dashed]

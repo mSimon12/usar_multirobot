@@ -480,8 +480,10 @@ class teleoperation(object):
             if self.current_ang_speed < 0.4:
                 self.current_ang_speed = 0.4
 
-        print("\n\nSPEED: {}".format(self.current_x_speed))
-        print("ANGULAR SPEED: {}".format(self.current_ang_speed))
+        if any(msg.buttons[4:8]):
+            print("\n\nSPEED: {}".format(self.current_x_speed))
+            print("ANGULAR SPEED: {}".format(self.current_ang_speed))
+        
 
         if msg.buttons[9]:
             # Teleoperation ended

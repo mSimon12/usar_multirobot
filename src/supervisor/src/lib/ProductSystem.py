@@ -172,6 +172,8 @@ class ProductSystem(Thread):
 				if type(p) == tuple:
 					for point in p:
 						trace_msg.param.append(float(point))
+				elif type(p) == str:
+					pass
 				else:
 					trace_msg.param.append(float(p))
 
