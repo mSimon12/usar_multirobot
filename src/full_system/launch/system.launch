@@ -172,14 +172,14 @@
   </include>
 
 <!-- LAUNCH RVIZ  -->
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/multi_slam.rviz"/> 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find full_system)/rviz/simple.rviz"/>	 <!-- multi_slam, simple --> 
 
   <master auto="start"/>
   <param name="/use_sim_time" value="true"/>
 
 <!--MONITOR -->
   <include file="$(find full_system)/launch/monitor.launch">
-      <arg name="robots" default="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/>
+      <arg name="robots" default="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/> 
       <arg name="sample_period" value="10"/>
   </include>
 

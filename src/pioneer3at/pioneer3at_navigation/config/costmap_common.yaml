@@ -7,7 +7,7 @@ footprint_padding: 0.01
 
 robot_base_frame: base_link
 
-update_frequency: 5.0
+update_frequency: 10.0
 publish_frequency: 3.0
 
 publish_cost_grid_pc: true
@@ -44,7 +44,8 @@ obstacles_layer:
     max_obstacle_height: 50.0
 
 inflation:
-    inflation_radius: 1.0 # Safe distance from obstacles
+    inflation_radius: 0.7
+    cost_scaling_factor: 1.0
 
 recovery_behaviors:
   - name: 'conservative_reset'

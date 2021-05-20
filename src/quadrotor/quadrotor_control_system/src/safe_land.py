@@ -90,6 +90,10 @@ class SafeLand(object):
         while not (state in [GoalStatus.SUCCEEDED, GoalStatus.ABORTED]): 
             # print(self.point_to_go)
 
+            if self.land_server.is_preempt_requested():
+                self.land_server.set_preempted(self.server_result)
+                return
+
             self.trajectory_client.send_goal(self.point_to_go)
             self.trajectory_client.wait_for_result()                                                # Wait for the result
             state = self.trajectory_client.get_state()                                              # Get the state of the action

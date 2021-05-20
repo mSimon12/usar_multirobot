@@ -101,7 +101,8 @@ class TaskManager(Thread):
                 g_var.manager_info['status'] = 'idle'
                 g_var.manager_info_flag.notify()
                 g_var.manager_info_flag.release()
-            self.main_task = tasks.AbortM()                                    # Select abort as current task
+            self.Abort.restart()
+            self.main_task = self.Abort                                         # Select abort as current task
             self.main_task_id = None
 
         if valid_task:
@@ -213,6 +214,9 @@ class TaskManager(Thread):
         if (self.foundV) and (not self.foundV.next_event(states.values(), last_event)):
             self.foundV = None
 
+        if (self.main_task == self.Abort) and (self.main_task.next_event(states.values(), last_event, param)):
+            self.main_task = None
+
         ##### Select the task to be executed (the main_task or backup behaviors) #####
         # if self.main_task_id:
         g_var.manager_info_flag.acquire()
@@ -257,9 +261,10 @@ class TaskManager(Thread):
                         # BEHAVIOR 5 -> report victim pose and execute VSV
                         if self.foundV:        
                             self.current_task = self.foundV  
-                            g_var.manager_info['status'] = 'busy'
+                            g_var.manager_info['status'] = 'unable'
                             if self.main_task_id:
-                                g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
+                                g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                                self.main_task = None
                         else:
                             # BEHAVIOR 6 -> execute the task assigned by the Task Alocator
                             if self.main_task:
@@ -274,6 +279,9 @@ class TaskManager(Thread):
                                 self.current_task = None
                                 g_var.manager_info['status'] = 'idle'
         
+        print("\n\n\nTELEOPERATION ENDED\n\n")
+        print(self.current_task)
+
         # Verify if the current task can be executed due to Sensor ERRORS
         if self.current_task and (states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()):
             

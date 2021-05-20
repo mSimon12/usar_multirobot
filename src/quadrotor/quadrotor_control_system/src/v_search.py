@@ -55,6 +55,13 @@ class V_search(object):
         self.search_server.start()
 
 
+    def trajectory_feed(self,msg):
+        '''
+            Verifies preemption requisitions
+        '''
+        if self.search_server.is_preempt_requested():
+            self.trajectory_client.cancel_goal()
+
     def searchCallback(self, search_area):
         '''
             Execute a search for vitims into the defined area
@@ -103,7 +110,7 @@ class V_search(object):
             self.next_point.goal.position.z = self.odometry.position.z + h_error        # Desired z position
             self.odometry_me.release()
 
-            self.trajectory_client.send_goal(self.next_point)
+            self.trajectory_client.send_goal(self.next_point, feedback_cb = self.trajectory_feed)
             self.trajectory_client.wait_for_result()                                                # Wait for the result
             result = self.trajectory_client.get_state()                                             # Get the state of the action
             # print(result)

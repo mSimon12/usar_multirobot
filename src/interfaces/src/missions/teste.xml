@@ -1,0 +1,17 @@
+<mission>
+  <id>teste</id>
+  <priority>6</priority>
+  <task>
+    <agent></agent>
+    <position>
+      <x>50.0</x>
+      <y>5.0</y>
+      <z>3.0</z>
+      <theta>3.14</theta>
+    </position>
+    <region/>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>approach</maneuver>
+  </task>
+</mission>

@@ -122,7 +122,9 @@ class DFS(object):
 
         # Increase cost due to replacing current task of the robot
         if self.robots.loc[robot,'current_task_id']:
-            if self.robots.loc[robot,'current_task_id'] in self.tasks.index:
+            if self.robots.loc[robot,'current_task_id'] == task:
+                cost -= 1   #Reduce cost to maintain the current robot executing the task
+            elif self.robots.loc[robot,'current_task_id'] in self.tasks.index:
                 cost += (10 - self.tasks.loc[self.robots.loc[robot,'current_task_id'],'priority']) * WEIGHTS[1] 
 
         # Increase cost due to batery level

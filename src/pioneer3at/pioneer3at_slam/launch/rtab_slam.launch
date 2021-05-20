@@ -108,14 +108,14 @@
 
 	  <param name="Reg/Force3DoF" type="string" value="true"/>
 	  
-	  <param name="GridGlobal/MinSize" type="string" value="100"/>
+	  <param name="GridGlobal/MinSize" type="string" value="150"/>
           <param name="GridGlobal/OccupancyThr" type="string" value="0.5"/>
 
 	  <param name="Rtabmap/DetectionRate" type="string" value="2"/>
  	  
           <param name="Grid/FromDepth" type="string" value="true"/>
 	  <param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>
-	  <param name="Grid/MaxGroundAngle" type="string" value="60.0"/>
+	  <param name="Grid/MaxGroundAngle" type="string" value="45.0"/>
 	  <param name="Grid/RayTracing" type="string" value="true"/>
 
 	  <!-- localization mode -->

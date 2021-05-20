@@ -87,6 +87,14 @@ class Explore(object):
         self.odometry_me.release()
 
 
+    def trajectory_feed(self,msg):
+        '''
+            Verifies preemption requisitions
+        '''
+        print("\n\n\nASSESSMENT FEEDBACK")
+        if self.exploration_server.is_preempt_requested():
+            self.trajectory_client.cancel_goal()
+
     def exploreCallback(self,pose):
         '''
             Execute a loop looking for frontiers and moving to points unvisited into the defined area
@@ -112,7 +120,7 @@ class Explore(object):
             self.server_result.last_pose = self.odometry
             self.server_feedback.current_pose = self.odometry
             self.odometry_me.release()
-
+            
             if self.exploration_server.is_preempt_requested():
                 self.exploration_server.set_preempted(self.server_result)
                 return
@@ -128,7 +136,7 @@ class Explore(object):
             self.next_point.goal.position.z = self.odometry.position.z + h_error        # Desired z position
             self.odometry_me.release()
 
-            self.trajectory_client.send_goal(self.next_point)
+            self.trajectory_client.send_goal(self.next_point, feedback_cb = self.trajectory_feed)
             self.trajectory_client.wait_for_result()                                                # Wait for the result
             result = self.trajectory_client.get_state()                                             # Get the state of the action
             # print(result)

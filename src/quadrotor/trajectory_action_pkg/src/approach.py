@@ -250,6 +250,7 @@ class Approach(object):
                     return 'aborted'
                 elif result == GoalStatus.PREEMPTED:
                     return 'replan'
+                    
                 last_pose = pose
                 self.server_feedback.current_pose = self.odometry
                 self.trajectory_server.publish_feedback(self.server_feedback)

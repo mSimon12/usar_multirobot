@@ -267,9 +267,10 @@ class TaskManager(Thread):
                     # BEHAVIOR 4 -> report victim pose and execute VSV
                     if self.foundV:        
                         self.current_task = self.foundV  
-                        g_var.manager_info['status'] = 'busy'
+                        g_var.manager_info['status'] = 'unable'
                         if self.main_task_id:
                             g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
+                            self.main_task = None
                     # BEHAVIOR 5 -> report gas leak position                           
                     elif self.foundG:            
                         self.current_task = self.foundG

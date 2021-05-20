@@ -1,0 +1,17 @@
+<mission>
+  <id>app</id>
+  <priority>3</priority>
+  <task>
+    <agent>UAV_2</agent>
+    <position>
+      <x>10.0</x>
+      <y>10.0</y>
+      <z>2.0</z>
+      <theta>2.0</theta>
+    </position>
+    <region/>
+    <vs>False</vs>
+    <gs></gs>
+    <maneuver>approach</maneuver>
+  </task>
+</mission>

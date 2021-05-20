@@ -286,11 +286,11 @@ class surroundings_verification(Maneuver):
 
             # Define points around the victim
             theta_step = 2*pi/self.n_points                                                           # Theta dist between points
-            self.points.append([victim_pose.x, victim_pose.y - self.safe_dist, 1.57])                 # First point to visit
+            self.points.append([self.victim['x'], self.victim['y']- self.safe_dist, 1.57])                 # First point to visit
             
             for i in range(1,self.n_points):                                                         
-                self.points.append([victim_pose.x + self.safe_dist*sin(i*theta_step), 
-                    victim_pose.y - self.safe_dist*cos(i*theta_step), 1.57 + i*theta_step])
+                self.points.append([self.victim['x'] + self.safe_dist*sin(i*theta_step), 
+                    self.victim['y']- self.safe_dist*cos(i*theta_step), 1.57 + i*theta_step])
 
         self.state = 'EXE'                                                                            # Set EXE state
 

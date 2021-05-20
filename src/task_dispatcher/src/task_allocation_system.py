@@ -94,6 +94,10 @@ class AllocationSystem(object):
             replan_flag.acquire()
             replan_flag.wait()
 
+            
+            print("\n\n\nREPLAN: ")
+            print(robots_info)
+
             # print("\n\nMISSION TASKS:")
             # print("{}\n\n".format(missions))
 
@@ -197,7 +201,7 @@ class AllocationSystem(object):
 
         ## Abort tasks of unallocated robots
         for r in robots_info.index:
-            if (not [t for t in tasks_node.getValue() if t[1] == r]) and (robots_info.loc[r,'current_task_id']):
+            if (not tasks_node) or (not [t for t in tasks_node.getValue() if t[1] == r]) and (robots_info.loc[r,'current_task_id']):
                 # Send empty message
                 task_pub = rospy.Publisher("/{}/task".format(r),task_message, queue_size=10)
                 task_msg = task_message()

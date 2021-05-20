@@ -642,7 +642,7 @@ class teleoperation(object):
                 self.current_ang_speed = 0.4
   
         if any(msg.buttons[4:8]):
-            print("\n\nSPEED: {}".format(self.current_x_speed))
+            print("\n\nSPEED: {}".format(self.current_speed))
             print("ANGULAR SPEED: {}".format(self.current_ang_speed))
 
         if msg.buttons[9]:
@@ -695,6 +695,11 @@ class safe_land(object):
         rospy.loginfo("Reseting Safe Land!")
         self.state = 'IDLE'
 
+    def erro(self):
+        rospy.loginfo("Safe Land Erro!")
+        self.state = 'ERROR'                                                # Set ERROR state
+        self._land_client.cancel_goal()                                # Cancel the motion of the robot
+
 
 ########################################################################
 ##### Maneuvers events callback ########################################
@@ -739,13 +744,13 @@ def maneuver_event(msg):
         elif (msg.event == "suspend_assessment") and (assess.state == 'EXE'):
             assess.suspend()
         elif (msg.event == "resume_assessment") and (assess.state == 'SUS'):
-            thread = Thread(target=assess.execute)
+            thread = Thread(target=assess.resume)
             thread.start()
         elif (msg.event == "reset_assessment") and (assess.state =='ERROR'):
             assess.reset()
         elif (msg.event == "abort_assessment") and (assess.state == 'SUS'):
             assess.abort()
-        elif (msg.event == "assessment_error") and (app.state in ['SUS','EXE']):
+        elif (msg.event == "assessment_error") and (assess.state in ['SUS','EXE']):
             assess.erro()
         else:
             rospy.logwarn("Command not allowed!")
@@ -763,13 +768,13 @@ def maneuver_event(msg):
         elif (msg.event == "suspend_v_search") and (search.state == 'EXE'):
             search.suspend()
         elif (msg.event == "resume_v_search") and (search.state == 'SUS'):
-            thread = Thread(target=search.execute)
+            thread = Thread(target=search.resume)
             thread.start()
         elif (msg.event == "reset_v_search") and (search.state =='ERROR'):
             search.reset()
         elif (msg.event == "abort_v_search") and (search.state == 'SUS'):
             search.abort()
-        elif (msg.event == "v_search_error") and (app.state in ['SUS','EXE']):
+        elif (msg.event == "v_search_error") and (search.state in ['SUS','EXE']):
             search.erro()
         else:
             rospy.logwarn("Command not allowed!")
@@ -785,13 +790,13 @@ def maneuver_event(msg):
         elif (msg.event == "suspend_verification") and (vsv.state == 'EXE'):
             vsv.suspend()
         elif (msg.event == "resume_verification") and (vsv.state == 'SUS'):
-            thread = Thread(target=vsv.execute)
+            thread = Thread(target=vsv.resume)
             thread.start()
         elif (msg.event == "reset_verification") and (vsv.state =='ERROR'):
             vsv.reset()
         elif (msg.event == "abort_verification") and (vsv.state == 'SUS'):
             vsv.abort()
-        elif (msg.event == "verification_error") and (app.state in ['SUS','EXE']):
+        elif (msg.event == "verification_error") and (vsv.state in ['SUS','EXE']):
             vsv.erro()
         else:
             rospy.logwarn("Command not allowed!")
@@ -804,13 +809,13 @@ def maneuver_event(msg):
         elif (msg.event == "suspend_return") and (rb.state == 'EXE'):
             rb.suspend()
         elif (msg.event == "resume_return") and (rb.state == 'SUS'):
-            thread = Thread(target=rb.execute)
+            thread = Thread(target=rb.resume)
             thread.start()
         elif (msg.event == "reset_return") and (rb.state =='ERROR'):
             rb.reset()
         elif (msg.event == "abort_return") and (rb.state == 'SUS'):
             rb.abort()
-        elif (msg.event == "return_error") and (app.state in ['SUS','EXE']):
+        elif (msg.event == "return_error") and (rb.state in ['SUS','EXE']):
             rb.erro()
         else:
             rospy.logwarn("Command not allowed!")
@@ -838,6 +843,9 @@ def maneuver_event(msg):
             thread.start()                                                                      # Start safe_land
         elif (msg.event == "reset_safe_land") and (land.state == 'ERROR'):
             land.reset()
+        elif (msg.event == "safe_land_error") and (land.state == 'EXE'):
+            # Teleoperation ended
+            land.error()    
         else:
             rospy.logwarn("Command not allowed!")
 
