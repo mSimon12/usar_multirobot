@@ -131,9 +131,9 @@
     <!-- Surroundings Verification parameters --> 
     <arg name="vsv_min_dist" value="1.0"/>
     <arg name="vsv_max_dist" value="5.0"/>
-    <arg name="vsv_rounds" value="2"/>
-    <arg name="vsv_round_points" value="8"/>
-    <arg name="vsv_height" value="3.0"/>
+    <arg name="vsv_rounds" value="1"/>
+    <arg name="vsv_round_points" value="4"/>
+    <arg name="vsv_height" value="2.0"/>
   </include>
 
 </launch>

@@ -7,5 +7,5 @@
    <param name="robot_name" type="str" value="$(arg robot_name)"/>
    <param name="height" type="str" value="$(arg height)"/> 
 
-   <node name="assessment_server" pkg="quadrotor_control_system" type="assessment.py" output="screen"/>
+   <node name="assessment_server" pkg="quadrotor_control_system" type="assessment.py" output="log"/>
 </launch>	

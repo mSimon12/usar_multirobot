@@ -12,6 +12,6 @@
    <param name="ycoordinate" value="$(arg ycoordinate)"/>
    <param name="vsv_safe_dist" value="$(arg vsv_safe_dist)"/>
    <param name="vsv_n_points" value="$(arg vsv_n_points)"/>
-   <node name="maneuvers" pkg="pioneer3at_controllers" type="maneuvers.py" output="screen"/>
+   <node name="maneuvers" pkg="pioneer3at_controllers" type="maneuvers.py" output="log"/>
     
 </launch>	

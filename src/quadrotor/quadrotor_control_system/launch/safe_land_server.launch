@@ -9,5 +9,5 @@
    <param name="quad_h" type="double" value="$(arg drone_height)"/>
    <param name="safe_dist" type="double" value="$(arg safe_dist)"/>
 
-   <node name="safe_land_server" pkg="quadrotor_control_system" type="safe_land.py" output="screen"/>
+   <node name="safe_land_server" pkg="quadrotor_control_system" type="safe_land.py" output="log"/>
 </launch>	

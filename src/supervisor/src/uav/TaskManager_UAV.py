@@ -278,9 +278,6 @@ class TaskManager(Thread):
                             else:
                                 self.current_task = None
                                 g_var.manager_info['status'] = 'idle'
-        
-        print("\n\n\nTELEOPERATION ENDED\n\n")
-        print(self.current_task)
 
         # Verify if the current task can be executed due to Sensor ERRORS
         if self.current_task and (states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()):

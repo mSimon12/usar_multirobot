@@ -19,7 +19,7 @@
   <!-- <param name="robot_description" command="$(find xacro)/xacro inorder $(find pioneer3at_description)/urdf/pioneer3at_ros.urdf"/> -->
 
   <!-- send fake joint values -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" output="log">
     <param name="use_gui" value="False"/>
   </node> 
 

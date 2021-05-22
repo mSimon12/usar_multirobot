@@ -389,13 +389,13 @@ class surroundings_verification(Maneuver):
 
             # Define points around the victim
             theta_step = 2*pi/self.n_points                                                                 # Theta dist between points
-            self.points.append([self.victim['x'], self.victim['y'] - self.min_dist, self.height, 1.57])     # First point to visit
+            self.points.append([self.victim['x'], self.victim['y'] - self.min_dist, self.victim['z'] + self.height, 1.57])     # First point to visit
 
             count = 0
             for i in range(0,self.rounds):
                 for j in range(1, self.n_points):                                                       
                     self.points.append([self.victim['x'] + (self.min_dist + count*delta)*sin(j*theta_step), 
-                         self.victim['y'] - (self.min_dist + count*delta)*cos(j*theta_step), self.height, 1.57 + j*theta_step])
+                         self.victim['y'] - (self.min_dist + count*delta)*cos(j*theta_step), self.victim['z'] + self.height, 1.57 + j*theta_step])
                     count += 1
 
         self.state = 'EXE'                                                                            # Set EXE state
@@ -404,7 +404,7 @@ class surroundings_verification(Maneuver):
         while self.points:   
             # Try to move to the next pose
             result = self.move_to(self.points[0][0], self.points[0][1], self.points[0][2], self.points[0][3])
-
+            rospy.logerr(self.points)
             # Verify the reason why the robot stopped moving
             if self.suspending:
                 self.suspending = False

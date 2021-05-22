@@ -93,10 +93,9 @@ class AllocationSystem(object):
         while not rospy.is_shutdown():
             replan_flag.acquire()
             replan_flag.wait()
-
             
-            print("\n\n\nREPLAN: ")
-            print(robots_info)
+            # print("\n\n\nREPLAN: ")
+            # print(robots_info)
 
             # print("\n\nMISSION TASKS:")
             # print("{}\n\n".format(missions))
@@ -118,7 +117,29 @@ class AllocationSystem(object):
 
             # Require replanning and send tasks to robots
             if (not current_tasks.empty) and (not robots.empty):
-                self.allocate(robots, current_tasks)
+                assign_tasks = self.allocate(robots, current_tasks)
+
+            ## Update Commander
+            mission_fbk = missions_feedback()
+            for i in missions.index:
+                m = m_status()
+                m.id = i
+                m.progress = missions.loc[i,'progress'] 
+
+                # Get current task
+                if missions.loc[i,'current_task'] >= len(missions.loc[i,'tasks'].index):
+                    m.status = 'finished'
+                else:
+                    m.status = i + "_{}".format(missions.loc[i,'current_task'])
+
+                m.robot = ''
+                if assign_tasks:
+                    for t in assign_tasks.getValue():
+                        if t[0] == m.status:
+                            m.robot = t[1]
+
+                mission_fbk.missions.append(m)
+            self.m_pub.publish(mission_fbk)
 
             replan_flag.release()
 
@@ -208,31 +229,11 @@ class AllocationSystem(object):
                 task_pub.publish(task_msg)
 
                 #Update robot info
-                robots_info.loc[r,'last_task_id'] = robots_info.loc[t[1],'current_task_id']
+                robots_info.loc[r,'last_task_id'] = robots_info.loc[r,'current_task_id']
                 robots_info.loc[r,'current_task_id'] = None
 
-        robots_info_me.release()
-
-        ## Update Commander
-        mission_fbk = missions_feedback()
-        for i in missions.index:
-            m = m_status()
-            m.id = i
-            m.progress = missions.loc[i,'progress'] 
-
-            # Get current task
-            if missions.loc[i,'current_task'] >= len(missions.loc[i,'tasks'].index):
-                m.status = 'finished'
-            else:
-                m.status = i + "_{}".format(missions.loc[i,'current_task'])
-
-            m.robot = ''
-            for t in tasks_node.getValue():
-                if t[0] == m.status:
-                    m.robot = t[1]
-
-            mission_fbk.missions.append(m)
-        self.m_pub.publish(mission_fbk)
+        robots_info_me.release() 
+        return tasks_node
 
 
 class RobotStateMachine(object):

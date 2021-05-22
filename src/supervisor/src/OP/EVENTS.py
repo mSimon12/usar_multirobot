@@ -3110,7 +3110,6 @@ class uav_st_vsv(object):
 		print('Executing event uav_st_vsv...')
 		msg = uav_st_vsv.module.events_message()
 		msg.event = uav_st_vsv.output['ll_event']
-		uav_st_vsv.pub.publish(msg)					#Publish message
 		try:
 			msg.info = param[0]
 			
@@ -3124,7 +3123,7 @@ class uav_st_vsv(object):
 			uav_st_vsv.pub.publish(msg)								#Publish message
 			return True
 		except:
-			rospy.logwarn("ERRO!!!!\nSurroundings verification need at a victim id and position -> [id,x,y,z]")
+			rospy.logwarn("ERRO!!!!\nSurroundings verification need a victim id and position -> [id,x,y,z]")
 			return False
 
 	@classmethod

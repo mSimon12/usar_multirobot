@@ -9,5 +9,5 @@
    <param name="resolution" type="str" value="$(arg sensor_resolution)"/>
    <param name="height" type="str" value="$(arg height)"/>
 
-   <node name="search_server" pkg="quadrotor_control_system" type="v_search.py" output="screen"/>
+   <node name="search_server" pkg="quadrotor_control_system" type="v_search.py" output="log"/>
 </launch>	
