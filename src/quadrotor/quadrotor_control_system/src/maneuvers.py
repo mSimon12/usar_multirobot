@@ -33,8 +33,9 @@ from hector_moveit_exploration.msg import ExecuteDroneExplorationAction, Execute
 from hector_uav_msgs.srv import EnableMotors, EnableMotorsRequest
 
 # For teleoperation
-from sensor_msgs.msg import Joy
+from sensor_msgs.msg import Joy, Range
 from nav_msgs.msg import Odometry
+
 
 ########################################################################
 class Maneuver(object):
@@ -44,6 +45,11 @@ class Maneuver(object):
         self.suspending = False   
         self.trajectory_client = SimpleActionClient("approach_server", ExecuteDroneApproachAction)
         self.trajectory_client.wait_for_server()
+
+        # Subscribe to sonar_height
+        rospy.Subscriber("sonar_height", Range, self.sonar_callback, queue_size=10)
+        self.sonar_me = Condition()
+        self.current_height = None
 
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
         self.msg = events_message()                                                                         # Message object
@@ -55,7 +61,10 @@ class Maneuver(object):
         dest = ExecuteDroneApproachGoal()
         dest.goal.position.x = x                    # Desired x position
         dest.goal.position.y = y                    # Desired y position
-        dest.goal.position.z = z                    # Desired z position
+
+        self.sonar_me.acquire()
+        dest.goal.position.z = z + self.current_height              # Desired z position
+        self.sonar_me.release()
 
         # Convert desired angle
         q = quaternion_from_euler(0,0,theta,'ryxz')
@@ -74,6 +83,14 @@ class Maneuver(object):
             return "susp"                                       # Client cancel the motion
         else:
             return "error"                                      # The server aborted the motion
+
+    def sonar_callback(self,msg):
+        '''
+            Function to update drone height
+        '''
+        self.sonar_me.acquire()
+        self.current_height = msg.range
+        self.sonar_me.release()
 
 ################################################################################################################################################
 class approach(Maneuver):

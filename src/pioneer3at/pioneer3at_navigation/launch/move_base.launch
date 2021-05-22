@@ -31,13 +31,13 @@
     <rosparam file="$(find pioneer3at_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
     <param name="local_costmap/width" value="10.0" />
     <param name="local_costmap/height" value="10.0" />
-    <param name="local_costmap/update_frequency" value="10.0" />
+    <param name="local_costmap/update_frequency" value="50.0" />
 
     <!-- global costmap with kinect -->
     <rosparam file="$(find pioneer3at_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap" />
     <param name="global_costmap/width" value="150.0" />
-    <param name="global_costmap/height" value="10[50.0" />
-    <param name="global_costmap/update_frequency" value="10.0" />	
+    <param name="global_costmap/height" value="150.0" />
+    <param name="global_costmap/update_frequency" value="50.0" />	
 
     <!-- Remap into namespace for cmd_vel_mux switching -->
     <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>

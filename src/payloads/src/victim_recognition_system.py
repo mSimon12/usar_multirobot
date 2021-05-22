@@ -16,8 +16,8 @@ class VictimSensor(object):
         # Get parameters
         self.__robot_name = rospy.get_param('robot_name', default='robot')
         self.__victims = rospy.get_param('victims_models', default=[])
-        self.__sensor_range = rospy.get_param('sensor_range', default=1.0)
-        self.__sensor_update_rate = rospy.get_param('sensor_update_rate', default=1.0)
+        self.__sensor_range = rospy.get_param('vs_sensor_range', default=1.0)
+        self.__sensor_update_rate = rospy.get_param('vs_sensor_update_rate', default=1.0)
 
         self.__models_service = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)                         # Get model service from Gazebo
         self.__models_service.wait_for_service()

@@ -2,15 +2,15 @@
   <id>app</id>
   <priority>3</priority>
   <task>
-    <agent>UAV_2</agent>
+    <agent></agent>
     <position>
       <x>34.0</x>
       <y>21.0</y>
-      <z>3.5</z>
+      <z>2.0</z>
       <theta>0.0</theta>
     </position>
     <region/>
-    <vs>True</vs>
+    <vs>False</vs>
     <gs>False</gs>
     <maneuver>approach</maneuver>
   </task>

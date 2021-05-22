@@ -17,6 +17,9 @@ class DFS(object):
         self.tasks = tasks                      # Set of tasks to be assigned to robots
         self.nodes_count = 1
 
+        print(robots_info)
+        print(tasks)
+
         self.__buildTree(self.robots, self.tasks,'root')
         self.search_tree.printTree()
 
@@ -33,10 +36,10 @@ class DFS(object):
                     robot_enabled = True        # Variable to verify if the robot fit to the task
 
                     # Verify if the robot can apply required sensors
-                    if ((tasks.loc[t,'vs'] == 'on') and (robots.loc[r,'vs'] == 'nok')):
+                    if tasks.loc[t,'vs'] and (robots.loc[r,'vs'] == 'nok'):
                         robot_enabled = False
 
-                    if ((tasks.loc[t,'gs'] == 'on') and (robots.loc[r,'gs'] == 'nok')):
+                    if tasks.loc[t,'gs'] and (robots.loc[r,'gs'] == 'nok'):
                         robot_enabled = False
 
                     # Verify if the robot is the type required

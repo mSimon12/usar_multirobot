@@ -21,8 +21,8 @@ class GasSensor(object):
         self.__update_radius = 1.5                                                                      # Radius in wich the robot does not republish gas leak
         self.__robot_name = rospy.get_param('robot_name', default='robot')
         self.__gas_models = rospy.get_param('gas_models', default=[])
-        self.__sensor_range = rospy.get_param('sensor_range', default=1.0)
-        self.__sensor_update_rate = rospy.get_param('sensor_update_rate', default=1.0)
+        self.__sensor_range = rospy.get_param('gs_sensor_range', default=1.0)
+        self.__sensor_update_rate = rospy.get_param('gs_sensor_update_rate', default=1.0)
 
         self.__models_service = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)             # Get model service from Gazebo
         self.__models_service.wait_for_service()

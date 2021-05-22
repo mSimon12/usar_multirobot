@@ -44,7 +44,7 @@ obstacles_layer:
     max_obstacle_height: 50.0
 
 inflation:
-    inflation_radius: 0.7
+    inflation_radius: 1.2
     cost_scaling_factor: 1.0
 
 recovery_behaviors:

@@ -4,6 +4,7 @@ import copy
 from numpy import arange
 from math import sqrt, atan2
 from threading import Condition
+from random import random as rd
 
 import rospy
 import roslib
@@ -159,6 +160,8 @@ class Approach(object):
         trials = 0
         while trials < 5:
             rospy.logwarn("Attempt {}".format(trials+1))
+            if(trials > 1):
+                self.target.position.z += 2*rd() - 1
             result = self.go(self.target)
             if (result == 'replan') or (result == 'no_plan'):
                 trials += 1

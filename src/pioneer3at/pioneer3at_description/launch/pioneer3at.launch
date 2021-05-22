@@ -63,7 +63,7 @@
   <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
   <include file="$(find payloads)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
-    <arg name="sensor_range" value="2.0"/>		<!-- Range the sensor are capable to sense a victim -->
+    <arg name="sensor_range" value="2.5"/>		<!-- Range the sensor are capable to sense a victim -->
     <arg name="sensor_update_rate" value="2"/>		<!-- Rate at which the sensor verify the presence of victims-->
   </include>
 
@@ -82,8 +82,8 @@
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="xcoordinate" value="$(arg xcoordinate)"/>
     <arg name="ycoordinate" value="$(arg ycoordinate)"/>
-    <arg name="vsv_safe_dist" value="2.0"/>
-    <arg name="vsv_n_points" default="8"/>
+    <arg name="vsv_safe_dist" value="2.5"/>
+    <arg name="vsv_n_points" default="4"/>
   </include>
 
 </launch>

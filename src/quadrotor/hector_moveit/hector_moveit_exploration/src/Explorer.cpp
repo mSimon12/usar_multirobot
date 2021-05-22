@@ -61,7 +61,7 @@ void Quadrotor::findFrontier()
         octomap::OcTree* current_map = (octomap::OcTree*)octomap_msgs::msgToMap(octomap);
         
         double resolution = current_map->getResolution();
-
+        
         std::vector<std::pair<double, geometry_msgs::Pose> > candidate_frontiers;
         for(octomap::OcTree::leaf_iterator n = current_map->begin_leafs(current_map->getTreeDepth()); n != current_map->end_leafs(); ++n)
         {
@@ -76,7 +76,7 @@ void Quadrotor::findFrontier()
                 // Check whether very close point is discovered previously
                 bool already_explored = false;
                 for(auto a : explored){
-                    if(fabs(x_cur - a.position.x) < 2.0 && fabs(y_cur - a.position.y) < 2.0 && fabs(z_cur - a.position.z) < 2.0){
+                    if((fabs(x_cur - a.position.x) < 8.0) && (fabs(y_cur - a.position.y) < 8.0) && (fabs(z_cur - a.position.z) < 15.0)){
                         already_explored = true;
                         break;
                     }
@@ -325,6 +325,14 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
             }
         }
         if(invalid) continue;
+        
+        // ROS_ERROR("\n\nALREADY EXPLORED POINTS");
+        // for(auto a : explored){
+        //     ROS_ERROR_STREAM(a);
+        // }
+
+        // ROS_ERROR("\n\nNEXT POINTS");
+        // ROS_ERROR_STREAM(_goal);
         
         success = go(_goal);
         if(!success) invalid_poses.push_back(_goal);

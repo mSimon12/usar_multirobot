@@ -7,8 +7,8 @@
 
    <param name="robot_name" type="str" value="$(arg robot_name)"/>
    <rosparam param="victims_models">[victim1,victim2,victim3,victim4]</rosparam>
-   <param name="sensor_range" type="double" value="$(arg sensor_range)"/>
-   <param name="sensor_update_rate" type="double" value="$(arg sensor_update_rate)"/>
+   <param name="vs_sensor_range" type="double" value="$(arg sensor_range)"/>
+   <param name="vs_sensor_update_rate" type="double" value="$(arg sensor_update_rate)"/>
    
    <node name="victim_recognition_system" pkg="payloads" type="victim_recognition_system.py" output="log"/>
     

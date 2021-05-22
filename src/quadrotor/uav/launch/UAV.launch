@@ -54,6 +54,7 @@
     <arg name="odom_frame"  value="$(arg drone_name)/world"/>
     <arg name="base_frame"  value="$(arg drone_name)/base_link"/>
     <arg name="publish_rate"  value="0.1"/>
+    <arg name="rtabmapviz"    value="false"/>
   </include>
 
   <!-- LAUNCH MOVEIT FOR PLANNING TRAJECTORIES -->
