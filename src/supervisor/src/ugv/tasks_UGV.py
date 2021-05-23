@@ -1,4 +1,6 @@
 
+from time import sleep
+
 class Task(object):
 
     def __init__(self, param=[], vs_req = False, gs_req = False):
@@ -357,6 +359,11 @@ class ReqHelp(Task):
         self._tele_executed = False
     
     def next_event(self, states, last_event, event_param = []):
+
+        # event_to_abort = self._abort_last_M(states)
+        # if event_to_abort:
+        #     return event_to_abort
+
         if last_event == 'req_assist':
             self._assit_required = True
         elif last_event == 'end_tele':
@@ -391,6 +398,46 @@ class TeleCalled(Task):
                     return ['sus_app', 'sus_exp', 'sus_vsv', 'sus_rb']
             # After the maneuver have been executed
             if 'TELE_IDLE' in states:
+                sleep(0.5)
                 return ['st_tele']
+            elif 'TELE_ERROR' in states:
+                return ['rst_tele']
             else:
                 return ['end_tele']
+
+class PosErro(Task):
+    '''
+        Abort maneuver if occurs a position failure and require human assistance withou automatically starting teleoperation
+    '''
+    def __init__(self, param=[], vs_req = False, gs_req = False):
+        super().__init__(param, False, False)
+        self.pose_reported = False
+        self._assit_required = False
+
+    def next_event(self, states, last_event, event_param = []):
+        # Verify if the last maneuver must be aborted 
+        event_to_abort = self._abort_last_M(states)
+        if event_to_abort:
+            return event_to_abort
+
+        if last_event == 'rep_self_pos':
+            self.pose_reported = True
+        elif last_event == 'req_assist':
+            self._assit_required = True
+
+        if self.pose_reported:
+            if not self._assit_required :
+                return ['req_assist']
+            else:
+                events = self._sensors2turnOFF(states)
+                if events:
+                    return events
+                else:
+                    return []
+        else:
+            return ['rep_self_pos']
+
+    def restart(self):
+        super().restart()
+        self.pose_reported = False
+        self._assit_required = False

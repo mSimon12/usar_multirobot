@@ -1,3 +1,4 @@
+from time import sleep
 
 class Task(object):
 
@@ -436,20 +437,24 @@ class ReqHelp(Task):
         self._tele_executed = False
     
     def next_event(self, states, last_event, event_param = []):
+        event_to_abort = self._abort_last_M(states)
+        if event_to_abort:
+            return event_to_abort
+
         if last_event == 'uav_req_assist':
             self._assit_required = True
         elif last_event == 'uav_end_tele':
             self._tele_executed = True
         elif last_event == 'uav_er_tele':
             return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb','uav_rst_tele']
-        elif last_event in ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb']:
+        elif last_event in ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search']:
             return []
         
         if not self._assit_required:
             return ['uav_req_assist']
         else:  
             if self._tele_executed:
-                return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb']
+                return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search']
             elif 'TELE_IDLE' in states:
                 return ['uav_st_tele']
             else:
@@ -472,6 +477,47 @@ class TeleCalled(Task):
                     return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_vsv', 'uav_sus_rb']
             # After the maneuver have been executed
             if 'TELE_IDLE' in states:
+                sleep(0.5)
                 return ['uav_st_tele']
+            elif 'TELE_ERROR' in states:
+                return ['uav_rst_tele']
             else:
                 return ['uav_end_tele']
+
+
+class PosErro(Task):
+    '''
+        Abort maneuver if occurs a position failure and require human assistance withou automatically starting teleoperation
+    '''
+    def __init__(self, param=[], vs_req = False, gs_req = False):
+        super().__init__(param, False, False)
+        self.pose_reported = False
+        self._assit_required = False
+
+    def next_event(self, states, last_event, event_param = []):
+        # Verify if the last maneuver must be aborted 
+        event_to_abort = self._abort_last_M(states)
+        if event_to_abort:
+            return event_to_abort
+
+        if last_event == 'uav_rep_self_pos':
+            self.pose_reported = True
+        elif last_event == 'uav_req_assist':
+            self._assit_required = True
+
+        if self.pose_reported:
+            if not self._assit_required :
+                return ['uav_req_assist']
+            else:
+                events = self._sensors2turnOFF(states)
+                if events:
+                    return events
+                else:
+                    return []
+        else:
+            return ['uav_rep_self_pos']
+
+    def restart(self):
+        super().restart()
+        self.pose_reported = False
+        self._assit_required = False

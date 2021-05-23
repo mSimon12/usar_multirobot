@@ -234,76 +234,78 @@ class EventInterface(object):
             
             if event == 'trigger':
                 # An event is triggered
+                try:
+                    robot_namespace = '/' + values['selected_robot'] + '/'
+                    event = values['selected_event']
 
-                robot_namespace = '/' + values['selected_robot'] + '/'
-                event = values['selected_event']
+                    # Translate non-controllable events to low-level call
+                    ll_event = self.translation_table[(self.translation_table['high-level'] == event)]['low-level'].array[0]
+                    topic = robot_namespace + self.translation_table[(self.translation_table['high-level'] == event)]['topic'].array[0]
 
-                # Translate non-controllable events to low-level call
-                ll_event = self.translation_table[(self.translation_table['high-level'] == event)]['low-level'].array[0]
-                topic = robot_namespace + self.translation_table[(self.translation_table['high-level'] == event)]['topic'].array[0]
-
-                if 'bat_' in event:
-                    # Fake battery state change
-                    topic = topic.replace('/out','/in')                                             # Get battery_monitor/in topic
-                    pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
-                    msg = events_message()
-                    msg.event = ll_event
-                    if (event == 'bat_OK') or (event == 'uav_bat_OK'):
-                        msg.param.append(70.0)                                                      # At level = 60 the system consider bat_OK
-                    elif (event == 'bat_L') or (event == 'uav_bat_L'):
-                        msg.param.append(25.0)                                                      # At level = 25 the system consider bat_L
-                    elif (event == 'bat_LL') or (event == 'uav_bat_LL'):
-                        msg.param.append(9.0)                                                       # At level = 9 the system consider bat_LL
-
-                elif 'failure' in ll_event:
-                    # Fake failures
-                    topic = topic.replace('/out','/in')                                             # Get failures_monitor/in topic
-                    pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
-                    msg = events_message()
-                    msg.event = ll_event
-
-                elif ('gas_sensor/out' in topic) or ('victim_sensor/out' in topic):
-                    # Fake sensor error
-                    if ll_event in ['erro','reset']:
-                        topic = topic.replace('/out','/in')                                         # Get sensor/in topic to fake a failure
+                    if 'bat_' in event:
+                        # Fake battery state change
+                        topic = topic.replace('/out','/in')                                             # Get battery_monitor/in topic
                         pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
                         msg = events_message()
                         msg.event = ll_event
-                    elif ll_event in ['gas_leak', 'victim_recognized']:
-                        if len(self.param) > 2:
+                        if (event == 'bat_OK') or (event == 'uav_bat_OK'):
+                            msg.param.append(70.0)                                                      # At level = 60 the system consider bat_OK
+                        elif (event == 'bat_L') or (event == 'uav_bat_L'):
+                            msg.param.append(25.0)                                                      # At level = 25 the system consider bat_L
+                        elif (event == 'bat_LL') or (event == 'uav_bat_LL'):
+                            msg.param.append(9.0)                                                       # At level = 9 the system consider bat_LL
+
+                    elif 'failure' in ll_event:
+                        # Fake failures
+                        topic = topic.replace('/out','/in')                                             # Get failures_monitor/in topic
+                        pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
+                        msg = events_message()
+                        msg.event = ll_event
+
+                    elif ('gas_sensor/out' in topic) or ('victim_sensor/out' in topic):
+                        # Fake sensor error
+                        if ll_event in ['erro','reset']:
+                            topic = topic.replace('/out','/in')                                         # Get sensor/in topic to fake a failure
                             pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
                             msg = events_message()
                             msg.event = ll_event
+                        elif ll_event in ['gas_leak', 'victim_recognized']:
+                            if len(self.param) > 2:
+                                pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
+                                msg = events_message()
+                                msg.event = ll_event
 
-                            p = Twist()
-                            p.linear.x = self.param[0]
-                            p.linear.y = self.param[1]
-                            p.linear.z = self.param[2]
+                                p = Twist()
+                                p.linear.x = self.param[0]
+                                p.linear.y = self.param[1]
+                                p.linear.z = self.param[2]
 
-                            msg.param.append(p)
-                        else:
-                            sg.popup_error('Param error!')
+                                msg.param.append(p)
+                            else:
+                                sg.popup_error('Param error!')
 
-                elif 'error' in ll_event:
-                    # Fake errors
-                    topic = topic.replace('/out','/in')                                             # Get failures_monitor/in topic
-                    pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
-                    msg = events_message()
-                    msg.event = ll_event
+                    elif 'error' in ll_event:
+                        # Fake errors
+                        topic = topic.replace('/out','/in')                                             # Get failures_monitor/in topic
+                        pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
+                        msg = events_message()
+                        msg.event = ll_event
 
-                else:
-                    # Another events
-                    pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
-                    msg = events_message()
-                    msg.event = ll_event
+                    else:
+                        # Another events
+                        pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 
+                        msg = events_message()
+                        msg.event = ll_event
 
-                if pub:
-                    while pub.get_num_connections() < 1:
-                        rate.sleep()
-                    pub.publish(msg)
-                self.param = []                                                                         # Clear param
-                self.window['param_list'].Update(values=self.param)                                     # Clear param screen
-                         
+                    if pub:
+                        while pub.get_num_connections() < 1:
+                            rate.sleep()
+                        pub.publish(msg)
+                    self.param = []                                                                         # Clear param
+                    self.window['param_list'].Update(values=self.param)                                     # Clear param screen
+                except:
+                    sg.popup_error("No robot or event selected!")
+
             elif event == 'add_param':
                 # Add a new item as parameter for the event
                 if values['new_param']:

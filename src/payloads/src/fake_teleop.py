@@ -1,10 +1,12 @@
 #!/usr/bin/env python2.7
 
 from geometry_msgs.msg import Twist
+from rospy.topics import Publisher
 from system_msgs.msg import events_message
 
 import rospy
 from random import random as rd
+from time import sleep
 
 from actionlib import SimpleActionClient, GoalStatus
 from trajectory_action_pkg.msg import ExecuteDroneApproachAction, ExecuteDroneApproachGoal
@@ -33,25 +35,38 @@ def maneuver_event(msg, robot):
                 dest.goal.position.x = robot_state.pose.position.x + 2*DIST*rd() - DIST        # Desired x position
                 dest.goal.position.y = robot_state.pose.position.y + 2*DIST*rd() - DIST        # Desired y position
                 dest.goal.position.z = robot_state.pose.position.z + DIST*rd()                 # Desired z position     
-                dest.goal.orientation.w = 1.0                    
+                dest.goal.orientation.w = 1.0        
+
+                trajectory_clients[robot].send_goal(dest)
+                trajectory_clients[robot].wait_for_result()                     # Wait for the result
+                state = trajectory_clients[robot].get_state()                   # Get the state of the action           
+
+                if state == GoalStatus.SUCCEEDED:
+                    trials = 10
+                    msg2pub.event = "end_teleoperation"
+                else:
+                    trials += 1
+                    if trials >= 4:
+                        msg2pub.event = "teleoperation_error"            
             
             elif 'pioneer3at' in robot:
-                dest = MoveBaseGoal()
-                dest.target_pose.header.frame_id = "earth"
-                dest.target_pose.pose.position.x = robot_state.pose.position.x + 2*DIST*rd() - DIST        # Desired x position
-                dest.target_pose.pose.position.y = robot_state.pose.position.y + 2*DIST*rd() - DIST        # Desired y position
+                pub_msg = Twist()
+                pub_msg.linear.x = 2*rd() - 1
+                pub_msg.angular.z = 2*rd() - 1
+                trajectory_clients[robot].publish(pub_msg)
+                sleep(5)
+                pub_msg.linear.x = 0.0
+                pub_msg.angular.z = 0.0
+                trajectory_clients[robot].publish(pub_msg)
 
-            trajectory_clients[robot].send_goal(dest)
-            trajectory_clients[robot].wait_for_result()                     # Wait for the result
-            state = trajectory_clients[robot].get_state()                   # Get the state of the action           
-
-            if state == GoalStatus.SUCCEEDED:
-                trials = 10
-                msg2pub.event = "end_teleoperation"
-            else:
-                trials += 1
-                if trials >= 4:
-                    msg2pub.event = "teleoperation_error"
+                robot_pose = models_service(robot, '')
+                if ((robot_pose.pose.position.x - robot_state.pose.position.x)**2 + (robot_pose.pose.position.y - robot_state.pose.position.y)**2)**(1/2) > 0.5:
+                    trials = 10
+                    msg2pub.event = "end_teleoperation"
+                else:
+                    trials += 1
+                    if trials >= 4:
+                        msg2pub.event = "teleoperation_error"              
         
         end_publishers[robot].publish(msg2pub)
 
@@ -67,10 +82,10 @@ if __name__=="__main__":
         #Get trajectory clients
         if 'UAV' in r:
             trajectory_clients[r] = SimpleActionClient("/{}/approach_server".format(r), ExecuteDroneApproachAction)
+            trajectory_clients[r].wait_for_server()
         elif 'pioneer3at' in r:
-            trajectory_clients[r] = SimpleActionClient("/{}/move_base".format(r), MoveBaseAction)                   # Server name = robot_name/move_base
-        trajectory_clients[r].wait_for_server()
-
+            trajectory_clients[r] = Publisher("/{}/cmd_vel".format(r), Twist)                   # Server name = robot_name/move_base
+        
         #Get tele END publishers
         end_publishers[r] = rospy.Publisher("/{}/maneuvers/in".format(r), events_message, queue_size=10)
         st_sub[r] = rospy.Subscriber("/{}/maneuvers/in".format(r), events_message, maneuver_event, r) 
