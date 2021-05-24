@@ -9,6 +9,7 @@ import rospy
 from Mission import Mission
 from DFS import DFS
 
+from rosgraph_msgs.msg import Clock
 from std_msgs.msg import String
 from geometry_msgs.msg import Twist
 from system_msgs.msg import abstractions, events_message, mission, task_message, missions_feedback, m_status
@@ -26,6 +27,8 @@ trace = pd.DataFrame(columns = ['time', 'robot', 'robot_status', 'task', 'task_s
 trace_filename = None
 
 replan_flag = Condition()           #Signal the requirement of a replanning
+global_time = 0
+global_time_me = Condition()
 
 class AllocationSystem(object):
 
@@ -65,7 +68,12 @@ class AllocationSystem(object):
     
         # Subscribe to topic to receive missions
         rospy.Subscriber("/missions", mission, self.mission_callback)
+        rospy.Subscriber("/clock", Clock, self.time_update)
 
+    def time_update(self, msg):
+        global_time_me.acquire()
+        global_time = msg.clock.secs
+        global_time_me.release()
 
     def mission_callback(self,msg):
         '''
@@ -286,7 +294,8 @@ class RobotStateMachine(object):
         elif msg.event == 'robot_unable':
             robots_info.loc[self.name,'status'] = 'unable'
             # Update trace & save it
-            trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': '-', 'task_status': '-'}, ignore_index = True)
+            # trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': '-', 'task_status': '-'}, ignore_index = True)
+            trace = trace.append({'time':global_time, 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': '-', 'task_status': '-'}, ignore_index = True)
             trace.to_csv(trace_filename)
 
         # Updates tasks status
@@ -295,7 +304,8 @@ class RobotStateMachine(object):
             
             if robots_info.loc[self.name,'current_task_id'] == msg.task_id:
                 # Update trace & save it
-                trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'executing'}, ignore_index = True)
+                # trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'executing'}, ignore_index = True)
+                trace = trace.append({'time':global_time, 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'executing'}, ignore_index = True)
                 trace.to_csv(trace_filename)
 
         elif "task_suspended" in msg.event:
@@ -303,7 +313,8 @@ class RobotStateMachine(object):
             
             if robots_info.loc[self.name,'current_task_id'] == msg.task_id:
                 # Update trace & save it
-                trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'suspended'}, ignore_index = True)
+                # trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'suspended'}, ignore_index = True)
+                trace = trace.append({'time':global_time, 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'suspended'}, ignore_index = True)
                 trace.to_csv(trace_filename)
 
         elif "task_finished" in msg.event:
@@ -332,7 +343,8 @@ class RobotStateMachine(object):
                 replan_flag.release()
 
             # Update trace & save it
-            trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'finished'}, ignore_index = True)
+            # trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'finished'}, ignore_index = True)
+            trace = trace.append({'time':global_time, 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'finished'}, ignore_index = True)
             trace.to_csv(trace_filename)
 
         elif "task_aborted" in msg.event:

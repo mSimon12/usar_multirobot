@@ -29,9 +29,9 @@
 
     <!-- local costmap params -->
     <rosparam file="$(find pioneer3at_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
-    <param name="local_costmap/width" value="10.0" />
-    <param name="local_costmap/height" value="10.0" />
-    <param name="local_costmap/update_frequency" value="20.0" />
+    <param name="local_costmap/width" value="15.0" />
+    <param name="local_costmap/height" value="15.0" />
+    <param name="local_costmap/update_frequency" value="30.0" />
 
     <!-- global costmap with kinect -->
     <rosparam file="$(find pioneer3at_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap" />

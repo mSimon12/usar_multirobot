@@ -6,6 +6,7 @@ import numpy
 from datetime import datetime
 from threading import Thread, Condition
 
+from rosgraph_msgs.msg import Clock
 import OP.EVENTS as events_module
 from interfaces.msg import trace_events
 
@@ -87,14 +88,21 @@ class ProductSystem(Thread):
 		self.trace_pub = rospy.Publisher("/events_trigger_ihm_in", trace_events, queue_size=10)
 		rate = rospy.Rate(10)
 
+		rospy.Subscriber("/clock", Clock, self.time_update)
+		self.time = 0
+		self.time_me = Condition()
+
 		while self.trace_pub.get_num_connections() < 1:
 			rate.sleep()
 
 		self.update_trace([None, None, None])													# Update trace of events
 
+	def time_update(self, msg):
+		self.time_me.acquire()
+		self.time = msg.clock.secs
+		self.time_me.release()
 
 	def run(self):
-
 		while True:
 			result = False
 			# Wait till there is a new event on any buffer
@@ -141,7 +149,10 @@ class ProductSystem(Thread):
 				- time.
 		'''
 		#Update events_trace
-		time = datetime.now().strftime("%H:%M:%S")												# Get time
+		# time = datetime.now().strftime("%H:%M:%S")												# Get time
+		self.time_me.acquire()
+		time = str(self.time)
+		self.time_me.release()
 		
 		# Get current states of all machines
 		states = {}
@@ -186,4 +197,3 @@ class ProductSystem(Thread):
 			trace_msg.possible_events.append(e)
 
 		self.trace_pub.publish(trace_msg)
-		

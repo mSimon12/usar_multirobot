@@ -103,8 +103,9 @@ class TaskManager(Thread):
                 g_var.manager_info['status'] = 'idle'
                 g_var.manager_info_flag.notify()
                 g_var.manager_info_flag.release()
-            self.Abort.restart()
-            self.main_task = self.Abort                                         # Select abort as current task
+            # self.Abort.restart()
+            # self.main_task = self.Abort                                         # Select abort as current task
+            self.main_task = tasks.AbortM()                                    # Select abort as current task
             self.main_task_id = None
 
         if valid_task:
@@ -313,6 +314,7 @@ class TaskManager(Thread):
 
         g_var.manager_info_flag.notify()
         g_var.manager_info_flag.release()
+
         # else:
         #      self.current_task = self.main_task
              

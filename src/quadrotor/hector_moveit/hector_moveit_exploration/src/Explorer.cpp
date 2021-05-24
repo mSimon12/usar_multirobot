@@ -112,7 +112,9 @@ void Quadrotor::findFrontier()
                 if(frontier){
                     // ROS_WARN("FRONTIER!");
                     geometry_msgs::Pose p;
-                    p.position.x = x_cur;p.position.y = y_cur;p.position.z = z_cur;
+                    p.position.x = x_cur;
+                    p.position.y = y_cur;
+                    p.position.z = z_cur;
                     p.orientation.w = 1;
                     double dist = sqrt(pow(p.position.x - odometry_information.position.x,2) + pow(p.position.y - odometry_information.position.y,2) + pow(p.position.z - odometry_information.position.z,2));
                     if(dist > 2)
@@ -147,8 +149,12 @@ void Quadrotor::findFrontier()
 
 void Quadrotor::appFeedCb(const trajectory_action_pkg::ExecuteDroneApproachFeedbackConstPtr& feedback)
 {
-  float h_error = exp_altitude - sonar_information;
-  ROS_WARN("Altitude error: %f",h_error);
+    float h_error = exp_altitude - sonar_information;
+    ROS_WARN("Altitude error: %f",h_error);
+
+    if (as_.isPreemptRequested() || !ros::ok()){         
+        approach_client.cancelGoal();
+    } 
 //   if (abs(h_error) > 0.5){
 //       trajectory_action_pkg::ExecuteDroneApproachGoal goal;
 //       goal.goal = feedback->current_pose;
@@ -174,6 +180,8 @@ bool Quadrotor::go(geometry_msgs::Pose& target_)
     //Execute the motion in a loop to allow corrections on altitude
     do{
         while(approach_preempted) rate.sleep();
+
+        if (as_.isPreemptRequested() || !ros::ok()) break;
 
         while(!sonar_received)
         rate.sleep();
@@ -223,7 +231,6 @@ void Quadrotor::takeoff()
     motor_enable_service.call(srv);
     
     ros::Rate rate(1);
-
 
     geometry_msgs::Pose takeoff_pose = odometry_information;
     takeoff_pose.position.z = exp_altitude;
@@ -325,14 +332,6 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
             }
         }
         if(invalid) continue;
-        
-        // ROS_ERROR("\n\nALREADY EXPLORED POINTS");
-        // for(auto a : explored){
-        //     ROS_ERROR_STREAM(a);
-        // }
-
-        // ROS_ERROR("\n\nNEXT POINTS");
-        // ROS_ERROR_STREAM(_goal);
         
         success = go(_goal);
         if(!success) invalid_poses.push_back(_goal);

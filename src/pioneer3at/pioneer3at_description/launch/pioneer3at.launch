@@ -24,7 +24,7 @@
   <!-- NAVIGATION (move_base) --> 
   <include file="$(find pioneer3at_navigation)/launch/move_base.launch">
     <arg name="robot_name" default="$(arg robot_name)"/>
-    <arg name="max_vel" value="0.7"/>
+    <arg name="max_vel" value="0.5"/>
     <arg name="max_ang_vel" value="2.4"/>
   </include>
 
