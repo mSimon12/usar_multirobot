@@ -62,16 +62,20 @@ plt.figure()
 
 df2 = df.iloc[:, 4:]
 
-leg = []
+# leg = []
+x=0
 for r_i in df2.columns:
     if 'cur_maneuver' in r_i:
+        x += 1
+        plt.subplot(2,2,x)
         plt.plot(df.iloc[:,0].values, df[r_i].values)
-        leg.append(r_i.replace('_cur_maneuver',''))
+        # leg.append(r_i.replace('_cur_maneuver',''))
 
-plt.legend(leg)
-plt.title('Maneuver executed by the robots along time')
-plt.xlabel('Time (s)')
-plt.ylabel('Current task')
+        plt.legend([r_i.replace('_cur_maneuver','')])
+        # plt.ylim(['teleoperation', 'safe land', 'approach', 'assessment','exploration', 'victim search', 'surroundings verification', 'return to base'])
+        plt.title('Maneuver executed by the robots along time')
+        plt.xlabel('Time (s)')
+        plt.ylabel('Current task')
 
 plt.gcf().set_size_inches(18.5, 10.5)
 
@@ -86,6 +90,7 @@ df2 = df.iloc[:, 4:]
 leg = []
 for r_i in df2.columns:
     if 'tasks_counter' in r_i:
+        
         plt.plot(df.iloc[:,0].values, df[r_i].values)
         leg.append(r_i.replace('_tasks_counter',''))
 

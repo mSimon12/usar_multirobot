@@ -71,6 +71,7 @@ class AllocationSystem(object):
         rospy.Subscriber("/clock", Clock, self.time_update)
 
     def time_update(self, msg):
+        global global_time
         global_time_me.acquire()
         global_time = msg.clock.secs
         global_time_me.release()
@@ -362,7 +363,8 @@ class RobotStateMachine(object):
                 replan_flag.release()
 
             # Update trace & save it
-            trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'aborted'}, ignore_index = True)
+            # trace = trace.append({'time':time.strftime("%H:%M:%S"), 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'aborted'}, ignore_index = True)
+            trace = trace.append({'time':global_time, 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': msg.task_id, 'task_status': 'aborted'}, ignore_index = True)
             trace.to_csv(trace_filename)
         trace_me.release()
         # rospy.logwarn("\n\n{}".format(trace))

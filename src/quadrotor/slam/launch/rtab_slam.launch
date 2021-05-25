@@ -17,7 +17,7 @@
   <arg name="rtabmapviz"        default="false"/>
   <arg name="localization"      default="false"/>
   
-  <arg name="wait_for_transform"  default="0.2"/> 
+  <arg name="wait_for_transform"  default="0.1"/> 
 
   <!--Syncronization between camera topics -->
   <node name="rgbd_sync" pkg="nodelet" type="nodelet" args="standalone rtabmap_ros/rgbd_sync" output="log">
