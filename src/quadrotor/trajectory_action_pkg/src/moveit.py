@@ -58,10 +58,21 @@ class MoveGroup(object):
         self.move_group_msg.request.num_planning_attempts = attempts
         self.move_group_msg.request.allowed_planning_time = allowed_time
         self.move_group_msg.request.max_velocity_scaling_factor = 1.0
-        self.move_group_msg.request.max_acceleration_scaling_factor = 1.0  
+        self.move_group_msg.request.max_acceleration_scaling_factor = 0.5  
 
     def set_start_state(self, robot_state):
         self.move_group_msg.request.start_state = robot_state
+
+    def set_workspace(self,limits): 
+        '''
+            Workspace limits [XMIN,YMIN,ZMIN,XMAX,YMAX,ZMAX]
+        '''
+        self.move_group_msg.request.workspace_parameters.min_corner.x = limits[0]
+        self.move_group_msg.request.workspace_parameters.min_corner.y = limits[1]
+        self.move_group_msg.request.workspace_parameters.min_corner.z = limits[2]
+        self.move_group_msg.request.workspace_parameters.max_corner.x = limits[3]
+        self.move_group_msg.request.workspace_parameters.max_corner.y = limits[4]
+        self.move_group_msg.request.workspace_parameters.max_corner.z = limits[5]
         
         # self.scene_pub.publishScene(robot_state)
 

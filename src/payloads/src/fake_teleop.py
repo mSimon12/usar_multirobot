@@ -84,7 +84,7 @@ if __name__=="__main__":
             trajectory_clients[r] = SimpleActionClient("/{}/approach_server".format(r), ExecuteDroneApproachAction)
             trajectory_clients[r].wait_for_server()
         elif 'pioneer3at' in r:
-            trajectory_clients[r] = Publisher("/{}/cmd_vel".format(r), Twist)                   # Server name = robot_name/move_base
+            trajectory_clients[r] = Publisher("/{}/cmd_vel".format(r), Twist, queue_size=10)                   # Server name = robot_name/move_base
         
         #Get tele END publishers
         end_publishers[r] = rospy.Publisher("/{}/maneuvers/in".format(r), events_message, queue_size=10)

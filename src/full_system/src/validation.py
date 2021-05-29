@@ -9,8 +9,9 @@ from threading import Condition
 # ROS libs
 import rospy
 from interfaces.msg import trace_events
-from system_msgs.msg import abstractions
+from system_msgs.msg import abstractions, events_message
 from rosgraph_msgs.msg import Clock
+from nav_msgs.msg import Odometry
 
 MANEUVERS_START = {
     'st_app' : 'approach',
@@ -45,16 +46,20 @@ class Validation(object):
 
         self.new_sample_flag = Condition()
         self.time_me = Condition()
+        self.odometry_me = Condition()
 
         # Defines collumns names related to desired informations
-        cols = ['allocated_robots', 'available_robots', 'teleoperations']
+        cols = ['event', 'allocated_robots', 'available_robots', 'teleoperations']
         for r in self.robots:
             cols.append(r + '_cur_maneuver')
             cols.append(r + '_tasks_counter')
+            cols.append(r + '_pose')
+            cols.append(r + '_battery')
 
         self.samples = pd.DataFrame(columns = cols)
 
         # Initialize variables
+        self.event = None
         self.allocated_n = 0 
         self.available_n = len(self.robots)
         self.tele_count = 0
@@ -63,24 +68,56 @@ class Validation(object):
         self.robots_status = {}
         self.robots_counter = {}
         self.allocated_robots = {}
+        self.robots_bat= {}
+        self.robots_pose = {}
         for r in self.robots:
             self.r_cur_task[r] = 'None'
             self.robots_status[r] = 'ok'
             self.robots_counter[r] = 0
             self.allocated_robots[r] = False
 
-
         # Subscribe to topics
-        for r in self.robots:            
+        for r in self.robots:   
+            self.robots_bat[r] = 100
+            self.robots_pose[r] = []
+
             rospy.Subscriber("/{}/events_abstractions".format(r), abstractions, self.abs_cbk, r)
-        
+            rospy.Subscriber("/{}/battery_monitor/out".format(r), events_message, self.batCallback, callback_args = r)
+            
+            if 'pioneer3at' in r:
+                rospy.Subscriber("/{}/odom".format(r), Odometry, self.poseCallback, callback_args = r)
+            elif 'UAV' in r:
+                rospy.Subscriber("/{}/ground_truth/state".format(r), Odometry, self.poseCallback, callback_args = r)
+
         rospy.Subscriber("/events_trigger_ihm_in", trace_events, self.trace_cbk)
         rospy.Subscriber("/clock", Clock, self.time_update)
 
     def time_update(self, msg):
         self.time_me.acquire()
-        self.time = msg.clock.secs
+        self.time = msg.clock.secs + msg.clock.nsecs/1000000000
         self.time_me.release()
+
+    def poseCallback(self, odometry, robot):
+        '''
+            Monitor the current position of the robot
+        '''
+        # t = time.time()
+
+        # if t - self.last_time[robot] > 1.0:
+        #     self.last_time[robot] = t
+
+        self.odometry_me.acquire()
+        self.robots_pose[robot] = [odometry.pose.pose.position.x, odometry.pose.pose.position.y, odometry.pose.pose.position.z]
+        self.odometry_me.release()
+
+
+    def batCallback(self, msg, robot):
+        '''
+            Monitor the battery level of the robot
+        '''
+        self.odometry_me.acquire()
+        self.robots_bat[robot] = msg.param[0]
+        self.odometry_me.release()
 
     def abs_cbk(self, msg, robot):
         '''
@@ -123,21 +160,18 @@ class Validation(object):
                 -teleoperation occurances;
                 -robots current maneuver
         '''
-        # print("\n\nTrace msg:")
-        # print(msg)
-
         self.new_sample_flag.acquire()
+        self.event = msg.last_event
 
         if 'st_tele' in msg.last_event:
             self.tele_count += 1
 
         if msg.last_event in MANEUVERS_START:
             self.r_cur_task[msg.robot] = MANEUVERS_START[msg.last_event]
-            self.new_sample_flag.notify()
         elif msg.last_event in MANEUVERS_STOP:
             self.r_cur_task[msg.robot] = 'None'
-            self.new_sample_flag.notify()
-
+        
+        self.new_sample_flag.notify()
         self.new_sample_flag.release()
 
 
@@ -147,10 +181,13 @@ class Validation(object):
             self.new_sample_flag.wait(self.samples_period)
             
             # Update samples
-            sample = [self.allocated_n, self.available_n, self.tele_count]
+            sample = [self.event, self.allocated_n, self.available_n, self.tele_count]
+            self.event = None
             for r in self.robots:
                 sample.append(self.r_cur_task[r])                       # robot current task
                 sample.append(self.robots_counter[r])                   # robot tasks counter
+                sample.append(self.robots_pose[r])                      # robot position
+                sample.append(self.robots_bat[r])                       # robot battery level
             
             self.time_me.acquire()
             # self.samples.loc[time.strftime("%H:%M:%S")] = sample
@@ -183,4 +220,3 @@ if __name__ == '__main__':
             
     except rospy.ROSInterruptException:
         pass
-

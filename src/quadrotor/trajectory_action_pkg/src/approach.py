@@ -29,14 +29,13 @@ from moveit import MoveGroup, PlanningScenePublisher
 
 
 PLANNING_GROUP = "DroneBody"
-XMIN = -50.0
-XMAX = 50.0
-YMIN = -50.0
-YMAX = 50.0
+XMIN = 0.0
+XMAX = 75.0
+YMIN = 0.0
+YMAX = 75.0
 ZMIN = 0.0
-ZMAX = 50.0
-RESOLUTION = 0.05
-SENSOR_RANGE = 5.0
+ZMAX = 30.0
+RESOLUTION = 0.1
 
 class Approach(object):
 
@@ -85,6 +84,8 @@ class Approach(object):
         #Start move_group
         self.move_group = MoveGroup('earth', name)
         self.move_group.set_planner()
+
+        self.move_group.set_workspace([XMIN,YMIN,ZMIN,XMAX,YMAX,ZMAX])                  # Set the workspace size
 
         # Get current robot position to define as start planning point
         self.current_pose = self.robot.get_current_state()
@@ -214,8 +215,7 @@ class Approach(object):
         # Plan a trajectory till the desired target
         plan = self.move_group.plan()
 
-        if plan.planned_trajectory.multi_dof_joint_trajectory.points:                      # Execute only if has points on the trajectory
-        # if plan.multi_dof_joint_trajectory.points:                                           # Execute only if has points on the trajectory
+        if plan.planned_trajectory.multi_dof_joint_trajectory.points:                           # Execute only if has points on the trajectory
             while (not self.trajectory_received):
                 rospy.loginfo("Waiting for trajectory!")
                 rospy.sleep(0.2)
@@ -299,7 +299,7 @@ class Approach(object):
                 delta_y = point.transforms[0].translation.y - last_pose.target_pose.pose.position.y
                 motion_theta = atan2(delta_y, delta_x)
 
-                # Make the robot orientation fit with the motion orientation if the movemente on xy is bigger than 0.2 
+                # Make the robot orientation fit with the motion orientation if the movemente on xy is bigger than RESOLUTION 
                 if (abs(delta_x) > RESOLUTION) or (abs(delta_y) > RESOLUTION):
                     q = quaternion_from_euler(0,0,motion_theta)
                     waypoint.target_pose.pose.orientation.x = q[0]
@@ -359,7 +359,9 @@ class Approach(object):
             self.odometry_me.release()
 
             #Verify possible collisions on diferent points between the robot and the goal point
-            for d in arange(RESOLUTION, dist, RESOLUTION):
+            rospy.logerr("\n\n\nCOLLISION CALLBACK: ")
+            rospy.logerr(dist)
+            for d in arange(RESOLUTION, dist + 0.5, RESOLUTION):
                 pose.translation.x = (self.next_pose.position.x - x)*(d/dist) + x
                 pose.translation.y = (self.next_pose.position.y - y)*(d/dist) + y
                 pose.translation.z = (self.next_pose.position.z - z)*(d/dist) + z
@@ -376,7 +378,8 @@ class Approach(object):
                 # Check if robot is in collision
                 if not collision_res.valid:
                     # print(validity_msg)
-                    rospy.logwarn('Collision in front [x:{} y:{} z:{}]'.format(pose.translation.x,pose.translation.y,pose.translation.z))
+                    rospy.logerr('Collision in front [x:{} y:{} z:{}]'.format(pose.translation.x,pose.translation.y,pose.translation.z))
+                    rospy.logerr('Current pose [x:{} y:{} z:{}]'.format(x,y,z))
                     # print(collision_res)
                     self.move_client.cancel_goal()
                     self.collision = True

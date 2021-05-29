@@ -1,5 +1,6 @@
 
 import matplotlib.pyplot as plt
+from numpy.core.numeric import NaN
 import pandas as pd 
 import sys
 import os
@@ -12,10 +13,20 @@ except:
     # filename = 'samples/May-17-2021  22:29:22.csv'
     pass
 
+df = pd.read_csv(filename)
+
 try:
     action = sys.argv[2]
 except:
     action = 'show'
+
+try:
+    if sys.argv[3] == 'time':
+        x_axis = 'time'
+    elif sys.argv[3] == 'events':
+        x_axis = 'event'
+except:
+    x_axis = 'event'
 
 if action == 'save':
     output_dir = filename.replace('.csv','')
@@ -24,82 +35,160 @@ if action == 'save':
     except:
         os.mkdir(output_dir)
 
-df = pd.read_csv(filename)
-
 print(df.head())
 
-# Graph one
-ax1 = plt.subplot(311)
-plt.plot(df.iloc[:,0].values, df['allocated_robots'].values, 'b')
-plt.setp(ax1.get_xticklabels(), visible=False)
-# plt.xlabel('Time (s)')
-plt.ylabel('Allocated Robots')
-# plt.title('Robots allocated to a task')
+if x_axis == 'time':
+    # Graph one
+    ax1 = plt.subplot(311)
+    plt.plot(df.iloc[:,0].values, df['allocated_robots'].values, 'b')
+    plt.setp(ax1.get_xticklabels(), visible=False)
+    # plt.xlabel('Time (s)')
+    plt.ylabel('Allocated Robots')
+    # plt.title('Robots allocated to a task')
 
-# Graph two
-ax2 = plt.subplot(312)
-plt.plot(df.iloc[:,0].values, df['available_robots'].values, 'r')
-plt.setp(ax2.get_xticklabels(), visible=False)
-# plt.xlabel('Time (s)')
-plt.ylabel('Available Robots')
-# plt.title('Robots available to executa a task')
+    # Graph two
+    ax2 = plt.subplot(312)
+    plt.plot(df.iloc[:,0].values, df['available_robots'].values, 'r')
+    plt.setp(ax2.get_xticklabels(), visible=False)
+    # plt.xlabel('Time (s)')
+    plt.ylabel('Available Robots')
+    # plt.title('Robots available to executa a task')
 
-# Graph two
-plt.subplot(313)
-plt.plot(df.iloc[:,0].values, df['teleoperations'].values, 'yellow')
-plt.xlabel('Time (s)')
-plt.ylabel('Number of\nteleoperations\nexecuted')
-# plt.title('Robots available to execute a task')
+    # Graph two
+    plt.subplot(313)
+    plt.plot(df.iloc[:,0].values, df['teleoperations'].values, 'yellow')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Number of\nteleoperations\nexecuted')
+    # plt.title('Robots available to execute a task')
 
-plt.gcf().set_size_inches(18.5, 10.5)
+    plt.gcf().set_size_inches(18.5, 10.5)
 
-if action == 'save':
-    plt.savefig(output_dir + '/general_info.png')
+    if action == 'save':
+        plt.savefig(output_dir + '/general_info.png')
 
-# Graphs of robots countings
-plt.figure()
-# Robots current maneuver
+    # Graphs of robots countings
+    plt.figure()
+    # Robots current maneuver
 
-df2 = df.iloc[:, 4:]
+    df2 = df.iloc[:, 4:]
 
-# leg = []
-x=0
-for r_i in df2.columns:
-    if 'cur_maneuver' in r_i:
-        x += 1
-        plt.subplot(2,2,x)
-        plt.plot(df.iloc[:,0].values, df[r_i].values)
-        # leg.append(r_i.replace('_cur_maneuver',''))
+    # leg = []
+    x=0
+    for r_i in df2.columns:
+        if 'cur_maneuver' in r_i:
+            x += 1
+            plt.subplot(2,2,x)
+            plt.plot(df.iloc[:,0].values, df[r_i].values)
+            # leg.append(r_i.replace('_cur_maneuver',''))
 
-        plt.legend([r_i.replace('_cur_maneuver','')])
-        # plt.ylim(['teleoperation', 'safe land', 'approach', 'assessment','exploration', 'victim search', 'surroundings verification', 'return to base'])
-        plt.title('Maneuver executed by the robots along time')
-        plt.xlabel('Time (s)')
-        plt.ylabel('Current task')
+            plt.legend([r_i.replace('_cur_maneuver','')])
+            # plt.ylim(['teleoperation', 'safe land', 'approach', 'assessment','exploration', 'victim search', 'surroundings verification', 'return to base'])
+            plt.title('Maneuver executed by the robots along time')
+            plt.xlabel('Time (s)')
+            plt.ylabel('Current task')
 
-plt.gcf().set_size_inches(18.5, 10.5)
+    plt.gcf().set_size_inches(18.5, 10.5)
 
-if action == 'save':
-    plt.savefig(output_dir + '/current_maneuvers.png')
+    if action == 'save':
+        plt.savefig(output_dir + '/current_maneuvers.png')
 
-plt.figure()
-# Robots tasks counter
+    plt.figure()
+    # Robots tasks counter
 
-df2 = df.iloc[:, 4:]
+    df2 = df.iloc[:, 4:]
 
-leg = []
-for r_i in df2.columns:
-    if 'tasks_counter' in r_i:
-        
-        plt.plot(df.iloc[:,0].values, df[r_i].values)
-        leg.append(r_i.replace('_tasks_counter',''))
+    leg = []
+    for r_i in df2.columns:
+        if 'tasks_counter' in r_i:
+            
+            plt.plot(df.iloc[:,0].values, df[r_i].values)
+            leg.append(r_i.replace('_tasks_counter',''))
 
-plt.legend(leg)
-plt.title('Tasks finished by the robot')
-plt.xlabel('Time (s)')
-plt.ylabel('Number of tasks')
+    plt.legend(leg)
+    plt.title('Tasks finished by the robot')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Number of tasks')
 
-plt.gcf().set_size_inches(18.5, 10.5)
+    plt.gcf().set_size_inches(18.5, 10.5)
+    
+else:
+    # Graph one
+    ax1 = plt.subplot(311)
+    plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()]['allocated_robots'].values, 'b')
+    plt.setp(ax1.get_xticklabels(), visible=False)
+    # plt.xlabel('Time (s)')
+    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
+    plt.ylabel('Allocated Robots')
+    # plt.title('Robots allocated to a task')
+
+    # Graph two
+    ax2 = plt.subplot(312)
+    plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()]['available_robots'].values, 'r')
+    plt.setp(ax2.get_xticklabels(), visible=False)
+    # plt.xlabel('Time (s)')
+    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
+    plt.ylabel('Available Robots')
+    # plt.title('Robots available to executa a task')
+
+    # Graph three
+    plt.subplot(313)
+    plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()]['teleoperations'].values, 'yellow')
+    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Number of\nteleoperations\nexecuted')
+    # plt.title('Robots available to execute a task')
+
+    plt.gcf().set_size_inches(18.5, 10.5)
+
+    if action == 'save':
+        plt.savefig(output_dir + '/general_info.png')
+
+    # Graphs of robots countings
+    plt.figure()
+    # Robots current maneuver
+
+    df2 = df.iloc[:, 4:]
+
+    # leg = []
+    x=0
+    for r_i in df2.columns:
+        if 'cur_maneuver' in r_i:
+            x += 1
+            plt.subplot(2,2,x)
+            plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][r_i].values)
+            # leg.append(r_i.replace('_cur_maneuver',''))
+
+            plt.legend([r_i.replace('_cur_maneuver','')])
+            # plt.ylim(['teleoperation', 'safe land', 'approach', 'assessment','exploration', 'victim search', 'surroundings verification', 'return to base'])
+            plt.title('Maneuver executed by the robots along time')
+            plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
+            plt.xlabel('Time (s)')
+            plt.ylabel('Current task')
+
+    plt.gcf().set_size_inches(18.5, 10.5)
+
+    if action == 'save':
+        plt.savefig(output_dir + '/current_maneuvers.png')
+
+    plt.figure()
+    # Robots tasks counter
+
+    df2 = df.iloc[:, 4:]
+
+    leg = []
+    for r_i in df2.columns:
+        if 'tasks_counter' in r_i:
+            
+            plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][r_i].values)
+            leg.append(r_i.replace('_tasks_counter',''))
+
+    plt.legend(leg)
+    plt.title('Tasks finished by the robot')
+    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Number of tasks')
+
+    plt.gcf().set_size_inches(18.5, 10.5)
 
 if action == 'save':
     plt.savefig(output_dir + '/tasks_counters.png')

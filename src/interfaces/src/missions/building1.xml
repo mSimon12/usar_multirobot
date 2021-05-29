@@ -31,12 +31,12 @@
     <agent></agent>
     <position>
       <x>32.0</x>
-      <y>32.0</y>
+      <y>34.0</y>
       <z>5.0</z>
       <theta>3.8</theta>
     </position>
     <region/>
-    <vs>True</vs>
+    <vs>False</vs>
     <gs>False</gs>
     <maneuver>approach</maneuver>
   </task>
@@ -44,12 +44,12 @@
     <agent></agent>
     <position>
       <x>16.0</x>
-      <y>32.0</y>
+      <y>34.0</y>
       <z>5.0</z>
       <theta>5.5</theta>
     </position>
     <region/>
-    <vs>True</vs>
+    <vs>False</vs>
     <gs>False</gs>
     <maneuver>approach</maneuver>
   </task>
@@ -60,7 +60,7 @@
       <origin_x>16.0</origin_x>
       <origin_y>16.0</origin_y>
       <x_size>16.0</x_size>
-      <y_size>16.0</y_size>
+      <y_size>18.0</y_size>
     </region>
     <vs>True</vs>
     <gs>True</gs>

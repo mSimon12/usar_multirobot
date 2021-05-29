@@ -63,6 +63,8 @@ void Quadrotor::findFrontier()
         double resolution = current_map->getResolution();
         
         std::vector<std::pair<double, geometry_msgs::Pose> > candidate_frontiers;
+
+        int j = 0;
         for(octomap::OcTree::leaf_iterator n = current_map->begin_leafs(current_map->getTreeDepth()); n != current_map->end_leafs(); ++n)
         {
             if(!current_map->isNodeOccupied(*n))
@@ -70,34 +72,24 @@ void Quadrotor::findFrontier()
                 double x_cur = n.getX();
                 double y_cur = n.getY();
                 double z_cur = n.getZ();
-                
                 bool frontier = false;
 
-                // Check whether very close point is discovered previously
-                bool already_explored = false;
-                for(auto a : explored){
-                    if((fabs(x_cur - a.position.x) < 8.0) && (fabs(y_cur - a.position.y) < 8.0) && (fabs(z_cur - a.position.z) < 15.0)){
-                        already_explored = true;
-                        break;
-                    }
-                }
                 //Reject frontiers out of the desired exploration area
-                if(x_cur < cur_XMIN + resolution || x_cur > cur_XMAX - resolution
-                || y_cur < cur_YMIN + resolution || y_cur > cur_YMAX - resolution
-                || z_cur < ZMIN + resolution || z_cur > ZMAX - resolution) continue;
+                if((x_cur < (cur_XMIN + resolution)) || (x_cur > (cur_XMAX - resolution))
+                || (y_cur < (cur_YMIN + resolution)) || (y_cur > (cur_YMAX - resolution))
+                || (z_cur < (ZMIN + resolution)) || (z_cur > (ZMAX - resolution))) continue;
 
                 // Reject the frontiers that are located in the patches who had many frontiers already discovered.
                 double xspan = XMAX-XMIN;
                 double yspan = YMAX-YMIN;
                 int xpatch = (x_cur-XMIN)*GRID/xspan;
                 int ypatch = (y_cur-YMIN)*GRID/yspan;
-                if(already_explored || patches[xpatch][ypatch]>= PATCH_LIMIT){
-                    // if(already_explored) ROS_WARN("NODE ALREADY EXLPORED");
-                    // else ROS_WARN("NODE in PATCH LIMIT");
+                if(patches[xpatch][ypatch]>= PATCH_LIMIT){
                     continue;
                 }
                 // ROS_WARN("Possible frontiers");
 
+                //Look for frontiers around the current node position
                 for (double x_cur_buf = x_cur - resolution; x_cur_buf < x_cur + resolution; x_cur_buf += resolution)
                 {   
                     for (double y_cur_buf = y_cur - resolution; y_cur_buf < y_cur + resolution; y_cur_buf += resolution)
@@ -110,23 +102,23 @@ void Quadrotor::findFrontier()
                     }
                 }
                 if(frontier){
-                    // ROS_WARN("FRONTIER!");
                     geometry_msgs::Pose p;
                     p.position.x = x_cur;
                     p.position.y = y_cur;
                     p.position.z = z_cur;
                     p.orientation.w = 1;
                     double dist = sqrt(pow(p.position.x - odometry_information.position.x,2) + pow(p.position.y - odometry_information.position.y,2) + pow(p.position.z - odometry_information.position.z,2));
-                    if(dist > 2)
+                    if(dist > 5.0)
                         candidate_frontiers.push_back({dist,p});
                 }
             }
+            j++;
         }
 
         //Sort candidate frontiers
         std::sort(candidate_frontiers.begin(),candidate_frontiers.end(), 
             [](const DistancedPoint& x, const DistancedPoint& y){
-                return x.first > y.first;
+                return x.first < y.first;
             });
 
         std::vector<int> indices(candidate_frontiers.size());
@@ -139,10 +131,10 @@ void Quadrotor::findFrontier()
         int i;
         for(i=0;i<indices.size();i++){
             frontiers.push(candidate_frontiers[i]);
-            // cout << "Frontier point " << i << endl;
-            // cout << "x: " << candidate_frontiers[i].second.position.x << endl;
-            // cout << "y: " << candidate_frontiers[i].second.position.y << endl;
-            // cout << "z: " << candidate_frontiers[i].second.position.z << endl;
+            cout << "Filtered frontier point " << i << endl;
+            cout << "x: " << candidate_frontiers[i].second.position.x << endl;
+            cout << "y: " << candidate_frontiers[i].second.position.y << endl;
+            cout << "z: " << candidate_frontiers[i].second.position.z << endl;
         }
     }
 }
@@ -194,6 +186,7 @@ bool Quadrotor::go(geometry_msgs::Pose& target_)
 
         // Maintain constant distance from the ground
         float h_error = exp_altitude - sonar_information;
+
         goal.goal.position.z = odometry_information.position.z + h_error;
 
         float delta_x = target_.position.x - odometry_information.position.x;
@@ -240,12 +233,16 @@ void Quadrotor::takeoff()
 
 void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoalConstPtr &goal)
 {
+    double xspan = XMAX-XMIN;
+    double yspan = YMAX-YMIN;
+    int xpatch, ypatch;
+
     cur_XMIN = goal->x_min;
     cur_XMAX = goal->x_max;
     cur_YMIN = goal->y_min;
     cur_YMAX = goal->y_max;
     ROS_INFO("EXPLORATION LIMITS:\n x_min: %f;\n x_max: %f;\n t_min: %f;\n y_max: %f;",cur_XMIN,cur_XMAX,cur_YMIN,cur_YMAX);
-    
+
     ros::Rate rate(2);
     while(!odom_received)
         rate.sleep();
@@ -256,15 +253,28 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
 
     //Move the drone to the center of the exploration area
     int trials = 0;
+    geometry_msgs::Pose pose = odometry_information;
+
+    //Put initial pose as explored point
+    explored.push_back(pose);       
+    xpatch = (pose.position.x - XMIN)*GRID/xspan;
+    ypatch = (pose.position.y - YMIN)*GRID/yspan;
+    patches[xpatch][ypatch]++;
+
     while (odometry_information.position.x < cur_XMIN || odometry_information.position.x > cur_XMAX ||
     odometry_information.position.y < cur_YMIN || odometry_information.position.y > cur_YMAX){
 
-        geometry_msgs::Pose pose = odometry_information;
+        pose = odometry_information;
         pose.position.x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(cur_XMAX - cur_XMIN))) + cur_XMIN; 
         pose.position.y = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(cur_YMAX - cur_YMIN))) + cur_YMIN; 
         pose.position.z = exp_altitude;
         bool move_to_area = go(pose);
         if(move_to_area){
+            //Put first pose as explored point
+            explored.push_back(pose);       
+            xpatch = (pose.position.x - XMIN)*GRID/xspan;
+            ypatch = (pose.position.y - YMIN)*GRID/yspan;
+            patches[xpatch][ypatch]++;
             break;
         }
         else{
@@ -286,21 +296,26 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
                 break;
         } 
 
+        // Verify if all points of the grid have been explored
+        cout << "\nPATCHES:";
+        for(int x = 0; x < GRID; x++){
+            cout << endl;
+            for(int y = 0; y < GRID; y++){
+                cout << patches[x][y] << "\t";
+            }   
+        }
+
         if(frontiers.empty()){
-            double xspan = XMAX-XMIN;
-            double yspan = YMAX-YMIN;
-
-            int indices_x = (cur_XMAX-cur_XMIN)*GRID/xspan;
-            int indices_y = (cur_YMAX-cur_YMIN)*GRID/yspan;
-
             bool exp_success = true;
             // Verify if all points of the grid have been explored
-            for(int x = 0; x<indices_x; x++){
-                for(int y = 0; y<indices_y; y++){
-                    int xpatch = ((cur_XMIN + x*xspan/GRID) - XMIN)*GRID/xspan;
-                    int ypatch = ((cur_YMIN + y*yspan/GRID) - YMIN)*GRID/yspan;
+            for(int x = (cur_XMIN - XMIN)*GRID/xspan; x < (cur_XMAX - XMAX)*GRID/xspan; x++){
+                for(int y = (cur_YMIN - YMIN)*GRID/yspan; y < (cur_YMAX - YMAX)*GRID/yspan; y++){
+                    xpatch = ((cur_XMIN + x*xspan/GRID) - XMIN)*GRID/xspan;
+                    ypatch = ((cur_YMIN + y*yspan/GRID) - YMIN)*GRID/yspan;
+                    cout << "VERIFYING PATCHES";
                     if (patches[xpatch][ypatch] < PATCH_LIMIT){
                         exp_success = false;
+                        cout << "\nEMPTY PATCH";
                         break;
                     }
                 }   
@@ -336,10 +351,8 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
         success = go(_goal);
         if(!success) invalid_poses.push_back(_goal);
         else{
-            double xspan = XMAX-XMIN;
-            double yspan = YMAX-YMIN;
-            int xpatch = (_goal.position.x - XMIN)*GRID/xspan;
-            int ypatch = (_goal.position.y - YMIN)*GRID/yspan;
+            xpatch = (_goal.position.x - XMIN)*GRID/xspan;
+            ypatch = (_goal.position.y - YMIN)*GRID/yspan;
             patches[xpatch][ypatch]++;
 
             geometry_msgs::Point msg;

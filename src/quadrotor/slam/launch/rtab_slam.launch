@@ -76,35 +76,41 @@
 	  <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0"/> 
 	  <param name="RGBD/OptimizeMaxError" type="string" value="0.1"/>
 
-	  <param name="Kp/MaxDepth" type="string" value="4.5"/>
+	  <param name="Kp/MaxDepth" type="string" value="10.0"/>
 
-	  <param name="Reg/Force3DoF" type="string" value="true"/>
- 	  <param name="Reg/Strategy" type="string" value="1"/>      <!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
-	  <param name="Icp/CorrespondenceRatio" type="string" value="0.3"/>
+	  <param name="Icp/CorrespondenceRatio" value="0.2"/>			<!-- Ratio of matching correspondences to accept the transform -->
+	  <param name="Icp/Iterations" value="30"/>				<!-- Max iterations -->
 
 	  <param name="Vis/MinInliers" type="string" value="15"/>      <!-- 3D visual words minimum inliers to accept loop closure -->
 	  <param name="Vis/InlierDistance" type="string" value="0.1"/>    <!-- 3D visual words correspondence distance -->
 	  
-	  <param name="Rtabmap/TimeThr" type="string" value="700"/>
+	  <param name="Rtabmap/TimeThr" type="string" value="200"/>
+
+	  <param name="Odom/Stategy" type="int" value="1"/>			<!-- Change the Visual Odometry Stategy into Frame to Frame -->
+
+	  <param name="OdomF2M/MaxSize" type="string" value="1000"/>		<!-- maximum features map size, default 2000 --> 
+
+	  <param name="Vis/CorType" value="1"/>					<!-- Change the Matching Correspondences into Optical Flow -->
+	  <param name="Vis/MaxFeatures" type="string" value="600"/>		<!-- maximum features extracted by image, default 1000 -->
 
 	  <param name="Mem/RehearsalSimilarity" type="string" value="0.30"/>
 
 	  <param name="Reg/Force3DoF" type="string" value="true"/>
+	  <param name="Reg/Force3DoF" type="string" value="true"/>
+ 	  <param name="Reg/Strategy" type="string" value="1"/>      <!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
 	  
 	  <param name="GridGlobal/MinSize" type="string" value="150"/>
           <param name="GridGlobal/OccupancyThr" type="string" value="0.5"/>
 
-	  <param name="Rtabmap/DetectionRate" type="string" value="100"/>
+	  <param name="Rtabmap/DetectionRate" type="string" value="30"/>
  	  
           <param name="Grid/FromDepth" type="string" value="true"/>
-	  <param name="Grid/CellSize" type="string" value="0.05"/>
-          <!--<param name="octomap_tree_depth" type="int" value="16"/>-->
-
-	  <!--<param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>
-	  <param name="Grid/MaxGroundAngle" type="string" value="60.0"/>-->
+	  <param name="Grid/CellSize" type="string" value="0.07"/>
 	  <param name="Grid/RayTracing" type="string" value="true"/>		<!--Must be true to ensure free space is published into the octomap -->
+ 	  <!--<param name="Grid/MaxObstacleHeight" type="string" value="0.4"/>
+	  <param name="Grid/MaxGroundAngle" type="string" value="60.0"/>-->
+        <!--<param name="octomap_tree_depth" type="int" value="16"/>-->
 
-	  
 	  <!-- localization mode -->
 	  <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/> 
   </node>

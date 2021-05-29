@@ -283,7 +283,7 @@ class TaskManager(Thread):
                         g_var.manager_info['status'] = 'busy'
                         if self.main_task_id:
                             g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
-                            self.main_task = None
+                            # self.main_task = None
                     else:
                         # ASSIGNED BEHAVIOR -> execute the task assigned by the Task Alocator
                         if self.main_task:

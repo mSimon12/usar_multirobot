@@ -289,7 +289,7 @@ class TaskManager(Thread):
                     g_var.manager_info['status'] = 'busy'
                     if self.main_task_id:
                         g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
-                        self.main_task = None
+                        # self.main_task = None
                 # BEHAVIOR 6 -> report gas leak position                           
                 elif self.foundG:            
                     self.current_task = self.foundG

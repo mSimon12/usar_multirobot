@@ -34,9 +34,9 @@
 #include <cmath>
 #include <queue>
 #define XMIN 0.0
-#define XMAX 70.0
+#define XMAX 75.0
 #define YMIN 0.0
-#define YMAX 70.0
+#define YMAX 75.0
 #define ZMIN 0.2
 #define ZMAX 30.0
 
