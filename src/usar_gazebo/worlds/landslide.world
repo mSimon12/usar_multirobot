@@ -109,12 +109,14 @@
 
     <include>
 	<uri>model://victim2</uri>
-	<pose>44.13 19.83 1.89 0.82 0.99 -1.32</pose>
+	<pose>35.34 26.45 3.97 -0.79 -0.98 -1.04</pose>
+	<!--<pose>44.13 19.83 1.89 0.82 0.99 -1.32</pose>-->
     </include>
 
     <include>
 	<uri>model://victim3</uri>
-	<pose>34.40 21.18 2.49 0.62 -0.31 3.08</pose>
+	<pose>12.10 27.96 2.50 0.23 -1.22 -2.38</pose>
+	<!--<pose>34.40 21.18 2.49 0.62 -0.31 3.08</pose>-->
     </include>
     
     <include>

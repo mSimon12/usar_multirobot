@@ -158,16 +158,16 @@ class Approach(object):
         rospy.loginfo("Try to start from [{},{},{}]".format(self.odometry.position.x, self.odometry.position.y, self.odometry.position.z))
         rospy.loginfo("Try to go to [{},{},{}]".format(self.target.position.x, self.target.position.y, self.target.position.z))
         
-        trials = 0
-        while trials < 5:
-            rospy.logwarn("Attempt {}".format(trials+1))
-            if(trials > 1):
+        self.trials = 0
+        while self.trials < 5:
+            rospy.logwarn("Attempt {}".format(self.trials+1))
+            if(self.trials > 1):
                 self.target.position.z += 2*rd() - 1
             result = self.go(self.target)
             if (result == 'replan') or (result == 'no_plan'):
-                trials += 1
+                self.trials += 1
             else:
-                trials = 10
+                self.trials = 10
             self.collision = False
 
         if result == 'ok':
@@ -176,8 +176,6 @@ class Approach(object):
             self.trajectory_server.set_preempted() 
         else:
             self.trajectory_server.set_aborted() 
-
-        self.trials = 0
 
 
     def go(self, target_):
@@ -248,11 +246,19 @@ class Approach(object):
                 # Abort if the drone can not reach the position
                 if result == GoalStatus.ABORTED:
                     self.move_client.send_goal(last_pose)       #Go back to the last pose
+                    self.move_client.wait_for_result()
                     self.trajectory_received = False
                     self.odom_received = False
                     return 'aborted'
                 elif result == GoalStatus.PREEMPTED:
+                    last_pose.target_pose.pose.position.z += rd() - 0.5
+                    self.move_client.send_goal(last_pose)       #Go back to the last pose
+                    self.move_client.wait_for_result()
+                    self.trajectory_received = False
+                    self.odom_received = False
                     return 'replan'
+                elif result == GoalStatus.SUCCEEDED:
+                    self.trials = 0
                     
                 last_pose = pose
                 self.server_feedback.current_pose = self.odometry
@@ -286,6 +292,7 @@ class Approach(object):
         last_pose.target_pose.pose.orientation.w = self.odometry.orientation.w
 
         self.trajectory = []
+        last_motion_theta = 0
         for t in msg.trajectory:
             for point in t.multi_dof_joint_trajectory.points:
                 waypoint = PoseGoal()
@@ -299,20 +306,28 @@ class Approach(object):
                 delta_y = point.transforms[0].translation.y - last_pose.target_pose.pose.position.y
                 motion_theta = atan2(delta_y, delta_x)
 
+                last_motion_theta =motion_theta 
+
                 # Make the robot orientation fit with the motion orientation if the movemente on xy is bigger than RESOLUTION 
-                if (abs(delta_x) > RESOLUTION) or (abs(delta_y) > RESOLUTION):
-                    q = quaternion_from_euler(0,0,motion_theta)
-                    waypoint.target_pose.pose.orientation.x = q[0]
-                    waypoint.target_pose.pose.orientation.y = q[1]
-                    waypoint.target_pose.pose.orientation.z = q[2]
-                    waypoint.target_pose.pose.orientation.w = q[3]
-                else:
-                    waypoint.target_pose.pose.orientation.x = point.transforms[0].rotation.x
-                    waypoint.target_pose.pose.orientation.y = point.transforms[0].rotation.y
-                    waypoint.target_pose.pose.orientation.z = point.transforms[0].rotation.z
-                    waypoint.target_pose.pose.orientation.w = point.transforms[0].rotation.w
+                # if (abs(delta_x) > RESOLUTION) or (abs(delta_y) > RESOLUTION):
+                q = quaternion_from_euler(0,0,motion_theta)
+                waypoint.target_pose.pose.orientation.x = q[0]
+                waypoint.target_pose.pose.orientation.y = q[1]
+                waypoint.target_pose.pose.orientation.z = q[2]
+                waypoint.target_pose.pose.orientation.w = q[3]
+                # else:
+                    # waypoint.target_pose.pose.orientation.x = point.transforms[0].rotation.x
+                    # waypoint.target_pose.pose.orientation.y = point.transforms[0].rotation.y
+                    # waypoint.target_pose.pose.orientation.z = point.transforms[0].rotation.z
+                    # waypoint.target_pose.pose.orientation.w = point.transforms[0].rotation.w
+
+                # Add a rotation inplace if next position has an angle difference bigger than 45
+                if abs(motion_theta - last_motion_theta) > 0.785:
+                     last_pose.target_pose.pose.orientation = waypoint.target_pose.pose.orientation
+                     self.trajectory.append(last_pose)
 
                 last_pose = copy.copy(waypoint)         # Save pose to calc the naxt delta
+                last_motion_theta =motion_theta
 
                 self.trajectory.append(waypoint)
 
@@ -359,9 +374,9 @@ class Approach(object):
             self.odometry_me.release()
 
             #Verify possible collisions on diferent points between the robot and the goal point
-            rospy.logerr("\n\n\nCOLLISION CALLBACK: ")
-            rospy.logerr(dist)
-            for d in arange(RESOLUTION, dist + 0.5, RESOLUTION):
+            # rospy.logerr("\n\n\nCOLLISION CALLBACK: ")
+            # rospy.logerr(dist)
+            for d in arange(RESOLUTION, dist + 0.2, RESOLUTION):
                 pose.translation.x = (self.next_pose.position.x - x)*(d/dist) + x
                 pose.translation.y = (self.next_pose.position.y - y)*(d/dist) + y
                 pose.translation.z = (self.next_pose.position.z - z)*(d/dist) + z

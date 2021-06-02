@@ -42,7 +42,7 @@
 
   <!-- Adjust grid size to have more granular exploration-->
   <param name="grid_size" type="double" value="10"/> 
-  <param name="exploration_altitude" type="double" value="4.0"/> 
+  <param name="exploration_altitude" type="double" value="3.0"/> 
 
   <!-- Publishing tf_static between earth and robot/map. -->
   <node name="earth_to_world_tf_broadcaster" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 earth $(arg drone_name)/map 50"/> 
@@ -83,7 +83,7 @@
   <!-- LAUNCH VICTIM RECOGNITION SYSTEM -->
   <include file="$(find payloads)/launch/victim_recognition_system.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
-    <arg name="sensor_range" value="3.0"/>
+    <arg name="sensor_range" value="3.5"/>
     <arg name="sensor_update_rate" value="2"/>
   </include>
 
@@ -133,7 +133,7 @@
     <arg name="vsv_min_dist" value="1.0"/>
     <arg name="vsv_max_dist" value="5.0"/>
     <arg name="vsv_rounds" value="2"/>
-    <arg name="vsv_round_points" value="8"/>
+    <arg name="vsv_round_points" value="4"/>
     <arg name="vsv_height" value="2.0"/>
   </include>
 

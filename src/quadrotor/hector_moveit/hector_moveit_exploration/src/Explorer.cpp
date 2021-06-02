@@ -65,6 +65,7 @@ void Quadrotor::findFrontier()
         std::vector<std::pair<double, geometry_msgs::Pose> > candidate_frontiers;
 
         int j = 0;
+        bool invalid; 
         for(octomap::OcTree::leaf_iterator n = current_map->begin_leafs(current_map->getTreeDepth()); n != current_map->end_leafs(); ++n)
         {
             if(!current_map->isNodeOccupied(*n))
@@ -74,20 +75,37 @@ void Quadrotor::findFrontier()
                 double z_cur = n.getZ();
                 bool frontier = false;
 
+                // cout << "\nPossible frontiers";
+
                 //Reject frontiers out of the desired exploration area
                 if((x_cur < (cur_XMIN + resolution)) || (x_cur > (cur_XMAX - resolution))
                 || (y_cur < (cur_YMIN + resolution)) || (y_cur > (cur_YMAX - resolution))
                 || (z_cur < (ZMIN + resolution)) || (z_cur > (ZMAX - resolution))) continue;
+
+                invalid = false;
+                for(int i=0; i<invalid_poses.size(); i++){
+                    if(sqrt(pow(invalid_poses[i].position.x - x_cur,2) + pow(invalid_poses[i].position.y - y_cur,2) 
+                        + pow(invalid_poses[i].position.z - z_cur,2)) < 0.5){
+                        invalid = true;
+                        geometry_msgs::Pose p;
+                        p.position.x = x_cur;
+                        p.position.y = y_cur;
+                        p.position.z = z_cur;
+                        p.orientation.w = 1;
+                        invalid_poses.push_back(p);
+                        break;
+                    }
+                }
 
                 // Reject the frontiers that are located in the patches who had many frontiers already discovered.
                 double xspan = XMAX-XMIN;
                 double yspan = YMAX-YMIN;
                 int xpatch = (x_cur-XMIN)*GRID/xspan;
                 int ypatch = (y_cur-YMIN)*GRID/yspan;
-                if(patches[xpatch][ypatch]>= PATCH_LIMIT){
+
+                if(invalid || patches[xpatch][ypatch] >= PATCH_LIMIT){
                     continue;
                 }
-                // ROS_WARN("Possible frontiers");
 
                 //Look for frontiers around the current node position
                 for (double x_cur_buf = x_cur - resolution; x_cur_buf < x_cur + resolution; x_cur_buf += resolution)
@@ -108,7 +126,7 @@ void Quadrotor::findFrontier()
                     p.position.z = z_cur;
                     p.orientation.w = 1;
                     double dist = sqrt(pow(p.position.x - odometry_information.position.x,2) + pow(p.position.y - odometry_information.position.y,2) + pow(p.position.z - odometry_information.position.z,2));
-                    if(dist > 5.0)
+                    if(dist > 2.0)
                         candidate_frontiers.push_back({dist,p});
                 }
             }
@@ -131,10 +149,10 @@ void Quadrotor::findFrontier()
         int i;
         for(i=0;i<indices.size();i++){
             frontiers.push(candidate_frontiers[i]);
-            cout << "Filtered frontier point " << i << endl;
-            cout << "x: " << candidate_frontiers[i].second.position.x << endl;
-            cout << "y: " << candidate_frontiers[i].second.position.y << endl;
-            cout << "z: " << candidate_frontiers[i].second.position.z << endl;
+            // cout << "Filtered frontier point " << i << endl;
+            // cout << "x: " << candidate_frontiers[i].second.position.x << endl;
+            // cout << "y: " << candidate_frontiers[i].second.position.y << endl;
+            // cout << "z: " << candidate_frontiers[i].second.position.z << endl;
         }
     }
 }
@@ -297,25 +315,24 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
         } 
 
         // Verify if all points of the grid have been explored
-        cout << "\nPATCHES:";
-        for(int x = 0; x < GRID; x++){
-            cout << endl;
-            for(int y = 0; y < GRID; y++){
-                cout << patches[x][y] << "\t";
-            }   
-        }
+        // cout << "\nPATCHES:";
+        // for(int x = 0; x < GRID; x++){
+        //     cout << endl;
+        //     for(int y = 0; y < GRID; y++){
+        //         cout << patches[x][y] << "\t";
+        //     }   
+        // }
 
         if(frontiers.empty()){
             bool exp_success = true;
             // Verify if all points of the grid have been explored
-            for(int x = (cur_XMIN - XMIN)*GRID/xspan; x < (cur_XMAX - XMAX)*GRID/xspan; x++){
-                for(int y = (cur_YMIN - YMIN)*GRID/yspan; y < (cur_YMAX - YMAX)*GRID/yspan; y++){
-                    xpatch = ((cur_XMIN + x*xspan/GRID) - XMIN)*GRID/xspan;
-                    ypatch = ((cur_YMIN + y*yspan/GRID) - YMIN)*GRID/yspan;
-                    cout << "VERIFYING PATCHES";
-                    if (patches[xpatch][ypatch] < PATCH_LIMIT){
+            // cout << "FRONTIERS EMPTY";
+            for(int x = (cur_XMIN - XMIN)*GRID/xspan; x < (cur_XMAX - XMIN)*GRID/xspan; x++){
+                for(int y = (cur_YMIN - YMIN)*GRID/yspan; y < (cur_YMAX - YMIN)*GRID/yspan; y++){
+                    // cout << "\nVERIFYING PATCHES";
+                    if (patches[x][y] < PATCH_LIMIT){
                         exp_success = false;
-                        cout << "\nEMPTY PATCH";
+                        // cout << "\nEMPTY PATCH";
                         break;
                     }
                 }   
@@ -336,17 +353,17 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
         geometry_msgs::Pose _goal = frontiers.front().second;
         frontiers.pop();
         explored.push_back(_goal); // Valid or not, make sure that will not be offered as candidate again.
-        bool invalid = false;
-        for(int i=0;i<invalid_poses.size();i++){
+        // bool invalid = false;
+        // for(int i=0;i<invalid_poses.size();i++){
             
-            if(sqrt(pow(invalid_poses[i].position.x - _goal.position.x,2) + pow(invalid_poses[i].position.y - _goal.position.y,2) 
-                + pow(invalid_poses[i].position.z - _goal.position.z,2)) < 1.5){
-                invalid = true;
-                invalid_poses.push_back(_goal);
-                break;
-            }
-        }
-        if(invalid) continue;
+        //     if(sqrt(pow(invalid_poses[i].position.x - _goal.position.x,2) + pow(invalid_poses[i].position.y - _goal.position.y,2) 
+        //         + pow(invalid_poses[i].position.z - _goal.position.z,2)) < 1.0){
+        //         invalid = true;
+        //         invalid_poses.push_back(_goal);
+        //         break;
+        //     }
+        // }
+        // if(invalid) continue;
         
         success = go(_goal);
         if(!success) invalid_poses.push_back(_goal);

@@ -1,5 +1,0 @@
-,time,robot,robot_status,task,task_status
-0,36,UAV_1,busy,uav_app_0,executing
-1,175,UAV_1,busy,uav_app_0,suspended
-2,228,UAV_1,unable,-,-
-3,228,UAV_1,unable,uav_app_0,aborted

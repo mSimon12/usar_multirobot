@@ -1,8 +1,8 @@
 // pioneer3at_2_SUP-GS_turn_off_condition
 digraph {
 	rankdir=LR
-	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	Mi_ON [label=Mi_ON color=black fillcolor=white shape=circle style=filled]
+	Mi_OFF [label=Mi_OFF color=black fillcolor=white shape=doublecircle style=filled]
+	Mi_ON [label=Mi_ON color=blue fillcolor=lightgrey shape=circle style=filled]
 	Mi_OFF -> Mi_OFF [label=off_gs fontcolor=blue]
 	Mi_OFF -> Mi_OFF [label="end_exp,
 end_vsv,

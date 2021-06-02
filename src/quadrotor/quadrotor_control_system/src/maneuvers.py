@@ -48,8 +48,12 @@ class Maneuver(object):
 
         # Subscribe to sonar_height
         rospy.Subscriber("sonar_height", Range, self.sonar_callback, queue_size=10)
+        rospy.Subscriber("ground_truth/state", Odometry, self.poseCallback)
         self.sonar_me = Condition()
         self.current_height = None
+
+        self.odometry_me = Condition()
+        self.odometry = None
 
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
         self.msg = events_message()                                                                         # Message object
@@ -63,8 +67,13 @@ class Maneuver(object):
         dest.goal.position.y = y                    # Desired y position
 
         self.sonar_me.acquire()
-        dest.goal.position.z = z + self.current_height              # Desired z position
+        h_error = z - self.current_height
         self.sonar_me.release()
+
+        self.odometry_me.acquire()
+        self.odometry_me.wait()
+        dest.goal.position.z = self.odometry.position.z + h_error        # Desired z position
+        self.odometry_me.release()
 
         # Convert desired angle
         q = quaternion_from_euler(0,0,theta,'ryxz')
@@ -91,6 +100,15 @@ class Maneuver(object):
         self.sonar_me.acquire()
         self.current_height = msg.range
         self.sonar_me.release()
+
+    def poseCallback(self,odometry):
+        '''
+            Monitor the current position of the robot
+        '''
+        self.odometry_me.acquire()
+        self.odometry = odometry.pose.pose
+        self.odometry_me.notify()
+        self.odometry_me.release()
 
 ################################################################################################################################################
 class approach(Maneuver):
@@ -415,13 +433,15 @@ class surroundings_verification(Maneuver):
                          self.victim['y'] - (self.min_dist + count*delta)*cos(j*theta_step), self.victim['z'] + self.height, 1.57 + j*theta_step])
                     count += 1
 
+            rospy.logerr("VSV points:")
+            rospy.logerr(self.points)
+
         self.state = 'EXE'                                                                            # Set EXE state
 
         # Start the execution and wait response
         while self.points:   
             # Try to move to the next pose
             result = self.move_to(self.points[0][0], self.points[0][1], self.points[0][2], self.points[0][3])
-            rospy.logerr(self.points)
             # Verify the reason why the robot stopped moving
             if self.suspending:
                 self.suspending = False

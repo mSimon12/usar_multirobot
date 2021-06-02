@@ -20,14 +20,6 @@ try:
 except:
     action = 'show'
 
-try:
-    if sys.argv[3] == 'time':
-        x_axis = 'time'
-    elif sys.argv[3] == 'events':
-        x_axis = 'event'
-except:
-    x_axis = 'event'
-
 if action == 'save':
     output_dir = filename.replace('.csv','')
     try:
@@ -36,159 +28,108 @@ if action == 'save':
         os.mkdir(output_dir)
 
 print(df.head())
+   
+#    top=0.88,
+# bottom=0.235,
+# left=0.11,
+# right=0.9,
+# hspace=0.2,
+# wspace=0.2
 
-if x_axis == 'time':
-    # Graph one
-    ax1 = plt.subplot(311)
-    plt.plot(df.iloc[:,0].values, df['allocated_robots'].values, 'b')
-    plt.setp(ax1.get_xticklabels(), visible=False)
-    # plt.xlabel('Time (s)')
-    plt.ylabel('Allocated Robots')
-    # plt.title('Robots allocated to a task')
+######################################################################################################
+# Graph one
+plt.figure()
+# ax1 = plt.subplot(311)
+plt.plot(df.index, df['allocated_robots'].values, 'b')
+# plt.setp(ax1.get_xticklabels(), visible=False)
+plt.xlabel('Time (s)')
+plt.xticks(df[df['event'].notnull()].index, df[df['event'].notnull()]['event'].values, rotation ='vertical')
+plt.ylabel('Allocated Robots')
+plt.tight_layout()
+plt.title('Robots allocated to a task')
 
-    # Graph two
-    ax2 = plt.subplot(312)
-    plt.plot(df.iloc[:,0].values, df['available_robots'].values, 'r')
-    plt.setp(ax2.get_xticklabels(), visible=False)
-    # plt.xlabel('Time (s)')
-    plt.ylabel('Available Robots')
-    # plt.title('Robots available to executa a task')
+plt.gcf().set_size_inches(18.5, 10.5)
 
-    # Graph two
-    plt.subplot(313)
-    plt.plot(df.iloc[:,0].values, df['teleoperations'].values, 'yellow')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Number of\nteleoperations\nexecuted')
-    # plt.title('Robots available to execute a task')
+if action == 'save':
+    plt.savefig(output_dir + '/robots_allocation.png')
 
-    plt.gcf().set_size_inches(18.5, 10.5)
+######################################################################################################
+# Graph two
+plt.figure()
+# ax2 = plt.subplot(312)
+plt.plot(df.index, df['available_robots'].values, 'r')
+# plt.setp(ax2.get_xticklabels(), visible=False)
+plt.xlabel('Time (s)')
+plt.xticks(df[df['event'].notnull()].index, df[df['event'].notnull()]['event'].values, rotation ='vertical')
+plt.ylabel('Available Robots')
+plt.tight_layout()
+plt.title('Robots available to executa a task')
 
-    if action == 'save':
-        plt.savefig(output_dir + '/general_info.png')
+plt.gcf().set_size_inches(18.5, 10.5)
 
-    # Graphs of robots countings
-    plt.figure()
-    # Robots current maneuver
+if action == 'save':
+    plt.savefig(output_dir + '/available_robots.png')
 
-    df2 = df.iloc[:, 4:]
+######################################################################################################
+# Graph three
+plt.figure()
+# plt.subplot(313)
+plt.plot(df.index, df['teleoperations'].values, 'yellow')
+plt.xticks(df[df['event'].notnull()].index, df[df['event'].notnull()]['event'].values, rotation ='vertical')
+plt.xlabel('Time (s)')
+plt.ylabel('Number of\nteleoperations\nexecuted')
+plt.tight_layout()
+plt.title('Robots available to execute a task')
 
-    # leg = []
-    x=0
-    for r_i in df2.columns:
-        if 'cur_maneuver' in r_i:
-            x += 1
-            plt.subplot(2,2,x)
-            plt.plot(df.iloc[:,0].values, df[r_i].values)
-            # leg.append(r_i.replace('_cur_maneuver',''))
+plt.gcf().set_size_inches(18.5, 10.5)
 
-            plt.legend([r_i.replace('_cur_maneuver','')])
-            # plt.ylim(['teleoperation', 'safe land', 'approach', 'assessment','exploration', 'victim search', 'surroundings verification', 'return to base'])
-            plt.title('Maneuver executed by the robots along time')
+if action == 'save':
+    plt.savefig(output_dir + '/teleoperations.png')
+
+######################################################################################################
+# Graphs of current maneuver
+plt.figure()
+x=0
+for r_i in df.columns:
+    if 'cur_maneuver' in r_i:
+        x += 1
+        ax = plt.subplot(4,1,x)
+        # plt.plot(df[df.iloc[:,x_axis_index].notnull()].iloc[:,x_axis_index].index, df[df.iloc[:,x_axis_index].notnull()][r_i].values)
+        plt.plot(df.iloc[:,0].index, df[r_i].values)
+        if x < 4:
+            plt.setp(ax.get_xticklabels(), visible=False)
+        else:
             plt.xlabel('Time (s)')
-            plt.ylabel('Current task')
+        # leg.append(r_i.replace('_cur_maneuver',''))
 
-    plt.gcf().set_size_inches(18.5, 10.5)
+        plt.legend([r_i.replace('_cur_maneuver','')])
+        plt.title('Maneuver executed by the robots along time')
+        plt.xticks(df[df['event'].notnull()].index, df[df['event'].notnull()]['event'].values, rotation ='vertical')
+        plt.ylabel('Current task')
 
-    if action == 'save':
-        plt.savefig(output_dir + '/current_maneuvers.png')
+plt.tight_layout()
+plt.gcf().set_size_inches(18.5, 10.5)
 
-    plt.figure()
-    # Robots tasks counter
+if action == 'save':
+    plt.savefig(output_dir + '/current_maneuvers.png')
 
-    df2 = df.iloc[:, 4:]
+######################################################################################################
+#Graphs of robots tasks counters
+plt.figure()
+leg = []
+for r_i in df.columns:
+    if 'tasks_counter' in r_i:
+        plt.plot(df.index, df[r_i].values)
+        leg.append(r_i.replace('_tasks_counter',''))
 
-    leg = []
-    for r_i in df2.columns:
-        if 'tasks_counter' in r_i:
-            
-            plt.plot(df.iloc[:,0].values, df[r_i].values)
-            leg.append(r_i.replace('_tasks_counter',''))
+plt.legend(leg)
+plt.title('Tasks finished by the robot')
+plt.xticks(df[df['event'].notnull()].index, df[df['event'].notnull()]['event'].values, rotation ='vertical')
+plt.xlabel('Time (s)')
+plt.ylabel('Number of tasks')
 
-    plt.legend(leg)
-    plt.title('Tasks finished by the robot')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Number of tasks')
-
-    plt.gcf().set_size_inches(18.5, 10.5)
-    
-else:
-    # Graph one
-    ax1 = plt.subplot(311)
-    plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()]['allocated_robots'].values, 'b')
-    plt.setp(ax1.get_xticklabels(), visible=False)
-    # plt.xlabel('Time (s)')
-    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
-    plt.ylabel('Allocated Robots')
-    # plt.title('Robots allocated to a task')
-
-    # Graph two
-    ax2 = plt.subplot(312)
-    plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()]['available_robots'].values, 'r')
-    plt.setp(ax2.get_xticklabels(), visible=False)
-    # plt.xlabel('Time (s)')
-    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
-    plt.ylabel('Available Robots')
-    # plt.title('Robots available to executa a task')
-
-    # Graph three
-    plt.subplot(313)
-    plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()]['teleoperations'].values, 'yellow')
-    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Number of\nteleoperations\nexecuted')
-    # plt.title('Robots available to execute a task')
-
-    plt.gcf().set_size_inches(18.5, 10.5)
-
-    if action == 'save':
-        plt.savefig(output_dir + '/general_info.png')
-
-    # Graphs of robots countings
-    plt.figure()
-    # Robots current maneuver
-
-    df2 = df.iloc[:, 4:]
-
-    # leg = []
-    x=0
-    for r_i in df2.columns:
-        if 'cur_maneuver' in r_i:
-            x += 1
-            plt.subplot(2,2,x)
-            plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][r_i].values)
-            # leg.append(r_i.replace('_cur_maneuver',''))
-
-            plt.legend([r_i.replace('_cur_maneuver','')])
-            # plt.ylim(['teleoperation', 'safe land', 'approach', 'assessment','exploration', 'victim search', 'surroundings verification', 'return to base'])
-            plt.title('Maneuver executed by the robots along time')
-            plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
-            plt.xlabel('Time (s)')
-            plt.ylabel('Current task')
-
-    plt.gcf().set_size_inches(18.5, 10.5)
-
-    if action == 'save':
-        plt.savefig(output_dir + '/current_maneuvers.png')
-
-    plt.figure()
-    # Robots tasks counter
-
-    df2 = df.iloc[:, 4:]
-
-    leg = []
-    for r_i in df2.columns:
-        if 'tasks_counter' in r_i:
-            
-            plt.plot(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][r_i].values)
-            leg.append(r_i.replace('_tasks_counter',''))
-
-    plt.legend(leg)
-    plt.title('Tasks finished by the robot')
-    plt.xticks(df[df[x_axis].notnull()][x_axis].index, df[df[x_axis].notnull()][x_axis].values, rotation ='vertical')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Number of tasks')
-
-    plt.gcf().set_size_inches(18.5, 10.5)
+plt.tight_layout()
+plt.gcf().set_size_inches(18.5, 10.5)
 
 if action == 'save':
     plt.savefig(output_dir + '/tasks_counters.png')
