@@ -3,6 +3,7 @@
 from threading import Thread
 
 import roslib
+import copy
 from math import sin, cos, pi, sqrt
 roslib.load_manifest('pioneer3at_controllers')
 import rospy
@@ -12,7 +13,9 @@ from tf.transformations import quaternion_from_euler
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 from system_msgs.msg import events_message
-from exploration_msgs.msg import ExploreGoal, ExploreAction
+# from exploration_msgs.msg import ExploreGoal, ExploreAction
+
+from octomap_exploration.msg import ExecuteExplorationAction, ExecuteExplorationGoal
 
 from geometry_msgs.msg import PolygonStamped, Point32, Twist
 from sensor_msgs.msg import Joy
@@ -146,13 +149,17 @@ class exploration(object):
         self.region = []                                # Region to be explored
 
         # Exploration service                                                                              
-        self._frontier_client = SimpleActionClient("/{}/exploration_server_node".format(self.robot_name), ExploreAction)            # Create a client to the exploration node
-        self._frontier_client.wait_for_server()                                                                                     # Wait server to be ready
-        
-        self._goal = ExploreGoal()                                                                                                  # Message to send the goal region
-        self._goal.strategy_plugin = rospy.get_param("plugin_name", default="exploration_server::ExamplePlugin")                    # Select the exploration plugin
-        self._goal.boundary.header.frame_id = "earth"                                                                               # Set frame wich the points are related to
-        self._goal.start_point.header.frame_id = "earth"
+        # self._frontier_client = SimpleActionClient("/{}/exploration_server_node".format(self.robot_name), ExploreAction)            # Create a client to the exploration node
+        # self._frontier_client.wait_for_server()                                                                                     # Wait server to be ready
+
+        # self._goal = ExploreGoal()                                                                                                  # Message to send the goal region
+        # self._goal.strategy_plugin = rospy.get_param("plugin_name", default="exploration_server::ExamplePlugin")                    # Select the exploration plugin
+        # self._goal.boundary.header.frame_id = "earth"                                                                               # Set frame wich the points are related to
+        # self._goal.start_point.header.frame_id = "earth"
+             
+        # Exploration service                                                                            
+        self._exp_client = SimpleActionClient("exploration_server", ExecuteExplorationAction)                                     # Create a client to the exploration server
+        self._exp_client.wait_for_server()                                                                                       # Wait server to be ready 
 
         # Maneuvers out
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)                                 # Publisher object
@@ -163,73 +170,116 @@ class exploration(object):
         rospy.loginfo("Starting Exploration!")
         
         if self.state == 'IDLE':
-            self.msg = received_msg
+            self.msg = copy.deepcopy(received_msg)
 
             # Save some variables
-            self.region = region_to_explore                              # Save region being explored
+            self.region = region_to_explore                             # Save region being explored
 
-        # Define boundaries    
-        # Vertice 1
-        p = Point32()
-        p.x = self.region[0].linear.x
-        p.y = self.region[0].linear.y
-        self._goal.boundary.polygon.points.append(p)
-
-        # Vertice 2
-        p = Point32()
-        p.x = self.region[0].linear.x + self.region[1].linear.x
-        p.y = self.region[0].linear.y
-        self._goal.boundary.polygon.points.append(p)
-
-        # Vertice 3
-        p = Point32()
-        p.x = self.region[0].linear.x
-        p.y = self.region[0].linear.y + self.region[1].linear.y
-        self._goal.boundary.polygon.points.append(p)
-
-        # Vertice 4
-        p = Point32()
-        p.x = self.region[0].linear.x + self.region[1].linear.x
-        p.y = self.region[0].linear.y + self.region[1].linear.y
-        self._goal.boundary.polygon.points.append(p)
-
-        # Start position is the polygon centroid
-        x_sum = 0
-        y_sum = 0
-        for p in self._goal.boundary.polygon.points:
-            x_sum += p.x
-            y_sum += p.y
+        self._exp_goal = ExecuteExplorationGoal()               # Message to send the goal region 
         
-        self._goal.start_point.point.x = x_sum/4
-        self._goal.start_point.point.y = y_sum/4
+        # Define boundaries
+        self._exp_goal.x_min = self.region[0].linear.x
+        self._exp_goal.x_max = self.region[0].linear.x + self.region[1].linear.x
+        self._exp_goal.y_min = self.region[0].linear.y
+        self._exp_goal.y_max = self.region[0].linear.y + self.region[1].linear.y
 
         self.state = 'EXE'                                              # Set EXE state
 
         # Start the execution and wait response
-        self._frontier_client.send_goal(self._goal)                     # Send the goal
-        self._frontier_client.wait_for_result()                         # Wait for the result
-        state = self._frontier_client.get_state()                       # Get the state of the action
+        self._exp_client.send_goal(self._exp_goal)
+        self._exp_client.wait_for_result()
+        state = self._exp_client.get_state()                         # Get the state of the action
+        # print(state)
 
         if state == GoalStatus.SUCCEEDED:
-            result = "end"                                              # Exploration successfully executed
+            result = "end"                                              # Assessment successfully executed
         elif state == GoalStatus.PREEMPTED:
             result = "susp"                                             # Client cancel the motion
         else:
             result = "error"                                            # The server aborted the motion
 
         # Verify the reason why the robot stopped moving
-        if self.suspending:                                                 # Exploration have been suspended
+        if self.suspending:                                             # Assessment have been suspended
             self.suspending = False
             return
         elif result == 'end':                                               # Robot explored the desired region
             self.state = 'IDLE'                                             # Set IDLE state
             self.region = []                                                # Clear the region variable
             self.msg.event = 'end_exploration'
-            self.pub.publish(self.msg)                                      # Send the message signaling that the exploration is complete
+            self.pub.publish(self.msg)                                      # Send the message signaling that the assessment is complete
         else:                                                               # An error occured during the maneuver
             self.state = 'ERROR'                                            # Set ERROR state
             self.msg.event = 'exploration_error'
             self.pub.publish(self.msg)                                      # Send message signaling the error   
+        
+        # if self.state == 'IDLE':
+        #     self.msg = received_msg
+
+        #     # Save some variables
+        #     self.region = region_to_explore                              # Save region being explored
+
+        # # Define boundaries    
+        # # Vertice 1
+        # p = Point32()
+        # p.x = self.region[0].linear.x
+        # p.y = self.region[0].linear.y
+        # self._goal.boundary.polygon.points.append(p)
+
+        # # Vertice 2
+        # p = Point32()
+        # p.x = self.region[0].linear.x + self.region[1].linear.x
+        # p.y = self.region[0].linear.y
+        # self._goal.boundary.polygon.points.append(p)
+
+        # # Vertice 3
+        # p = Point32()
+        # p.x = self.region[0].linear.x
+        # p.y = self.region[0].linear.y + self.region[1].linear.y
+        # self._goal.boundary.polygon.points.append(p)
+
+        # # Vertice 4
+        # p = Point32()
+        # p.x = self.region[0].linear.x + self.region[1].linear.x
+        # p.y = self.region[0].linear.y + self.region[1].linear.y
+        # self._goal.boundary.polygon.points.append(p)
+
+        # # Start position is the polygon centroid
+        # x_sum = 0
+        # y_sum = 0
+        # for p in self._goal.boundary.polygon.points:
+        #     x_sum += p.x
+        #     y_sum += p.y
+        
+        # self._goal.start_point.point.x = x_sum/4
+        # self._goal.start_point.point.y = y_sum/4
+
+        # self.state = 'EXE'                                              # Set EXE state
+
+        # # Start the execution and wait response
+        # self._frontier_client.send_goal(self._goal)                     # Send the goal
+        # self._frontier_client.wait_for_result()                         # Wait for the result
+        # state = self._frontier_client.get_state()                       # Get the state of the action
+
+        # if state == GoalStatus.SUCCEEDED:
+        #     result = "end"                                              # Exploration successfully executed
+        # elif state == GoalStatus.PREEMPTED:
+        #     result = "susp"                                             # Client cancel the motion
+        # else:
+        #     result = "error"                                            # The server aborted the motion
+
+        # # Verify the reason why the robot stopped moving
+        # if self.suspending:                                                 # Exploration have been suspended
+        #     self.suspending = False
+        #     return
+        # elif result == 'end':                                               # Robot explored the desired region
+        #     self.state = 'IDLE'                                             # Set IDLE state
+        #     self.region = []                                                # Clear the region variable
+        #     self.msg.event = 'end_exploration'
+        #     self.pub.publish(self.msg)                                      # Send the message signaling that the exploration is complete
+        # else:                                                               # An error occured during the maneuver
+        #     self.state = 'ERROR'                                            # Set ERROR state
+        #     self.msg.event = 'exploration_error'
+        #     self.pub.publish(self.msg)                                      # Send message signaling the error   
 
     def suspend(self):
         rospy.loginfo("Suspending Exploration!")

@@ -55,6 +55,19 @@
   </task>
   <task>
     <agent></agent>
+    <position>
+      <x>16.0</x>
+      <y>16.0</y>
+      <z>3.0</z>
+      <theta>0.7</theta>
+    </position>
+    <region/>
+    <vs>True</vs>
+    <gs>False</gs>
+    <maneuver>approach</maneuver>
+  </task>
+  <task>
+    <agent></agent>
     <position/>
     <region>
       <origin_x>16.0</origin_x>

@@ -16,7 +16,7 @@
     <node name="exploration_client" pkg="exploration_server" type="plugin_client" output="log" />
 
     <!-- Launch exploration server -->
-    <node name="exploration_server_node" pkg="exploration_server" type="exploration_server_node"  output="log">
+    <node name="exploration_server_node" pkg="exploration_server" type="exploration_server_node"  output="screen">
 
         <param name="frequency" type="double" value="10.0"/>
         <param name="goal_aliasing" type="double" value="$(arg sensor_range)"/>
