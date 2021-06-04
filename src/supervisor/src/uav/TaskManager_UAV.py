@@ -267,15 +267,15 @@ class TaskManager(Thread):
                     g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                     self.main_task = None   
             else:
-                # BEHAVIOR 5 -> finish the last task and return to base
+                # BEHAVIOR 5 -> return to base
                 if (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
                     g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
                     if self.current_task != self.BB:
                         self.BB.atBase = False
                         self.current_task = self.BB
                         if self.main_task_id:
-                            g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
-                            self.main_task.restart()
+                            g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                            self.main_task = None 
                 else:
                     # BEHAVIOR 6 -> report victim pose and execute VSV
                     if self.foundV:        

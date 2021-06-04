@@ -255,7 +255,7 @@ class EventInterface(object):
                         elif (event == 'bat_LL') or (event == 'uav_bat_LL'):
                             msg.param.append(9.0)                                                       # At level = 9 the system consider bat_LL
 
-                    elif 'failure' in ll_event:
+                    elif 'failure' in ll_event or 'rst_f' in event:
                         # Fake failures
                         topic = topic.replace('/out','/in')                                             # Get failures_monitor/in topic
                         pub = rospy.Publisher("{}".format(topic), events_message, queue_size=10) 

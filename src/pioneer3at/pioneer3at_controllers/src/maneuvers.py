@@ -211,81 +211,12 @@ class exploration(object):
             self.state = 'ERROR'                                            # Set ERROR state
             self.msg.event = 'exploration_error'
             self.pub.publish(self.msg)                                      # Send message signaling the error   
-        
-        # if self.state == 'IDLE':
-        #     self.msg = received_msg
-
-        #     # Save some variables
-        #     self.region = region_to_explore                              # Save region being explored
-
-        # # Define boundaries    
-        # # Vertice 1
-        # p = Point32()
-        # p.x = self.region[0].linear.x
-        # p.y = self.region[0].linear.y
-        # self._goal.boundary.polygon.points.append(p)
-
-        # # Vertice 2
-        # p = Point32()
-        # p.x = self.region[0].linear.x + self.region[1].linear.x
-        # p.y = self.region[0].linear.y
-        # self._goal.boundary.polygon.points.append(p)
-
-        # # Vertice 3
-        # p = Point32()
-        # p.x = self.region[0].linear.x
-        # p.y = self.region[0].linear.y + self.region[1].linear.y
-        # self._goal.boundary.polygon.points.append(p)
-
-        # # Vertice 4
-        # p = Point32()
-        # p.x = self.region[0].linear.x + self.region[1].linear.x
-        # p.y = self.region[0].linear.y + self.region[1].linear.y
-        # self._goal.boundary.polygon.points.append(p)
-
-        # # Start position is the polygon centroid
-        # x_sum = 0
-        # y_sum = 0
-        # for p in self._goal.boundary.polygon.points:
-        #     x_sum += p.x
-        #     y_sum += p.y
-        
-        # self._goal.start_point.point.x = x_sum/4
-        # self._goal.start_point.point.y = y_sum/4
-
-        # self.state = 'EXE'                                              # Set EXE state
-
-        # # Start the execution and wait response
-        # self._frontier_client.send_goal(self._goal)                     # Send the goal
-        # self._frontier_client.wait_for_result()                         # Wait for the result
-        # state = self._frontier_client.get_state()                       # Get the state of the action
-
-        # if state == GoalStatus.SUCCEEDED:
-        #     result = "end"                                              # Exploration successfully executed
-        # elif state == GoalStatus.PREEMPTED:
-        #     result = "susp"                                             # Client cancel the motion
-        # else:
-        #     result = "error"                                            # The server aborted the motion
-
-        # # Verify the reason why the robot stopped moving
-        # if self.suspending:                                                 # Exploration have been suspended
-        #     self.suspending = False
-        #     return
-        # elif result == 'end':                                               # Robot explored the desired region
-        #     self.state = 'IDLE'                                             # Set IDLE state
-        #     self.region = []                                                # Clear the region variable
-        #     self.msg.event = 'end_exploration'
-        #     self.pub.publish(self.msg)                                      # Send the message signaling that the exploration is complete
-        # else:                                                               # An error occured during the maneuver
-        #     self.state = 'ERROR'                                            # Set ERROR state
-        #     self.msg.event = 'exploration_error'
-        #     self.pub.publish(self.msg)                                      # Send message signaling the error   
-
+ 
     def suspend(self):
         rospy.loginfo("Suspending Exploration!")
         self.suspending = True
         self.state = 'SUS'                                                   # Set SUS state
-        self._frontier_client.cancel_goal()                                  # Cancel the motion of the robot
+        self._exp_client.cancel_goal()                                  # Cancel the motion of the robot
 
     def resume(self):
         rospy.loginfo("Resuming Exploration!")
@@ -309,7 +240,7 @@ class exploration(object):
 
     def erro(self):
         rospy.loginfo("Exploration Error!")
-        self._frontier_client.cancel_goal()                                  # Cancel the motion of the robot
+        self._exp_client.cancel_goal()                                  # Cancel the motion of the robot
 
 ########################################################################
 class surroundings_verification(Maneuver):

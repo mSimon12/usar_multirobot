@@ -31,21 +31,26 @@
     <arg name="use_ground_truth_for_tf" value="$(arg use_ground_truth_for_tf)"/>
     <arg name="use_ground_truth_for_control" value="$(arg use_ground_truth_for_control)"/>
     <arg name="use_pose_estimation" value="$(arg use_pose_estimation)"/>
+    <arg name="controllers" value="
+      controller/position
+      controller/velocity
+      controller/attitude
+      "/>
   </include>
 
   <!-- We do not have a robot connected, so publish fake joint states -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
     <param name="use_gui" value="false"/>
-    <param name="publish_frequency" type="double" value="100.0" />
+    <param name="publish_frequency" type="double" value="50.0" />
     <rosparam param="source_list">[/move_group/fake_controller_joint_states]</rosparam>
   </node> 
 
   <!-- Adjust grid size to have more granular exploration-->
-  <param name="grid_size" type="double" value="10"/> 
+  <param name="grid_size" type="double" value="14"/> 
   <param name="exploration_altitude" type="double" value="3.0"/> 
 
   <!-- Publishing tf_static between earth and robot/map. -->
-  <node name="earth_to_world_tf_broadcaster" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 earth $(arg drone_name)/map 50"/> 
+  <node name="earth_to_world_tf_broadcaster" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 earth $(arg drone_name)/map 30"/> 
 
   <!-- RTABMAP SLAM --> 
   <include file="$(find slam)/launch/rtab_slam.launch">
@@ -91,7 +96,7 @@
   <include file="$(find payloads)/launch/battery_monitor.launch">
     <arg name="move_topic" value="action/pose/status"/>
     <arg name="publish_rate" value="0.1"/>
-    <arg name="motion_w" value="0.010"/>
+    <arg name="motion_w" value="0.008"/>
     <arg name="victim_w" value="0.0009"/>
     <arg name="gas_w" value="0.0005"/>
   </include>

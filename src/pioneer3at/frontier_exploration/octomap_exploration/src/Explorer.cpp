@@ -44,7 +44,6 @@ void Pioneer::findFrontier()
         std::vector<std::pair<double, geometry_msgs::Pose> > candidate_frontiers;
 
         int j = 0;
-        bool invalid; 
         for(octomap::OcTree::leaf_iterator n = current_map->begin_leafs(current_map->getTreeDepth()); n != current_map->end_leafs(); ++n)
         {
             if(!current_map->isNodeOccupied(*n))
@@ -54,24 +53,24 @@ void Pioneer::findFrontier()
                 double z_cur = n.getZ();
                 bool frontier = false;
 
-                // cout << "\nPossible frontiers";
-
                 //Reject frontiers out of the desired exploration area
                 if((x_cur < (cur_XMIN + resolution)) || (x_cur > (cur_XMAX - resolution))
                 || (y_cur < (cur_YMIN + resolution)) || (y_cur > (cur_YMAX - resolution))
                 || (z_cur < (ZMIN + resolution)) || (z_cur > (ZMAX - resolution))) continue;
 
-                invalid = false;
+                bool invalid = false;
                 for(int i=0; i<invalid_poses.size(); i++){
                     if(sqrt(pow(invalid_poses[i].position.x - x_cur,2) + pow(invalid_poses[i].position.y - y_cur,2) 
                         + pow(invalid_poses[i].position.z - z_cur,2)) < 0.5){
                         invalid = true;
-                        geometry_msgs::Pose p;
-                        p.position.x = x_cur;
-                        p.position.y = y_cur;
-                        p.position.z = z_cur;
-                        p.orientation.w = 1;
-                        invalid_poses.push_back(p);
+                        break;
+                    }
+                }
+
+                bool already_explored = false;
+                for(auto a : explored){
+                    if(sqrt(pow(a.position.x - x_cur,2) + pow(a.position.y - y_cur,2)) < 2.5){
+                        already_explored = true;
                         break;
                     }
                 }
@@ -82,7 +81,7 @@ void Pioneer::findFrontier()
                 int xpatch = (x_cur-XMIN)*GRID/xspan;
                 int ypatch = (y_cur-YMIN)*GRID/yspan;
 
-                if(invalid || patches[xpatch][ypatch] >= PATCH_LIMIT){
+                if(invalid || already_explored  || patches[xpatch][ypatch] >= PATCH_LIMIT){
                     continue;
                 }
 
@@ -105,8 +104,8 @@ void Pioneer::findFrontier()
                     p.position.z = z_cur;
                     p.orientation.w = 1;
                     double dist = sqrt(pow(p.position.x - odometry_information.position.x,2) + pow(p.position.y - odometry_information.position.y,2) + pow(p.position.z - odometry_information.position.z,2));
-                    if(dist > 2.0)
-                        candidate_frontiers.push_back({dist,p});
+                    // if(dist > 2.0)
+                    candidate_frontiers.push_back({dist,p});
                 }
             }
             j++;
@@ -141,6 +140,16 @@ void Pioneer::appFeedCb(const move_base_msgs::MoveBaseFeedbackConstPtr& feedback
     if (as_.isPreemptRequested() || !ros::ok()){         
         approach_client.cancelGoal();
     } 
+
+    double xspan = XMAX-XMIN;
+    double yspan = YMAX-YMIN;
+
+    if((feedback->base_position.pose.position.x > XMIN) && (feedback->base_position.pose.position.x < XMAX)
+    || (feedback->base_position.pose.position.y > YMIN) && (feedback->base_position.pose.position.y < YMAX)){
+        int xpatch = (feedback->base_position.pose.position.x - XMIN)*GRID/xspan;
+        int ypatch = (feedback->base_position.pose.position.y - YMIN)*GRID/yspan;
+        patches[xpatch][ypatch]++;
+    }
 }
 
 bool Pioneer::go(geometry_msgs::Pose& target_)
@@ -150,38 +159,31 @@ bool Pioneer::go(geometry_msgs::Pose& target_)
     goal.target_pose.pose = target_;
     ros::Rate rate(1);
 
-    approach_preempted = false;
-    //Execute the motion in a loop to allow corrections on altitude
-    do{
-        while(approach_preempted) rate.sleep();
+    //Execute the motion
+    if (as_.isPreemptRequested() || !ros::ok()) return false;
 
-        if (as_.isPreemptRequested() || !ros::ok()) break;
+    while(!odom_received) rate.sleep();
+    odom_received = false;
 
-        while(!odom_received)
-            rate.sleep();
+    float delta_x = target_.position.x - odometry_information.position.x;
+    float delta_y = target_.position.y - odometry_information.position.y;
+    float yaw = atan(delta_y/delta_x);
+    if(delta_y < 0)
+        yaw = yaw + atan(1)*4;
 
-        odom_received = false;
+    //Set the end yaw of the pioneer
+    myQuaternion.setRPY(0,0,yaw);
 
-        float delta_x = target_.position.x - odometry_information.position.x;
-        float delta_y = target_.position.y - odometry_information.position.y;
-        float yaw = atan(delta_y/delta_x);
-        if(delta_y < 0)
-            yaw = yaw + atan(1)*4;
+    goal.target_pose.pose.orientation.x = myQuaternion[0];
+    goal.target_pose.pose.orientation.y = myQuaternion[1];
+    goal.target_pose.pose.orientation.z = myQuaternion[2];
+    goal.target_pose.pose.orientation.w = myQuaternion[3];
 
-        //Set the end yaw of the pioneer
-        myQuaternion.setRPY(0,0,yaw);
-
-        goal.target_pose.pose.orientation.x = myQuaternion[0];
-        goal.target_pose.pose.orientation.y = myQuaternion[1];
-        goal.target_pose.pose.orientation.z = myQuaternion[2];
-        goal.target_pose.pose.orientation.w = myQuaternion[3];
-
-        ROS_INFO("Send Next Pose Goal");
-        approach_client.sendGoal(goal, actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>::SimpleDoneCallback(),
-                            actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>::SimpleActiveCallback(),
-                            boost::bind(&Pioneer::appFeedCb,this,_1));
-        approach_client.waitForResult();
-    }while(approach_preempted);
+    ROS_INFO("Send Next Pose Goal");
+    approach_client.sendGoal(goal, actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>::SimpleDoneCallback(),
+                        actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction>::SimpleActiveCallback(),
+                        boost::bind(&Pioneer::appFeedCb,this,_1));
+    approach_client.waitForResult();
 
     this->odom_received = false;
     if (approach_client.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
@@ -195,8 +197,6 @@ void Pioneer::run(const octomap_exploration::ExecuteExplorationGoalConstPtr &goa
     double xspan = XMAX-XMIN;
     double yspan = YMAX-YMIN;
     int xpatch, ypatch;
-
-    cout << "\n\nBAZINGA BAZINGA BAZINGA";
 
     cur_XMIN = goal->x_min;
     cur_XMAX = goal->x_max;
@@ -218,6 +218,7 @@ void Pioneer::run(const octomap_exploration::ExecuteExplorationGoalConstPtr &goa
 
     while (odometry_information.position.x < cur_XMIN || odometry_information.position.x > cur_XMAX ||
         odometry_information.position.y < cur_YMIN || odometry_information.position.y > cur_YMAX){
+        srand((unsigned) time(0));
 
         pose = odometry_information;
         pose.position.x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(cur_XMAX - cur_XMIN))) + cur_XMIN; 
@@ -234,12 +235,14 @@ void Pioneer::run(const octomap_exploration::ExecuteExplorationGoalConstPtr &goa
         else{
             trials++;
         }
+
         if (trials >=5){
             as_.setAborted(result_);
             return;
         } 
     }
     
+    trials = 0;
     while(ros::ok()){
         bool success = false;
         findFrontier();
@@ -251,25 +254,37 @@ void Pioneer::run(const octomap_exploration::ExecuteExplorationGoalConstPtr &goa
         } 
 
         // Verify if all points of the grid have been explored
-        cout << "\nPATCHES:";
-        for(int x = 0; x < GRID; x++){
-            cout << endl;
-            for(int y = 0; y < GRID; y++){
-                cout << patches[x][y] << "\t";
-            }   
-        }
+        // cout << "\nPATCHES:";
+        // for(int x = 0; x < GRID; x++){
+        //     cout << endl;
+        //     for(int y = 0; y < GRID; y++){
+        //         cout << patches[x][y] << "  ";
+        //     }   
+        // }
 
+        geometry_msgs::Pose _goal;
         if(frontiers.empty()){
             bool exp_success = true;
             // Verify if all points of the grid have been explored
             // cout << "FRONTIERS EMPTY";
+            float closest_x = FLT_MAX;
+            float closest_y = FLT_MAX;
+            float min_dist = FLT_MAX;
             for(int x = (cur_XMIN - XMIN)*GRID/xspan; x < (cur_XMAX - XMIN)*GRID/xspan; x++){
                 for(int y = (cur_YMIN - YMIN)*GRID/yspan; y < (cur_YMAX - YMIN)*GRID/yspan; y++){
                     // cout << "\nVERIFYING PATCHES";
                     if (patches[x][y] < PATCH_LIMIT){
                         exp_success = false;
+                        float x_delta = odometry_information.position.x - static_cast <float>((x+0.5)*xspan/GRID);
+                        float y_delta = odometry_information.position.y - static_cast <float>((y+0.5)*yspan/GRID);
+                        float dist = sqrt(pow(x_delta,2) + pow(y_delta,2));
+                        if (dist < min_dist){
+                            min_dist = dist;
+                            closest_x = static_cast <float>((x+0.5)*xspan/GRID);
+                            closest_y = static_cast <float>((y+0.5)*yspan/GRID);
+                        }
                         // cout << "\nEMPTY PATCH";
-                        break;
+                        // cout << "\nClosest x: " << closest_x << " y: " << closest_y;
                     }
                 }   
             }
@@ -278,32 +293,29 @@ void Pioneer::run(const octomap_exploration::ExecuteExplorationGoalConstPtr &goa
                 ROS_INFO("Exploration succeded!");
                 break;
             }
-            else
-            {
-                as_.setAborted(result_);
-                ROS_INFO("Exploration aborted!");
-                break;
+            else{
+                _goal.position.x = closest_x;
+                _goal.position.y = closest_y;
+                _goal.orientation.w = 1;                
             }
  
         } 
-        geometry_msgs::Pose _goal = frontiers.front().second;
-        frontiers.pop();
-        explored.push_back(_goal); // Valid or not, make sure that will not be offered as candidate again.
-        // bool invalid = false;
-        // for(int i=0;i<invalid_poses.size();i++){
-            
-        //     if(sqrt(pow(invalid_poses[i].position.x - _goal.position.x,2) + pow(invalid_poses[i].position.y - _goal.position.y,2) 
-        //         + pow(invalid_poses[i].position.z - _goal.position.z,2)) < 1.0){
-        //         invalid = true;
-        //         invalid_poses.push_back(_goal);
-        //         break;
-        //     }
-        // }
-        // if(invalid) continue;
-        
-        success = go(_goal);
-        if(!success) invalid_poses.push_back(_goal);
         else{
+            _goal = frontiers.front().second;
+            frontiers.pop();
+        }
+        
+        explored.push_back(_goal); // Valid or not, make sure that will not be offered as candidate again.
+        success = go(_goal);
+        if(!success){
+            invalid_poses.push_back(_goal);
+            if(trials++ > 5){
+                as_.setAborted(result_);
+                return;
+            }
+        } 
+        else{
+            trials = 0;
             xpatch = (_goal.position.x - XMIN)*GRID/xspan;
             ypatch = (_goal.position.y - YMIN)*GRID/yspan;
             patches[xpatch][ypatch]++;
@@ -314,5 +326,4 @@ void Pioneer::run(const octomap_exploration::ExecuteExplorationGoalConstPtr &goa
         ros::spinOnce();
         rate.sleep();
     }
-    // as_.setAborted(result_);
 }

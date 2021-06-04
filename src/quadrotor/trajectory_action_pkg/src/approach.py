@@ -83,7 +83,7 @@ class Approach(object):
 
         #Start move_group
         self.move_group = MoveGroup('earth', name)
-        self.move_group.set_planner()
+        self.move_group.set_planner(planner_id = 'RRTConnectkConfigDefault', attempts = 10, allowed_time = 2)       #RRTConnectkConfigDefault
 
         self.move_group.set_workspace([XMIN,YMIN,ZMIN,XMAX,YMAX,ZMAX])                  # Set the workspace size
 
@@ -251,7 +251,7 @@ class Approach(object):
                     self.odom_received = False
                     return 'aborted'
                 elif result == GoalStatus.PREEMPTED:
-                    last_pose.target_pose.pose.position.z += rd() - 0.5
+                    # last_pose.target_pose.pose.position.z += rd() - 0.5
                     self.move_client.send_goal(last_pose)       #Go back to the last pose
                     self.move_client.wait_for_result()
                     self.trajectory_received = False
@@ -376,7 +376,7 @@ class Approach(object):
             #Verify possible collisions on diferent points between the robot and the goal point
             # rospy.logerr("\n\n\nCOLLISION CALLBACK: ")
             # rospy.logerr(dist)
-            for d in arange(RESOLUTION, dist + 0.2, RESOLUTION):
+            for d in arange(RESOLUTION, dist + 0.5, RESOLUTION):
                 pose.translation.x = (self.next_pose.position.x - x)*(d/dist) + x
                 pose.translation.y = (self.next_pose.position.y - y)*(d/dist) + y
                 pose.translation.z = (self.next_pose.position.z - z)*(d/dist) + z

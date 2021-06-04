@@ -38,10 +38,11 @@
  
 
   <!-- LAUNCH FRONTIER EXPLORATION -->
- 	<!-- Adjust grid size to have more granular exploration-->
-  	<param name="grid_size" type="double" value="10"/> 
+    <!-- Adjust grid size to have more granular exploration-->
+    <param name="grid_size" type="double" value="20"/> 
   <include file="$(find octomap_exploration)/launch/explore.launch"/> 
-  <!-- <include file="$(find exploration_server)/launch/exploration.launch">
+  
+<!-- <include file="$(find exploration_server)/launch/exploration.launch">
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="sensor_range" value="3.5"/>
     <arg name="plugin" value="frontier_exploration::FrontierPlugin"/>

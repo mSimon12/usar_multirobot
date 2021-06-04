@@ -15,7 +15,6 @@ class FailuresMonitor(object):
         rospy.Subscriber("failures_monitor/in", events_message, self.event_receiver)            # Topic to receive occured events
 
     def event_receiver(self, msg):
-        
         # Reset failure monitor system
         if (msg.event == 'reset') and (self.state != 'NO_FAIL'):
             self.state = 'NO_FAIL'

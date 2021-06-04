@@ -65,7 +65,6 @@ void Quadrotor::findFrontier()
         std::vector<std::pair<double, geometry_msgs::Pose> > candidate_frontiers;
 
         int j = 0;
-        bool invalid; 
         for(octomap::OcTree::leaf_iterator n = current_map->begin_leafs(current_map->getTreeDepth()); n != current_map->end_leafs(); ++n)
         {
             if(!current_map->isNodeOccupied(*n))
@@ -75,24 +74,27 @@ void Quadrotor::findFrontier()
                 double z_cur = n.getZ();
                 bool frontier = false;
 
-                // cout << "\nPossible frontiers";
-
                 //Reject frontiers out of the desired exploration area
-                if((x_cur < (cur_XMIN + resolution)) || (x_cur > (cur_XMAX - resolution))
-                || (y_cur < (cur_YMIN + resolution)) || (y_cur > (cur_YMAX - resolution))
-                || (z_cur < (ZMIN + resolution)) || (z_cur > (ZMAX - resolution))) continue;
+                if((x_cur < cur_XMIN) || (x_cur > cur_XMAX)
+                || (y_cur < cur_YMIN) || (y_cur > cur_YMAX)
+                || (z_cur < ZMIN) || (z_cur > ZMAX)) continue;
 
-                invalid = false;
+
+                bool invalid = false;
+                //Avoid visiting close to invalid poses
                 for(int i=0; i<invalid_poses.size(); i++){
                     if(sqrt(pow(invalid_poses[i].position.x - x_cur,2) + pow(invalid_poses[i].position.y - y_cur,2) 
                         + pow(invalid_poses[i].position.z - z_cur,2)) < 0.5){
                         invalid = true;
-                        geometry_msgs::Pose p;
-                        p.position.x = x_cur;
-                        p.position.y = y_cur;
-                        p.position.z = z_cur;
-                        p.orientation.w = 1;
-                        invalid_poses.push_back(p);
+                        break;
+                    }
+                }
+
+                bool already_explored = false;
+                for(auto a : explored){
+                    if(sqrt(pow(a.position.x - x_cur,2) + pow(a.position.y - y_cur,2) 
+                        + pow(a.position.z - z_cur,2)) < 2.5){
+                        already_explored = true;
                         break;
                     }
                 }
@@ -103,7 +105,7 @@ void Quadrotor::findFrontier()
                 int xpatch = (x_cur-XMIN)*GRID/xspan;
                 int ypatch = (y_cur-YMIN)*GRID/yspan;
 
-                if(invalid || patches[xpatch][ypatch] >= PATCH_LIMIT){
+                if(invalid || already_explored || (patches[xpatch][ypatch] >= PATCH_LIMIT)){
                     continue;
                 }
 
@@ -126,8 +128,8 @@ void Quadrotor::findFrontier()
                     p.position.z = z_cur;
                     p.orientation.w = 1;
                     double dist = sqrt(pow(p.position.x - odometry_information.position.x,2) + pow(p.position.y - odometry_information.position.y,2) + pow(p.position.z - odometry_information.position.z,2));
-                    if(dist > 2.0)
-                        candidate_frontiers.push_back({dist,p});
+                    // if(dist > 3.0)
+                    candidate_frontiers.push_back({dist,p});
                 }
             }
             j++;
@@ -164,20 +166,17 @@ void Quadrotor::appFeedCb(const trajectory_action_pkg::ExecuteDroneApproachFeedb
 
     if (as_.isPreemptRequested() || !ros::ok()){         
         approach_client.cancelGoal();
-    } 
-//   if (abs(h_error) > 0.5){
-//       trajectory_action_pkg::ExecuteDroneApproachGoal goal;
-//       goal.goal = feedback->current_pose;
-//       goal.goal.position.z = odometry_information.position.z + h_error;
-      
-//       approach_preempted = true;
-//       approach_client.cancelAllGoals();
+    }
 
-//       //Fix the drone z position
-//       approach_client.sendGoal(goal);
-//       approach_client.waitForResult();
-//       approach_preempted = false;
-//   }
+    double xspan = XMAX-XMIN;
+    double yspan = YMAX-YMIN;
+
+    if((feedback->current_pose.position.x > XMIN) && (feedback->current_pose.position.x < XMAX)
+    || (feedback->current_pose.position.y > YMIN) && (feedback->current_pose.position.y < YMAX) && (h_error > -2.0)){
+        int xpatch = (feedback->current_pose.position.x - XMIN)*GRID/xspan;
+        int ypatch = (feedback->current_pose.position.y - YMIN)*GRID/yspan;
+        patches[xpatch][ypatch]++;
+    }
 }
 
 bool Quadrotor::go(geometry_msgs::Pose& target_)
@@ -186,49 +185,40 @@ bool Quadrotor::go(geometry_msgs::Pose& target_)
     goal.goal = target_;
     ros::Rate rate(1);
 
-    approach_preempted = false;
-    //Execute the motion in a loop to allow corrections on altitude
-    do{
-        while(approach_preempted) rate.sleep();
+    //Execute the motion
+    if (as_.isPreemptRequested() || !ros::ok()) return false;
 
-        if (as_.isPreemptRequested() || !ros::ok()) break;
+    while(!sonar_received) rate.sleep();
+    sonar_received = false;
+    
+    while(!odom_received) rate.sleep();
+    odom_received = false;
 
-        while(!sonar_received)
-        rate.sleep();
+    // Maintain constant distance from the ground
+    float h_error = exp_altitude - sonar_information;
 
-        while(!odom_received)
-            rate.sleep();
+    goal.goal.position.z = odometry_information.position.z + h_error;
 
-        sonar_received = false;
-        odom_received = false;
+    float delta_x = target_.position.x - odometry_information.position.x;
+    float delta_y = target_.position.y - odometry_information.position.y;
+    float yaw = atan(delta_y/delta_x);
+    if(delta_y < 0)
+        yaw = yaw + atan(1)*4;
 
-        // Maintain constant distance from the ground
-        float h_error = exp_altitude - sonar_information;
+    //Set the end yaw of the drone
+    myQuaternion.setRPY(0,0,yaw);
 
-        goal.goal.position.z = odometry_information.position.z + h_error;
+    goal.goal.orientation.x = myQuaternion[0];
+    goal.goal.orientation.y = myQuaternion[1];
+    goal.goal.orientation.z = myQuaternion[2];
+    goal.goal.orientation.w = myQuaternion[3];
 
-        float delta_x = target_.position.x - odometry_information.position.x;
-        float delta_y = target_.position.y - odometry_information.position.y;
-        float yaw = atan(delta_y/delta_x);
-        if(delta_y < 0)
-            yaw = yaw + atan(1)*4;
+    ROS_INFO("Send Next Pose Goal");
+    approach_client.sendGoal(goal, actionlib::SimpleActionClient<trajectory_action_pkg::ExecuteDroneApproachAction>::SimpleDoneCallback(),
+                        actionlib::SimpleActionClient<trajectory_action_pkg::ExecuteDroneApproachAction>::SimpleActiveCallback(),
+                        boost::bind(&Quadrotor::appFeedCb,this,_1));
+    approach_client.waitForResult();
 
-        //Set the end yaw of the drone
-        myQuaternion.setRPY(0,0,yaw);
-
-        goal.goal.orientation.x = myQuaternion[0];
-        goal.goal.orientation.y = myQuaternion[1];
-        goal.goal.orientation.z = myQuaternion[2];
-        goal.goal.orientation.w = myQuaternion[3];
-
-        ROS_INFO("Send Next Pose Goal");
-        approach_client.sendGoal(goal, actionlib::SimpleActionClient<trajectory_action_pkg::ExecuteDroneApproachAction>::SimpleDoneCallback(),
-                            actionlib::SimpleActionClient<trajectory_action_pkg::ExecuteDroneApproachAction>::SimpleActiveCallback(),
-                            boost::bind(&Quadrotor::appFeedCb,this,_1));
-        approach_client.waitForResult();
-    }while(approach_preempted);
-
-    this->odom_received = false;
     if (approach_client.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
         return true;
     }
@@ -281,6 +271,7 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
 
     while (odometry_information.position.x < cur_XMIN || odometry_information.position.x > cur_XMAX ||
     odometry_information.position.y < cur_YMIN || odometry_information.position.y > cur_YMAX){
+        srand((unsigned) time(0));
 
         pose = odometry_information;
         pose.position.x = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX/(cur_XMAX - cur_XMIN))) + cur_XMIN; 
@@ -304,6 +295,7 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
         } 
     }
     
+    trials = 0;
     while(ros::ok()){
         bool success = false;
         findFrontier();
@@ -315,25 +307,36 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
         } 
 
         // Verify if all points of the grid have been explored
-        // cout << "\nPATCHES:";
-        // for(int x = 0; x < GRID; x++){
-        //     cout << endl;
-        //     for(int y = 0; y < GRID; y++){
-        //         cout << patches[x][y] << "\t";
-        //     }   
-        // }
+        cout << "\nPATCHES:";
+        for(int x = 0; x < GRID; x++){
+            cout << endl;
+            for(int y = 0; y < GRID; y++){
+                cout << patches[x][y] << "  ";
+            }   
+        }
 
+        geometry_msgs::Pose _goal;
         if(frontiers.empty()){
+            cout << "\n\nFRONTIER EMPTY\n\n";
             bool exp_success = true;
             // Verify if all points of the grid have been explored
-            // cout << "FRONTIERS EMPTY";
+            float closest_x = FLT_MAX;
+            float closest_y = FLT_MAX;
+            float min_dist = FLT_MAX;
             for(int x = (cur_XMIN - XMIN)*GRID/xspan; x < (cur_XMAX - XMIN)*GRID/xspan; x++){
                 for(int y = (cur_YMIN - YMIN)*GRID/yspan; y < (cur_YMAX - YMIN)*GRID/yspan; y++){
-                    // cout << "\nVERIFYING PATCHES";
                     if (patches[x][y] < PATCH_LIMIT){
                         exp_success = false;
-                        // cout << "\nEMPTY PATCH";
-                        break;
+                        float x_delta = odometry_information.position.x - static_cast <float>((x+0.5)*xspan/GRID);
+                        float y_delta = odometry_information.position.y - static_cast <float>((y+0.5)*yspan/GRID);
+                        float dist = sqrt(pow(x_delta,2) + pow(y_delta,2));
+                        if (dist < min_dist){
+                            min_dist = dist;
+                            closest_x = static_cast <float>((x+0.5)*xspan/GRID);
+                            closest_y = static_cast <float>((y+0.5)*yspan/GRID);
+                        }
+                        cout << "\nEMPTY PATCH";
+                        cout << "\nClosest x: " << closest_x << " y: " << closest_y;
                     }
                 }   
             }
@@ -342,32 +345,30 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
                 ROS_INFO("Exploration succeded!");
                 break;
             }
-            else
-            {
-                as_.setAborted(result_);
-                ROS_INFO("Exploration aborted!");
-                break;
+            else{
+                _goal.position.x = closest_x;
+                _goal.position.y = closest_y;
+                _goal.position.z = exp_altitude;
+                _goal.orientation.w = 1;                
             }
- 
+
         } 
-        geometry_msgs::Pose _goal = frontiers.front().second;
-        frontiers.pop();
-        explored.push_back(_goal); // Valid or not, make sure that will not be offered as candidate again.
-        // bool invalid = false;
-        // for(int i=0;i<invalid_poses.size();i++){
-            
-        //     if(sqrt(pow(invalid_poses[i].position.x - _goal.position.x,2) + pow(invalid_poses[i].position.y - _goal.position.y,2) 
-        //         + pow(invalid_poses[i].position.z - _goal.position.z,2)) < 1.0){
-        //         invalid = true;
-        //         invalid_poses.push_back(_goal);
-        //         break;
-        //     }
-        // }
-        // if(invalid) continue;
-        
-        success = go(_goal);
-        if(!success) invalid_poses.push_back(_goal);
         else{
+            _goal = frontiers.front().second;
+            frontiers.pop();
+        }
+        
+        explored.push_back(_goal);          // Valid or not, make sure that will not be offered as candidate again.
+        success = go(_goal);
+        if(!success){
+            invalid_poses.push_back(_goal);
+            if(trials++ > 5){
+                as_.setAborted(result_);
+                return;
+            }
+        } 
+        else{
+            trials = 0;
             xpatch = (_goal.position.x - XMIN)*GRID/xspan;
             ypatch = (_goal.position.y - YMIN)*GRID/yspan;
             patches[xpatch][ypatch]++;
@@ -383,5 +384,4 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
         ros::spinOnce();
         rate.sleep();
     }
-    // as_.setAborted(result_);
 }

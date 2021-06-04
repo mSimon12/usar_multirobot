@@ -13,5 +13,5 @@ digraph {
 	POS_FAILURE -> NO_FAIL [label=uav_rst_f fontcolor=red style=dashed]
 	SIMPLE_FAILURE -> CRITIC_FAILURE [label=uav_critic_fail fontcolor=red style=dashed]
 	SIMPLE_FAILURE -> NO_FAIL [label=uav_rst_f fontcolor=red style=dashed]
-	SIMPLE_FAILURE -> POS_FAILURE [label=uav_fail fontcolor=red style=dashed]
+	SIMPLE_FAILURE -> POS_FAILURE [label=uav_pos_fail fontcolor=red style=dashed]
 }

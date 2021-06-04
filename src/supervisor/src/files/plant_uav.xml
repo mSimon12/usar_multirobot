@@ -109,7 +109,7 @@
 		<Transition source="1" dest="3" event="1"/>
 		<Transition source="2" dest="1" event="3"/>
 		<Transition source="2" dest="0" event="0"/>
-		<Transition source="3" dest="2" event="1"/>
+		<Transition source="3" dest="2" event="2"/>
 		<Transition source="3" dest="0" event="0"/>
 		<Transition source="3" dest="1" event="3"/>
 	</Transitions>
