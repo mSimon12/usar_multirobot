@@ -429,7 +429,7 @@ class teleoperation(object):
         self.state = 'ERROR'
 
     def Joy_callback(self,msg):
-        speed = msg.axes[1]             # Get speed
+        speed = msg.axes[3]             # Get speed
         rot = msg.axes[2]               # Ger angular speed
         if speed < 0:
             rot = -rot

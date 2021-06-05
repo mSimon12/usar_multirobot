@@ -284,7 +284,7 @@ class RobotStateMachine(object):
         # Update robot working status
         elif msg.event == 'robot_idle':
             if robots_info.loc[self.name,'status'] == 'unable':
-                # Signal the need of replanning due to the new mission received
+                # Signal the need of replanning due to the new robot available
                 replan_flag.acquire()
                 replan_flag.notify()
                 replan_flag.release()

@@ -151,7 +151,7 @@
 
 <!-- LAUNCH TELEOPERATION SERVER -->
   <include file="$(find payloads)/launch/teleop.launch">
-     <arg name="teleop_type" value="fake"/>						<!-- joy, kbr OR fake -->
+     <arg name="teleop_type" value="kbr"/>						<!-- joy, kbr OR fake -->
      <arg name="robots" value="[pioneer3at_1, pioneer3at_2, UAV_1, UAV_2]"/>
   </include>
 

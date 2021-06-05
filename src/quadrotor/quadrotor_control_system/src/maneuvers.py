@@ -628,7 +628,7 @@ class teleoperation(object):
     def Joy_callback(self,msg):
         z_speed = msg.axes[1]             # Get vertical speed
         x_speed = msg.axes[3]             # Get horizontal speed
-        rot = - msg.axes[2]                # Get angular speed
+        rot = msg.axes[2]                # Get angular speed
 
         time = rospy.get_time()
         dt = time - self.__last_time

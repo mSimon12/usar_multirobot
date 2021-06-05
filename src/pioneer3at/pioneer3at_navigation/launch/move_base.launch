@@ -31,7 +31,8 @@
     <rosparam file="$(find pioneer3at_navigation)/config/costmap_local.yaml" command="load" ns="local_costmap" />
     <param name="local_costmap/width" value="15.0" />
     <param name="local_costmap/height" value="15.0" />
-    <param name="local_costmap/update_frequency" value="5.0" />
+    <param name="local_costmap/update_frequency" value="5
+.0" />
 
     <!-- global costmap with kinect -->
     <rosparam file="$(find pioneer3at_navigation)/config/costmap_global.yaml" command="load" ns="global_costmap" />
@@ -60,6 +61,7 @@
 
     <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
     <param name="DWAPlannerROS/min_vel_x" value="-0.2" unless="$(arg move_forward_only)" />
+
     <param name="DWAPlannerROS/max_vel_x" value="$(arg max_vel)"/>
     <param name="DWAPlannerROS/max_rot_vel" value="$(arg max_ang_vel)"/>
     <param name="DWAPlannerROS/min_rot_vel" value="-$(arg max_ang_vel)"/>

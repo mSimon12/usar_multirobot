@@ -13,7 +13,6 @@ uav_rsm_assess,
 uav_rsm_v_search,
 uav_rsm_vsv,
 uav_rsm_rb" fontcolor=blue]
-	AUTO -> TELE [label=uav_req_assist fontcolor=blue]
 	AUTO -> TELE [label=uav_call_tele fontcolor=red style=dashed]
 	TELE -> AUTO [label=uav_st_tele fontcolor=blue]
 	TELE -> TELE [label=uav_call_tele fontcolor=red style=dashed]

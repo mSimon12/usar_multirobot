@@ -51,7 +51,7 @@ def maneuver_event(msg, robot):
             
             elif 'pioneer3at' in robot:
                 pub_msg = Twist()
-                pub_msg.linear.x = 0.5*rd() - 0.4
+                pub_msg.linear.x = 0.3*rd() - 0.2
                 pub_msg.angular.z = 1*rd() - 0.5
                 trajectory_clients[robot].publish(pub_msg)
                 sleep(10)

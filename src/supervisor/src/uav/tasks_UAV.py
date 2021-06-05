@@ -435,6 +435,7 @@ class ReqHelp(Task):
         super().__init__(param, False, False)
         self._assit_required = False
         self._tele_executed = False
+        self._tele_required = False
     
     def next_event(self, states, last_event, event_param = []):
         event_to_abort = self._abort_last_M(states)
@@ -443,22 +444,26 @@ class ReqHelp(Task):
 
         if last_event == 'uav_req_assist':
             self._assit_required = True
+        elif last_event == 'uav_call_tele':
+            self._tele_required = True
         elif last_event == 'uav_end_tele':
             self._tele_executed = True
-        elif last_event == 'uav_er_tele':
-            return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb','uav_rst_tele']
-        elif last_event in ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search']:
+        elif last_event in ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search','uav_er_tele']:
             return []
         
         if not self._assit_required:
             return ['uav_req_assist']
         else:  
-            if self._tele_executed:
-                return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search']
-            elif 'TELE_IDLE' in states:
-                return ['uav_st_tele']
+            if self._tele_required:
+                if self._tele_executed:
+                    return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search']
+                elif 'TELE_IDLE' in states:
+                    sleep(0.5)
+                    return ['uav_st_tele']
+                else:
+                    return ['uav_end_tele','uav_er_tele']
             else:
-                return ['uav_end_tele']
+                return ['uav_call_tele']
 
 
 class TeleCalled(Task):
@@ -469,12 +474,16 @@ class TeleCalled(Task):
         super().__init__(param, False, False)
 
     def next_event(self, states, last_event, event_param = []):
-        if last_event == 'uav_end_tele':
+        if last_event in ['uav_end_tele','uav_er_tele']:
             return []
         else:
-            for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','RB_EXE']:
+            for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','RB_EXE', 'V_SEARCH_EXE']:
                 if i in states:
                     return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_vsv', 'uav_sus_rb']
+            for i in ['APP_ERROR','ASSESS_ERROR','VSV_ERROR','RB_ERROR', 'V_SEARCH_ERROR', 'SAFE_LAND_ERROR']:
+                if i in states:
+                    return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search', 'uav_rst_safe_land']
+
             # After the maneuver have been executed
             if 'TELE_IDLE' in states:
                 sleep(0.5)

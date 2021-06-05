@@ -357,29 +357,35 @@ class ReqHelp(Task):
         super().__init__(param, False, False)
         self._assit_required = False
         self._tele_executed = False
+        self._tele_required = False
     
     def next_event(self, states, last_event, event_param = []):
-
-        # event_to_abort = self._abort_last_M(states)
-        # if event_to_abort:
-        #     return event_to_abort
+        event_to_abort = self._abort_last_M(states)
+        if event_to_abort:
+            return event_to_abort
 
         if last_event == 'req_assist':
             self._assit_required = True
+        elif last_event == 'call_tele':
+            self._tele_required = True
         elif last_event == 'end_tele':
             self._tele_executed = True
-        elif last_event in ['rst_app', 'rst_exp', 'rst_vsv', 'rst_rb']:
+        elif last_event in ['rst_app', 'rst_exp', 'rst_vsv', 'rst_rb','er_tele']:
             return []
         
         if not self._assit_required:
             return ['req_assist']
         else:  
-            if self._tele_executed:
-                return ['rst_app', 'rst_exp', 'rst_vsv', 'rst_rb']
-            elif 'TELE_IDLE' in states:
-                return ['st_tele']
+            if self._tele_required:
+                if self._tele_executed:
+                    return ['rst_app', 'rst_exp', 'rst_vsv', 'rst_rb']
+                if 'TELE_IDLE' in states:
+                    sleep(0.5)
+                    return ['st_tele']
+                else:
+                    return ['end_tele','er_tele']
             else:
-                return ['end_tele']
+                return ['call_tele']
 
 
 class TeleCalled(Task):
@@ -390,12 +396,15 @@ class TeleCalled(Task):
         super().__init__(param, False, False)
 
     def next_event(self, states, last_event, event_param = []):
-        if last_event == 'end_tele':
+        if last_event in ['end_tele','er_tele']:
             return []
         else:
             for i in ['APP_EXE','EXP_EXE','VSV_EXE','RB_EXE']:
                 if i in states:
                     return ['sus_app', 'sus_exp', 'sus_vsv', 'sus_rb']
+            for i in ['APP_ERROR','EXP_ERROR','VSV_ERROR','RB_ERROR']:
+                if i in states:
+                    return ['rst_app', 'rst_exp', 'rst_vsv', 'rst_rb']
             # After the maneuver have been executed
             if 'TELE_IDLE' in states:
                 sleep(0.5)

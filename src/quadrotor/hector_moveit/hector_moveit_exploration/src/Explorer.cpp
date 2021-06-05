@@ -307,17 +307,17 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
         } 
 
         // Verify if all points of the grid have been explored
-        cout << "\nPATCHES:";
-        for(int x = 0; x < GRID; x++){
-            cout << endl;
-            for(int y = 0; y < GRID; y++){
-                cout << patches[x][y] << "  ";
-            }   
-        }
+        // cout << "\nPATCHES:";
+        // for(int x = 0; x < GRID; x++){
+        //     cout << endl;
+        //     for(int y = 0; y < GRID; y++){
+        //         cout << patches[x][y] << "  ";
+        //     }   
+        // }
 
         geometry_msgs::Pose _goal;
         if(frontiers.empty()){
-            cout << "\n\nFRONTIER EMPTY\n\n";
+            // cout << "\n\nFRONTIER EMPTY\n\n";
             bool exp_success = true;
             // Verify if all points of the grid have been explored
             float closest_x = FLT_MAX;
@@ -335,8 +335,8 @@ void Quadrotor::run(const hector_moveit_exploration::ExecuteDroneExplorationGoal
                             closest_x = static_cast <float>((x+0.5)*xspan/GRID);
                             closest_y = static_cast <float>((y+0.5)*yspan/GRID);
                         }
-                        cout << "\nEMPTY PATCH";
-                        cout << "\nClosest x: " << closest_x << " y: " << closest_y;
+                        // cout << "\nEMPTY PATCH";
+                        // cout << "\nClosest x: " << closest_x << " y: " << closest_y;
                     }
                 }   
             }

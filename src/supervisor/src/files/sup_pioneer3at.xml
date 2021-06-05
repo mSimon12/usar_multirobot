@@ -416,33 +416,31 @@
 <Automaton name="teleoperation_pref_and_start_condition" type="Specification">
 	<Events>
 		<Event id="0" label="call_tele" controllable="false"/>
-		<Event id="1" label="req_assist"/>
-		<Event id="2" label="rsm_app"/>
-		<Event id="3" label="rsm_exp"/>
-		<Event id="4" label="rsm_rb"/>
-		<Event id="5" label="rsm_vsv"/>
-		<Event id="6" label="st_app"/>
-		<Event id="7" label="st_exp"/>
-		<Event id="8" label="st_rb"/>
-		<Event id="9" label="st_tele"/>
-		<Event id="10" label="st_vsv"/>
+		<Event id="1" label="rsm_app"/>
+		<Event id="2" label="rsm_exp"/>
+		<Event id="3" label="rsm_rb"/>
+		<Event id="4" label="rsm_vsv"/>
+		<Event id="5" label="st_app"/>
+		<Event id="6" label="st_exp"/>
+		<Event id="7" label="st_rb"/>
+		<Event id="8" label="st_tele"/>
+		<Event id="9" label="st_vsv"/>
 	</Events>
 	<States>
 		<State id="0" name="AUTO" initial="true" accepting="true"/>
 		<State id="1" name="TELE"/>
 	</States>
 	<Transitions>
-		<Transition source="0" dest="1" event="1"/>
 		<Transition source="0" dest="1" event="0"/>
+		<Transition source="0" dest="0" event="5"/>
 		<Transition source="0" dest="0" event="6"/>
 		<Transition source="0" dest="0" event="7"/>
-		<Transition source="0" dest="0" event="8"/>
-		<Transition source="0" dest="0" event="10"/>
+		<Transition source="0" dest="0" event="9"/>
+		<Transition source="0" dest="0" event="1"/>
 		<Transition source="0" dest="0" event="2"/>
 		<Transition source="0" dest="0" event="3"/>
 		<Transition source="0" dest="0" event="4"/>
-		<Transition source="0" dest="0" event="5"/>
-		<Transition source="1" dest="0" event="9"/>
+		<Transition source="1" dest="0" event="8"/>
 		<Transition source="1" dest="1" event="0"/>
 	</Transitions>
 </Automaton>
