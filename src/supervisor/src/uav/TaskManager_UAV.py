@@ -207,6 +207,7 @@ class TaskManager(Thread):
 
         # g_var.manager_info['status'] = 'idle'
 
+        #### CLEAR VARIABLES RELATED TO MANEUVERS ############################################################################
         if (last_event == 'uav_er_tele') and (isinstance(self.teleoperation,tasks.ReqHelp)):
             # g_var.manager_info['status'] = 'unable'
             g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
@@ -216,22 +217,6 @@ class TaskManager(Thread):
             
         if self.teleoperation and (not self.teleoperation.next_event(states.values(), last_event, param)):
             self.teleoperation = None
-            if self.tele_ok:
-                # g_var.manager_info['status'] = 'idle'
-                print("\n\nHEEREEE -> TELE ENDED")
-
-        # Verify events that afect the behavior
-        if (last_event == 'uav_victim_found'):
-            self.foundV = tasks.V_Found(param) 
-        # BEHAVIOR 3 -> human assistance due to maneuvers errors
-        elif self.tele_ok and (any([states['approach'] == 'APP_ERROR', states['assessment'] == 'ASSESS_ERROR', states['victims_search'] == 'SEARCH_ERROR',
-            states['surroundings_verification'] == 'VSV_ERROR', states['return_to_base'] == 'RB_ERROR'])):
-            if not self.current_task == self.teleoperation:
-                self.teleoperation = tasks.ReqHelp() 
-        # BEHAVIOR 2 -> teleoperation required by the Commander
-        elif (last_event == 'uav_call_tele'):
-            self.teleoperation = tasks.TeleCalled()  
-            self.tele_ok = True
 
         # Verify if 'Found behaviors' have been accomplished
         if (self.foundV) and (not self.foundV.next_event(states.values(), last_event)):
@@ -239,6 +224,21 @@ class TaskManager(Thread):
 
         if (self.main_task == self.Abort) and (self.main_task.next_event(states.values(), last_event, param)):
             self.main_task = None
+        ######################################################################################################################
+
+        # VERIFY EVENTS AND STATES THAT TRIGGER BACKUP BEHAVIORS ##############################################################################
+        if (last_event == 'uav_victim_found'):
+            self.foundV = tasks.V_Found(param) 
+        # BEHAVIOR 2 -> human assistance due to maneuvers errors
+        elif self.tele_ok and (any([states['approach'] == 'APP_ERROR', states['assessment'] == 'ASSESS_ERROR', states['victims_search'] == 'SEARCH_ERROR',
+            states['surroundings_verification'] == 'VSV_ERROR', states['return_to_base'] == 'RB_ERROR'])):
+            if not self.current_task == self.teleoperation:
+                self.teleoperation = tasks.ReqHelp() 
+        # BEHAVIOR 3 -> teleoperation required by the Commander
+        elif (last_event == 'uav_call_tele'):
+            self.teleoperation = tasks.TeleCalled()  
+            self.tele_ok = True
+        ########################################################################################################################################
 
         ##### Select the task to be executed (the main_task or backup behaviors) #####
         # if self.main_task_id:
@@ -259,6 +259,7 @@ class TaskManager(Thread):
                 # g_var.manager_info['status'] = 'busy'
                 if self.main_task_id:
                     g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
+            
             # BEHAVIOR 4 -> position failure
             elif states['failures'] == 'POS_FAILURE':
                 if self.current_task != self.Pose_Erro:  
@@ -273,11 +274,12 @@ class TaskManager(Thread):
                 if (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
                     g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
                     if self.current_task != self.BB:
-                        self.BB.atBase = False
-                        self.current_task = self.BB
-                        if self.main_task_id:
-                            g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
-                            self.main_task = None 
+                        self.BB.restart()
+                    self.current_task = self.BB
+                    if self.main_task_id:
+                        g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                        self.main_task = None 
+                        self.main_task_id = None
                 else:
                     # BEHAVIOR 6 -> report victim pose and execute VSV
                     if self.foundV:        
@@ -298,10 +300,10 @@ class TaskManager(Thread):
                                 g_var.manager_info['tasks'][self.main_task_id] = 'executing'
                         else:
                             self.current_task = None
-                            if self.tele_ok:
-                                g_var.manager_info['status'] = 'idle'
-                            else: 
+                            if not self.tele_ok:
                                 g_var.manager_info['status'] = 'unable'
+                            else: 
+                                g_var.manager_info['status'] = 'idle'
 
         # Verify if the current task can be executed due to Sensor ERRORS
         if self.current_task and (states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()):
@@ -317,7 +319,6 @@ class TaskManager(Thread):
                 self.Abort.restart()
             self.current_task = self.Abort
 
-        print("\n\nstatus-> " + g_var.manager_info['status'] )
         g_var.manager_info_flag.notify()
         g_var.manager_info_flag.release()
 

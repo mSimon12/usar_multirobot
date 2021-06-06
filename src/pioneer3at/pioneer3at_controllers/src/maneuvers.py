@@ -168,6 +168,7 @@ class exploration(object):
     
     def execute(self, region_to_explore = None, received_msg = None):
         rospy.loginfo("Starting Exploration!")
+        self.suspending = False
         
         if self.state == 'IDLE':
             self.msg = copy.deepcopy(received_msg)
@@ -200,7 +201,7 @@ class exploration(object):
 
         # Verify the reason why the robot stopped moving
         if self.suspending:                                             # Assessment have been suspended
-            self.suspending = False
+            # self.suspending = False
             return
         elif result == 'end':                                               # Robot explored the desired region
             self.state = 'IDLE'                                             # Set IDLE state
@@ -523,7 +524,7 @@ def maneuver_event(msg):
             exp.reset()
         elif (msg.event == "abort_exploration") and (exp.state == 'SUS'):
             exp.abort()
-        elif (msg.event == "exploration_error") and (app.state in ['SUS','EXE']):
+        elif (msg.event == "exploration_error") and (exp.state in ['SUS','EXE']):
             exp.erro()
         else:
             rospy.logwarn("Command not allowed!")
@@ -545,7 +546,7 @@ def maneuver_event(msg):
             vsv.reset()
         elif (msg.event == "abort_verification") and (vsv.state == 'SUS'):
             vsv.abort()
-        elif (msg.event == "verification_error") and (app.state in ['SUS','EXE']):
+        elif (msg.event == "verification_error") and (vsv.state in ['SUS','EXE']):
             vsv.erro()
         else:
             rospy.logwarn("Command not allowed!")
@@ -564,7 +565,7 @@ def maneuver_event(msg):
             rb.reset()
         elif (msg.event == "abort_return") and (rb.state == 'SUS'):
             rb.abort()
-        elif (msg.event == "return_error") and (app.state in ['SUS','EXE']):
+        elif (msg.event == "return_error") and (rb.state in ['SUS','EXE']):
             rb.erro()
         else:
             rospy.logwarn("Command not allowed!")

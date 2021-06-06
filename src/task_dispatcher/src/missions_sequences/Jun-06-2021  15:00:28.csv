@@ -1,0 +1,16 @@
+,time,robot,robot_status,task,task_status
+0,214,UAV_2,busy,assessment1_0,executing
+1,239,UAV_1,busy,assessment2_0,executing
+2,281,UAV_2,unable,-,-
+3,281,UAV_2,unable,assessment1_0,aborted
+4,281,UAV_1,busy,assessment2_0,aborted
+5,281,UAV_1,busy,assessment1_0,executing
+6,322,UAV_2,busy,assessment1_0,executing
+7,322,UAV_1,busy,assessment1_0,aborted
+8,322,UAV_1,busy,assessment2_0,executing
+9,422,UAV_2,unable,-,-
+10,422,UAV_2,unable,assessment1_0,aborted
+11,422,UAV_1,busy,assessment2_0,aborted
+12,422,UAV_1,busy,assessment1_0,executing
+13,562,UAV_1,unable,-,-
+14,562,UAV_1,unable,assessment1_0,aborted

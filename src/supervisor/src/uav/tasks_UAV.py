@@ -329,6 +329,8 @@ class GoBackToBase(Task):
         if last_event == 'uav_end_rb':
             self.atBase = True
             return []
+        elif last_event == 'uav_st_rb':
+            return ['uav_end_rb']
         elif not self.atBase:
             # Verify if the last maneuver must be aborted 
             event_to_abort = self._abort_last_M(states)
@@ -344,6 +346,10 @@ class GoBackToBase(Task):
                 return events
             else:
                 return ['uav_st_rb']
+
+    def restart(self):
+        super().restart()
+        self.atBase = False
 
 
 class AbortM(Task):
@@ -426,6 +432,10 @@ class V_Found(Task):
             else:
                 return ['uav_rep_victim']
 
+    def restart(self):
+        super().restart()
+        self.v_reported = False   
+
 
 class ReqHelp(Task):
     '''
@@ -464,6 +474,12 @@ class ReqHelp(Task):
                     return ['uav_end_tele','uav_er_tele']
             else:
                 return ['uav_call_tele']
+
+    def restart(self):
+        super().restart()
+        self._assit_required = False
+        self._tele_executed = False
+        self._tele_required = False
 
 
 class TeleCalled(Task):

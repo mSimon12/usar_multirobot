@@ -14,7 +14,7 @@ from tf.transformations import quaternion_from_euler, euler_from_quaternion
 from hector_uav_msgs.srv import EnableMotors
 
 from trajectory_action_pkg.msg import ExecuteDroneApproachAction, ExecuteDroneApproachGoal
-from geometry_msgs.msg import Pose, Point, PoseStamped
+from geometry_msgs.msg import Pose, Point, PoseStamped, Twist
 
 # from sensor_msgs.msg import Range
 from system_msgs.msg import events_message
@@ -208,6 +208,7 @@ class assessment(object):
         
     def execute(self, region_to_explore = None, received_msg = None):
         rospy.loginfo("Starting assessment!")
+        self.suspending = False
         
         if self.state == 'IDLE':
             self.msg = copy.deepcopy(received_msg)
@@ -240,7 +241,7 @@ class assessment(object):
 
         # Verify the reason why the robot stopped moving
         if self.suspending:                                             # Assessment have been suspended
-            self.suspending = False
+            # self.suspending = False
             return
         elif result == 'end':                                               # Robot explored the desired region
             self.state = 'IDLE'                                             # Set IDLE state
@@ -573,17 +574,16 @@ class teleoperation(object):
         self.odometry_me = Condition()
 
         #Variables to control the speed 
-        self.max_vel = 6.0                              #rospy.get_param()
-        self.max_ang_vel = 3.0                          #rospy.get_param()
+        self.max_vel = 0.8                              #rospy.get_param()
+        self.max_ang_vel = 1.0                          #rospy.get_param()
         self.current_speed = self.max_vel/2
         self.current_ang_speed = self.max_ang_vel/2
 
         #Publish msg to execute the motion
-        self.__tele_pub = rospy.Publisher("command/pose", PoseStamped, queue_size=10)
-        self.__tele_msg = PoseStamped()
-        self.__tele_msg.header.frame_id = "{}/world".format(self.robot_name)
+        self.__tele_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
+        self.__tele_msg = Twist()
 
-        self.__last_time = rospy.get_time()
+        # self.__last_time = rospy.get_time()
 
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
         self.msg = events_message()                                                                         # Message object
@@ -630,30 +630,9 @@ class teleoperation(object):
         x_speed = msg.axes[3]             # Get horizontal speed
         rot = msg.axes[2]                # Get angular speed
 
-        time = rospy.get_time()
-        dt = time - self.__last_time
-        self.__last_time = time 
-
-        self.odometry_me.acquire()
-        while not self.odometry:
-            self.odometry_me.wait()
-        self.__tele_msg.pose = self.odometry 
-        angles = euler_from_quaternion([self.odometry.orientation.x,self.odometry.orientation.y,self.odometry.orientation.z,self.odometry.orientation.w])
-        self.odometry_me.release()
-        theta = angles[2]
-
-        #Add z_speed, rotation or planar delta to current pose
-        self.__tele_msg.pose.position.z = self.__tele_msg.pose.position.z + z_speed*self.current_speed*dt
-        self.__tele_msg.pose.position.x = self.__tele_msg.pose.position.x + x_speed*cos(theta)*self.current_speed*dt
-        self.__tele_msg.pose.position.y = self.__tele_msg.pose.position.y + x_speed*sin(theta)*self.current_speed*dt  
-        theta = theta + rot*self.current_ang_speed*dt
-
-        # Convert oriantation back to quartenion
-        q_angles = quaternion_from_euler(angles[0],angles[1],theta)
-        self.__tele_msg.pose.orientation.x = q_angles[0]
-        self.__tele_msg.pose.orientation.y = q_angles[1]
-        self.__tele_msg.pose.orientation.z = q_angles[2]
-        self.__tele_msg.pose.orientation.w = q_angles[3]
+        self.__tele_msg.linear.x = x_speed*self.current_speed
+        self.__tele_msg.linear.z = z_speed*self.current_speed
+        self.__tele_msg.angular.z = rot*self.current_ang_speed
 
         #Send the desired position
         self.__tele_pub.publish(self.__tele_msg)
@@ -665,8 +644,8 @@ class teleoperation(object):
                 self.current_speed = self.max_vel
         elif msg.buttons[6]:
             self.current_speed -= self.max_vel*0.1
-            if self.current_speed < 0.2:
-                self.current_speed = 0.2
+            if self.current_speed < 0.05:
+                self.current_speed = 0.05
 
         # Change angular speed
         if msg.buttons[5]:
@@ -675,8 +654,8 @@ class teleoperation(object):
                 self.current_ang_speed = self.max_ang_vel 
         elif msg.buttons[7]:
             self.current_ang_speed -= self.max_ang_vel *0.1
-            if self.current_ang_speed < 0.4:
-                self.current_ang_speed = 0.4
+            if self.current_ang_speed < 0.2:
+                self.current_ang_speed = 0.2
   
         if any(msg.buttons[4:8]):
             print("\n\nSPEED: {}".format(self.current_speed))

@@ -233,9 +233,10 @@ class AllocationSystem(object):
         for r in robots_info.index:
             if (not tasks_node) or (not [t for t in tasks_node.getValue() if t[1] == r]) and (robots_info.loc[r,'current_task_id']):
                 # Send empty message
-                task_pub = rospy.Publisher("/{}/task".format(r),task_message, queue_size=10)
-                task_msg = task_message()
-                task_pub.publish(task_msg)
+                if robots_info.loc[r,'status'] != 'unable':
+                    task_pub = rospy.Publisher("/{}/task".format(r),task_message, queue_size=10)
+                    task_msg = task_message()
+                    task_pub.publish(task_msg)
 
                 #Update robot info
                 robots_info.loc[r,'last_task_id'] = robots_info.loc[r,'current_task_id']

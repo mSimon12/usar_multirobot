@@ -240,6 +240,8 @@ class GoBackToBase(Task):
         if last_event == 'end_rb':
             self.atBase = True
             return []
+        elif last_event == 'st_rb':
+            return ['end_rb']
         elif not self.atBase:
             for i in ['APP_EXE','EXP_EXE','VSV_EXE','TELE_EXE','RB_EXE']:
                 if i in states:
@@ -250,6 +252,10 @@ class GoBackToBase(Task):
                 return events
             else:
                 return ['st_rb']
+
+    def restart(self):
+        super().restart()
+        self.atBase = False
 
 
 class AbortM(Task):
@@ -333,6 +339,10 @@ class V_Found(Task):
             else:
                 return ['rep_victim']
 
+    def restart(self):
+        super().restart()
+        self.v_reported = False
+
 
 class G_Found(Task):
     '''
@@ -387,7 +397,13 @@ class ReqHelp(Task):
             else:
                 return ['call_tele']
 
+    def restart(self):
+        super().restart()
+        self._assit_required = False
+        self._tele_executed = False
+        self._tele_required = False
 
+        
 class TeleCalled(Task):
     '''
         Behavior if the Commander require teleoperation

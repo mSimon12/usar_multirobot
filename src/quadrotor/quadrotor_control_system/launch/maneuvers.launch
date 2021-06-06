@@ -24,6 +24,6 @@
    <param name="vsv_height" value="$(arg vsv_height)"/>
 
    <!-- LAUNCH MANEUVERS -->
-   <node name="maneuvers" pkg="quadrotor_control_system" type="maneuvers.py" output="log"/>
+   <node name="maneuvers" pkg="quadrotor_control_system" type="maneuvers.py" output="screen"/>
     
 </launch>	
