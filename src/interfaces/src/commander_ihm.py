@@ -37,6 +37,8 @@ class CommanderInterface(object):
         self.robots = robots_names
         self.robots_buttons= {}
 
+        self.requisitions = []        
+
         # Intitialize variable to control reset butotns and teleoperation call
         for r in self.robots:
             self.robots_buttons[r] = {'tele': True, 'rst_f': False, 'rst_vs': False, 'rst_gs': False}
@@ -49,7 +51,7 @@ class CommanderInterface(object):
         self.main = [
             # MISSIONS:
             [sg.Frame('MISSIONS:',[
-                [sg.Table(values = [['','','','','','']], size = (70,18), background_color='white', text_color='black', col_widths=[5,15,15,15,15,30], auto_size_columns=False,
+                [sg.Table(values = [['','','','','','']], size = (70,18), background_color='white', text_color='black', col_widths=[10,15,15,15,15,25], auto_size_columns=False,
                           justification='left', key='missions', headings = self.header_list, right_click_menu = ['&Right', ['Add', 'Load', 'View/Edit', 'Send', 'Remove']])],
                           [sg.Button('ADD', key='Add', size=(5,1)),
                            sg.Button('LOAD', key='Load', size=(5,1)),
@@ -62,7 +64,9 @@ class CommanderInterface(object):
                 [sg.Button('call teleoperation', key = 'tele', button_color = ('white', 'green'), disabled_button_color = ('white', 'red'), use_ttk_buttons=True, size = (30,1))], 
                 [sg.Button('reset failure', key = 'rst_f', button_color = ('white', 'green'), disabled_button_color = ('white', 'red'), use_ttk_buttons=True, disabled= True, size = (30,1))],
                 [sg.Button('reset victim sensor', key = 'rst_vs', button_color = ('white', 'green'), disabled_button_color = ('white', 'red'), use_ttk_buttons=True, disabled= True, size = (30,1))], 
-                [sg.Button('reset gas sensor', key = 'rst_gs', button_color = ('white', 'green'), disabled_button_color = ('white', 'red'), use_ttk_buttons=True, disabled= True, size = (30,1))]
+                [sg.Button('reset gas sensor', key = 'rst_gs', button_color = ('white', 'green'), disabled_button_color = ('white', 'red'), use_ttk_buttons=True, disabled= True, size = (30,1))],
+                [sg.Text('TELEOPERATION REQUISITIONS:')],
+                [sg.Multiline(size=(40,5), key='requisitions', disabled=True, autoscroll=True)]            
             ], vertical_alignment= "top")],
             [sg.Frame('ROBOTS:',[
                 [sg.Table(values = [['','','']], size = (90,6), background_color='white', text_color='black', col_widths=[15,12,28,35], auto_size_columns=False,
@@ -71,7 +75,7 @@ class CommanderInterface(object):
         ]
         
         # start the Window
-        self.window = sg.Window("COMMANDER IHM", size=(1150,600),layout = self.main, resizable= True)
+        self.window = sg.Window("COMMANDER IHM", size=(1250,600),layout = self.main, resizable= True)
         ###############################################################################################
 
         self.last_time = {}
@@ -99,6 +103,8 @@ class CommanderInterface(object):
             rospy.Subscriber("/{}/battery_monitor/out".format(r), events_message, self.batCallback, callback_args = r)
             rospy.Subscriber("/{}/failures_monitor/out".format(r), events_message, self.statusCallback, callback_args = [r, 'failures'])
             rospy.Subscriber("/{}/victim_sensor/out".format(r), events_message, self.statusCallback, callback_args = [r, 'vs'])
+
+            rospy.Subscriber("/{}/ihm/in".format(r), events_message, self.req_callback, callback_args = r)
             
             self.odometry_me.release()
         self.update_robot_info = True
@@ -116,6 +122,19 @@ class CommanderInterface(object):
 
             self.publishers.loc[r] = [f_pub, vs_pub, gs_pub, com_pub]
     
+
+    def req_callback(self, msg, robot):
+        if msg.event == 'require_assistance':
+            self.requisitions.append(robot)
+
+            self.window['requisitions'].update('')
+            for r in self.requisitions:
+                self.odometry_me.acquire()
+                text = r+ " at --> " + self.robots_info[r][2]
+                self.odometry_me.release()
+                self.window['requisitions'].print(text, text_color='red')
+
+            sg.popup_error('Robot {} requiring ASSISTANCE!!!'.format(robot), auto_close_duration=10, non_blocking= True)
 
     def poseCallback(self, odometry, robot):
         '''
@@ -251,6 +270,14 @@ class CommanderInterface(object):
                 for b in self.robots_buttons[values['robot_to_call']]:
                     self.window[b].update(disabled = not self.robots_buttons[values['robot_to_call']][b])
             elif event == 'tele':
+                if values['robot_to_call'] in self.requisitions:
+                    self.requisitions.pop(self.requisitions == values['robot_to_call'] )
+                    self.window['requisitions'].update('')
+                    for r in self.requisitions:
+                        self.odometry_me.acquire()
+                        text = r + " at --> " + self.robots_info[r][2]
+                        self.odometry_me.release()
+                        self.window['requisitions'].print(text, text_color='red') 
                 msg.event = 'teleoperation_requisition'
                 self.publishers.loc[values['robot_to_call'],'communication'].publish(msg)
             elif event == 'rst_f':
