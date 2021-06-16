@@ -104,7 +104,7 @@ class TaskManager(Thread):
             valid_task = True
         # elif task.task == 'verification':
         #     self.main_task = tasks.UGV_verification(task_position, task.victim_sensor, task.gas_sensor)          #Create object of the main task
-        elif task.task == 'return':
+        elif task.task == 'return_to_base':
             self.main_task = tasks.UGV_return(task_position, task.victim_sensor, task.gas_sensor)                #Create object of the main task
             valid_task = True
 

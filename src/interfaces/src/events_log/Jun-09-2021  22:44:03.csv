@@ -1,4 +1,0 @@
-,robot,event,event_type,param,enabled_events,time
-1,pioneer3at_1,pos_fail,uncontrollable,(),"['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'rep_self_pos', 'st_exp', 'rst_f', 'critic_fail', 'on_gs', 'st_rb', 'st_tele', 'on_vs', 'st_vsv']",30
-2,pioneer3at_1,rep_self_pos,controllable,(),"['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'rep_self_pos', 'st_exp', 'rst_f', 'critic_fail', 'on_gs', 'st_rb', 'st_tele', 'on_vs', 'st_vsv']",30
-3,pioneer3at_1,req_assist,controllable,(),"['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'rep_self_pos', 'st_exp', 'rst_f', 'critic_fail', 'on_gs', 'st_rb', 'st_tele', 'on_vs', 'st_vsv']",31

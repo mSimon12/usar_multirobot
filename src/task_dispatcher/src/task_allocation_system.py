@@ -88,6 +88,20 @@ class AllocationSystem(object):
             missions.loc[m.id] = [float(m.priority), m.tasks, 0, 0]
         
         else:
+            # Send empty message to deallocate the robot
+            task = missions.loc[msg.id,'current_task']
+            robot = list(robots_info.loc[robots_info['current_task_id'] == (msg.id + '_{}'.format(task))].index)
+
+            if robot:
+                robot = robot[0]
+                task_pub = rospy.Publisher("/{}/task".format(robot),task_message, queue_size=10)
+                task_msg = task_message()
+                task_pub.publish(task_msg)
+
+                #Update robot info
+                robots_info.loc[robot,'last_task_id'] = robots_info.loc[robot,'current_task_id']
+                robots_info.loc[robot,'current_task_id'] = None
+
             missions.drop(msg.id, inplace=True)         # Remove the mission
 
         # Signal the need of replanning due to the new mission received

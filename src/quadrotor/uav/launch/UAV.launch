@@ -45,10 +45,6 @@
     <rosparam param="source_list">[/move_group/fake_controller_joint_states]</rosparam>
   </node> 
 
-  <!-- Adjust grid size to have more granular exploration-->
-  <param name="grid_size" type="double" value="14"/> 
-  <param name="exploration_altitude" type="double" value="3.0"/> 
-
   <!-- Publishing tf_static between earth and robot/map. -->
   <node name="earth_to_world_tf_broadcaster" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 earth $(arg drone_name)/map 30"/> 
 
@@ -74,6 +70,10 @@
   </include>
 
   <!-- LAUNCH FRONTIER EXPLORATION-->
+
+  <!-- Adjust grid size to have more granular exploration-->
+  <param name="grid_size" type="double" value="15"/> 
+  <param name="exploration_altitude" type="double" value="2.5"/> 
   <include file="$(find hector_moveit_exploration)/launch/explore.launch"/>  
  
   <!--<include file="$(find exploration_server)/launch/exploration.launch">

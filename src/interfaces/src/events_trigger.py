@@ -251,7 +251,7 @@ class EventInterface(object):
                         if (event == 'bat_OK') or (event == 'uav_bat_OK'):
                             msg.param.append(70.0)                                                      # At level = 60 the system consider bat_OK
                         elif (event == 'bat_L') or (event == 'uav_bat_L'):
-                            msg.param.append(25.0)                                                      # At level = 25 the system consider bat_L
+                            msg.param.append(24.5)                                                      # At level = 25 the system consider bat_L
                         elif (event == 'bat_LL') or (event == 'uav_bat_LL'):
                             msg.param.append(9.0)                                                       # At level = 9 the system consider bat_LL
 

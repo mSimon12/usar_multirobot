@@ -343,6 +343,9 @@ class CommanderInterface(object):
                             r = loaded_mission.tasks.loc[t,'region']
                             pos = []
                             reg = [r['x0'], r['y0'], r['x1'], r['y1']]
+                        else:
+                            pos = []
+                            reg = []
                         task = [seq, maneuver, agent, pos, reg, vs, gs]
                         seq += 1
 
@@ -535,8 +538,6 @@ class CommanderInterface(object):
                                 add_window['reg_y'].update(disabled = True)
 
                 elif (event == 'remove_task') and selected_task != None:
-                    # Não esta removendo o primeiro
-
                     self.missions_details[selected_mission]
                     self.missions_details[selected_mission].pop(selected_task)
 

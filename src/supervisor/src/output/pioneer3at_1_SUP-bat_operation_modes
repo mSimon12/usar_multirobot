@@ -13,7 +13,11 @@ rsm_app,
 rsm_exp,
 rsm_vsv,
 rsm_rb" fontcolor=blue]
+	ALL_M -> ALL_M [label="bat_OK,
+bat_LL" fontcolor=red style=dashed]
 	ALL_M -> VSV_RB_TELE [label=bat_L fontcolor=red style=dashed]
+	NO_Mi -> NO_Mi [label="bat_OK,
+bat_LL" fontcolor=red style=dashed]
 	NO_Mi -> VSV_RB_TELE [label=bat_L fontcolor=red style=dashed]
 	VSV_RB_TELE -> ALL_M [label=bat_OK fontcolor=red style=dashed]
 	VSV_RB_TELE -> NO_Mi [label=bat_LL fontcolor=red style=dashed]
@@ -22,4 +26,5 @@ st_rb,
 rsm_vsv,
 rsm_rb,
 st_tele" fontcolor=blue]
+	VSV_RB_TELE -> VSV_RB_TELE [label=bat_L fontcolor=red style=dashed]
 }
