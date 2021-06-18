@@ -1,10 +1,10 @@
 #!/usr/bin/env python2.7
 
-from threading import Thread
+from threading import Thread, Condition
 
 import roslib
 import copy
-from math import sin, cos, pi, sqrt
+from math import atan2, sin, cos, pi, sqrt
 roslib.load_manifest('pioneer3at_controllers')
 import rospy
 from actionlib import SimpleActionClient, GoalStatus
@@ -19,6 +19,7 @@ from octomap_exploration.msg import ExecuteExplorationAction, ExecuteExploration
 
 from geometry_msgs.msg import PolygonStamped, Point32, Twist
 from sensor_msgs.msg import Joy
+from nav_msgs.msg import Odometry
 
 ########################################################################
 class Maneuver(object):
@@ -29,6 +30,9 @@ class Maneuver(object):
         self.suspending = False
         self._move_client = SimpleActionClient("/{}/move_base".format(self.robot_name), MoveBaseAction)     # Server name = robot_name/move_base
         self._move_client.wait_for_server()
+
+        rospy.Subscriber("/{}/odom".format(name), Odometry, self.poseCallback)
+        self.odometry_me = Condition()
 
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
         self.msg = events_message()                                                                         # Message object
@@ -59,6 +63,14 @@ class Maneuver(object):
             return "susp"                                       # Client cancel the motion
         else:
             return "error"                                      # The server aborted the motion
+
+    def poseCallback(self, odometry):
+        '''
+            Monitor the current position of the robot
+        '''
+        self.odometry_me.acquire()
+        self.odom = odometry.pose.pose
+        self.odometry_me.release()
 
 ################################################################################################################################################
 class approach(Maneuver):
@@ -246,7 +258,7 @@ class exploration(object):
 ########################################################################
 class surroundings_verification(Maneuver):
     '''
-        Maneuver responsibl for sending the robot to points around the victim to evalute
+        Maneuver responsible for sending the robot to points around the victim to evalute
         possible gas sources and surroundings conditions.
     '''
     def __init__(self, name, safe_dist, n_points):
@@ -266,13 +278,20 @@ class surroundings_verification(Maneuver):
             self.victim['x'] = victim_pose.linear.x                                                          # Get victim pose
             self.victim['y'] = victim_pose.linear.y
 
+            self.odometry_me.acquire()
+            r_v_dist = sqrt((self.odom.position.x - self.victim['x'])**2 + (self.odom.position.y - self.victim['y'])**2)
+            initial_x = (self.odom.position.x - self.victim['x'])*self.safe_dist/r_v_dist
+            initial_y = (self.odom.position.y - self.victim['y'])*self.safe_dist/r_v_dist
+            initial_theta = atan2(initial_y, initial_x)
+            self.odometry_me.release()
+
             # Define points around the victim
             theta_step = 2*pi/self.n_points                                                           # Theta dist between points
-            self.points.append([self.victim['x'], self.victim['y']- self.safe_dist, 1.57])                 # First point to visit
+            # self.points.append([self.victim['x'], self.victim['y']- self.safe_dist, 1.57])                 # First point to visit
             
-            for i in range(1,self.n_points):                                                         
-                self.points.append([self.victim['x'] + self.safe_dist*sin(i*theta_step), 
-                    self.victim['y']- self.safe_dist*cos(i*theta_step), 1.57 + i*theta_step])
+            for i in range(0,self.n_points):                                                         
+                self.points.append([self.victim['x'] + self.safe_dist*cos(initial_theta + i*theta_step), 
+                    self.victim['y'] + self.safe_dist*sin(initial_theta + i*theta_step), initial_theta + i*theta_step + pi])
 
         self.state = 'EXE'                                                                            # Set EXE state
 

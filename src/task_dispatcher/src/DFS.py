@@ -5,7 +5,7 @@ from tree import Tree
 UAV_TASKS = ['approach', 'assessment', 'search', 'return_to_base']
 UGV_TASKS = ['approach', 'search', 'return_to_base']
 
-WEIGHTS = [1,5,10,0.5]         # Weight for cost function [tp, rctp, bat, pose]
+WEIGHTS = [1,1,10,0.5]         # Weight for cost function [tp, rctp, bat, pose]
 
 
 class DFS(object):
@@ -126,7 +126,7 @@ class DFS(object):
         # Increase cost due to replacing current task of the robot
         if self.robots.loc[robot,'current_task_id']:
             if self.robots.loc[robot,'current_task_id'] == task:
-                cost -= 1   #Reduce cost to maintain the current robot executing the task
+                cost -= WEIGHTS[1] + (10 - self.tasks.loc[self.robots.loc[robot,'current_task_id'],'priority']) * WEIGHTS[1]         #Reduce cost to maintain the current robot executing the task
             elif self.robots.loc[robot,'current_task_id'] in self.tasks.index:
                 cost += (10 - self.tasks.loc[self.robots.loc[robot,'current_task_id'],'priority']) * WEIGHTS[1] 
 
@@ -143,8 +143,8 @@ class DFS(object):
             dist = (x_dif**2 + y_dif**2 + z_dif**2)**(1/2)
          
         elif self.tasks.loc[task,'region']:
-            x_dif = self.robots.loc[robot,'pose']['x'] - self.tasks.loc[task,'region']['x0']
-            y_dif = self.robots.loc[robot,'pose']['y'] - self.tasks.loc[task,'region']['y0']
+            x_dif = self.robots.loc[robot,'pose']['x'] - (self.tasks.loc[task,'region']['x0'] + self.tasks.loc[task,'region']['x1']/2)
+            y_dif = self.robots.loc[robot,'pose']['y'] - (self.tasks.loc[task,'region']['y0'] + self.tasks.loc[task,'region']['y1']/2)
             # z_dif = self.robots.loc[robot,'pose']['z'] - self.tasks.loc[task,'region']['z0']
 
             dist = (x_dif**2 + y_dif**2)**(1/2)

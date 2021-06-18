@@ -104,24 +104,22 @@
 
     <include>
 	<uri>model://victim1</uri>
-	<pose>26.66 30.32 3.67 -1.72 1.04 1.71</pose>
+	<pose>25.5 28.5 3.25 -1.72 1.04 1.71</pose>
     </include>
 
     <include>
 	<uri>model://victim2</uri>
-	<pose>35.34 26.45 3.97 -0.79 -0.98 -1.04</pose>
-	<!--<pose>44.13 19.83 1.89 0.82 0.99 -1.32</pose>-->
+	<pose>35.34 26.45 4.2 -0.79 -0.98 -1.04</pose>
     </include>
 
     <include>
 	<uri>model://victim3</uri>
-	<pose>12.10 27.96 2.50 0.23 -1.22 -2.38</pose>
-	<!--<pose>34.40 21.18 2.49 0.62 -0.31 3.08</pose>-->
+	<pose>12.10 27.96 2.70 0.38 -1.36 -2.54</pose>
     </include>
     
     <include>
 	<uri>model://victim4</uri>
-	<pose>19.66 28.35 2.84 -1.61 0.32 1.91</pose>
+	<pose>19.66 28.35 2.98 -1.61 0.32 1.91</pose>
     </include>
 
     <include>

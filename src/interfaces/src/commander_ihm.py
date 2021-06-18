@@ -130,7 +130,7 @@ class CommanderInterface(object):
             self.window['requisitions'].update('')
             for r in self.requisitions:
                 self.odometry_me.acquire()
-                text = r+ " at --> " + self.robots_info[r][2]
+                text = r + " at --> " + self.robots_info[r][2]
                 self.odometry_me.release()
                 self.window['requisitions'].print(text, text_color='red')
 

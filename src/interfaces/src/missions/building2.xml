@@ -11,7 +11,7 @@
     </position>
     <region/>
     <vs>True</vs>
-    <gs>False</gs>
+    <gs>True</gs>
     <maneuver>approach</maneuver>
   </task>
   <task>
@@ -24,7 +24,7 @@
     </position>
     <region/>
     <vs>True</vs>
-    <gs>False</gs>
+    <gs>True</gs>
     <maneuver>approach</maneuver>
   </task>
   <task>
@@ -37,7 +37,7 @@
     </position>
     <region/>
     <vs>True</vs>
-    <gs>False</gs>
+    <gs>True</gs>
     <maneuver>approach</maneuver>
   </task>
   <task>
@@ -50,7 +50,7 @@
     </position>
     <region/>
     <vs>True</vs>
-    <gs>False</gs>
+    <gs>True</gs>
     <maneuver>approach</maneuver>
   </task>
   <task>
@@ -63,7 +63,7 @@
     </position>
     <region/>
     <vs>True</vs>
-    <gs>False</gs>
+    <gs>True</gs>
     <maneuver>approach</maneuver>
   </task>
   <task>

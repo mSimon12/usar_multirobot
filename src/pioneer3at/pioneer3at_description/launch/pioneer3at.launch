@@ -61,7 +61,7 @@
   <include file="$(find payloads)/launch/battery_monitor.launch">
     <arg name="move_topic" value="move_base/status"/>
     <arg name="publish_rate" value="0.1"/>		<!-- Rate at which the battery level is published in Hz -->
-    <arg name="motion_w" value="0.005"/>
+    <arg name="motion_w" value="0.0065"/>
     <arg name="victim_w" value="0.0009"/>
     <arg name="gas_w" value="0.0005"/>
   </include>
@@ -88,8 +88,8 @@
     <arg name="robot_name" value="$(arg robot_name)"/>
     <arg name="xcoordinate" value="$(arg xcoordinate)"/>
     <arg name="ycoordinate" value="$(arg ycoordinate)"/>
-    <arg name="vsv_safe_dist" value="2.5"/>
-    <arg name="vsv_n_points" default="4"/>
+    <arg name="vsv_safe_dist" value="2.0"/>
+    <arg name="vsv_n_points" default="8"/>
   </include>
 
 </launch>
