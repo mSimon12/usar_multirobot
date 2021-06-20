@@ -13,7 +13,7 @@ publish_frequency: 3.0
 publish_cost_grid_pc: true
 
 transform_tolerance: 2
-resolution: 0.02
+resolution: 0.05
 
 # Distance in which something becomes an obstacle
 obstacle_range: 2.5

@@ -18,7 +18,7 @@ class GasSensor(object):
         self.__points_with_gas = []                                                                     # Array with points with gas
 
         # Get parameters
-        self.__update_radius = 1.5                                                                      # Radius in wich the robot does not republish gas leak
+        self.__update_radius = rospy.get_param('gas_update_radius', default=3.0)                        # Radius in wich the robot does not republish gas leak
         self.__robot_name = rospy.get_param('robot_name', default='robot')
         self.__gas_models = rospy.get_param('gas_models', default=[])
         self.__sensor_range = rospy.get_param('gs_sensor_range', default=1.0)
@@ -37,7 +37,7 @@ class GasSensor(object):
             Periodically update robot position according the Odometry
         '''
         self.__current_pose.linear.x = msg.pose.pose.position.x 
-        self.__current_pose.linear.x = msg.pose.pose.position.y  
+        self.__current_pose.linear.y = msg.pose.pose.position.y  
 
     def event_receiver(self, msg):
         '''
@@ -71,7 +71,7 @@ class GasSensor(object):
                     if self.__points_with_gas:
                         count = 0
                         for point in self.__points_with_gas:
-                            dist = ((self.__current_pose.x - point.x)**2 + (self.__current_pose.y - point.y)**2)**(0.5)
+                            dist = ((self.__current_pose.linear.x - point.linear.x)**2 + (self.__current_pose.linear.y - point.linear.y)**2)**(0.5)
                             if dist < self.__update_radius:
                                 break
                             else:
@@ -90,8 +90,6 @@ class GasSensor(object):
                         msg.event = 'gas_leak'
                         msg.position.append(self.__current_pose)
                         self.__pub.publish(msg)                                                         # Publish the found gas location
-
-                    # self.__victims.remove(g)                                                          # Remove the found gas from the list
 
             rate.sleep()
 

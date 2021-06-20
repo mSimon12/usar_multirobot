@@ -47,14 +47,14 @@
     <atmosphere type='adiabatic'/>
     <physics name='default_physics' default='0' type='ode'>
       <max_step_size>0.005</max_step_size>
-      <real_time_factor>5</real_time_factor>
+      <real_time_factor>10</real_time_factor>
       <real_time_update_rate>0</real_time_update_rate>
     </physics>
 
     <scene>
       <ambient>0.4 0.4 0.4 1</ambient>
       <background>0.7 0.7 0.7 1</background>
-      <shadows>false</shadows>
+      <shadows>true</shadows>
       <sky>
 	 <clouds>
 	    <speed>0.6</speed>
