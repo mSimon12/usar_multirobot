@@ -180,7 +180,8 @@ class TaskManager(Thread):
                 rospy.loginfo("[Task Manager]: TASK '{}' accomplished!!!!!!".format(self.main_task_id))
                 g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'finished'
-                g_var.manager_info['status'] = 'idle'
+                if g_var.manager_info['status'] == 'busy':
+                    g_var.manager_info['status'] = 'idle'
                 # Reset task
                 self.main_task = None
                 self.main_task_id = None
@@ -310,7 +311,9 @@ class TaskManager(Thread):
                             self.BB.restart()
                             self.current_task = self.BB
                             if self.main_task and (last_event == 'st_rb'):
-                                self.main_task.restart()
+                                g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                                self.main_task = None
+                                self.main_task_id = None
                     else:
                         # ASSIGNED BEHAVIOR -> execute the task assigned by the Task Alocator
                         if self.main_task:

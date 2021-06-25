@@ -4,7 +4,7 @@ from threading import Thread, Condition
 import copy
 
 import roslib
-from math import sin, cos, pi
+from math import sin, cos, pi, sqrt, atan2
 roslib.load_manifest('quadrotor_control_system')
 import rospy
 from actionlib import SimpleActionClient, GoalStatus
@@ -411,7 +411,6 @@ class surroundings_verification(Maneuver):
         
     def execute(self, victim_id = 'victim', victim_pose = None, received_msg = None):
         
-        
         delta = (self.max_dist - self.min_dist)/(self.rounds*self.n_points)
         
         if self.state == 'IDLE':
@@ -423,19 +422,22 @@ class surroundings_verification(Maneuver):
             self.victim['y'] = victim_pose.linear.y
             self.victim['z'] = victim_pose.linear.z
 
-            # Define points around the victim
-            theta_step = 2*pi/self.n_points                                                                 # Theta dist between points
-            self.points.append([self.victim['x'], self.victim['y'] - self.min_dist, self.victim['z'] + self.height, 1.57])     # First point to visit
+            self.odometry_me.acquire()
+            r_v_dist = sqrt((self.odometry.position.x - self.victim['x'])**2 + (self.odometry.position.y - self.victim['y'])**2)
+            initial_x = (self.odometry.position.x - self.victim['x'])*self.min_dist/r_v_dist
+            initial_y = (self.odometry.position.y - self.victim['y'])*self.min_dist/r_v_dist
+            initial_theta = atan2(initial_y, initial_x)
+            self.odometry_me.release()
 
+            # Define points around the victim
+            theta_step = 2*pi/self.n_points                                                           # Theta dist between points
+            
             count = 0
             for i in range(0,self.rounds):
-                for j in range(1, self.n_points):                                                       
-                    self.points.append([self.victim['x'] + (self.min_dist + count*delta)*sin(j*theta_step), 
-                         self.victim['y'] - (self.min_dist + count*delta)*cos(j*theta_step), self.victim['z'] + self.height, 1.57 + j*theta_step])
+                for j in range(0,self.n_points):                                                         
+                    self.points.append([self.victim['x'] + (self.min_dist + count*delta)*cos(initial_theta + j*theta_step), 
+                        self.victim['y'] + (self.min_dist + count*delta)*sin(initial_theta + j*theta_step), self.height, initial_theta + j*theta_step + pi])
                     count += 1
-
-            rospy.logerr("VSV points:")
-            rospy.logerr(self.points)
 
         self.state = 'EXE'                                                                            # Set EXE state
 

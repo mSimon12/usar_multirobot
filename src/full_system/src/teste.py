@@ -1,12 +1,25 @@
-from numpy.core.numeric import NaN
+import matplotlib.pyplot as plt
+from numpy.core.records import array
 import pandas as pd
 
-df = pd.DataFrame({'a':[1,2,3,4,5],'b':[10,20,NaN,40,50]})
+fig = plt.figure()
 
-print(df[df['b'].notnull()]['a'].values)
+ax = fig.add_subplot(constrained_layout=True)
+ax plot_wireframe([1,2,3],[1,2,3],[1,2,3])
+# ax.set_xlabel('f [Hz]')
+# ax.set_ylabel('PSD')
+# ax.set_title('Random spectrum')
 
-x = [1,3]
+secax = ax.secondary_xaxis('top', [10,3,4])
+secax.set_xlabel('period [s]')
 
-df.append(x, ignore_index=True)
+plt.show()
+# df = pd.DataFrame(columns=['a','b','c'])
 
-print(df)
+# df.loc[1] = [1,2,3]
+# df.loc[2] = [4,5,None]
+# df.loc[3] = [7,8,9]
+
+# print(df)
+
+# print(list(df.columns.values).index('b'))

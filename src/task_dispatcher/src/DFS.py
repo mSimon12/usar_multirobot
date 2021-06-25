@@ -5,7 +5,7 @@ from tree import Tree
 UAV_TASKS = ['approach', 'assessment', 'search', 'return_to_base']
 UGV_TASKS = ['approach', 'search', 'return_to_base']
 
-WEIGHTS = [1,1,10,0.5]         # Weight for cost function [tp, rctp, bat, pose]
+WEIGHTS = [1,2,10,0.5]         # Weight for cost function [tp, rctp, bat, pose]
 
 
 class DFS(object):

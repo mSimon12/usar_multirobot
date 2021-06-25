@@ -2,7 +2,7 @@ controller_frequency: 10.0
 
 NavfnROS:
   allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.
-  default_tolerance: 0.2 # A tolerance on the goal point for the planner.
+  default_tolerance: 0.3 # A tolerance on the goal point for the planner.
 
 TrajectoryPlannerROS:
   # Robot Configuration Parameters
@@ -73,7 +73,7 @@ DWAPlannerROS:
   latch_xy_goal_tolerance: false
 
   # # Forward Simulation Parameters
-  sim_time: 2.0
+  sim_time: 4.0
   sim_granularity: 0.02
   vx_samples: 6
   vy_samples: 0

@@ -49,7 +49,7 @@ class Validation(object):
         self.odometry_me = Condition()
 
         # Defines collumns names related to desired informations
-        cols = ['event', 'allocated_robots', 'available_robots', 'teleoperations']
+        cols = ['event', 'event_source', 'allocated_robots', 'available_robots', 'teleoperations']
         for r in self.robots:
             cols.append(r + '_cur_maneuver')
             cols.append(r + '_tasks_counter')
@@ -90,6 +90,7 @@ class Validation(object):
                 rospy.Subscriber("/{}/ground_truth/state".format(r), Odometry, self.poseCallback, callback_args = r)
 
         rospy.Subscriber("/events_trigger_ihm_in", trace_events, self.trace_cbk)
+        self.event_robot = None
         rospy.Subscriber("/clock", Clock, self.time_update)
 
     def time_update(self, msg):
@@ -162,6 +163,7 @@ class Validation(object):
         '''
         self.new_sample_flag.acquire()
         self.event = msg.last_event
+        self.event_robot = msg.robot
 
         if 'st_tele' in msg.last_event:
             self.tele_count += 1
@@ -181,8 +183,9 @@ class Validation(object):
             self.new_sample_flag.wait(self.samples_period)
             
             # Update samples
-            sample = [self.event, self.allocated_n, self.available_n, self.tele_count]
+            sample = [self.event, self.event_robot, self.allocated_n, self.available_n, self.tele_count]
             self.event = None
+            self.event_robot = None
             for r in self.robots:
                 sample.append(self.r_cur_task[r])                       # robot current task
                 sample.append(self.robots_counter[r])                   # robot tasks counter

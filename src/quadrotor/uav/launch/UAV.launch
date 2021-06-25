@@ -73,7 +73,7 @@
 
   <!-- Adjust grid size to have more granular exploration-->
   <param name="grid_size" type="double" value="15"/> 
-  <param name="exploration_altitude" type="double" value="2.5"/> 
+  <param name="exploration_altitude" type="double" value="4.0"/> 
   <include file="$(find hector_moveit_exploration)/launch/explore.launch"/>  
  
   <!--<include file="$(find exploration_server)/launch/exploration.launch">
@@ -114,15 +114,15 @@
   <!-- LAUNCH SAFE LAND EXECUTOR -->
   <include file="$(find quadrotor_control_system)/launch/safe_land_server.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
-    <arg name="drone_height" value="0.25"/>
+    <arg name="drone_height" value="0.5"/>
     <arg name="safe_dist" value="3.0"/>
   </include>
 
   <!-- LAUNCH VICTIM SEARCH EXECUTOR -->
   <include file="$(find quadrotor_control_system)/launch/search_server.launch">
     <arg name="robot_name" value="$(arg drone_name)"/>
-    <arg name="sensor_resolution" value="2.5"/>
-    <arg name="height" value="1.0"/>
+    <arg name="sensor_resolution" value="2.0"/>
+    <arg name="height" value="1.5"/>
   </include>
 
   <!-- Launch the node responsible for controlling maneuvers -->

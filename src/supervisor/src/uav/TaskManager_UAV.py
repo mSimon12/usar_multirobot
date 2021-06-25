@@ -167,7 +167,8 @@ class TaskManager(Thread):
                 rospy.loginfo("[Task Manager]: TASK '{}' accomplished!!!!!!".format(self.main_task_id))
                 g_var.manager_info_flag.acquire()
                 g_var.manager_info['tasks'][self.main_task_id] = 'finished'
-                g_var.manager_info['status'] = 'idle'
+                if g_var.manager_info['status'] == 'busy':
+                    g_var.manager_info['status'] = 'idle'
 
                 print("\n\nTask finished\n\n")
 

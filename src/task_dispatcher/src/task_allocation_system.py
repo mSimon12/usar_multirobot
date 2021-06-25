@@ -172,8 +172,8 @@ class AllocationSystem(object):
             Allocate tasks to robots
         '''
         rospy.loginfo("Searching for best robots allocation!")
-        # print("\nROBOTS\n{}\n".format(robots))
-        # print("\nTASKS:\n{}\n\n\n".format(tasks))
+        print("\nROBOTS\n{}\n".format(robots))
+        print("\nTASKS:\n{}\n\n\n".format(tasks))
 
         # Sort tasks by priority
         tasks.sort_values(by=['priority'], ascending=True, inplace=True)

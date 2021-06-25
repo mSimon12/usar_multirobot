@@ -83,7 +83,7 @@ class Approach(object):
 
         #Start move_group
         self.move_group = MoveGroup('earth', name)
-        self.move_group.set_planner(planner_id = 'PRMkConfigDefault', attempts = 5, allowed_time = 3)       #RRTConnectkConfigDefault
+        self.move_group.set_planner(planner_id = 'RRTConnectkConfigDefault', attempts = 10, allowed_time = 3)       #RRTConnectkConfigDefault - PRMkConfigDefault
 
         self.move_group.set_workspace([XMIN,YMIN,ZMIN,XMAX,YMAX,ZMAX])                  # Set the workspace size
 
@@ -162,7 +162,7 @@ class Approach(object):
         while self.trials < 5:
             rospy.logwarn("Attempt {}".format(self.trials+1))
             if(self.trials > 1):
-                self.target.position.z += 2*rd() - 1
+                self.target.position.z += rd()
             result = self.go(self.target)
             if (result == 'replan') or (result == 'no_plan'):
                 self.trials += 1
@@ -376,7 +376,7 @@ class Approach(object):
             #Verify possible collisions on diferent points between the robot and the goal point
             # rospy.logerr("\n\n\nCOLLISION CALLBACK: ")
             # rospy.logerr(dist)
-            for d in arange(RESOLUTION, dist + 0.5, RESOLUTION):
+            for d in arange(RESOLUTION, dist + 0.1, RESOLUTION):
                 pose.translation.x = (self.next_pose.position.x - x)*(d/dist) + x
                 pose.translation.y = (self.next_pose.position.y - y)*(d/dist) + y
                 pose.translation.z = (self.next_pose.position.z - z)*(d/dist) + z
