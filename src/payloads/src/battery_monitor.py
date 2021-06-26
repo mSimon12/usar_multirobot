@@ -6,6 +6,7 @@ from threading import Thread
 from actionlib_msgs.msg import GoalStatusArray
 from actionlib import GoalStatus
 from system_msgs.msg import events_message
+from geometry_msgs.msg import Twist
 
 class BatteryMonitor(Thread):
 
@@ -27,7 +28,7 @@ class BatteryMonitor(Thread):
         self.__weights = {'move': motion_w,
                           'victim_sensor': victim_w, 
                           'gas_sensor': gas_w}                                                 
-        self.__sensors_status = {'move_base': False, 'victim_sensor': False, 'gas_sensor': False}       # Variable to know sensor status
+        self.__sensors_status = {'move_base': False, 'victim_sensor': False, 'gas_sensor': False, 'cmd': False}       # Variable to know sensor status
 
         # Message object
         self.msg = events_message()                                                                              
@@ -40,7 +41,10 @@ class BatteryMonitor(Thread):
         rospy.Subscriber("battery_monitor/in", events_message, self.event_receiver)            # Topic to receive occured events
         rospy.Subscriber("victim_sensor/in", events_message, self.victim_sensor_status)        # Topic to monitor victim sensor status
         rospy.Subscriber("gas_sensor/in", events_message, self.gas_sensor_status)              # Topic to monitor gas sensor status
+
+        ##Topics to monitor motion
         rospy.Subscriber(motion_topic, GoalStatusArray, self.move_base_status)                 # Topic to monitor move_base status
+        rospy.Subscriber("cmd_vel", Twist, self.cmd)                 # Topic to monitor move_base status
 
     def run(self):
         #Monitor the battery level
@@ -55,7 +59,7 @@ class BatteryMonitor(Thread):
             if self.__sensors_status['gas_sensor']:
                 bat_delta += self.__weights['gas_sensor']
 
-            if self.__sensors_status['move_base']: 
+            if self.__sensors_status['move_base'] or self.__sensors_status['cmd']: 
                 bat_delta += self.__weights['move']
             
             self.battery_level -= bat_delta                             # Update battery level
@@ -94,6 +98,23 @@ class BatteryMonitor(Thread):
                 self.__sensors_status['move_base'] = False
         except:
             self.__sensors_status['move_base'] = False
+
+    def cmd(self, msg):
+
+        if msg.linear.x:
+            self.__sensors_status['cmd'] = True
+        elif msg.linear.y:
+            self.__sensors_status['cmd'] = True
+        elif msg.linear.z:
+            self.__sensors_status['cmd'] = True
+        elif msg.angular.x:
+            self.__sensors_status['cmd'] = True
+        elif msg.angular.y:
+            self.__sensors_status['cmd'] = True
+        elif msg.angular.z:
+            self.__sensors_status['cmd'] = True
+        else:
+            self.__sensors_status['cmd'] = False
 
     def event_receiver(self, msg):
         #Receive battery level

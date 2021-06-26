@@ -3,8 +3,8 @@ digraph {
 	rankdir=LR
 	APP_ERROR [label=APP_ERROR color=black fillcolor=white shape=circle style=filled]
 	APP_EXE [label=APP_EXE color=black fillcolor=white shape=circle style=filled]
-	APP_IDLE [label=APP_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	APP_SUSP [label=APP_SUSP color=black fillcolor=white shape=circle style=filled]
+	APP_IDLE [label=APP_IDLE color=black fillcolor=white shape=doublecircle style=filled]
+	APP_SUSP [label=APP_SUSP color=blue fillcolor=lightgrey shape=circle style=filled]
 	APP_ERROR -> APP_IDLE [label=rst_app fontcolor=blue]
 	APP_EXE -> APP_ERROR [label=er_app fontcolor=red style=dashed]
 	APP_EXE -> APP_IDLE [label=end_app fontcolor=red style=dashed]
