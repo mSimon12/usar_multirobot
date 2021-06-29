@@ -99,6 +99,8 @@ class SafeLand(object):
             state = self.trajectory_client.get_state()                                              # Get the state of the action
 
             if state == GoalStatus.SUCCEEDED:
+                trials = 0
+
                 self.sonar_me.acquire()
                 self.odometry_me.acquire()
                 if self.current_height > (self.quadrotor_height*1.20):
@@ -124,7 +126,12 @@ class SafeLand(object):
                     self.land_server.set_succeeded(self.server_result)
                 self.odometry_me.release()
                 self.sonar_me.release()
-                
+
+            elif result == GoalStatus.ABORTED:
+                trials += 1
+                if trials == 5:
+                    self.exploration_server.set_aborted(self.server_result)
+                    return  
             elif state == GoalStatus.ABORTED:
                 self.land_server.set_aborted()
 

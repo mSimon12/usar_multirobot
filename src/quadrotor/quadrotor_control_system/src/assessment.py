@@ -112,7 +112,7 @@ class Explore(object):
         self.frontiers_req.y_min = 0.0
         self.frontiers_req.y_max = 50.0
 
-        trials = 0                                              # v_search trials
+        trials = 0                                              # assessment trials
 
         while not rospy.is_shutdown():
 
@@ -142,6 +142,7 @@ class Explore(object):
             # print(result)
 
             if result == GoalStatus.SUCCEEDED:
+                trials = 0
                 p = Pose()
                 self.odometry_me.acquire()
                 p = self.odometry
@@ -181,7 +182,7 @@ class Explore(object):
             
             elif result == GoalStatus.ABORTED:
                 trials += 1
-                if trials == 2:
+                if trials == 5:
                     self.exploration_server.set_aborted(self.server_result)
                     return
 

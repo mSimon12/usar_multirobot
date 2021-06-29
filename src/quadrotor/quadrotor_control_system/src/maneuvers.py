@@ -66,32 +66,37 @@ class Maneuver(object):
         dest.goal.position.x = x                    # Desired x position
         dest.goal.position.y = y                    # Desired y position
 
-        self.sonar_me.acquire()
-        h_error = z - self.current_height
-        self.sonar_me.release()
+        trials = 0      # approach trials
 
-        self.odometry_me.acquire()
-        self.odometry_me.wait()
-        dest.goal.position.z = self.odometry.position.z + h_error        # Desired z position
-        self.odometry_me.release()
+        while trials < 10:
 
-        # Convert desired angle
-        q = quaternion_from_euler(0,0,theta,'ryxz')
-        dest.goal.orientation.x = q[0]
-        dest.goal.orientation.y = q[1]
-        dest.goal.orientation.z = q[2]
-        dest.goal.orientation.w = q[3]
+            self.sonar_me.acquire()
+            h_error = z - self.current_height
+            self.sonar_me.release()
 
-        self.trajectory_client.send_goal(dest)                      # Send the goal
-        self.trajectory_client.wait_for_result()                    # Wait for the result
-        state = self.trajectory_client.get_state()                  # Get the state of the action
+            self.odometry_me.acquire()
+            self.odometry_me.wait()
+            dest.goal.position.z = self.odometry.position.z + h_error        # Desired z position
+            self.odometry_me.release()
 
-        if state == GoalStatus.SUCCEEDED:
-            return "end"                                        # Motion successfully executed
-        elif state == GoalStatus.PREEMPTED:
-            return "susp"                                       # Client cancel the motion
-        else:
-            return "error"                                      # The server aborted the motion
+            # Convert desired angle
+            q = quaternion_from_euler(0,0,theta,'ryxz')
+            dest.goal.orientation.x = q[0]
+            dest.goal.orientation.y = q[1]
+            dest.goal.orientation.z = q[2]
+            dest.goal.orientation.w = q[3]
+
+            self.trajectory_client.send_goal(dest)                      # Send the goal
+            self.trajectory_client.wait_for_result()                    # Wait for the result
+            state = self.trajectory_client.get_state()                  # Get the state of the action
+            
+            if state == GoalStatus.SUCCEEDED:
+                return "end"                                        # Motion successfully executed
+            elif state == GoalStatus.PREEMPTED:
+                return "susp"                                       # Client cancel the motion
+            
+            trials += 1
+        return "error"                                      # The server aborted the motion
 
     def sonar_callback(self,msg):
         '''

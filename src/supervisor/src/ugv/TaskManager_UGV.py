@@ -311,7 +311,8 @@ class TaskManager(Thread):
                             self.BB.restart()
                             self.current_task = self.BB
                             if self.main_task and (last_event == 'st_rb'):
-                                g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                                # g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
+                                # g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                                 self.main_task = None
                                 self.main_task_id = None
                     else:

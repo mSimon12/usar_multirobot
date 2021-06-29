@@ -31,12 +31,12 @@ class MoveGroup(object):
         self.move_group_msg.request = MotionPlanRequest()
 
         self.move_group_msg.request.workspace_parameters.header.frame_id = frame
-        self.move_group_msg.request.workspace_parameters.min_corner.x = -50
-        self.move_group_msg.request.workspace_parameters.min_corner.y = -50
+        self.move_group_msg.request.workspace_parameters.min_corner.x = 0
+        self.move_group_msg.request.workspace_parameters.min_corner.y = 0
         self.move_group_msg.request.workspace_parameters.min_corner.z = 0
-        self.move_group_msg.request.workspace_parameters.max_corner.x = 50
-        self.move_group_msg.request.workspace_parameters.max_corner.y = 50
-        self.move_group_msg.request.workspace_parameters.max_corner.z = 50
+        self.move_group_msg.request.workspace_parameters.max_corner.x = 75
+        self.move_group_msg.request.workspace_parameters.max_corner.y = 75
+        self.move_group_msg.request.workspace_parameters.max_corner.z = 35
 
         # Target definition      
         self.move_group_msg.request.goal_constraints.append(Constraints())

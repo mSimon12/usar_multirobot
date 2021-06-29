@@ -83,7 +83,7 @@ class Approach(object):
 
         #Start move_group
         self.move_group = MoveGroup('earth', name)
-        self.move_group.set_planner(planner_id = 'PRMkConfigDefault', attempts = 10, allowed_time = 3)       #RRTConnectkConfigDefault - PRMkConfigDefault
+        self.move_group.set_planner(planner_id = 'BiTRRTkConfigDefault', attempts = 10, allowed_time = 3)       #RRTConnectkConfigDefault - PRMkConfigDefault - BFMTkConfigDefault - TRRTkConfigDefault - BiTRRTkConfigDefault
 
         self.move_group.set_workspace([XMIN,YMIN,ZMIN,XMAX,YMAX,ZMAX])                  # Set the workspace size
 
@@ -158,19 +158,27 @@ class Approach(object):
         rospy.loginfo("Try to start from [{},{},{}]".format(self.odometry.position.x, self.odometry.position.y, self.odometry.position.z))
         rospy.loginfo("Try to go to [{},{},{}]".format(self.target.position.x, self.target.position.y, self.target.position.z))
         
-        self.trials = 0
-        while self.trials < 5:
-            rospy.logwarn("Attempt {}".format(self.trials+1))
-            if(self.trials > 1):
-                self.target.position.x += rd() - 0.5
-                self.target.position.y += rd() - 0.5
-                self.target.position.z += 2*rd() - 1
-            result = self.go(self.target)
-            if (result == 'replan') or (result == 'no_plan'):
-                self.trials += 1
-            else:
-                self.trials = 10
-            self.collision = False
+        # self.trials = 0
+        # while self.trials < 5:
+        #     rospy.logwarn("Attempt {}".format(self.trials+1))
+        #     if(self.trials > 1):
+        #         self.target.position.x += rd() - 0.5
+        #         self.target.position.y += rd() - 0.5
+        #         self.target.position.z += 2*rd() - 1
+        #     result = self.go(self.target)
+        #     if (result == 'replan') or (result == 'no_plan'):
+        #         self.trials += 1
+        #     else:
+        #         self.trials = 10
+        #     self.collision = False
+
+        if(self.collision):
+            self.target.position.x += rd() - 0.5
+            self.target.position.y += rd() - 0.5
+            self.target.position.z += 2*rd() - 1
+
+        result = self.go(self.target)
+        self.collision = False
 
         if result == 'ok':
             self.trajectory_server.set_succeeded()
@@ -190,10 +198,14 @@ class Approach(object):
         target.append(target_.position.x)
         target.append(target_.position.y)
         target.append(target_.position.z)
-        target.append(target_.orientation.x)
-        target.append(target_.orientation.y)
-        target.append(target_.orientation.z)
-        target.append(target_.orientation.w)
+        target.append(0)
+        target.append(0)
+        target.append(0)
+        target.append(1)
+        # target.append(target_.orientation.x)
+        # target.append(target_.orientation.y)
+        # target.append(target_.orientation.z)
+        # target.append(target_.orientation.w)
 
         #Define target for move_group
         # self.move_group.set_joint_value_target(target)
@@ -203,10 +215,10 @@ class Approach(object):
         self.current_pose.multi_dof_joint_state.transforms[0].translation.x = self.odometry.position.x
         self.current_pose.multi_dof_joint_state.transforms[0].translation.y = self.odometry.position.y
         self.current_pose.multi_dof_joint_state.transforms[0].translation.z = self.odometry.position.z
-        self.current_pose.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.x
-        self.current_pose.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.y
-        self.current_pose.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.z
-        self.current_pose.multi_dof_joint_state.transforms[0].rotation.x = self.odometry.orientation.w
+        self.current_pose.multi_dof_joint_state.transforms[0].rotation.x = 0
+        self.current_pose.multi_dof_joint_state.transforms[0].rotation.y = 0
+        self.current_pose.multi_dof_joint_state.transforms[0].rotation.z = 0
+        self.current_pose.multi_dof_joint_state.transforms[0].rotation.w = 1
         self.odometry_me.release()
 
         #Set start state
@@ -339,11 +351,18 @@ class Approach(object):
             waypoint.target_pose.pose.position.x = point.transforms[0].translation.x
             waypoint.target_pose.pose.position.y = point.transforms[0].translation.y
             waypoint.target_pose.pose.position.z = point.transforms[0].translation.z
-
-            waypoint.target_pose.pose.orientation.x = point.transforms[0].rotation.x
-            waypoint.target_pose.pose.orientation.y = point.transforms[0].rotation.y
-            waypoint.target_pose.pose.orientation.z = point.transforms[0].rotation.z
-            waypoint.target_pose.pose.orientation.w = point.transforms[0].rotation.w
+            waypoint.target_pose.pose.orientation.x = self.target.orientation.x
+            waypoint.target_pose.pose.orientation.y = self.target.orientation.y
+            waypoint.target_pose.pose.orientation.z = self.target.orientation.z
+            waypoint.target_pose.pose.orientation.w = self.target.orientation.w
+            
+            # waypoint.target_pose.pose.position.x = point.transforms[0].translation.x
+            # waypoint.target_pose.pose.position.y = point.transforms[0].translation.y
+            # waypoint.target_pose.pose.position.z = point.transforms[0].translation.z
+            # waypoint.target_pose.pose.orientation.x = point.transforms[0].rotation.x
+            # waypoint.target_pose.pose.orientation.y = point.transforms[0].rotation.y
+            # waypoint.target_pose.pose.orientation.z = point.transforms[0].rotation.z
+            # waypoint.target_pose.pose.orientation.w = point.transforms[0].rotation.w
             self.trajectory.append(waypoint)
 
         self.trajectory_received = True
@@ -398,8 +417,8 @@ class Approach(object):
                     rospy.logerr('Collision in front [x:{} y:{} z:{}]'.format(pose.translation.x,pose.translation.y,pose.translation.z))
                     rospy.logerr('Current pose [x:{} y:{} z:{}]'.format(x,y,z))
                     # print(collision_res)
-                    self.move_client.cancel_goal()
                     self.collision = True
+                    self.move_client.cancel_goal()
                     return
 
 

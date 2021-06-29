@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /TF1/Frames1
+        - /Image1
       Splitter Ratio: 0.4794117510318756
     Tree Height: 513
   - Class: rviz/Selection
@@ -769,7 +770,7 @@ Visualization Manager:
       Name: UAV_2
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /UAV_1/camera/rgb/image_raw
+      Image Topic: /UAV_2/camera/rgb/image_raw
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -806,26 +807,21 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/XYOrbit
-      Distance: 48.87112045288086
+      Angle: 2.1420419216156006e-8
+      Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Focal Point:
-        X: 29.526002883911133
-        Y: -0.12183845043182373
-        Z: -1.9073486328125e-6
-      Focal Shape Fixed Size: true
-      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.685397744178772
+      Scale: 17.369640350341797
       Target Frame: map
-      Value: XYOrbit (rviz)
-      Yaw: 4.310400485992432
+      Value: TopDownOrtho (rviz)
+      X: 39.04268264770508
+      Y: 21.764760971069336
     Saved: ~
 Window Geometry:
   Displays:

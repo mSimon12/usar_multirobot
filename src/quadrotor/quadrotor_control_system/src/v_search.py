@@ -86,7 +86,7 @@ class V_search(object):
 
         x_count = 0                                             # Counter of steps (in meters traveled)
         direction = 1                                           # Direction of the motion (right, left or up)
-        trials = 0                                              # v_search trials
+        trials = 0                                              # safe_landtrials
 
         while not rospy.is_shutdown():
 
@@ -117,6 +117,7 @@ class V_search(object):
 
 
             if result == GoalStatus.SUCCEEDED:
+                trials = 0
                 # Verifies if all the area have been searched
                 if (self.next_point.goal.position.x == (start.x + x)) and ((self.next_point.goal.position.y == (start.y + y))):
                     self.odometry_me.acquire()
@@ -153,7 +154,7 @@ class V_search(object):
             
             elif result == GoalStatus.ABORTED:
                 trials += 1
-                if trials == 2:
+                if trials == 5:
                     self.search_server.set_aborted(self.server_result)
                     return
 
