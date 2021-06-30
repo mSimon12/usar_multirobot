@@ -1,0 +1,17 @@
+<mission>
+  <id>dasda</id>
+  <priority>3</priority>
+  <task>
+    <agent></agent>
+    <position/>
+    <region>
+      <origin_x>10.0</origin_x>
+      <origin_y>10.0</origin_y>
+      <x_size>10.0</x_size>
+      <y_size>10.0</y_size>
+    </region>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>search</maneuver>
+  </task>
+</mission>

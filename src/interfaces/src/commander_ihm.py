@@ -271,7 +271,7 @@ class CommanderInterface(object):
                     self.window[b].update(disabled = not self.robots_buttons[values['robot_to_call']][b])
             elif event == 'tele':
                 if values['robot_to_call'] in self.requisitions:
-                    self.requisitions.pop(self.requisitions == values['robot_to_call'] )
+                    self.requisitions.remove(values['robot_to_call'])
                     self.window['requisitions'].update('')
                     for r in self.requisitions:
                         self.odometry_me.acquire()

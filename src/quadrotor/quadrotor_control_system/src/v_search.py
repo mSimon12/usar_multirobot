@@ -86,7 +86,10 @@ class V_search(object):
 
         x_count = 0                                             # Counter of steps (in meters traveled)
         direction = 1                                           # Direction of the motion (right, left or up)
-        trials = 0                                              # safe_landtrials
+        trials = 0                                              # v_search trials
+
+        points = (x_positions+1)*(y_positions+1)
+        error = 0
 
         while not rospy.is_shutdown():
 
@@ -106,20 +109,28 @@ class V_search(object):
             h_error = self.motion_height - self.current_height
             self.sonar_me.release()
 
-            self.odometry_me.acquire()
-            self.next_point.goal.position.z = self.odometry.position.z + h_error        # Desired z position
-            self.odometry_me.release()
+            if error:
+                self.next_point.goal.position.z += 1
+            else:
+                self.odometry_me.acquire()
+                self.next_point.goal.position.z = self.odometry.position.z + h_error        # Desired z position
+                self.odometry_me.release()
+            error = 0
 
             self.trajectory_client.send_goal(self.next_point, feedback_cb = self.trajectory_feed)
             self.trajectory_client.wait_for_result()                                                # Wait for the result
             result = self.trajectory_client.get_state()                                             # Get the state of the action
             # print(result)
 
+            # rospy.logerr("\n\nV_SEARCH trials: {}\n".format(trials))
+            # rospy.logerr(self.next_point)
 
             if result == GoalStatus.SUCCEEDED:
                 trials = 0
+                points -= 1
                 # Verifies if all the area have been searched
-                if (self.next_point.goal.position.x == (start.x + x)) and ((self.next_point.goal.position.y == (start.y + y))):
+                # if (self.next_point.goal.position.x >= (start.x + x)) and ((self.next_point.goal.position.y >= (start.y + y))):
+                if not points:
                     self.odometry_me.acquire()
                     self.server_result.last_pose = self.odometry
                     self.odometry_me.release()
@@ -154,7 +165,8 @@ class V_search(object):
             
             elif result == GoalStatus.ABORTED:
                 trials += 1
-                if trials == 5:
+                error = 1
+                if trials >= 10:
                     self.search_server.set_aborted(self.server_result)
                     return
 

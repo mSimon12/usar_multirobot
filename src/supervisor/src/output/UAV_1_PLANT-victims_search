@@ -2,8 +2,8 @@
 digraph {
 	rankdir=LR
 	SEARCH_ERROR [label=SEARCH_ERROR color=black fillcolor=white shape=circle style=filled]
-	SEARCH_EXE [label=SEARCH_EXE color=black fillcolor=white shape=circle style=filled]
-	SEARCH_IDLE [label=SEARCH_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	SEARCH_EXE [label=SEARCH_EXE color=blue fillcolor=lightgrey shape=circle style=filled]
+	SEARCH_IDLE [label=SEARCH_IDLE color=black fillcolor=white shape=doublecircle style=filled]
 	SEARCH_SUSP [label=SEARCH_SUSP color=black fillcolor=white shape=circle style=filled]
 	SEARCH_ERROR -> SEARCH_IDLE [label=uav_rst_v_search fontcolor=blue]
 	SEARCH_EXE -> SEARCH_ERROR [label=uav_er_v_search fontcolor=red style=dashed]

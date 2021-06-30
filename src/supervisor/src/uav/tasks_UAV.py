@@ -493,10 +493,10 @@ class TeleCalled(Task):
         if last_event in ['uav_end_tele','uav_er_tele']:
             return []
         else:
-            for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','RB_EXE', 'V_SEARCH_EXE']:
+            for i in ['APP_EXE','ASSESS_EXE','VSV_EXE','RB_EXE', 'SEARCH_EXE']:
                 if i in states:
-                    return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_vsv', 'uav_sus_rb']
-            for i in ['APP_ERROR','ASSESS_ERROR','VSV_ERROR','RB_ERROR', 'V_SEARCH_ERROR', 'SAFE_LAND_ERROR']:
+                    return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_vsv', 'uav_sus_rb', 'uav_sus_v_search']
+            for i in ['APP_ERROR','ASSESS_ERROR','VSV_ERROR','RB_ERROR', 'SEARCH_ERROR', 'SAFE_LAND_ERROR']:
                 if i in states:
                     return ['uav_rst_app', 'uav_rst_assess', 'uav_rst_vsv', 'uav_rst_rb', 'uav_rst_v_search', 'uav_rst_safe_land']
 

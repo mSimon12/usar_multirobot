@@ -83,7 +83,7 @@ class Approach(object):
 
         #Start move_group
         self.move_group = MoveGroup('earth', name)
-        self.move_group.set_planner(planner_id = 'BiTRRTkConfigDefault', attempts = 10, allowed_time = 3)       #RRTConnectkConfigDefault - PRMkConfigDefault - BFMTkConfigDefault - TRRTkConfigDefault - BiTRRTkConfigDefault
+        self.move_group.set_planner(planner_id = 'RRTConnectkConfigDefault', attempts = 10, allowed_time = 3)       #RRTConnectkConfigDefault - PRMkConfigDefault - BFMTkConfigDefault - TRRTkConfigDefault - BiTRRTkConfigDefault
 
         self.move_group.set_workspace([XMIN,YMIN,ZMIN,XMAX,YMAX,ZMAX])                  # Set the workspace size
 
