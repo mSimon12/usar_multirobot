@@ -1,8 +1,8 @@
 // UAV_2_SUP-manouvers_ME
 digraph {
 	rankdir=LR
-	Mi_EXE [label=Mi_EXE color=black fillcolor=white shape=circle style=filled]
-	NO_Mi [label=NO_Mi color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	Mi_EXE [label=Mi_EXE color=blue fillcolor=lightgrey shape=circle style=filled]
+	NO_Mi [label=NO_Mi color=black fillcolor=white shape=doublecircle style=filled]
 	Mi_EXE -> NO_Mi [label="uav_sus_app,
 uav_sus_assess,
 uav_sus_v_search,

@@ -2,8 +2,8 @@
 digraph {
 	rankdir=LR
 	ASSESS_ERROR [label=ASSESS_ERROR color=black fillcolor=white shape=circle style=filled]
-	ASSESS_EXE [label=ASSESS_EXE color=black fillcolor=white shape=circle style=filled]
-	ASSESS_IDLE [label=ASSESS_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	ASSESS_EXE [label=ASSESS_EXE color=blue fillcolor=lightgrey shape=circle style=filled]
+	ASSESS_IDLE [label=ASSESS_IDLE color=black fillcolor=white shape=doublecircle style=filled]
 	ASSESS_SUSP [label=ASSESS_SUSP color=black fillcolor=white shape=circle style=filled]
 	ASSESS_ERROR -> ASSESS_IDLE [label=uav_rst_assess fontcolor=blue]
 	ASSESS_EXE -> ASSESS_ERROR [label=uav_er_assess fontcolor=red style=dashed]

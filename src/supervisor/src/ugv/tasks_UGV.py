@@ -239,7 +239,6 @@ class GoBackToBase(Task):
     def next_event(self, states, last_event, event_param = []):
         if last_event == 'end_rb':
             self.atBase = True
-            return []
         elif last_event == 'st_rb':
             return ['end_rb']
         elif not self.atBase:
@@ -252,6 +251,7 @@ class GoBackToBase(Task):
                 return events
             else:
                 return ['st_rb']
+        return []
 
     def restart(self):
         super().restart()

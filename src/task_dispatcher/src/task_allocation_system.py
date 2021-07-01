@@ -297,16 +297,21 @@ class RobotStateMachine(object):
             robots_info.loc[self.name,'gs'] = 'ok'
 
         # Update robot working status
-        elif msg.event == 'robot_idle':
+        elif msg.event == 'robot_idle':  
             if robots_info.loc[self.name,'status'] == 'unable':
+                robots_info.loc[self.name,'status'] = 'idle'
                 # Signal the need of replanning due to the new robot available
                 replan_flag.acquire()
                 replan_flag.notify()
                 replan_flag.release()
-
             robots_info.loc[self.name,'status'] = 'idle'
+            trace = trace.append({'time':global_time, 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': '-', 'task_status': '-'}, ignore_index = True)
+            trace.to_csv(trace_filename)
+            
         elif msg.event == 'robot_busy':
             robots_info.loc[self.name,'status'] = 'busy'
+            trace = trace.append({'time':global_time, 'robot': self.name, 'robot_status': robots_info.loc[self.name,'status'], 'task': '-', 'task_status': '-'}, ignore_index = True)
+            trace.to_csv(trace_filename)
         elif msg.event == 'robot_unable':
             robots_info.loc[self.name,'status'] = 'unable'
             # Update trace & save it
