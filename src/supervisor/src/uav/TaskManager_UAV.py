@@ -330,7 +330,6 @@ class TaskManager(Thread):
         
         #Get next events allowed by the current selected task
         if self.current_task:
-            rospy.logerr(self.current_task)
             next_task_events = self.current_task.next_event(states.values(), last_event, param)
         else:
             next_task_events = []

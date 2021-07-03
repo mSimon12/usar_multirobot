@@ -1,8 +1,8 @@
 // UAV_2_SUP-teleoperation_pref_and_start_conditions
 digraph {
 	rankdir=LR
-	AUTO [label=AUTO color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	TELE [label=TELE color=black fillcolor=white shape=circle style=filled]
+	AUTO [label=AUTO color=black fillcolor=white shape=doublecircle style=filled]
+	TELE [label=TELE color=blue fillcolor=lightgrey shape=circle style=filled]
 	AUTO -> AUTO [label="uav_st_app,
 uav_st_assess,
 uav_st_v_search,
