@@ -36,10 +36,12 @@ class DFS(object):
                     robot_enabled = True        # Variable to verify if the robot fit to the task
 
                     # Verify if the robot can apply required sensors
-                    if tasks.loc[t,'vs'] and (robots.loc[r,'vs'] == 'nok'):
+                    if (tasks.loc[t,'vs'] or 
+                       ((tasks.loc[t,'maneuver'] in ['approach', 'search']) and ('pioneer3at' in r)) or 
+                       ((tasks.loc[t,'maneuver'] in ['assessment', 'search']) and ('UAV' in r))) and (robots.loc[r,'vs'] == 'nok'):
                         robot_enabled = False
 
-                    if tasks.loc[t,'gs'] and (robots.loc[r,'gs'] == 'nok'):
+                    if (tasks.loc[t,'gs'] or ((tasks.loc[t,'maneuver'] in ['search']) and ('pioneer3at' in r))) and (robots.loc[r,'gs'] == 'nok'):
                         robot_enabled = False
 
                     # Verify if the robot is the type required
