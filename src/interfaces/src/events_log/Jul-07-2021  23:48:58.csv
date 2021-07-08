@@ -1,0 +1,12 @@
+,robot,event,event_type,param,enabled_events,time
+1,UAV_2,uav_st_assess,controllable,"(2.0, 2.0, 33.0, 10.0)","['abort_tele', 'uav_on_vs', 'uav_rep_self_pos', 'uav_sus_assess']",45
+2,UAV_1,uav_st_assess,controllable,"(35.0, 2.0, 33.0, 10.0)","['abort_tele', 'uav_on_vs', 'uav_rep_self_pos', 'uav_sus_assess']",60
+3,pioneer3at_2,on_vs,controllable,(),"['off_vs', 'on_gs', 'rep_self_pos', 'st_app', 'st_rb']",74
+4,pioneer3at_2,st_app,controllable,"(16.0, 16.0, 0.699999988079071)","['on_gs', 'rep_self_pos', 'sus_app']",77
+5,pioneer3at_1,on_gs,controllable,(),"['off_gs', 'on_vs', 'rep_self_pos', 'st_rb']",88
+6,pioneer3at_1,on_vs,controllable,(),"['off_gs', 'off_vs', 'rep_self_pos', 'st_app', 'st_exp', 'st_rb']",89
+7,pioneer3at_1,st_app,controllable,"(40.0, 7.0, 0.699999988079071)","['off_gs', 'rep_self_pos', 'sus_app']",94
+8,pioneer3at_2,end_app,uncontrollable,"(16.0, 16.0, 0.699999988079071)","['off_vs', 'on_gs', 'rep_self_pos', 'st_app', 'st_rb']",127
+9,pioneer3at_2,off_vs,controllable,(),"['on_gs', 'on_vs', 'rep_self_pos', 'st_rb']",128
+10,pioneer3at_2,on_vs,controllable,(),"['off_vs', 'on_gs', 'rep_self_pos', 'st_app', 'st_rb']",129
+11,pioneer3at_2,st_app,controllable,"(32.0, 16.0, 2.200000047683716)","['on_gs', 'rep_self_pos', 'sus_app']",132

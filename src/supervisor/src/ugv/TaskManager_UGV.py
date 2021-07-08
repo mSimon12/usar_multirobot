@@ -6,7 +6,7 @@ import rospy
 
 import ugv.tasks_UGV as tasks
 from lib.ProductSystem import g_var, trigger_event
-from system_msgs.msg import task_message, events_message
+from system_msgs.msg import task_message, events_message, required_events
 
 import OP.EVENTS as events_module
 
@@ -39,6 +39,9 @@ class TaskManager(Thread):
 
     def __init__(self):
         Thread.__init__(self)
+
+        self.robot_name = rospy.get_param("robot_name", default="")
+        self.req_event_pub = rospy.Publisher("/deliberative_layer_required_events", required_events, queue_size=10)
 
         # Variables to control the reception of new events or tasks
         self.update_flag = Condition()              # Flag to signal new cycle
@@ -356,6 +359,13 @@ class TaskManager(Thread):
         else:
             next_task_events = []
         rospy.loginfo("Next required events: {}".format(next_task_events))
+
+        ## Publish next required event or events
+        req_event_msg = required_events()
+        req_event_msg.robot = self.robot_name
+        for e in next_task_events:
+            req_event_msg.desired_events.append(e)
+        self.req_event_pub.publish(req_event_msg)
 
         # Set priorities according status of the events
         for e in next_task_events:

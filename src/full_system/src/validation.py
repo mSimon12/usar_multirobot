@@ -9,7 +9,7 @@ from threading import Condition
 # ROS libs
 import rospy
 from interfaces.msg import trace_events
-from system_msgs.msg import abstractions, events_message
+from system_msgs.msg import abstractions, events_message, required_events
 from rosgraph_msgs.msg import Clock
 from nav_msgs.msg import Odometry
 
@@ -48,15 +48,28 @@ class Validation(object):
         self.time_me = Condition()
         self.odometry_me = Condition()
 
-        # Defines collumns names related to desired informations
+        # Defines columns names related to desired informations
         cols = ['event', 'event_source', 'allocated_robots', 'available_robots', 'teleoperations']
+
+        # Defines events info monitor columns
+        events_cols = []
         for r in self.robots:
             cols.append(r + '_cur_maneuver')
             cols.append(r + '_tasks_counter')
             cols.append(r + '_pose')
             cols.append(r + '_battery')
 
+            events_cols.append(r + '_enabled_events')
+            events_cols.append(r + '_disabled_events')
+            events_cols.append(r + '_desired_events')
+
+        ## Dataframe to save general information
         self.samples = pd.DataFrame(columns = cols)
+
+        ## Dataframe to save events information
+        self.events_samples = pd.DataFrame(columns = events_cols)
+        self.enable_events = {}
+        self.disabled_events = {}
 
         # Initialize variables
         self.event = None
@@ -76,6 +89,9 @@ class Validation(object):
             self.robots_counter[r] = 0
             self.allocated_robots[r] = False
 
+            self.enable_events[r] = []
+            self.disabled_events[r] = []
+
         # Subscribe to topics
         for r in self.robots:   
             self.robots_bat[r] = 100
@@ -90,6 +106,7 @@ class Validation(object):
                 rospy.Subscriber("/{}/ground_truth/state".format(r), Odometry, self.poseCallback, callback_args = r)
 
         rospy.Subscriber("/events_trigger_ihm_in", trace_events, self.trace_cbk)
+        rospy.Subscriber("/deliberative_layer_required_events", required_events, self.req_event_callback)
         self.event_robot = None
         rospy.Subscriber("/clock", Clock, self.time_update)
 
@@ -97,6 +114,22 @@ class Validation(object):
         self.time_me.acquire()
         self.time = msg.clock.secs + msg.clock.nsecs/1000000000
         self.time_me.release()
+
+    def req_event_callback(self, msg):
+        sample = []
+        for r in self.robots:
+            sample.append(self.enable_events[r])
+            sample.append(self.disabled_events[r]) 
+            if r == msg.robot:
+                sample.append(msg.desired_events)
+            else:
+                sample.append(None)
+
+        self.time_me.acquire()
+        self.events_samples.loc[self.time] = sample
+        self.time_me.release()
+
+        self.events_samples.to_csv(self.filename.replace(".csv", "_TM.csv"))
 
     def poseCallback(self, odometry, robot):
         '''
@@ -172,6 +205,10 @@ class Validation(object):
             self.r_cur_task[msg.robot] = MANEUVERS_START[msg.last_event]
         elif msg.last_event in MANEUVERS_STOP:
             self.r_cur_task[msg.robot] = 'None'
+
+        ### Events info monitor update
+        self.enable_events[msg.robot] = msg.possible_events
+        self.disabled_events[msg.robot] = msg.disabled_events
         
         self.new_sample_flag.notify()
         self.new_sample_flag.release()

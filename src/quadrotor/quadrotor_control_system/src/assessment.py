@@ -108,9 +108,9 @@ class Explore(object):
         self.odometry_me.release()
 
         self.frontiers_req.x_min = 0.0
-        self.frontiers_req.x_max = 50.0
+        self.frontiers_req.x_max = 75.0
         self.frontiers_req.y_min = 0.0
-        self.frontiers_req.y_max = 50.0
+        self.frontiers_req.y_max = 75.0
 
         trials = 0                                              # assessment trials
 

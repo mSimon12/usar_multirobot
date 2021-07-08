@@ -1,0 +1,12 @@
+,time,robot,robot_status,task,task_status
+0,43,UAV_2,busy,-,-
+1,43,UAV_2,busy,assessment1_0,executing
+2,56,UAV_1,busy,-,-
+3,56,UAV_1,busy,assessment2_0,executing
+4,73,pioneer3at_2,busy,-,-
+5,73,pioneer3at_2,busy,building1_0,executing
+6,88,pioneer3at_1,busy,-,-
+7,88,pioneer3at_1,busy,building2_0,executing
+8,128,pioneer3at_2,idle,-,-
+9,128,pioneer3at_2,idle,building1_0,finished
+10,128,pioneer3at_2,busy,-,-

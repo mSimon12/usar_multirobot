@@ -2,8 +2,8 @@
 digraph {
 	rankdir=LR
 	LAND_ERROR [label=LAND_ERROR color=black fillcolor=white shape=circle style=filled]
-	LAND_EXE [label=LAND_EXE color=blue fillcolor=lightgrey shape=circle style=filled]
-	LAND_IDLE [label=LAND_IDLE color=black fillcolor=white shape=doublecircle style=filled]
+	LAND_EXE [label=LAND_EXE color=black fillcolor=white shape=circle style=filled]
+	LAND_IDLE [label=LAND_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	LAND_ERROR -> LAND_IDLE [label=uav_rst_safe_land fontcolor=blue]
 	LAND_EXE -> LAND_ERROR [label=uav_er_safe_land fontcolor=red style=dashed]
 	LAND_EXE -> LAND_IDLE [label=uav_end_safe_land fontcolor=red style=dashed]

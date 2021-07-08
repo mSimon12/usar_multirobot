@@ -98,6 +98,10 @@ class SafeLand(object):
             self.trajectory_client.wait_for_result()                                                # Wait for the result
             state = self.trajectory_client.get_state()                                              # Get the state of the action
 
+            self.odometry_me.acquire()
+            self.server_result.land_pose = self.odometry
+            self.odometry_me.release()
+
             if state == GoalStatus.SUCCEEDED:
                 trials = 0
 
@@ -127,13 +131,12 @@ class SafeLand(object):
                 self.odometry_me.release()
                 self.sonar_me.release()
 
-            elif result == GoalStatus.ABORTED:
+            elif state == GoalStatus.ABORTED:
                 trials += 1
                 if trials == 5:
-                    self.exploration_server.set_aborted(self.server_result)
+                    self.land_server.set_aborted(self.server_result)
                     return  
-            elif state == GoalStatus.ABORTED:
-                self.land_server.set_aborted()
+                
 
         sonar_sub.unregister()
         odom_sub.unregister()

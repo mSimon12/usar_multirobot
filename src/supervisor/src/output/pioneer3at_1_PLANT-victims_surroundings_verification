@@ -1,9 +1,9 @@
 // pioneer3at_1_PLANT-victims_surroundings_verification
 digraph {
 	rankdir=LR
-	VSV_ERROR [label=VSV_ERROR color=blue fillcolor=lightgrey shape=circle style=filled]
+	VSV_ERROR [label=VSV_ERROR color=black fillcolor=white shape=circle style=filled]
 	VSV_EXE [label=VSV_EXE color=black fillcolor=white shape=circle style=filled]
-	VSV_IDLE [label=VSV_IDLE color=black fillcolor=white shape=doublecircle style=filled]
+	VSV_IDLE [label=VSV_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	VSV_SUSP [label=VSV_SUSP color=black fillcolor=white shape=circle style=filled]
 	VSV_ERROR -> VSV_IDLE [label=rst_vsv fontcolor=blue]
 	VSV_EXE -> VSV_ERROR [label=er_vsv fontcolor=red style=dashed]

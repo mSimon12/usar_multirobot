@@ -188,12 +188,18 @@ class ProductSystem(Thread):
 				else:
 					trace_msg.param.append(float(p))
 
+		## Get enabled events
 		events = []
 		for sm in self.__SMs:
 			e = self.__SMs[sm].get_allowed_events().tolist()
 			events += e
-
+		# events = [e for e in self.__events if self.__events[e].get_status()]
 		for e in events:
 			trace_msg.possible_events.append(e)
+
+		## Get disabled events
+		events = [e for e in self.__cont_e if not self.__events[e].get_status()]
+		for e in events:
+			trace_msg.disabled_events.append(e)
 
 		self.trace_pub.publish(trace_msg)

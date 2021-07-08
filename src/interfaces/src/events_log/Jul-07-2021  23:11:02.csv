@@ -1,0 +1,3 @@
+,robot,event,event_type,param,enabled_events,time
+1,UAV_2,uav_st_assess,controllable,"(2.0, 2.0, 33.0, 10.0)","['abort_tele', 'uav_on_vs', 'uav_rep_self_pos', 'uav_sus_assess']",153
+2,UAV_1,uav_st_assess,controllable,"(35.0, 2.0, 33.0, 10.0)","['abort_tele', 'uav_on_vs', 'uav_rep_self_pos', 'uav_sus_assess']",351

@@ -121,6 +121,9 @@ class EventInterface(object):
             else:
                 event_type = 'uncontrollable'        
 
+            rospy.logerr("Hahaha")
+            rospy.logerr(type(msg.possible_events))
+
             ## Insert new trace event
             self.trace.loc[self.events_counter] = [msg.robot, msg.last_event, event_type, msg.param, msg.possible_events, msg.event_time]
             self.new_trace = True
@@ -340,9 +343,13 @@ class EventInterface(object):
             if self.update_allowed_events:
                 self.update_allowed_events = False
 
+                # rospy.logerr("Hahaha")
+
                 # Update events to trigger
                 self.window.Element('selected_event').update('')
                 self.window.Element('selected_event').update(values = self.robots_events[values['selected_robot']])
+                # rospy.logerr(type(self.robots_events[values['selected_robot']]))
+                # rospy.logerr(self.robots_events[values['selected_robot']])
 
             if self.update_model:
                 if self.models_window:
