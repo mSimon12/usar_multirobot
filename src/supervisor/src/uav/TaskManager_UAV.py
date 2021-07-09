@@ -298,11 +298,13 @@ class TaskManager(Thread):
                             self.current_task = self.main_task
                             
                             # Update task variable
-                            g_var.manager_info['status'] = 'busy'
-                            if self.main_task_id:
-                                g_var.manager_info['tasks'][self.main_task_id] = 'executing'
+                            if not isinstance(self.main_task , tasks.AbortM):
+                                g_var.manager_info['status'] = 'busy'
+                                if self.main_task_id:
+                                    g_var.manager_info['tasks'][self.main_task_id] = 'executing'
                         else:
-                            self.current_task = None
+                            if((not isinstance(self.current_task, tasks.AbortM)) or (not self.current_task.next_event(states.values(), last_event))):
+                                self.current_task = None
                             if not self.tele_ok:
                                 g_var.manager_info['status'] = 'unable'
                             else: 

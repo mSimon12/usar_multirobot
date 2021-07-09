@@ -1,5 +1,6 @@
 import time
 import inspect
+from uav.tasks_UAV import AbortM
 import pandas as pd
 from threading import Thread, Condition
 import rospy
@@ -304,8 +305,8 @@ class TaskManager(Thread):
                 # BEHAVIOR 6 -> report gas leak position                           
                 elif self.foundG:            
                     self.current_task = self.foundG
-                    if self.main_task_id:
-                        g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
+                    # if self.main_task_id:
+                    #     g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                 else:
                     # BEHAVIOR 7 -> finish the last task and return to base
                     if (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
@@ -325,11 +326,13 @@ class TaskManager(Thread):
                             self.current_task = self.main_task
                             
                             # Update task variable
-                            g_var.manager_info['status'] = 'busy'
-                            if self.main_task_id:
-                                g_var.manager_info['tasks'][self.main_task_id] = 'executing'
+                            if not isinstance(self.main_task , tasks.AbortM):
+                                g_var.manager_info['status'] = 'busy'
+                                if self.main_task_id:
+                                    g_var.manager_info['tasks'][self.main_task_id] = 'executing'
                         else:
-                            self.current_task = None
+                            if((not isinstance(self.current_task, tasks.AbortM)) or (not self.current_task.next_event(states.values(), last_event))):
+                                self.current_task = None
                             if not self.tele_ok:
                                 g_var.manager_info['status'] = 'unable'
                             else: 
@@ -342,8 +345,12 @@ class TaskManager(Thread):
             if self.main_task and (self.current_task == self.main_task):
                 # Set the main task as aborted but does not make the robot unable to execute missions
                 g_var.manager_info['status'] = 'idle'
-                g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                if self.main_task_id:
+                    g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                 self.main_task = None
+            
+            if self.current_task != self.Abort:  
+                self.Abort.restart()
             self.current_task = self.Abort
 
         g_var.manager_info_flag.notify()
