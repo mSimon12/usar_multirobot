@@ -5,7 +5,8 @@ import pandas as pd
 from threading import Thread, Condition
 import rospy
 
-import ugv.tasks_UGV as tasks
+import ugv.tasks_UGV_samples as tasks       # To implement wrong sequences
+# import ugv.tasks_UGV as tasks
 from lib.ProductSystem import g_var, trigger_event
 from system_msgs.msg import task_message, events_message, required_events
 
