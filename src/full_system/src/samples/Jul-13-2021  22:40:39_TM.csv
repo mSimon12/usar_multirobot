@@ -1,0 +1,4 @@
+,pioneer3at_1_enabled_events,pioneer3at_1_disabled_events,pioneer3at_1_desired_events,pioneer3at_2_enabled_events,pioneer3at_2_disabled_events,pioneer3at_2_desired_events,UAV_1_enabled_events,UAV_1_disabled_events,UAV_1_desired_events,UAV_2_enabled_events,UAV_2_disabled_events,UAV_2_desired_events
+0.195,[],[],,[],[],,[],[],[],[],[],
+0.2,[],[],,[],[],,[],[],,[],[],[]
+0.26,"['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'rep_self_pos', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'on_vs', 'st_vsv']","['abort_app', 'abort_exp', 'abort_rb', 'abort_vsv', 'off_gs', 'off_vs', 'rep_gas', 'rep_victim', 'req_assist', 'rsm_app', 'rsm_exp', 'rsm_rb', 'rsm_vsv', 'rst_app', 'rst_exp', 'rst_rb', 'rst_tele', 'rst_vsv', 'st_app', 'st_exp', 'st_tele', 'st_vsv', 'sus_app', 'sus_exp', 'sus_rb', 'sus_vsv']",[],[],[],,[],[],,[],[],

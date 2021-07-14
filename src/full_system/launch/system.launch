@@ -184,6 +184,11 @@
       <arg name="sample_period" value="10"/>
   </include>
 
+<!--CPU MONITOR -->
+  <include file="$(find cpu_monitor)/launch/cpu_monitor.launch">
+      <arg name="poll_period" default="1.0"/> 
+  </include>
+
 <!-- LAUNCH RQT
   <node name="rqt_topic" pkg="rqt_topic" type="rqt_topic" output="screen" /> 
   <node name="rqt_graph" pkg="rqt_graph" type="rqt_graph" output="screen" /> 
