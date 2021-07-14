@@ -4,8 +4,8 @@ import pandas as pd
 from threading import Thread, Condition
 import rospy
 
-import uav.tasks_UAV_samples as tasks       # To implement wrong sequences
-# import uav.tasks_UAV as tasks
+# import uav.tasks_UAV_samples as tasks       # To implement wrong sequences
+import uav.tasks_UAV as tasks
 from lib.ProductSystem import g_var, trigger_event
 from system_msgs.msg import task_message, events_message, required_events
 
