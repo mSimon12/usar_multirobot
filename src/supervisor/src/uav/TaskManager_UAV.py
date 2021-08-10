@@ -54,7 +54,8 @@ class TaskManager(Thread):
         # Get all events call in the module
         self.events = {}
         for x in inspect.getmembers(events_module,inspect.isclass):
-            self.events[x[0]] = x[1]  
+            if 'uav' in x[0]:
+                self.events[x[0]] = x[1] 
 
         # Start the TaskManager
         self.start() 

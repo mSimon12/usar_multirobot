@@ -294,7 +294,7 @@ class SafeLand(Task):
                 else:
                     return ['uav_end_safe_land']
 
-        if last_event == 'uav_rep_self_pos':
+        if last_event == 'uav_rep_known':
             self.pose_reported = True
         # elif not (('BAT_CRITICAL' in states) or ('CRITIC_FAILURE' in states)):
         #     self.pose_reported = False
@@ -309,7 +309,7 @@ class SafeLand(Task):
                 if events:
                     return events
                 else:
-                    return ['uav_rep_self_pos']
+                    return ['uav_rep_known']
 
     def restart(self):
         super().restart()
@@ -373,7 +373,7 @@ class AbortM(Task):
         #     if i in states:
         #         return ['uav_abort_app', 'uav_abort_assess', 'uav_abort_vsv', 'uav_abort_rb','uav_abort_v_search']
         
-        if last_event == 'uav_rep_self_pos':
+        if last_event == 'uav_rep_known':
             self.pose_reported = True
 
         if self.pose_reported:
@@ -384,7 +384,7 @@ class AbortM(Task):
             if events:
                 return events
             else:
-                return ['uav_rep_self_pos']
+                return ['uav_rep_known']
 
     def restart(self):
         super().restart()
@@ -525,7 +525,7 @@ class PosErro(Task):
         if event_to_abort:
             return event_to_abort
 
-        if last_event == 'uav_rep_self_pos':
+        if last_event == 'uav_rep_known':
             self.pose_reported = True
         elif last_event == 'uav_req_assist':
             self._assit_required = True
@@ -540,7 +540,7 @@ class PosErro(Task):
                 else:
                     return []
         else:
-            return ['uav_rep_self_pos']
+            return ['uav_rep_known']
 
     def restart(self):
         super().restart()

@@ -62,6 +62,12 @@ class TaskManager(Thread):
         self.teleB = False                
  
         #BACKUP BEHAVIORS
+        self.CM = tasks.CriticSystem()
+        self.TeleM = tasks.HRI()
+        self.DM1 = tasks.DegradedMode1()
+        self.DM2 = tasks.DegradedMode2()
+        self.VM = tasks.Victim()  
+
         # self.BB = tasks.GoBackToBase()                      # Behavior to return to base
         # self.Abort = tasks.AbortM()                         # Behavior to abort current task and turn off sensors
         # self.Pose_Erro = tasks.PosErro()
@@ -73,7 +79,8 @@ class TaskManager(Thread):
         # Get all events call in the module
         self.events = {}
         for x in inspect.getmembers(events_module,inspect.isclass):
-            self.events[x[0]] = x[1]  
+            if not 'uav' in x[0]:
+                self.events[x[0]] = x[1]  
 
         # Start the TaskManager
         self.start() 
@@ -122,7 +129,7 @@ class TaskManager(Thread):
                 g_var.manager_info['status'] = 'idle'
                 g_var.manager_info_flag.notify()
                 g_var.manager_info_flag.release()
-            self.main_task = tasks.AbortM()                                    # Select abort as current task
+            self.main_task = None                                    # Select abort as current task
             self.main_task_id = None
 
         if valid_task:
@@ -210,7 +217,6 @@ class TaskManager(Thread):
             # 1: uncontrollable events
             # 2 - n: enabled controllable events that are required by the deliberative layer
         '''
-        baseline_events = []
 
         #Reset all priorities
         for x in self.events:
@@ -231,18 +237,16 @@ class TaskManager(Thread):
 
         # VERIFY EVENTS AND STATES THAT TRIGGER BACKUP BEHAVIORS ###############################################################################
 
-        # Teleoperation control
+        # Teleoperation control START and STOP condition
         if (last_event == 'call_tele'):
             self.teleB = True
         elif (last_event in ['er_tele', 'end_tele']) and (isinstance(self.current_task, tasks.HRI)):
             self.teleB = False
 
-        # Verify events that afect the behavior
+        # VICTIM behavior START and STOP condition
         if (last_event == 'victim_found'):
             self.foundV = True
-
-        # Verify if 'Found behaviors' have been accomplished
-        if (self.foundV) and (last_event in ['end_vsv']) and (isinstance(self.current_task, tasks.Victim)):
+        elif (self.foundV) and (last_event in ['end_vsv']) and (isinstance(self.current_task, tasks.Victim)):
             self.foundV = False
 
         ########################################################################################################################################
@@ -253,7 +257,7 @@ class TaskManager(Thread):
 
         # BEHAVIOR 1 -> CRITICAL SYSTEM
         if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
-            self.current_task = tasks.CriticSystem()            # Get mode of operation object            
+            self.current_task = self.CM           # Get mode of operation object            
 
             ## Set status for ALLOCATION SYSTEM
             g_var.manager_info['status'] = 'unable'
@@ -263,7 +267,7 @@ class TaskManager(Thread):
 
         # BEHAVIORS 2 -> HUMAN ROBOT INTERFACE
         elif self.teleB or (any([states['approach'] == 'APP_ERROR', states['exploration'] == 'EXP_ERROR', states['victims_surroundings_verification'] == 'VSV_ERROR', states['return_to_base'] == 'RB_ERROR'])):
-            self.current_task = tasks.HRI()            # Get mode of operation object 
+            self.current_task = self.TeleM            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
             # g_var.manager_info['status'] = 'busy'
@@ -273,7 +277,7 @@ class TaskManager(Thread):
         # BEHAVIOR 3 -> DEGRADED MODE 2
         elif (states['failures'] == 'POS_FAILURE') or (self.main_task and any([(states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()), 
                                                         (states['gas_sensor'] == 'GS_ERROR') and ('gs' in self.current_task.getSensors())])):
-            self.current_task = tasks.DegradedMode2()            # Get mode of operation object 
+            self.current_task = self.DM2            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
             g_var.manager_info['status'] = 'unable'
@@ -283,17 +287,19 @@ class TaskManager(Thread):
 
         # BEHAVIOR 4 -> VICTIM FOUND
         elif self.foundV:        
-            self.current_task = tasks.Victim()            # Get mode of operation object 
+            self.current_task = self.VM            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
-            g_var.manager_info['status'] = 'busy'
+            # g_var.manager_info['status'] = 'busy'
             if self.main_task_id:
                 g_var.manager_info['tasks'][self.main_task_id] = 'suspended'
                 # self.main_task = None
 
         # BEHAVIOR 5 -> DEGRADED MODE 1                          
         elif (states['battery_monitor'] == 'BAT_LOW') or (states['failures'] == 'SIMPLE_FAILURE'):
-            self.current_task = tasks.DegradedMode1()            # Get mode of operation object 
+            if self.current_task != self.DM1:
+                        self.DM1.restart()
+            self.current_task = self.DM1            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
             g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
@@ -315,7 +321,7 @@ class TaskManager(Thread):
                     g_var.manager_info['tasks'][self.main_task_id] = 'executing'
             else:
                 # if((not isinstance(self.current_task, tasks.AbortM)) or (not self.current_task.next_event(states.values(), last_event))):
-                #     self.current_task = None
+                self.current_task = tasks.Task()
 
                 g_var.manager_info['status'] = 'idle'
         
@@ -324,38 +330,51 @@ class TaskManager(Thread):
         # else:
         #      self.current_task = self.main_task
 
-
         ##########################################################################################################
-        # Get table of priorities
-        table = self.current_task.get_priorities_table()
+        table = []
+        baseline_events = []
 
-        #Get next events allowed by the current selected task
         if self.current_task:
+            # Get table of priorities
+            table = self.current_task.get_priorities_table()
+
+            #Get next events allowed by the current selected task
             baseline_events = self.current_task.next_event(states.values(), last_event, param)
-        else:
-            baseline_events = []
         rospy.loginfo("Next required events: {}".format(baseline_events))
 
         ## Publish next required event or events
         req_event_msg = required_events()
         req_event_msg.robot = self.robot_name
-        for e in baseline_events:
-            req_event_msg.desired_events.append(e)
+
+        if baseline_events:
+            for e in baseline_events:
+                req_event_msg.desired_events.append(e)
         self.req_event_pub.publish(req_event_msg)
 
-        
-        # Set priorities according table of the current mode of operation
-        for e in baseline_events:
-            self.events_priority[e] = BASELINE_PRIORITY
+        rospy.loginfo("Baseline: {}".format(baseline_events))
+        rospy.loginfo("Table: {}".format(table))
 
         # Set events priorities for events in table
-        for e in table:
-            self.events_priority[e] = table[e]
+        if table:
+            for e in table:
+                self.events_priority[e] = table[e]
 
-        # Set the event priority to zero if it is not enabled by the supervisor
+        # Set priorities according table of the current mode of operation
+        if baseline_events:
+            for e in baseline_events:
+                self.events_priority[e] = BASELINE_PRIORITY
+
+        # Set the event priority to zero if it is disabled by the supervisor
         for e in self.events:
             if self.events[e].is_controllable() and (e not in self.current_status['enabled_events'].array[0]):
                     self.events_priority[e] = 0                     # Controllable and disabled event
+
+
+
+        self.events_priority = {k: v for k, v in sorted(self.events_priority.items(), key=lambda item: item[1])}
+        print("PRIORITIES:\n")
+        for e in self.events_priority:
+            print("{} -> {}\n".format(e,self.events_priority[e]))
 
 
     # def updatePriorities(self):

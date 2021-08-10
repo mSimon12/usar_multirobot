@@ -1,0 +1,5 @@
+,robot,event,event_type,param,enabled_events,time
+1,pioneer3at_1,on_vs,controllable,(),"['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'off_vs', 'victim_found', 'er_vs', 'st_vsv']",315
+2,pioneer3at_1,st_app,controllable,"(16.0, 16.0, 0.699999988079071)","['er_app', 'sus_app', 'end_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'off_vs', 'victim_found', 'er_vs', 'st_vsv']",319
+3,pioneer3at_1,end_app,uncontrollable,"(16.0, 16.0, 0.699999988079071)","['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'off_vs', 'victim_found', 'er_vs', 'st_vsv']",373
+4,pioneer3at_1,off_vs,controllable,(),"['st_app', 'bat_L', 'call_tele', 'rep_gas', 'rep_victim', 'req_assist', 'st_exp', 'pos_fail', 'critic_fail', 'fail', 'on_gs', 'st_rb', 'st_tele', 'on_vs', 'st_vsv']",375

@@ -75,18 +75,16 @@
 <Automaton name="communication" type="Plant">
 	<Events>
 		<Event id="0" label="uav_call_tele" controllable="false"/>
-		<Event id="1" label="uav_rep_self_pos"/>
-		<Event id="2" label="uav_rep_victim"/>
-		<Event id="3" label="uav_req_assist"/>
+		<Event id="1" label="uav_rep_victim"/>
+		<Event id="2" label="uav_req_assist"/>
 	</Events>
 	<States>
 		<State id="0" name="COMMUNICATION" initial="true" accepting="true"/>
 	</States>
 	<Transitions>
 		<Transition source="0" dest="0" event="0"/>
-		<Transition source="0" dest="0" event="2"/>
-		<Transition source="0" dest="0" event="3"/>
 		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="0" event="2"/>
 	</Transitions>
 </Automaton>
 <Automaton name="failures" type="Plant">

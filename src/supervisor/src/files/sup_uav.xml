@@ -317,6 +317,24 @@
 		<Transition source="1" dest="1" event="11"/>
 	</Transitions>
 </Automaton>
+<Automaton name="sensors_at_critical_battery" type="Specification">
+	<Events>
+		<Event id="0" label="uav_bat_L" controllable="false"/>
+		<Event id="1" label="uav_bat_LL" controllable="false"/>
+		<Event id="2" label="uav_on_vs"/>
+	</Events>
+	<States>
+		<State id="0" name="BAT_DEAD"/>
+		<State id="1" name="BAT_NOT_DEAD" initial="true" accepting="true"/>
+	</States>
+	<Transitions>
+		<Transition source="0" dest="0" event="1"/>
+		<Transition source="0" dest="1" event="0"/>
+		<Transition source="1" dest="1" event="2"/>
+		<Transition source="1" dest="1" event="0"/>
+		<Transition source="1" dest="0" event="1"/>
+	</Transitions>
+</Automaton>
 <Automaton name="simple_failure_operation_mode" type="Specification">
 	<Events>
 		<Event id="0" label="uav_fail" controllable="false"/>

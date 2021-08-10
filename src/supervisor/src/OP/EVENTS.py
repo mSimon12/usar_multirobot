@@ -1701,42 +1701,6 @@ class victim_found(object):
 		victim_found.__enabled[name] = status
 
 
-##### -- rep_self_pos call & handler -- ########################################
-class rep_self_pos(object):
-	__enabled = {}
-	__type = 'controllable'
-
-	# For ROS
-	module = importlib.import_module('system_msgs.msg')
-	output = hl_2_ll(__qualname__)
-	pub = rospy.Publisher('{}'.format(output['topic']), module.events_message, queue_size=10)
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event rep_self_pos...')
-		msg = rep_self_pos.module.events_message()
-		msg.event = rep_self_pos.output['ll_event']
-		rep_self_pos.pub.publish(msg)					#Publish message
-		return True
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(rep_self_pos.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return rep_self_pos.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		rep_self_pos.__enabled[name] = status
-
-
 ##### -- abort_tele call & handler -- ########################################
 class abort_tele(object):
 	__enabled = {}
@@ -2370,42 +2334,6 @@ class uav_call_tele(object):
 	@classmethod
 	def set_status(cls, name, status):
 		uav_call_tele.__enabled[name] = status
-
-
-##### -- uav_rep_self_pos call & handler -- ########################################
-class uav_rep_self_pos(object):
-	__enabled = {}
-	__type = 'controllable'
-
-	# For ROS
-	module = importlib.import_module('system_msgs.msg')
-	output = hl_2_ll(__qualname__)
-	pub = rospy.Publisher('{}'.format(output['topic']), module.events_message, queue_size=10)
-
-	@classmethod
-	def handler(cls, param = None):
-		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
-		print('Executing event uav_rep_self_pos...')
-		msg = uav_rep_self_pos.module.events_message()
-		msg.event = uav_rep_self_pos.output['ll_event']
-		uav_rep_self_pos.pub.publish(msg)					#Publish message
-		return True
-
-	@classmethod
-	def get_status(cls):
-		'''
-		True: event enabled;
-		False: event not allowed.
-		'''
-		return all(uav_rep_self_pos.__enabled.values())
-
-	@classmethod
-	def is_controllable(cls):
-		return uav_rep_self_pos.__type == 'controllable'
-
-	@classmethod
-	def set_status(cls, name, status):
-		uav_rep_self_pos.__enabled[name] = status
 
 
 ##### -- uav_rep_victim call & handler -- ########################################

@@ -4,7 +4,6 @@ digraph {
 	COMMUNICATION [label=COMMUNICATION color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	COMMUNICATION -> COMMUNICATION [label="rep_gas,
 rep_victim,
-req_assist,
-rep_self_pos" fontcolor=blue]
+req_assist" fontcolor=blue]
 	COMMUNICATION -> COMMUNICATION [label=call_tele fontcolor=red style=dashed]
 }

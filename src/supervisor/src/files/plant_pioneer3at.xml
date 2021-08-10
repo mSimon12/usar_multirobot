@@ -49,9 +49,8 @@
 	<Events>
 		<Event id="0" label="call_tele" controllable="false"/>
 		<Event id="1" label="rep_gas"/>
-		<Event id="2" label="rep_self_pos"/>
-		<Event id="3" label="rep_victim"/>
-		<Event id="4" label="req_assist"/>
+		<Event id="2" label="rep_victim"/>
+		<Event id="3" label="req_assist"/>
 	</Events>
 	<States>
 		<State id="0" name="COMMUNICATION" initial="true" accepting="true"/>
@@ -59,9 +58,8 @@
 	<Transitions>
 		<Transition source="0" dest="0" event="0"/>
 		<Transition source="0" dest="0" event="1"/>
-		<Transition source="0" dest="0" event="3"/>
-		<Transition source="0" dest="0" event="4"/>
 		<Transition source="0" dest="0" event="2"/>
+		<Transition source="0" dest="0" event="3"/>
 	</Transitions>
 </Automaton>
 <Automaton name="exploration" type="Plant">

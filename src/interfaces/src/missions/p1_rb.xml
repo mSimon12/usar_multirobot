@@ -1,0 +1,12 @@
+<mission>
+  <id>p1_rb</id>
+  <priority>0</priority>
+  <task>
+    <agent>pioneer3at_1</agent>
+    <position/>
+    <region/>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>return_to_base</maneuver>
+  </task>
+</mission>
