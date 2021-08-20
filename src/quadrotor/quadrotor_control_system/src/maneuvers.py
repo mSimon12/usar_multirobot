@@ -616,6 +616,11 @@ class teleoperation(object):
         self.pub.publish(self.msg)                                      # Send message signaling the error
         self.state = 'IDLE'
 
+    def abort(self):
+        rospy.loginfo("Aborting Teleoperation!")
+        self.state = 'IDLE'
+        self.__sub.unregister()
+
     def error(self):
         self.__sub.unregister()                                         # Stop receiving messages from joystick
         self.__odom_sub.unregister()
@@ -853,6 +858,8 @@ def maneuver_event(msg):
         elif (msg.event == "end_teleoperation") and (tele.state == 'EXE'):
             # Teleoperation ended
             tele.end()
+        elif (msg.event == "abort_teleoperation") and (tele.state == 'EXE'):
+            tele.abort()
         elif (msg.event == "teleoperation_error") and (tele.state == 'EXE'):
             # Teleoperation ended
             tele.error()

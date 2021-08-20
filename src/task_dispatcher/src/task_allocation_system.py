@@ -291,10 +291,16 @@ class RobotStateMachine(object):
             robots_info.loc[self.name,'vs'] = 'nok'
         elif msg.event == 'vs_allowed':
             robots_info.loc[self.name,'vs'] = 'ok'
+            replan_flag.acquire()
+            replan_flag.notify()
+            replan_flag.release()
         elif msg.event == 'gs_unallowed':
             robots_info.loc[self.name,'gs'] = 'nok'
         elif msg.event == 'gs_allowed':
             robots_info.loc[self.name,'gs'] = 'ok'
+            replan_flag.acquire()
+            replan_flag.notify()
+            replan_flag.release()
 
         # Update robot working status
         elif msg.event == 'robot_idle':  

@@ -53,7 +53,7 @@ off_vs,stop,victim_sensor/in,pioneer3at
 on_vs,start,victim_sensor/in,pioneer3at
 rst_vs,reset,victim_sensor/out,pioneer3at
 victim_found,victim_recognized,victim_sensor/out,pioneer3at
-abort_tele,abort_teleoperation,maneuvers/in,uav
+abort_tele,abort_teleoperation,maneuvers/in,pioneer3at
 uav_abort_app,abort_approach,maneuvers/in,uav
 uav_end_app,end_approach,maneuvers/out,uav
 uav_er_app,approach_error,maneuvers/out,uav
@@ -113,3 +113,4 @@ uav_rst_v_search,reset_v_search,maneuvers/in,uav
 uav_st_v_search,start_v_search,maneuvers/in,uav
 uav_sus_v_search,suspend_v_search,maneuvers/in,uav
 uav_victim_found,victim_recognized,victim_sensor/out,uav
+uav_abort_tele,abort_teleoperation,maneuvers/in,uav

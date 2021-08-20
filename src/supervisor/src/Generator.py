@@ -24,7 +24,7 @@ G = MultiAutomata('Plant')
 G.read_xml('files/plant_uav.xml')
 G.generate_calls()
 
-S = MultiAutomata('Supervisors')
-S.read_xml('files/sup_uav.xml')
-S.generate_calls()
+# S = MultiAutomata('Supervisors')
+# S.read_xml('files/sup_uav.xml')
+# S.generate_calls()
 

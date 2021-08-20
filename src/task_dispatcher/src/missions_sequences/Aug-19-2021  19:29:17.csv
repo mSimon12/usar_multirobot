@@ -1,0 +1,13 @@
+,time,robot,robot_status,task,task_status
+0,509,pioneer3at_1,busy,-,-
+1,509,pioneer3at_1,busy,exp_test_0,executing
+2,630,pioneer3at_1,busy,exp_test_0,aborted
+3,630,pioneer3at_1,idle,-,-
+4,668,pioneer3at_1,busy,-,-
+5,668,pioneer3at_1,busy,exp_test_0,executing
+6,699,pioneer3at_1,busy,exp_test_0,aborted
+7,700,pioneer3at_1,idle,-,-
+8,726,pioneer3at_1,busy,-,-
+9,726,pioneer3at_1,busy,exp_test_0,executing
+10,846,pioneer3at_1,unable,-,-
+11,846,pioneer3at_1,unable,exp_test_0,aborted

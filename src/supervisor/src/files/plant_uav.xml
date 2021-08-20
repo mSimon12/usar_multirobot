@@ -187,10 +187,11 @@
 </Automaton>
 <Automaton name="teleoperation" type="Plant">
 	<Events>
-		<Event id="0" label="uav_end_tele" controllable="false"/>
-		<Event id="1" label="uav_er_tele" controllable="false"/>
-		<Event id="2" label="uav_rst_tele"/>
-		<Event id="3" label="uav_st_tele"/>
+		<Event id="0" label="uav_abort_tele"/>
+		<Event id="1" label="uav_end_tele" controllable="false"/>
+		<Event id="2" label="uav_er_tele" controllable="false"/>
+		<Event id="3" label="uav_rst_tele"/>
+		<Event id="4" label="uav_st_tele"/>
 	</Events>
 	<States>
 		<State id="0" name="TELE_ERROR"/>
@@ -198,10 +199,11 @@
 		<State id="2" name="TELE_IDLE" initial="true" accepting="true"/>
 	</States>
 	<Transitions>
-		<Transition source="0" dest="2" event="2"/>
-		<Transition source="1" dest="0" event="1"/>
+		<Transition source="0" dest="2" event="3"/>
+		<Transition source="1" dest="0" event="2"/>
+		<Transition source="1" dest="2" event="1"/>
 		<Transition source="1" dest="2" event="0"/>
-		<Transition source="2" dest="1" event="3"/>
+		<Transition source="2" dest="1" event="4"/>
 	</Transitions>
 </Automaton>
 <Automaton name="victims_recognition_system" type="Plant">

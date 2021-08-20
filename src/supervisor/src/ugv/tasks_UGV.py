@@ -117,8 +117,8 @@ class UGV_approach(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['sus_app'] = 0
-        table['abort_app'] = 0
+        table['sus_app'] = 3
+        table['abort_app'] = 3
         if 'on_vs' in self.getSensors():
             table['off_vs'] = 5
         if 'on_gs' in self.getSensors():
@@ -233,7 +233,7 @@ class CriticSystem(Task):
         - the robot must abort all maneuvers and stop sensors.
     '''
     def __init__(self):
-        pass
+        super().__init__()
 
     '''
         Function to get baseline events --> stop current maneuver and turn sensors off
@@ -279,6 +279,7 @@ class HRI(Task):
         - In case of teleoperation requisition by the commander, the robots start tele mode.
     '''
     def __init__(self):
+        super().__init__()
         self._tele_executed = False
     
     def next_event(self, states, last_event, event_param = []):
@@ -329,15 +330,19 @@ class HRI(Task):
 
         return table
 
+    def restart(self):
+        super().restart()
+        self._tele_executed = False
+
 
 class DegradedMode2(Task):
     '''
         Behavior if the robot has a POSITION FAILURE or SENSOR ERROR with current task depending on it
 
-        - the robot must abort all maneuvers (except teleoperation) and stop sensors.
+        - the robot must return to base after finishing the last task.
     '''
     def __init__(self):
-        pass
+        super().__init__()
 
     '''
         Function to get baseline events --> stop current maneuver and turn sensors off
@@ -375,6 +380,43 @@ class DegradedMode2(Task):
         return table
 
 
+class Victim(Task):
+    '''
+        Behavior if the robot has found a VICTIM
+
+        - the robot must suspend current maneuver and execute VICTIM SURROUNDINGS VERIFICATION
+    '''
+    def __init__(self, param=[]):
+        super().__init__(param = ['victim', param[0], param[1]])
+
+    def next_event(self, states, last_event, event_param = []):
+        pass
+
+    '''
+        Priority of events affected by this mode of operation
+    '''    
+    def get_priorities_table(self):
+        table = {
+            #Controllable
+                'abort_app':0, 'abort_exp':0, 'abort_rb':0, 'abort_tele':0, 'abort_vsv':0,
+                'off_gs':5, 'off_vs':5, 'on_gs':6, 'on_vs':6,
+                'rep_gas':11, 'rep_victim':11, 'req_assist':11,
+                'rsm_app':3, 'rsm_exp':3, 'rsm_rb':3, 'rsm_vsv':8,
+                'rst_app':3, 'rst_exp':3, 'rst_rb':3, 'rst_tele':3, 'rst_vsv':3,
+                'st_app':3, 'st_exp':3, 'st_rb':3, 'st_tele':3, 'st_vsv':8,
+                'sus_app':3, 'sus_exp':3, 'sus_rb':3, 'sus_vsv':0,
+            #Uontrollable
+                'bat_L':1, 'bat_LL':1, 'bat_OK':1,
+                'fail':1, 'pos_fail':1, 'critic_fail':1,
+                'gas_found':1, 'victim_found':1, 'call_tele':1,
+                'end_app':1, 'end_exp':1, 'end_rb':1, 'end_tele':1, 'end_vsv':1,
+                'er_app':1, 'er_exp':1, 'er_rb':1, 'er_tele':1, 'er_vsv':1,
+                'er_gs':1, 'er_vs':1,
+                'rst_f':1, 'rst_gs':1, 'rst_vs':1}
+
+        return table
+
+
 class DegradedMode1(Task):
     '''
         Behavior if the robot has a SIMPLE FAILURE or if the battery level become LOW
@@ -382,6 +424,7 @@ class DegradedMode1(Task):
         - the robot must abort all maneuvers (except teleoperation) and stop sensors.
     '''
     def __init__(self):
+        super().__init__()
         self.atBase = False
 
     '''
@@ -435,42 +478,6 @@ class DegradedMode1(Task):
     def restart(self):
         super().restart()
         self.atBase = False
-
-class Victim(Task):
-    '''
-        Behavior if the robot has found a VICTIM
-
-        - the robot must suspend current maneuver and execute VICTIM SURROUNDINGS VERIFICATION
-    '''
-    def __init__(self):
-        pass       
-
-    def next_event(self, states, last_event, event_param = []):
-        pass
-
-    '''
-        Priority of events affected by this mode of operation
-    '''    
-    def get_priorities_table(self):
-        table = {
-            #Controllable
-                'abort_app':0, 'abort_exp':0, 'abort_rb':0, 'abort_tele':0, 'abort_vsv':0,
-                'off_gs':5, 'off_vs':5, 'on_gs':4, 'on_vs':4,
-                'rep_gas':11, 'rep_victim':11, 'req_assist':11,
-                'rsm_app':3, 'rsm_exp':3, 'rsm_rb':3, 'rsm_vsv':3,
-                'rst_app':3, 'rst_exp':3, 'rst_rb':3, 'rst_tele':3, 'rst_vsv':3,
-                'st_app':3, 'st_exp':3, 'st_rb':3, 'st_tele':3, 'st_vsv':3,
-                'sus_app':3, 'sus_exp':3, 'sus_rb':3, 'sus_vsv':3,
-            #Uontrollable
-                'bat_L':1, 'bat_LL':1, 'bat_OK':1,
-                'fail':1, 'pos_fail':1, 'critic_fail':1,
-                'gas_found':1, 'victim_found':1, 'call_tele':1,
-                'end_app':1, 'end_exp':1, 'end_rb':1, 'end_tele':1, 'end_vsv':1,
-                'er_app':1, 'er_exp':1, 'er_rb':1, 'er_tele':1, 'er_vsv':1,
-                'er_gs':1, 'er_vs':1,
-                'rst_f':1, 'rst_gs':1, 'rst_vs':1}
-
-        return table
 
 
 #### OLD MODES ############################################################################################

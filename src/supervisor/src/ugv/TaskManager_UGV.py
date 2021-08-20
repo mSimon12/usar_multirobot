@@ -1,6 +1,5 @@
 import time
 import inspect
-from uav.tasks_UAV import AbortM
 import pandas as pd
 from threading import Thread, Condition
 import rospy
@@ -15,21 +14,6 @@ import OP.EVENTS as events_module
 # List of events that require a parameter
 P_EVENTS = ['st_app','st_vsv','st_exp','rep_victim','rep_gas']      
 BASELINE_PRIORITY = 10  
-
-'''
-Behaviors types priorities:
-    1 - CRITIC_FAILURE and CRITICAL_BAT
-    2 - teleoperation required by the commander
-    3 - Mi_ERROR or POS_ERROR (require teleoperation)
-    4 - victim found
-    5 - gas found
-    6 - BAT_LOW and SIMPLE_FAILURE
-    7 - main_tasks
-    8 - nothing
-
-    * Then verify if the selected tasks can be executed due to VS_ERROR or GS_ERROR
-'''
-
 
 class TaskManager(Thread):
     '''
@@ -56,7 +40,7 @@ class TaskManager(Thread):
         self.current_task = None
 
         # Varible to activate a behavior when something is found
-        self.foundV = False
+        # self.foundV = False
         # self.foundG = None 
         self.tele_ok = True  
         self.teleB = False                
@@ -65,8 +49,8 @@ class TaskManager(Thread):
         self.CM = tasks.CriticSystem()
         self.TeleM = tasks.HRI()
         self.DM1 = tasks.DegradedMode1()
-        self.DM2 = tasks.DegradedMode2()
-        self.VM = tasks.Victim()  
+        self.DM2 = tasks.DegradedMode2() 
+        self.VM = None
 
         # self.BB = tasks.GoBackToBase()                      # Behavior to return to base
         # self.Abort = tasks.AbortM()                         # Behavior to abort current task and turn off sensors
@@ -129,7 +113,7 @@ class TaskManager(Thread):
                 g_var.manager_info['status'] = 'idle'
                 g_var.manager_info_flag.notify()
                 g_var.manager_info_flag.release()
-            self.main_task = None                                    # Select abort as current task
+            self.main_task = None                                   
             self.main_task_id = None
 
         if valid_task:
@@ -202,8 +186,6 @@ class TaskManager(Thread):
                 g_var.manager_info_flag.notify()
                 g_var.manager_info_flag.release()
 
-                
-
             # Signal that a new event was received
             self.update_flag.acquire()
             self.update_flag.notify()
@@ -245,9 +227,9 @@ class TaskManager(Thread):
 
         # VICTIM behavior START and STOP condition
         if (last_event == 'victim_found'):
-            self.foundV = True
-        elif (self.foundV) and (last_event in ['end_vsv']) and (isinstance(self.current_task, tasks.Victim)):
-            self.foundV = False
+            self.VM = tasks.Victim(param) 
+        elif (self.VM) and (last_event in ['end_vsv']) and (isinstance(self.current_task, tasks.Victim)):
+            self.VM = None
 
         ########################################################################################################################################
 
@@ -267,6 +249,8 @@ class TaskManager(Thread):
 
         # BEHAVIORS 2 -> HUMAN ROBOT INTERFACE
         elif self.teleB or (any([states['approach'] == 'APP_ERROR', states['exploration'] == 'EXP_ERROR', states['victims_surroundings_verification'] == 'VSV_ERROR', states['return_to_base'] == 'RB_ERROR'])):
+            if self.current_task != self.TeleM:
+                        self.TeleM.restart()
             self.current_task = self.TeleM            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
@@ -275,18 +259,20 @@ class TaskManager(Thread):
                 g_var.manager_info['tasks'][self.main_task_id] = 'suspended'     
             
         # BEHAVIOR 3 -> DEGRADED MODE 2
-        elif (states['failures'] == 'POS_FAILURE') or (self.main_task and any([(states['victims_recognition_system'] == 'VS_ERROR') and ('vs' in self.current_task.getSensors()), 
-                                                        (states['gas_sensor'] == 'GS_ERROR') and ('gs' in self.current_task.getSensors())])):
+        elif (states['failures'] == 'POS_FAILURE') or (self.main_task and any([(states['victims_recognition_system'] == 'VS_ERROR') and ('on_vs' in self.main_task.getSensors()), 
+                                                        (states['gas_sensor'] == 'GS_ERROR') and ('on_gs' in self.main_task.getSensors())])):
             self.current_task = self.DM2            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
-            g_var.manager_info['status'] = 'unable'
+            if states['failures'] == 'POS_FAILURE':
+                g_var.manager_info['status'] = 'unable'
+
             if self.main_task_id:
                 g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                 self.main_task = None
 
         # BEHAVIOR 4 -> VICTIM FOUND
-        elif self.foundV:        
+        elif self.VM:    
             self.current_task = self.VM            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
@@ -302,10 +288,9 @@ class TaskManager(Thread):
             self.current_task = self.DM1            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
-            g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
             if self.main_task and (last_event == 'st_rb'):
-                # g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
-                # g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
+                g_var.manager_info['status'] = 'unable'                         # The robot is not allowed to receive new tasks
+                g_var.manager_info['tasks'][self.main_task_id] = 'aborted'
                 self.main_task = None
                 self.main_task_id = None
 
@@ -321,9 +306,9 @@ class TaskManager(Thread):
                     g_var.manager_info['tasks'][self.main_task_id] = 'executing'
             else:
                 # if((not isinstance(self.current_task, tasks.AbortM)) or (not self.current_task.next_event(states.values(), last_event))):
-                self.current_task = tasks.Task()
-
-                g_var.manager_info['status'] = 'idle'
+                if not isinstance(self.current_task, tasks.DegradedMode2):
+                    self.current_task = tasks.Task()
+                    g_var.manager_info['status'] = 'idle'
         
         g_var.manager_info_flag.notify()
         g_var.manager_info_flag.release()
@@ -340,7 +325,7 @@ class TaskManager(Thread):
 
             #Get next events allowed by the current selected task
             baseline_events = self.current_task.next_event(states.values(), last_event, param)
-        rospy.loginfo("Next required events: {}".format(baseline_events))
+        # rospy.loginfo("Next required events: {}".format(baseline_events))
 
         ## Publish next required event or events
         req_event_msg = required_events()
@@ -370,8 +355,8 @@ class TaskManager(Thread):
                     self.events_priority[e] = 0                     # Controllable and disabled event
 
 
-
         self.events_priority = {k: v for k, v in sorted(self.events_priority.items(), key=lambda item: item[1])}
+        
         print("PRIORITIES:\n")
         for e in self.events_priority:
             print("{} -> {}\n".format(e,self.events_priority[e]))

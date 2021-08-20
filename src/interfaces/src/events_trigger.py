@@ -11,7 +11,7 @@ import PySimpleGUI as sg
 
 # Supervisor libs
 import OP.EVENTS as events_module
-import OP.STATES as states_module
+# import OP.STATES as states_module
 
 # ROS libs
 import rospy

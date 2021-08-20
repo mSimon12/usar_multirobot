@@ -1,0 +1,17 @@
+// Plant-failures
+digraph {
+	rankdir=LR
+	CRITIC_FAILURE [label=CRITIC_FAILURE color=black fillcolor=white shape=circle style=filled]
+	NO_FAIL [label=NO_FAIL color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	POS_FAILURE [label=POS_FAILURE color=black fillcolor=white shape=circle style=filled]
+	SIMPLE_FAILURE [label=SIMPLE_FAILURE color=black fillcolor=white shape=circle style=filled]
+	CRITIC_FAILURE -> NO_FAIL [label=uav_rst_f fontcolor=red style=dashed]
+	NO_FAIL -> CRITIC_FAILURE [label=uav_critic_fail fontcolor=red style=dashed]
+	NO_FAIL -> POS_FAILURE [label=uav_pos_fail fontcolor=red style=dashed]
+	NO_FAIL -> SIMPLE_FAILURE [label=uav_fail fontcolor=red style=dashed]
+	POS_FAILURE -> CRITIC_FAILURE [label=uav_critic_fail fontcolor=red style=dashed]
+	POS_FAILURE -> NO_FAIL [label=uav_rst_f fontcolor=red style=dashed]
+	SIMPLE_FAILURE -> CRITIC_FAILURE [label=uav_critic_fail fontcolor=red style=dashed]
+	SIMPLE_FAILURE -> NO_FAIL [label=uav_rst_f fontcolor=red style=dashed]
+	SIMPLE_FAILURE -> POS_FAILURE [label=uav_pos_fail fontcolor=red style=dashed]
+}

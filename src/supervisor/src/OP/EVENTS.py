@@ -3739,3 +3739,38 @@ class uav_rst_vs(object):
 	def set_status(cls, name, status):
 		uav_rst_vs.__enabled[name] = status
 
+
+##### -- uav_abort_tele call & handler -- ########################################
+class uav_abort_tele(object):
+	__enabled = {}
+	__type = 'controllable'
+
+	# For ROS
+	module = importlib.import_module('system_msgs.msg')
+	output = hl_2_ll(__qualname__)
+	pub = rospy.Publisher('{}'.format(output['topic']), module.events_message, queue_size=10)
+
+	@classmethod
+	def handler(cls, param = None):
+		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
+		print('Executing event uav_abort_tele...')
+		msg = uav_abort_tele.module.events_message()
+		msg.event = uav_abort_tele.output['ll_event']
+		uav_abort_tele.pub.publish(msg)					#Publish message
+		return True
+
+	@classmethod
+	def get_status(cls):
+		'''
+		True: event enabled;
+		False: event not allowed.
+		'''
+		return all(uav_abort_tele.__enabled.values())
+
+	@classmethod
+	def is_controllable(cls):
+		return uav_abort_tele.__type == 'controllable'
+
+	@classmethod
+	def set_status(cls, name, status):
+		uav_abort_tele.__enabled[name] = status

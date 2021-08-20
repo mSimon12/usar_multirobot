@@ -1,0 +1,16 @@
+// Plant-approach
+digraph {
+	rankdir=LR
+	APP_ERROR [label=APP_ERROR color=black fillcolor=white shape=circle style=filled]
+	APP_EXE [label=APP_EXE color=black fillcolor=white shape=circle style=filled]
+	APP_IDLE [label=APP_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	APP_SUSP [label=APP_SUSP color=black fillcolor=white shape=circle style=filled]
+	APP_ERROR -> APP_IDLE [label=uav_rst_app fontcolor=blue]
+	APP_EXE -> APP_ERROR [label=uav_er_app fontcolor=red style=dashed]
+	APP_EXE -> APP_IDLE [label=uav_end_app fontcolor=red style=dashed]
+	APP_EXE -> APP_SUSP [label=uav_sus_app fontcolor=blue]
+	APP_IDLE -> APP_EXE [label=uav_st_app fontcolor=blue]
+	APP_SUSP -> APP_ERROR [label=uav_er_app fontcolor=red style=dashed]
+	APP_SUSP -> APP_EXE [label=uav_rsm_app fontcolor=blue]
+	APP_SUSP -> APP_IDLE [label=uav_abort_app fontcolor=blue]
+}

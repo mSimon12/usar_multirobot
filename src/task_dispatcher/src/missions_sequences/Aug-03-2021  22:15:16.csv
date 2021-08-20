@@ -1,7 +1,0 @@
-,time,robot,robot_status,task,task_status
-0,99,pioneer3at_1,busy,-,-
-1,99,pioneer3at_1,busy,building1_0,executing
-2,155,pioneer3at_1,idle,-,-
-3,155,pioneer3at_1,idle,building1_0,finished
-4,155,pioneer3at_1,busy,-,-
-5,155,pioneer3at_1,busy,building1_1,executing
