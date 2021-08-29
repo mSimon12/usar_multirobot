@@ -5,7 +5,7 @@ class Task(object):
 
     def __init__(self, param=[], vs_req = False, gs_req = False):
         self._param = param                                           # Atribute to save the parameter of the task
-        self.__sensors = {'on_vs': vs_req, 'on_gs': gs_req}           # Save the required status of the sensors
+        self.__sensors = {'uav_on_vs': vs_req, 'uav_on_gs': gs_req}           # Save the required status of the sensors
         self._motion_done = False                                     # Monitor the motion execution
         self._last_task_aborted = False                               # Variable to abort last maneuver
 
@@ -228,14 +228,17 @@ class CriticSystem(Task):
         Function to get baseline events --> stop current maneuver, execute safe land and turn sensors off
     '''
     def next_event(self, states, last_event, event_param = []):
-        for s in ['APP_EXE','ASSESS_EXE', 'V_SEARCH_EXE', 'VSV_EXE','TELE_EXE','RB_EXE', 'APP_SUSP','ASSESS_SUSP', 'V_SEARCH_SUSP','VSV_SUSP','RB_SUSP', 'VS_ON']:
-            if s in states:
-                return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_v_search', 'uav_sus_vsv', 'uav_sus_rb', 'uav_abort_tele',     # suspend current maneuver
-                        'uav_abort_app', 'uav_abort_assess', 'uav_abort_v_search', 'uav_abort_vsv', 'uav_abort_rb']             # abort current maneuver
+        if last_event == 'uav_end_safe_land':
+            self._safe_land_executed = True
+
+        # for s in ['APP_EXE','ASSESS_EXE', 'V_SEARCH_EXE', 'VSV_EXE','TELE_EXE','RB_EXE', 'APP_SUSP','ASSESS_SUSP', 'V_SEARCH_SUSP','VSV_SUSP','RB_SUSP', 'VS_ON']:
+        #     if s in states:
+        #         return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_v_search', 'uav_sus_vsv', 'uav_sus_rb', 'uav_abort_tele',     # suspend current maneuver
+        #                 'uav_abort_app', 'uav_abort_assess', 'uav_abort_v_search', 'uav_abort_vsv', 'uav_abort_rb']             # abort current maneuver
 
         
         if not self._safe_land_executed:
-            return ['uav_st_vs', 'uav_rst_safe_land', 'uav_st_safe_land', 'uav_rsm_safe_land']
+            return ['uav_on_vs', 'uav_rst_safe_land', 'uav_st_safe_land']
 
         return []
 
@@ -350,7 +353,7 @@ class DegradedMode2(Task):
             if s in states:
                 return ['uav_sus_app', 'uav_sus_assess', 'uav_sus_v_search', 'uav_sus_vsv', 'uav_sus_rb',                      # suspend current maneuver
                         'uav_abort_app', 'uav_abort_assess', 'uav_abort_v_search', 'uav_abort_vsv', 'uav_abort_rb',            # abort current maneuver
-                        'off_vs']                                                                                              # stop sensors
+                        'uav_off_vs']                                                                                              # stop sensors
         return []
 
     '''
@@ -450,7 +453,7 @@ class Victim(Task):
         - the robot must suspend current maneuver and execute VICTIM SURROUNDINGS VERIFICATION
     '''
     def __init__(self, param=[]):
-        super().__init__(param = ['victim', param[0], param[1]])
+        super().__init__(param = ['victim', param[0], param[1], param[2]])
 
     def next_event(self, states, last_event, event_param = []):
         pass

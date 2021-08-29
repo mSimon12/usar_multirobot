@@ -22,7 +22,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/marceloSimon/usar_multirobot/src/usar_gazebo/models/collapsed_fire_station/meshes/collapsed_fire_station.dae</uri>
+            <uri>model://collapsed_fire_station/meshes/collapsed_fire_station.dae</uri>
             <scale>1 1 1</scale>
           </mesh>
         </geometry>

@@ -5,7 +5,6 @@ digraph {
 	SIMPLE_FAIL [label=SIMPLE_FAIL color=black fillcolor=white shape=circle style=filled]
 	OK -> OK [label="st_app,
 st_exp,
-st_vsv,
 rsm_app,
 rsm_exp,
 rsm_vsv" fontcolor=blue]

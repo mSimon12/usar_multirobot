@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
-  <model name='collapsed_house2'>
+  <model name='collapsed_house'>
     <link name='link'>
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
@@ -23,7 +23,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/marceloSimon/usar_multirobot/src/usar_gazebo/models/collapsed_house/meshes/collapsed_house.dae</uri>
+            <uri>model://collapsed_house/meshes/collapsed_house.dae</uri>
             <scale>1.5 1.5 1.5</scale>
           </mesh>
         </geometry>

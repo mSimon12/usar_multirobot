@@ -87,6 +87,7 @@ class SafeLand(object):
         self.sonar_me.release()
 
         state = None
+        trials = 0
         while not (state in [GoalStatus.SUCCEEDED, GoalStatus.ABORTED]): 
             # print(self.point_to_go)
 

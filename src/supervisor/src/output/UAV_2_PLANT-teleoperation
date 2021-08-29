@@ -6,6 +6,7 @@ digraph {
 	TELE_IDLE [label=TELE_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	TELE_ERROR -> TELE_IDLE [label=uav_rst_tele fontcolor=blue]
 	TELE_EXE -> TELE_ERROR [label=uav_er_tele fontcolor=red style=dashed]
+	TELE_EXE -> TELE_IDLE [label=uav_abort_tele fontcolor=blue]
 	TELE_EXE -> TELE_IDLE [label=uav_end_tele fontcolor=red style=dashed]
 	TELE_IDLE -> TELE_EXE [label=uav_st_tele fontcolor=blue]
 }

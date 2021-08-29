@@ -240,6 +240,8 @@ class TaskManager(Thread):
 
         # BEHAVIOR 1 -> CRITICAL SYSTEM
         if (any([states['battery_monitor'] == 'BAT_CRITICAL', states['failures'] == 'CRITIC_FAILURE'])):
+            if self.current_task != self.CM:
+                self.CM.restart()
             self.current_task = self.CM           # Get mode of operation object            
 
             ## Set status for ALLOCATION SYSTEM
@@ -261,7 +263,7 @@ class TaskManager(Thread):
                 g_var.manager_info['tasks'][self.main_task_id] = 'suspended'     
             
         # BEHAVIOR 3 -> DEGRADED MODE 2
-        elif (states['failures'] == 'POS_FAILURE') or (self.main_task and (states['victims_recognition_system'] == 'VS_ERROR') and ('on_vs' in self.main_task.getSensors())):
+        elif (states['failures'] == 'POS_FAILURE') or (self.main_task and (states['victims_recognition_system'] == 'VS_ERROR') and ('uav_on_vs' in self.main_task.getSensors())):
             self.current_task = self.DM2            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM

@@ -255,44 +255,41 @@
 		<Event id="2" label="uav_er_rb" controllable="false"/>
 		<Event id="3" label="uav_er_v_search" controllable="false"/>
 		<Event id="4" label="uav_er_vsv" controllable="false"/>
-		<Event id="5" label="uav_fail" controllable="false"/>
-		<Event id="6" label="uav_pos_fail" controllable="false"/>
-		<Event id="7" label="uav_req_assist"/>
-		<Event id="8" label="uav_rst_app"/>
-		<Event id="9" label="uav_rst_assess"/>
-		<Event id="10" label="uav_rst_rb"/>
-		<Event id="11" label="uav_rst_v_search"/>
-		<Event id="12" label="uav_rst_vsv"/>
+		<Event id="5" label="uav_pos_fail" controllable="false"/>
+		<Event id="6" label="uav_req_assist"/>
+		<Event id="7" label="uav_rst_app"/>
+		<Event id="8" label="uav_rst_assess"/>
+		<Event id="9" label="uav_rst_rb"/>
+		<Event id="10" label="uav_rst_v_search"/>
+		<Event id="11" label="uav_rst_vsv"/>
 	</Events>
 	<States>
 		<State id="0" name="ASSIST_ALLOWED"/>
 		<State id="1" name="NO_ASSIT" initial="true" accepting="true"/>
 	</States>
 	<Transitions>
+		<Transition source="0" dest="1" event="6"/>
 		<Transition source="0" dest="1" event="7"/>
 		<Transition source="0" dest="1" event="8"/>
-		<Transition source="0" dest="1" event="9"/>
-		<Transition source="0" dest="1" event="11"/>
-		<Transition source="0" dest="1" event="12"/>
 		<Transition source="0" dest="1" event="10"/>
+		<Transition source="0" dest="1" event="11"/>
+		<Transition source="0" dest="1" event="9"/>
 		<Transition source="0" dest="0" event="0"/>
 		<Transition source="0" dest="0" event="1"/>
 		<Transition source="0" dest="0" event="3"/>
 		<Transition source="0" dest="0" event="4"/>
 		<Transition source="0" dest="0" event="2"/>
-		<Transition source="0" dest="0" event="6"/>
 		<Transition source="0" dest="0" event="5"/>
+		<Transition source="1" dest="1" event="7"/>
 		<Transition source="1" dest="1" event="8"/>
-		<Transition source="1" dest="1" event="9"/>
-		<Transition source="1" dest="1" event="11"/>
-		<Transition source="1" dest="1" event="12"/>
 		<Transition source="1" dest="1" event="10"/>
+		<Transition source="1" dest="1" event="11"/>
+		<Transition source="1" dest="1" event="9"/>
 		<Transition source="1" dest="0" event="0"/>
 		<Transition source="1" dest="0" event="1"/>
 		<Transition source="1" dest="0" event="3"/>
 		<Transition source="1" dest="0" event="4"/>
 		<Transition source="1" dest="0" event="2"/>
-		<Transition source="1" dest="0" event="6"/>
 		<Transition source="1" dest="0" event="5"/>
 	</Transitions>
 </Automaton>
@@ -365,24 +362,6 @@
 		<Transition source="0" dest="0" event="3"/>
 		<Transition source="1" dest="0" event="0"/>
 		<Transition source="1" dest="1" event="11"/>
-	</Transitions>
-</Automaton>
-<Automaton name="sensors_at_critical_battery" type="Specification">
-	<Events>
-		<Event id="0" label="uav_bat_L" controllable="false"/>
-		<Event id="1" label="uav_bat_LL" controllable="false"/>
-		<Event id="2" label="uav_on_vs"/>
-	</Events>
-	<States>
-		<State id="0" name="BAT_DEAD"/>
-		<State id="1" name="BAT_NOT_DEAD" initial="true" accepting="true"/>
-	</States>
-	<Transitions>
-		<Transition source="0" dest="0" event="1"/>
-		<Transition source="0" dest="1" event="0"/>
-		<Transition source="1" dest="1" event="2"/>
-		<Transition source="1" dest="1" event="0"/>
-		<Transition source="1" dest="0" event="1"/>
 	</Transitions>
 </Automaton>
 <Automaton name="simple_failure_operation_mode" type="Specification">

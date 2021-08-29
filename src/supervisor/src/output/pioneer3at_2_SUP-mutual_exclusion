@@ -1,41 +1,64 @@
 // pioneer3at_2_SUP-mutual_exclusion
 digraph {
 	rankdir=LR
+	APP_ON [label=APP_ON color=black fillcolor=white shape=circle style=filled]
+	EXP_ON [label=EXP_ON color=black fillcolor=white shape=circle style=filled]
 	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	Mi_ON [label=Mi_ON color=black fillcolor=white shape=circle style=filled]
+	RB_ON [label=RB_ON color=black fillcolor=white shape=circle style=filled]
+	TELE_ON [label=TELE_ON color=black fillcolor=white shape=circle style=filled]
+	VSV_ON [label=VSV_ON color=black fillcolor=white shape=circle style=filled]
+	APP_ON -> APP_ON [label="er_exp,
+er_rb,
+er_tele,
+er_vsv" fontcolor=red style=dashed]
+	APP_ON -> Mi_OFF [label=sus_app fontcolor=blue]
+	APP_ON -> Mi_OFF [label="end_app,
+er_app" fontcolor=red style=dashed]
+	EXP_ON -> EXP_ON [label="er_app,
+er_rb,
+er_tele,
+er_vsv" fontcolor=red style=dashed]
+	EXP_ON -> Mi_OFF [label=sus_exp fontcolor=blue]
+	EXP_ON -> Mi_OFF [label="end_exp,
+er_exp" fontcolor=red style=dashed]
+	Mi_OFF -> APP_ON [label="rsm_app,
+st_app" fontcolor=blue]
+	Mi_OFF -> EXP_ON [label="st_exp,
+rsm_exp" fontcolor=blue]
 	Mi_OFF -> Mi_OFF [label="end_app,
 end_exp,
+end_vsv,
 end_rb,
 end_tele,
-end_vsv,
 er_app,
 er_exp,
+er_vsv,
 er_rb,
+er_tele" fontcolor=red style=dashed]
+	Mi_OFF -> RB_ON [label="rsm_rb,
+st_rb" fontcolor=blue]
+	Mi_OFF -> TELE_ON [label=st_tele fontcolor=blue]
+	Mi_OFF -> VSV_ON [label="rsm_vsv,
+st_vsv" fontcolor=blue]
+	RB_ON -> Mi_OFF [label=sus_rb fontcolor=blue]
+	RB_ON -> Mi_OFF [label="end_rb,
+er_rb" fontcolor=red style=dashed]
+	RB_ON -> RB_ON [label="er_app,
+er_exp,
 er_tele,
-er_vs,
 er_vsv" fontcolor=red style=dashed]
-	Mi_OFF -> Mi_ON [label="st_app,
-st_exp,
-st_vsv,
-st_rb,
-st_tele,
-rsm_app,
-rsm_exp,
-rsm_vsv,
-rsm_rb" fontcolor=blue]
-	Mi_ON -> Mi_OFF [label="sus_app,
-sus_exp,
-sus_rb,
-sus_vsv" fontcolor=blue]
-	Mi_ON -> Mi_OFF [label="end_app,
-end_exp,
-end_rb,
-end_tele,
-end_vsv,
-er_app,
+	TELE_ON -> Mi_OFF [label=abort_tele fontcolor=blue]
+	TELE_ON -> Mi_OFF [label="end_tele,
+er_tele" fontcolor=red style=dashed]
+	TELE_ON -> TELE_ON [label="er_app,
 er_exp,
 er_rb,
-er_tele,
-er_vs,
 er_vsv" fontcolor=red style=dashed]
+	VSV_ON -> Mi_OFF [label=sus_vsv fontcolor=blue]
+	VSV_ON -> Mi_OFF [label="end_vsv,
+er_vsv" fontcolor=red style=dashed]
+	VSV_ON -> VSV_ON [label="er_app,
+er_exp,
+er_rb,
+er_tele" fontcolor=red style=dashed]
 }

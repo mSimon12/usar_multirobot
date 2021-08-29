@@ -8,8 +8,7 @@ uav_er_assess,
 uav_er_v_search,
 uav_er_vsv,
 uav_er_rb,
-uav_pos_fail,
-uav_fail" fontcolor=red style=dashed]
+uav_pos_fail" fontcolor=red style=dashed]
 	ASSIST_ALLOWED -> NO_ASSIT [label="uav_req_assist,
 uav_rst_app,
 uav_rst_assess,
@@ -21,8 +20,7 @@ uav_er_assess,
 uav_er_v_search,
 uav_er_vsv,
 uav_er_rb,
-uav_pos_fail,
-uav_fail" fontcolor=red style=dashed]
+uav_pos_fail" fontcolor=red style=dashed]
 	NO_ASSIT -> NO_ASSIT [label="uav_rst_app,
 uav_rst_assess,
 uav_rst_v_search,

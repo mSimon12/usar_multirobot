@@ -569,16 +569,15 @@ class return_to_base(Maneuver):
         self.trajectory_client.cancel_goal()                                # Cancel the motion of the robot
 
 # ########################################################################
-class teleoperation(object):
+class teleoperation(Maneuver):
     '''
         Allows a human to teleoperate the robot through a joystick.
     '''
     def __init__(self, name):
-        self.robot_name = name
-        self.state = 'IDLE' 
+        super(teleoperation, self).__init__(name)
 
-        self.odometry = None
-        self.odometry_me = Condition()
+        # self.robot_name = name
+        # self.state = 'IDLE' 
 
         #Variables to control the speed 
         self.max_vel = 0.8                              #rospy.get_param()
@@ -592,93 +591,83 @@ class teleoperation(object):
 
         # self.__last_time = rospy.get_time()
 
-        self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
-        self.msg = events_message()                                                                         # Message object
+        # self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)         # Publisher object
+        # self.msg = events_message()                                                                         # Message object
+
+         # Subscribe to joy msgs
+        self.__sub = rospy.Subscriber('/joy', Joy, self.Joy_callback)                       # Start receiving messages from joystick
 
     def execute(self):
         rospy.loginfo("Starting Teleoperation!")
         self.state = 'EXE'
-
-        # Start teleoperation
-        self.__sub = rospy.Subscriber('/joy', Joy, self.Joy_callback)                       # Start receiving messages from joystick
-
-        # Subscribe to ground_truth to monitor the current pose of the robot
-        self.__odom_sub = rospy.Subscriber("ground_truth/state", Odometry, self.poseCallback)
 
     def reset(self):
         rospy.loginfo("Reseting Teleoperation!")
         self.state = 'IDLE'
     
     def end(self):
-        self.__sub.unregister()                                         # Stop receiving messages from joystick
-        self.__odom_sub.unregister()
+        self.stop()
+        self.state = 'IDLE'
         self.msg.event = 'end_teleoperation'
         self.pub.publish(self.msg)                                      # Send message signaling the error
-        self.state = 'IDLE'
 
     def abort(self):
         rospy.loginfo("Aborting Teleoperation!")
+        self.stop()
         self.state = 'IDLE'
-        self.__sub.unregister()
 
     def error(self):
-        self.__sub.unregister()                                         # Stop receiving messages from joystick
-        self.__odom_sub.unregister()
+        self.stop()
+        self.state = 'ERROR'
         self.msg.event = 'teleoperation_error'
         self.pub.publish(self.msg)                                      # Send message signaling the error
-        self.state = 'ERROR'
 
-    def poseCallback(self,odometry):
-        '''
-            Monitor the current position of the robot
-        '''
-        self.odometry_me.acquire()
-        self.odometry = odometry.pose.pose
-        self.odometry_me.notifyAll()
-        self.odometry_me.release()
+    def stop(self):
+        self.move_to(self.odometry.position.x,self.odometry.position.y, self.current_height,0.0)
 
     def Joy_callback(self,msg):
-        z_speed = msg.axes[1]             # Get vertical speed
-        x_speed = msg.axes[3]             # Get horizontal speed
-        rot = msg.axes[2]                # Get angular speed
+        if self.state == 'EXE':
+            z_speed = msg.axes[1]             # Get vertical speed
+            x_speed = msg.axes[3]             # Get horizontal speed
+            rot = msg.axes[2]                # Get angular speed
 
-        self.__tele_msg.linear.x = x_speed*self.current_speed
-        self.__tele_msg.linear.z = z_speed*self.current_speed
-        self.__tele_msg.angular.z = rot*self.current_ang_speed
+            self.__tele_msg.linear.x = x_speed*self.current_speed
+            self.__tele_msg.linear.z = z_speed*self.current_speed
+            self.__tele_msg.angular.z = rot*self.current_ang_speed
 
-        #Send the desired position
-        self.__tele_pub.publish(self.__tele_msg)
+            #Send the desired position
+            self.__tele_pub.publish(self.__tele_msg)
 
-        # Change linear speed
-        if msg.buttons[4]:
-            self.current_speed += self.max_vel*0.1
-            if self.current_speed > self.max_vel:
-                self.current_speed = self.max_vel
-        elif msg.buttons[6]:
-            self.current_speed -= self.max_vel*0.1
-            if self.current_speed < 0.05:
-                self.current_speed = 0.05
+            # Change linear speed
+            if msg.buttons[4]:
+                self.current_speed += self.max_vel*0.1
+                if self.current_speed > self.max_vel:
+                    self.current_speed = self.max_vel
+            elif msg.buttons[6]:
+                self.current_speed -= self.max_vel*0.1
+                if self.current_speed < 0.05:
+                    self.current_speed = 0.05
 
-        # Change angular speed
-        if msg.buttons[5]:
-            self.current_ang_speed += self.max_ang_vel*0.1
-            if self.current_ang_speed > self.max_ang_vel:
-                self.current_ang_speed = self.max_ang_vel 
-        elif msg.buttons[7]:
-            self.current_ang_speed -= self.max_ang_vel *0.1
-            if self.current_ang_speed < 0.2:
-                self.current_ang_speed = 0.2
-  
-        if any(msg.buttons[4:8]):
-            print("\n\nSPEED: {}".format(self.current_speed))
-            print("ANGULAR SPEED: {}".format(self.current_ang_speed))
+            # Change angular speed
+            if msg.buttons[5]:
+                self.current_ang_speed += self.max_ang_vel*0.1
+                if self.current_ang_speed > self.max_ang_vel:
+                    self.current_ang_speed = self.max_ang_vel 
+            elif msg.buttons[7]:
+                self.current_ang_speed -= self.max_ang_vel *0.1
+                if self.current_ang_speed < 0.2:
+                    self.current_ang_speed = 0.2
+    
+            if any(msg.buttons[4:8]):
+                print("\n\nSPEED: {}".format(self.current_speed))
+                print("ANGULAR SPEED: {}".format(self.current_ang_speed))
 
-        if msg.buttons[9]:
-            # Teleoperation ended
-            self.end()
-        elif all(msg.buttons[4:8]):
-            # Teleoperation error
-            self.error()
+            if msg.buttons[9]:
+                # Teleoperation ended
+                self.end()
+            elif all(msg.buttons[4:8]):
+                # Teleoperation error
+                self.error()
 
 # ########################################################################
 class safe_land(object):

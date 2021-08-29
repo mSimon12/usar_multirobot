@@ -404,7 +404,7 @@ class Victim(Task):
                 'rsm_app':3, 'rsm_exp':3, 'rsm_rb':3, 'rsm_vsv':8,
                 'rst_app':3, 'rst_exp':3, 'rst_rb':3, 'rst_tele':3, 'rst_vsv':3,
                 'st_app':3, 'st_exp':3, 'st_rb':3, 'st_tele':3, 'st_vsv':8,
-                'sus_app':3, 'sus_exp':3, 'sus_rb':3, 'sus_vsv':0,
+                'sus_app':6, 'sus_exp':6, 'sus_rb':6, 'sus_vsv':0,
             #Uontrollable
                 'bat_L':1, 'bat_LL':1, 'bat_OK':1,
                 'fail':1, 'pos_fail':1, 'critic_fail':1,
