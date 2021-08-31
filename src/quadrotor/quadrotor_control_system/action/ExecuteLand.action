@@ -1,5 +1,7 @@
 # Execute safe land has no parameter
 
+#Known victims
+geometry_msgs/Twist[] victims_pose
 ---
 #Result definition
 geometry_msgs/Pose land_pose

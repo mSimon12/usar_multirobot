@@ -2838,8 +2838,17 @@ class uav_st_safe_land(object):
 	def handler(cls, param = None):
 		##### >>>>>>>>>>>>>>>>>>>>>    WRITE YOUR CODE HERE    <<<<<<<<<<<<<<<<<<<<<<< #####
 		print('Executing event uav_st_safe_land...')
+		geometry = importlib.import_module('geometry_msgs.msg')
+
 		msg = uav_st_safe_land.module.events_message()
 		msg.event = uav_st_safe_land.output['ll_event']
+		for v in param:
+			point = geometry.Twist()
+			point.linear.x = param[v][0]
+			point.linear.y = param[v][1]
+			point.linear.z = param[v][2]
+			msg.position.append(point)						#Insert victims positions
+
 		uav_st_safe_land.pub.publish(msg)					#Publish message
 		return True
 

@@ -1,8 +1,9 @@
 #!/usr/bin/env python2.7
 
 import copy
-from threading import Condition
+from threading import Condition, Thread
 from math import sqrt, atan
+import time
 
 import rospy
 import roslib
@@ -57,6 +58,7 @@ class SafeLand(object):
         '''
         self.current_height = None
         self.odometry = None
+        self.victims = msg.victims_pose
 
         # Subscribe to sonar_height
         sonar_sub = rospy.Subscriber("sonar_height", Range, self.sonar_callback, queue_size=10)
@@ -66,6 +68,11 @@ class SafeLand(object):
 
         # Subscribe to victim sensor
         sensor_sub = rospy.Subscriber("victim_sensor/out",events_message, self.v_sensor_callback, queue_size=10)
+
+        # Start victims avoidance function
+        self.avoid_thread_status = True
+        self.avoid_thread = Thread(target = self.known_victims_dist)
+        self.avoid_thread.start() 
 
         self.sonar_me.acquire()
         if not self.current_height:
@@ -88,7 +95,7 @@ class SafeLand(object):
 
         state = None
         trials = 0
-        while not (state in [GoalStatus.SUCCEEDED, GoalStatus.ABORTED]): 
+        while not state == GoalStatus.SUCCEEDED: 
             # print(self.point_to_go)
 
             if self.land_server.is_preempt_requested():
@@ -138,10 +145,10 @@ class SafeLand(object):
                     self.land_server.set_aborted(self.server_result)
                     return  
                 
-
         sonar_sub.unregister()
         odom_sub.unregister()
         sensor_sub.unregister()
+        self.avoid_thread_status = False
         # rospy.logwarn("ENDING safe land!")
 
         return
@@ -176,20 +183,46 @@ class SafeLand(object):
         '''
             Receive position of a detected victim
         '''
-        self.sonar_me.acquire()
-        actual_x = self.odometry.position.x
-        actual_y = self.odometry.position.y
-        self.sonar_me.release()
+        # self.odometry_me.acquire()
+        # actual_x = self.odometry.position.x
+        # actual_y = self.odometry.position.y
+        # self.odometry_me.release()
 
         victim_x = msg.position[0].linear.x
         victim_y = msg.position[0].linear.y
 
-        dist = sqrt((actual_x - victim_x)**2 + (actual_y - victim_y)**2)
+        dist = sqrt((self.point_to_go.goal.position.x - victim_x)**2 + (self.point_to_go.goal.position.y - victim_y)**2)
         if dist < self.safe_dist:
-            self.point_to_go.goal.position.x = victim_x + (self.safe_dist/dist)*(actual_x - victim_x)
-            self.point_to_go.goal.position.y = victim_y + (self.safe_dist/dist)*(actual_y - victim_y)
+            self.point_to_go.goal.position.x = victim_x + ((self.safe_dist + 0.5)/dist)*(self.point_to_go.goal.position.x - victim_x)
+            self.point_to_go.goal.position.y = victim_y + ((self.safe_dist + 0.5)/dist)*(self.point_to_go.goal.position.y - victim_y)
             rospy.logwarn("Replannig safe land!!!!")
             self.trajectory_client.cancel_all_goals()
+
+    def known_victims_dist(self):
+        '''
+            Avoids landing to close to a known victim
+        '''
+        while self.avoid_thread_status:
+            time.sleep(1)
+            
+            # self.odometry_me.acquire()
+            # if not self.odometry:
+            #     self.odometry_me.wait()
+            # actual_x = self.odometry.position.x
+            # actual_y = self.odometry.position.y
+            # self.odometry_me.release()
+
+            for v in self.victims:
+                victim_x = v.linear.x
+                victim_y = v.linear.y
+
+                dist = sqrt((self.point_to_go.goal.position.x  - victim_x)**2 + (self.point_to_go.goal.position.y - victim_y)**2)
+                if dist < self.safe_dist:
+                    self.point_to_go.goal.position.x = victim_x + ((self.safe_dist + 0.5)/dist)*(self.point_to_go.goal.position.x - victim_x)
+                    self.point_to_go.goal.position.y = victim_y + ((self.safe_dist + 0.5)/dist)*(self.point_to_go.goal.position.y - victim_y)
+                    rospy.logwarn("Replannig safe land!!!!")
+                    self.trajectory_client.cancel_all_goals()
+
             
 
 if __name__=="__main__":

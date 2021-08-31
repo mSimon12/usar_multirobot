@@ -687,9 +687,11 @@ class safe_land(object):
         self.pub = rospy.Publisher("/{}/maneuvers/out".format(name), events_message, queue_size=10)    # Publisher object
         self.msg = events_message()                                                                    # Message object
 
-    def execute(self):
+    def execute(self, victims = None):
         rospy.loginfo("Starting Safe Land!")
         self.state = 'EXE'
+
+        self._land_goal.victims_pose = victims
 
         # Start safe_land
         self._land_client.send_goal(self._land_goal)
@@ -858,8 +860,8 @@ def maneuver_event(msg):
     elif "safe_land" in msg.event:
         # Commands for safe_land maneuver
         if (msg.event == "start_safe_land") and (land.state =='IDLE'):
-            thread = Thread(target=land.execute)
-            thread.start()                                                                      # Start safe_land
+            thread = Thread(target=land.execute, args=[msg.position])
+            thread.start()                                                                  # Start safe_land
         elif (msg.event == "reset_safe_land") and (land.state == 'ERROR'):
             land.reset()
         elif (msg.event == "safe_land_error") and (land.state == 'EXE'):
