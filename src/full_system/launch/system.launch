@@ -13,7 +13,7 @@
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_1"/>
       <arg name="xcoordinate" value="3.0"/>
-      <arg name="ycoordinate" value="1.0"/>
+      <arg name="ycoordinate" value="2.0"/>
       <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
@@ -32,7 +32,7 @@
     <include file="$(find pioneer3at_description)/launch/pioneer3at.launch">
       <arg name="robot_name" value="pioneer3at_2"/>
       <arg name="xcoordinate" value="3.0"/>
-      <arg name="ycoordinate" value="3.0"/>
+      <arg name="ycoordinate" value="4.0"/>
       <arg name="zcoordinate" value="0.6"/>
       <arg name="roll" value="0.0"/>
       <arg name="pitch" value="0.0"/>
@@ -52,7 +52,7 @@
     <include file="$(find uav)/launch/UAV.launch">
       <arg name="drone_name" value="UAV_1"/>
       <arg name="x" value="1.0"/>
-      <arg name="y" value="1.0"/>
+      <arg name="y" value="2.0"/>
       <arg name="z" value="0.7"/> 
     </include>
 
@@ -69,7 +69,7 @@
     <include file="$(find uav)/launch/UAV.launch">
       <arg name="drone_name" value="UAV_2"/>
       <arg name="x" value="1.0"/>
-      <arg name="y" value="3.0"/>
+      <arg name="y" value="4.0"/>
       <arg name="z" value="0.7"/> 
     </include>
 

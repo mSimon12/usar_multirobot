@@ -1,8 +1,8 @@
 // UAV_2_SUP-simple_failure_operation_mode
 digraph {
 	rankdir=LR
-	OK [label=OK color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	SIMPLE_FAIL [label=SIMPLE_FAIL color=black fillcolor=white shape=circle style=filled]
+	OK [label=OK color=black fillcolor=white shape=doublecircle style=filled]
+	SIMPLE_FAIL [label=SIMPLE_FAIL color=blue fillcolor=lightgrey shape=circle style=filled]
 	OK -> OK [label="uav_st_app,
 uav_st_assess,
 uav_st_v_search,

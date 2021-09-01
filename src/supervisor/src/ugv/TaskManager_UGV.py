@@ -352,9 +352,9 @@ class TaskManager(Thread):
 
         self.events_priority = {k: v for k, v in sorted(self.events_priority.items(), key=lambda item: item[1])}
         
-        # print("PRIORITIES:\n")
-        # for e in self.events_priority:
-        #     print("{} -> {}\n".format(e,self.events_priority[e]))
+        print("PRIORITIES:\n")
+        for e in self.events_priority:
+            print("{} -> {}\n".format(e,self.events_priority[e]))
 
 
     def run(self):

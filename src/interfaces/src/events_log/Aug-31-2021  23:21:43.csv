@@ -1,0 +1,3 @@
+,robot,event,event_type,param,enabled_events,time
+1,UAV_2,uav_st_assess,controllable,"(2.0, 2.0, 33.0, 10.0)","['uav_st_app', 'uav_er_assess', 'uav_sus_assess', 'uav_end_assess', 'uav_bat_L', 'uav_call_tele', 'uav_rep_victim', 'uav_req_assist', 'uav_pos_fail', 'uav_critic_fail', 'uav_fail', 'uav_st_rb', 'uav_st_safe_land', 'uav_st_vsv', 'uav_st_tele', 'uav_on_vs', 'uav_st_v_search']",53
+2,UAV_1,uav_st_assess,controllable,"(35.0, 2.0, 33.0, 10.0)","['uav_st_app', 'uav_er_assess', 'uav_sus_assess', 'uav_end_assess', 'uav_bat_L', 'uav_call_tele', 'uav_rep_victim', 'uav_req_assist', 'uav_pos_fail', 'uav_critic_fail', 'uav_fail', 'uav_st_rb', 'uav_st_safe_land', 'uav_st_vsv', 'uav_st_tele', 'uav_on_vs', 'uav_st_v_search']",70

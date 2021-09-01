@@ -42,6 +42,70 @@
       <direction>-0.5 0.1 -0.9</direction>
     </light>
 
+    <model name='camera1'>
+      <static>true</static>
+      <pose>30.77 -45.99 33.52 0 0.35 1.57</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+        <sensor name='my_camera1' type='camera'>
+          <camera>
+            <save enabled="true">
+              <path>/tmp/camera_save_sample1</path>
+            </save>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>1920</width>
+              <height>1080</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>500</far>
+            </clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
+    <model name='camera2'>
+      <static>true</static>
+      <pose>35.0 37.0 120.0 0 1.57 1.57</pose>
+      <link name='link'>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+        </visual>
+        <sensor name='my_camera2' type='camera'>
+          <camera>
+            <save enabled="true">
+              <path>/tmp/camera_save_sample2</path>
+            </save>
+            <horizontal_fov>1.047</horizontal_fov>
+            <image>
+              <width>1920</width>
+              <height>1080</height>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>500</far>
+            </clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>10</update_rate>
+        </sensor>
+      </link>
+    </model>
+
     <gravity>0 0 -9.8</gravity>
     <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
     <atmosphere type='adiabatic'/>
@@ -76,7 +140,9 @@
 
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose frame=''>-0.33 -42 26 0 0.30 1.09</pose>
+        <pose frame=''>30.77 -45.99 33.52 0 0.35 1.57</pose>
+	<near>0.1</near>
+        <far>500</far>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
@@ -133,7 +199,6 @@
 	<uri>model://barrel</uri>
 	<pose>62.11 18.42 0.82 -1.32 0.71 -0.90</pose>
     </include>
-
 
   </world>
 </sdf>

@@ -1,6 +1,6 @@
 <mission>
   <id>building1</id>
-  <priority>3</priority>
+  <priority>2</priority>
   <task>
     <agent></agent>
     <position>

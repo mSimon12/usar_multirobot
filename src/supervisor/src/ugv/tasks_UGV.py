@@ -78,8 +78,9 @@ class UGV_approach(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['sus_app'] = 3
-        table['abort_app'] = 3
+        if self.maneuver_started:
+            table['sus_app'] = 3
+            table['abort_app'] = 3
         if 'on_vs' in self.getSensors():
             table['off_vs'] = 5
         if 'on_gs' in self.getSensors():
@@ -110,8 +111,9 @@ class UGV_exploration(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['sus_exp'] = 3
-        table['abort_exp'] = 3
+        if self.maneuver_started:
+            table['sus_exp'] = 3
+            table['abort_exp'] = 3
         if 'on_vs' in self.getSensors():
             table['off_vs'] = 5
         if 'on_gs' in self.getSensors():
@@ -142,8 +144,9 @@ class UGV_verification(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['sus_vsv'] = 3
-        table['abort_vsv'] = 3
+        if self.maneuver_started:
+            table['sus_vsv'] = 3
+            table['abort_vsv'] = 3
         if 'on_vs' in self.getSensors():
             table['off_vs'] = 5
         if 'on_gs' in self.getSensors():
@@ -175,8 +178,9 @@ class UGV_return(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['sus_rb'] = 3
-        table['abort_rb'] = 3
+        if self.maneuver_started:
+            table['sus_rb'] = 3
+            table['abort_rb'] = 3
         if 'on_vs' in self.getSensors():
             table['off_vs'] = 5
         if 'on_gs' in self.getSensors():

@@ -2,8 +2,8 @@
 digraph {
 	rankdir=LR
 	APP_ON [label=APP_ON color=black fillcolor=white shape=circle style=filled]
-	ASSESS_ON [label=ASSESS_ON color=black fillcolor=white shape=circle style=filled]
-	NA_ON [label=NA_ON color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	ASSESS_ON [label=ASSESS_ON color=blue fillcolor=lightgrey shape=circle style=filled]
+	NA_ON [label=NA_ON color=black fillcolor=white shape=doublecircle style=filled]
 	RB_ON [label=RB_ON color=black fillcolor=white shape=circle style=filled]
 	SL_ON [label=SL_ON color=black fillcolor=white shape=circle style=filled]
 	TELE_ON [label=TELE_ON color=black fillcolor=white shape=circle style=filled]

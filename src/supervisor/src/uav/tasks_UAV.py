@@ -80,8 +80,9 @@ class UAV_approach(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['uav_sus_app'] = 3
-        table['uav_abort_app'] = 3
+        if self.maneuver_started:
+            table['uav_sus_app'] = 3
+            table['uav_abort_app'] = 3
         if 'uav_on_vs' in self.getSensors():
             table['uav_off_vs'] = 5
         return table
@@ -111,8 +112,9 @@ class UAV_assessment(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['uav_sus_assess'] = 3
-        table['uav_abort_assess'] = 3
+        if self.maneuver_started:
+            table['uav_sus_assess'] = 3
+            table['uav_abort_assess'] = 3
         if 'uav_on_vs' in self.getSensors():
             table['uav_off_vs'] = 5
         return table
@@ -142,8 +144,9 @@ class UAV_v_search(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['uav_sus_v_search'] = 3
-        table['uav_abort_v_search'] = 3
+        if self.maneuver_started:
+            table['uav_sus_v_search'] = 3
+            table['uav_abort_v_search'] = 3
         if 'uav_on_vs' in self.getSensors():
             table['uav_off_vs'] = 5
         return table
@@ -173,8 +176,9 @@ class UAV_verification(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['uav_sus_vsv'] = 3
-        table['uav_abort_vsv'] = 3
+        if self.maneuver_started:
+            table['uav_sus_vsv'] = 3
+            table['uav_abort_vsv'] = 3
         if 'uav_on_vs' in self.getSensors():
             table['uav_off_vs'] = 5
         return table
@@ -204,8 +208,9 @@ class UAV_return(Task):
             Priority of events affected by this mode of operation
         '''    
         table = super().get_priorities_table()
-        table['uav_sus_rb'] = 3
-        table['uav_abort_rb'] = 3
+        if self.maneuver_started:
+            table['uav_sus_rb'] = 3
+            table['uav_abort_rb'] = 3
         if 'uav_on_vs' in self.getSensors():
             table['uav_off_vs'] = 5
         return table

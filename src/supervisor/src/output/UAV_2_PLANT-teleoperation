@@ -2,8 +2,8 @@
 digraph {
 	rankdir=LR
 	TELE_ERROR [label=TELE_ERROR color=black fillcolor=white shape=circle style=filled]
-	TELE_EXE [label=TELE_EXE color=black fillcolor=white shape=circle style=filled]
-	TELE_IDLE [label=TELE_IDLE color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	TELE_EXE [label=TELE_EXE color=blue fillcolor=lightgrey shape=circle style=filled]
+	TELE_IDLE [label=TELE_IDLE color=black fillcolor=white shape=doublecircle style=filled]
 	TELE_ERROR -> TELE_IDLE [label=uav_rst_tele fontcolor=blue]
 	TELE_EXE -> TELE_ERROR [label=uav_er_tele fontcolor=red style=dashed]
 	TELE_EXE -> TELE_IDLE [label=uav_abort_tele fontcolor=blue]

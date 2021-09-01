@@ -1,6 +1,6 @@
 <mission>
   <id>assessment2</id>
-  <priority>1</priority>
+  <priority>5</priority>
   <task>
     <agent></agent>
     <position/>
