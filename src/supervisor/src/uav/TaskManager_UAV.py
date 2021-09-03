@@ -137,6 +137,11 @@ class TaskManager(Thread):
             g_var.manager_info_flag.release()
 
         ###############################################################
+
+        g_var.trace_update_flag.acquire()
+        self.current_status['event'].array[0] = None            # Clear last event since what trigger the update is a task call
+        g_var.trace_update_flag.release()
+
         # Signal that a new task was received
         self.update_flag.acquire()
         self.update_flag.notify()

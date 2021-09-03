@@ -1,4 +1,0 @@
-,event,event_source,allocated_robots,available_robots,teleoperations,pioneer3at_1_cur_maneuver,pioneer3at_1_tasks_counter,pioneer3at_1_pose,pioneer3at_1_battery,pioneer3at_2_cur_maneuver,pioneer3at_2_tasks_counter,pioneer3at_2_pose,pioneer3at_2_battery,UAV_1_cur_maneuver,UAV_1_tasks_counter,UAV_1_pose,UAV_1_battery,UAV_2_cur_maneuver,UAV_2_tasks_counter,UAV_2_pose,UAV_2_battery
-0.0,,,0,4,0,None,0,[],100,None,0,[],100,None,0,[],100,None,0,[],100
-0.175,,pioneer3at_1,0,4,0,None,0,[],100,None,0,"[2.996214471779333, 3.9875773579812557, 0.0]",100,None,0,[],100,None,0,[],100
-0.465,,,0,4,0,None,0,[],100,None,0,"[3.0002440466978784, 3.988441813825922, 0.0]",100,None,0,[],100,None,0,[],100

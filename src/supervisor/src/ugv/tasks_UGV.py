@@ -66,6 +66,7 @@ class UGV_approach(Task):
         '''
         if last_event == 'st_app':
             self.maneuver_started = True
+            print("\n\n\nHEEEEREEEE")
         elif last_event == 'end_app' and self.maneuver_started:
             self.maneuver_started = False
             return 'task_done'

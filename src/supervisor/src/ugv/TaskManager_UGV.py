@@ -114,6 +114,7 @@ class TaskManager(Thread):
             self.main_task_id = None
 
         if valid_task:
+
             # Subscribe the last task by the new one, flaging that the last one is aborted
             g_var.manager_info_flag.acquire()
 
@@ -132,6 +133,10 @@ class TaskManager(Thread):
             g_var.manager_info_flag.release()
 
         ###############################################################  
+
+        g_var.trace_update_flag.acquire()
+        self.current_status['event'].array[0] = None            # Clear last event since what trigger the update is a task call
+        g_var.trace_update_flag.release()
 
         # Signal that a new task was received
         self.update_flag.acquire()
@@ -331,8 +336,9 @@ class TaskManager(Thread):
                 req_event_msg.desired_events.append(e)
         self.req_event_pub.publish(req_event_msg)
 
-        # rospy.loginfo("Baseline: {}".format(baseline_events))
-        # rospy.loginfo("Table: {}".format(table))
+        rospy.loginfo("robot: {}".format(self.robot_name))
+        rospy.loginfo("Baseline: {}".format(baseline_events))
+        rospy.loginfo("Table: {}".format(table))
 
         # Set events priorities for events in table
         if table:

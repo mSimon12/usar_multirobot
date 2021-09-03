@@ -438,6 +438,7 @@ class teleoperation(object):
     
     def end(self):
         self.__sub.unregister()                                         # Stop receiving messages from joystick
+        self.stop()
         self.msg.event = 'end_teleoperation'
         self.pub.publish(self.msg)                                      # Send message signaling the error
         self.state = 'IDLE'
@@ -446,12 +447,21 @@ class teleoperation(object):
         rospy.loginfo("Aborting Teleoperation!")
         self.state = 'IDLE'
         self.__sub.unregister()
+        self.stop()
 
     def error(self):
         self.__sub.unregister()                                         # Stop receiving messages from joystick
+        self.stop()
         self.msg.event = 'teleoperation_error'
         self.pub.publish(self.msg)                                      # Send message signaling the error
         self.state = 'ERROR'
+
+    def stop(self):
+        twist_msg = Twist()
+        twist_msg.linear.x = 0
+        twist_msg.angular.z = 0
+
+        self.__pub.publish(twist_msg)          # Publish to cmd_vel
 
     def Joy_callback(self,msg):
         speed = msg.axes[3]             # Get speed
