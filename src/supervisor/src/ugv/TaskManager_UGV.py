@@ -47,6 +47,10 @@ class TaskManager(Thread):
         self.found_victims = {}
         self.victims_count = 0
 
+        # Last found parameter
+        self.victim_param = None
+        self.gas_param = None
+
         #BACKUP BEHAVIORS
         self.CM = tasks.CriticSystem()
         self.TeleM = tasks.HRI()
@@ -230,9 +234,12 @@ class TaskManager(Thread):
         if (last_event == 'victim_found'):
             self.victims_count = self.victims_count + 1
             self.found_victims['victim{}'.format(self.victims_count)] = [ param[0], param[1]]      # Save position of found victim
+            self.victim_param = ['victim{}'.format(self.victims_count), param[0], param[1]]
             self.VM = tasks.Victim(param) 
         elif (self.VM) and (last_event in ['end_vsv']) and (isinstance(self.current_task, tasks.Victim)):
             self.VM = None
+        elif (last_event == 'gas_found'):
+            self.gas_param = param
 
         ########################################################################################################################################
 
@@ -274,7 +281,7 @@ class TaskManager(Thread):
                 self.main_task = None
 
         # BEHAVIOR 4 -> VICTIM FOUND
-        elif self.VM:    
+        elif self.VM and (states['gas_sensor'] != 'GS_ERROR') and (states['victims_recognition_system'] != 'VS_ERROR'):    
             self.current_task = self.VM            # Get mode of operation object 
 
             ## Set status for ALLOCATION SYSTEM
@@ -380,8 +387,14 @@ class TaskManager(Thread):
             # print(next_event)
             if self.events[next_event].is_controllable():
                 if next_event in P_EVENTS:
-                    rospy.loginfo(self.current_task.getTaskParam())
-                    trigger_event(next_event, self.current_task.getTaskParam())          # Call the execution of the controllable event
+                    if next_event == 'rep_gas':
+                        p = self.gas_param
+                    elif next_event == 'rep_victim':
+                        p = self.victim_param
+                    else:
+                        p = self.current_task.getTaskParam()
+                    # rospy.loginfo(self.current_task.getTaskParam())
+                    trigger_event(next_event, p)          # Call the execution of the controllable event
                 else:
                     trigger_event(next_event)                                            # Call the execution of the controllable event
 

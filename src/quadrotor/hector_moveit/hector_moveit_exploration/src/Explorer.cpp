@@ -141,15 +141,19 @@ void Quadrotor::findFrontier()
                 return x.first < y.first;
             });
 
-        std::vector<int> indices(candidate_frontiers.size());
-        if(candidate_frontiers.size() > 10){
-            for(int i=0;i<indices.size();i++)
-                indices[i] = i;
-            std::random_shuffle(indices.begin(),indices.end());
-            indices.erase(indices.begin()+10,indices.end()); 
+        //Get only 30 points
+        // std::vector<int> indices(candidate_frontiers.size());
+        int max_points = candidate_frontiers.size();
+        if(candidate_frontiers.size() > 30){
+            max_points = 30;
+            // for(int i=0;i<indices.size();i++)
+            //     indices[i] = i;
+            // std::random_shuffle(indices.begin(),indices.end());
+            // indices.erase(indices.begin()+20,indices.end()); 
         }
+
         int i;
-        for(i=0;i<indices.size();i++){
+        for(i=0;i<max_points;i++){
             frontiers.push(candidate_frontiers[i]);
             // cout << "Filtered frontier point " << i << endl;
             // cout << "x: " << candidate_frontiers[i].second.position.x << endl;
