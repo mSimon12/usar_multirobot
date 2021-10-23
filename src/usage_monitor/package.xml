@@ -1,5 +1,5 @@
 <package format="2">
-  <name>cpu_monitor</name>
+  <name>usage_monitor</name>
   <version>0.0.0</version>
   <description>cpu_monitor</description>
   <author email="aes368@cornell.edu">Alex Spitzer</author>

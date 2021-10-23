@@ -185,7 +185,7 @@
   </include>
 
 <!--CPU MONITOR -->
-  <include file="$(find cpu_monitor)/launch/cpu_monitor.launch">
+  <include file="$(find usage_monitor)/launch/cpu_monitor.launch">
       <arg name="poll_period" default="1.0"/> 
   </include>
 
