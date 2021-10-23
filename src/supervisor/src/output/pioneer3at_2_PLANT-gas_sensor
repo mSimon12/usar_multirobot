@@ -1,8 +1,8 @@
 // pioneer3at_2_PLANT-gas_sensor
 digraph {
 	rankdir=LR
-	GS_ERROR [label=GS_ERROR color=black fillcolor=white shape=circle style=filled]
-	GS_OFF [label=GS_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	GS_ERROR [label=GS_ERROR color=blue fillcolor=lightgrey shape=circle style=filled]
+	GS_OFF [label=GS_OFF color=black fillcolor=white shape=doublecircle style=filled]
 	GS_ON [label=GS_ON color=black fillcolor=white shape=circle style=filled]
 	GS_ERROR -> GS_OFF [label=rst_gs fontcolor=red style=dashed]
 	GS_OFF -> GS_ON [label=on_gs fontcolor=blue]

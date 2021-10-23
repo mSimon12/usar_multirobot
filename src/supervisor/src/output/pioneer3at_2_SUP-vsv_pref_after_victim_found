@@ -1,8 +1,8 @@
 // pioneer3at_2_SUP-vsv_pref_after_victim_found
 digraph {
 	rankdir=LR
-	ALL_M [label=ALL_M color=blue fillcolor=lightgrey shape=doublecircle style=filled]
-	VSV_PREFERENCE [label=VSV_PREFERENCE color=black fillcolor=white shape=circle style=filled]
+	ALL_M [label=ALL_M color=black fillcolor=white shape=doublecircle style=filled]
+	VSV_PREFERENCE [label=VSV_PREFERENCE color=blue fillcolor=lightgrey shape=circle style=filled]
 	ALL_M -> ALL_M [label="st_app,
 st_exp,
 st_vsv,

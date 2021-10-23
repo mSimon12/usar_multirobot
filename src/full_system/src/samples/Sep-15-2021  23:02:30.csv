@@ -1,0 +1,5 @@
+,event,event_source,allocated_robots,available_robots,teleoperations,pioneer3at_1_cur_maneuver,pioneer3at_1_tasks_counter,pioneer3at_1_pose,pioneer3at_1_battery,pioneer3at_2_cur_maneuver,pioneer3at_2_tasks_counter,pioneer3at_2_pose,pioneer3at_2_battery,UAV_1_cur_maneuver,UAV_1_tasks_counter,UAV_1_pose,UAV_1_battery,UAV_2_cur_maneuver,UAV_2_tasks_counter,UAV_2_pose,UAV_2_battery
+0.0,,,0,4,0,None,0,[],100,None,0,[],100,None,0,[],100,None,0,[],100
+0.17,,pioneer3at_2,0,4,0,None,0,[],100,None,0,[],100,None,0,[],100,None,0,[],100
+6.9,,UAV_2,0,4,0,None,0,"[3.0031610044303654, 1.9906814992392765, 0.0]",100,None,0,"[2.99837774065571, 3.979214314987807, 0.0]",100,None,0,"[0.9957825352881067, 1.9921757083287697, 0.66110764887112]",100,None,0,"[0.9315919953993373, 3.8014299577004453, 0.7092901953003311]",100
+18.085,,,0,4,0,None,0,"[3.0099722561089535, 1.9783220479428723, 0.0]",100.0,None,0,"[2.9957760663392228, 3.9636843076634607, 0.0]",100.0,None,0,"[0.9940290180292368, 1.9880344988460847, 0.6610042263231581]",100.0,None,0,"[0.9308892475267346, 3.8019820726264792, 0.7068119818738587]",100.0

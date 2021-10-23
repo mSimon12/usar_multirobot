@@ -2,8 +2,8 @@
 digraph {
 	rankdir=LR
 	APP_ON [label=APP_ON color=black fillcolor=white shape=circle style=filled]
-	EXP_ON [label=EXP_ON color=black fillcolor=white shape=circle style=filled]
-	Mi_OFF [label=Mi_OFF color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	EXP_ON [label=EXP_ON color=blue fillcolor=lightgrey shape=circle style=filled]
+	Mi_OFF [label=Mi_OFF color=black fillcolor=white shape=doublecircle style=filled]
 	RB_ON [label=RB_ON color=black fillcolor=white shape=circle style=filled]
 	TELE_ON [label=TELE_ON color=black fillcolor=white shape=circle style=filled]
 	VSV_ON [label=VSV_ON color=black fillcolor=white shape=circle style=filled]

@@ -15,15 +15,24 @@ from nav_msgs.msg import Odometry
 
 MANEUVERS_START = {
     'st_app' : 'approach',
+    'rsm_app' : 'approach',
     'st_exp' : 'exploration',
+    'rsm_exp' : 'exploration',
     'st_vsv' : 'surroundings verification',
+    'rsm_vsv' : 'surroundings verification',
     'st_rb' : 'return to base',
+    'rsm_rb' : 'return to base',
     'st_tele' : 'teleoperation',
     'uav_st_app' : 'approach',
+    'uav_rsm_app' : 'approach',
     'uav_st_assess' : 'assessment',
+    'uav_rsm_assess' : 'assessment',
     'uav_st_v_search' : 'victim search',
+    'uav_rsm_v_search' : 'victim search',
     'uav_st_vsv' : 'surroundings verification',
+    'uav_rsm_vsv' : 'surroundings verification',
     'uav_st_rb' : 'return to base',
+    'uav_rsm_rb' : 'return to base',
     'uav_st_tele' : 'teleoperation',
     'uav_st_safe_land' : 'safe land'
 }
