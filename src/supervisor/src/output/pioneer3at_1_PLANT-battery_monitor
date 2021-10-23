@@ -1,9 +1,9 @@
 // pioneer3at_1_PLANT-battery_monitor
 digraph {
 	rankdir=LR
-	BAT_CRITICAL [label=BAT_CRITICAL color=black fillcolor=white shape=circle style=filled]
+	BAT_CRITICAL [label=BAT_CRITICAL color=blue fillcolor=lightgrey shape=circle style=filled]
 	BAT_LOW [label=BAT_LOW color=black fillcolor=white shape=circle style=filled]
-	BAT_OK [label=BAT_OK color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	BAT_OK [label=BAT_OK color=black fillcolor=white shape=doublecircle style=filled]
 	BAT_CRITICAL -> BAT_LOW [label=bat_L fontcolor=red style=dashed]
 	BAT_LOW -> BAT_CRITICAL [label=bat_LL fontcolor=red style=dashed]
 	BAT_LOW -> BAT_OK [label=bat_OK fontcolor=red style=dashed]

@@ -770,7 +770,7 @@ Visualization Manager:
       Name: UAV_2
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /UAV_1/camera/rgb/image_raw
+      Image Topic: /UAV_2/camera/rgb/image_raw
       Max Value: 1
       Median window: 5
       Min Value: 0
