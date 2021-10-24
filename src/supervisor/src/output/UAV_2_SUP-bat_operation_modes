@@ -1,9 +1,9 @@
 // UAV_2_SUP-bat_operation_modes
 digraph {
 	rankdir=LR
-	ALL_M [label=ALL_M color=black fillcolor=white shape=doublecircle style=filled]
+	ALL_M [label=ALL_M color=blue fillcolor=lightgrey shape=doublecircle style=filled]
 	BAT_DEAD [label=BAT_DEAD color=black fillcolor=white shape=circle style=filled]
-	RB_TELE [label=RB_TELE color=blue fillcolor=lightgrey shape=circle style=filled]
+	RB_TELE [label=RB_TELE color=black fillcolor=white shape=circle style=filled]
 	ALL_M -> ALL_M [label="uav_st_app,
 uav_st_assess,
 uav_st_v_search,

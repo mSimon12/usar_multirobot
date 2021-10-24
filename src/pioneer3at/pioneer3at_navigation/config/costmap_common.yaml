@@ -44,7 +44,7 @@ obstacles_layer:
     max_obstacle_height: 50.0
 
 inflation:
-    inflation_radius: 1.4
+    inflation_radius: 1.2
     cost_scaling_factor: 1.2
 recovery_behaviors:
   - name: 'conservative_reset'
