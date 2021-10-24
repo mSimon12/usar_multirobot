@@ -1,0 +1,17 @@
+<mission>
+  <id>first_view</id>
+  <priority>5</priority>
+  <task>
+    <agent>UAV_1</agent>
+    <position>
+      <x>35.0</x>
+      <y>35.0</y>
+      <z>25.0</z>
+      <theta>0.0</theta>
+    </position>
+    <region/>
+    <vs>False</vs>
+    <gs>False</gs>
+    <maneuver>approach</maneuver>
+  </task>
+</mission>
