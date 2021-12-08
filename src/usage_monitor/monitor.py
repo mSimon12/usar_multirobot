@@ -60,10 +60,12 @@ if __name__ == "__main__":
   path = os.path.dirname(os.path.abspath(__file__))
   os.chdir(path)
   robots = ['UAV_1', 'UAV_2', 'pioneer3at_1', 'pioneer3at_2']
-  cols = ['total_cpu', 'total_mem', 'gazebo_cpu', 'gazebo_mem']
+  cols = ['total_cpu', 'total_mem', 'gazebo_cpu', 'gazebo_mem', 'rviz_cpu','rviz_mem', 'td_cpu', 'td_mem']
   for r in robots:
     cols.append('{}_sup_cpu'.format(r))
     cols.append('{}_sup_mem'.format(r))
+    cols.append('{}_op_cpu'.format(r))
+    cols.append('{}_op_mem'.format(r))
   usage_monitor = pd.DataFrame(columns=cols)
 
   rospy.Subscriber("/clock", Clock, time_update)
@@ -106,16 +108,46 @@ if __name__ == "__main__":
     time_me.acquire()
     usage_monitor.loc[time,'gazebo_cpu'] = 0
     usage_monitor.loc[time,'gazebo_mem'] = 0
+    usage_monitor.loc[time,'rviz_cpu'] = 0
+    usage_monitor.loc[time,'rviz_mem'] = 0
+    usage_monitor.loc[time,'td_cpu'] = 0
+    usage_monitor.loc[time,'td_mem'] = 0
+
+    for r in robots:
+      usage_monitor.loc[time,'{}_op_cpu'.format(r)] = 0
+      usage_monitor.loc[time,'{}_op_mem'.format(r)] = 0
 
     for node_name, node in list(node_map.items()):
+      flag = False
       if node.alive():
         for r in robots:
           if '{}/supervisor'.format(r) in node.name:
             usage_monitor.loc[time,'{}_sup_cpu'.format(r)] = node.proc.cpu_percent() / psutil.cpu_count()
             usage_monitor.loc[time,'{}_sup_mem'.format(r)] = node.proc.memory_percent()
+            flag = True
+          elif '{}'.format(r) in node.name:
+            usage_monitor.loc[time,'{}_op_cpu'.format(r)] += node.proc.cpu_percent() / psutil.cpu_count()
+            usage_monitor.loc[time,'{}_op_mem'.format(r)] += node.proc.memory_percent()
+            flag = True
+        
         if 'gazebo' in node.name:
           usage_monitor.loc[time,'gazebo_cpu'] += node.proc.cpu_percent() / psutil.cpu_count()
           usage_monitor.loc[time,'gazebo_mem'] += node.proc.memory_percent()
+        elif 'rviz' in node.name:
+          usage_monitor.loc[time,'rviz_cpu'] += node.proc.cpu_percent() / psutil.cpu_count()
+          usage_monitor.loc[time,'rviz_mem'] += node.proc.memory_percent()
+        elif 'task_dispatcher' in node.name:
+          usage_monitor.loc[time,'td_cpu'] += node.proc.cpu_percent() / psutil.cpu_count()
+          usage_monitor.loc[time,'td_mem'] += node.proc.memory_percent()
+        else:
+          if not flag:
+            if node.name not in usage_monitor.columns:
+              usage_monitor['{}_cpu'.format(node.name).replace('/','')] = None
+              usage_monitor['{}_mem'.format(node.name).replace('/','')] = None
+
+            usage_monitor.loc[time,'{}_cpu'.format(node.name).replace('/','')] = node.proc.cpu_percent() / psutil.cpu_count()
+            usage_monitor.loc[time,'{}_mem'.format(node.name).replace('/','')] = node.proc.memory_percent()
+
       else:
         rospy.logwarn("[cpu monitor] lost node %s" % node_name)
         del node_map[node_name]

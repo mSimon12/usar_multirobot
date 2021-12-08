@@ -2,9 +2,9 @@
 digraph {
 	rankdir=LR
 	CRITIC_FAILURE [label=CRITIC_FAILURE color=black fillcolor=white shape=circle style=filled]
-	NO_FAIL [label=NO_FAIL color=blue fillcolor=lightgrey shape=doublecircle style=filled]
+	NO_FAIL [label=NO_FAIL color=black fillcolor=white shape=doublecircle style=filled]
 	POS_FAILURE [label=POS_FAILURE color=black fillcolor=white shape=circle style=filled]
-	SIMPLE_FAILURE [label=SIMPLE_FAILURE color=black fillcolor=white shape=circle style=filled]
+	SIMPLE_FAILURE [label=SIMPLE_FAILURE color=blue fillcolor=lightgrey shape=circle style=filled]
 	CRITIC_FAILURE -> NO_FAIL [label=uav_rst_f fontcolor=red style=dashed]
 	NO_FAIL -> CRITIC_FAILURE [label=uav_critic_fail fontcolor=red style=dashed]
 	NO_FAIL -> POS_FAILURE [label=uav_pos_fail fontcolor=red style=dashed]
