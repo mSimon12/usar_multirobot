@@ -23,8 +23,8 @@ bat_LL" fontcolor=red style=dashed]
 	VSV_RB_TELE -> NO_Mi [label=bat_LL fontcolor=red style=dashed]
 	VSV_RB_TELE -> VSV_RB_TELE [label="st_vsv,
 st_rb,
+st_tele,
 rsm_vsv,
-rsm_rb,
-st_tele" fontcolor=blue]
+rsm_rb" fontcolor=blue]
 	VSV_RB_TELE -> VSV_RB_TELE [label=bat_L fontcolor=red style=dashed]
 }

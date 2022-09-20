@@ -475,34 +475,6 @@
 		<Transition source="1" dest="0" event="13"/>
 	</Transitions>
 </Automaton>
-<Automaton name="vsv_pref_after_victim_found" type="Specification">
-	<Events>
-		<Event id="0" label="uav_rsm_app"/>
-		<Event id="1" label="uav_rsm_assess"/>
-		<Event id="2" label="uav_rsm_v_search"/>
-		<Event id="3" label="uav_st_app"/>
-		<Event id="4" label="uav_st_assess"/>
-		<Event id="5" label="uav_st_v_search"/>
-		<Event id="6" label="uav_st_vsv"/>
-		<Event id="7" label="uav_victim_found" controllable="false"/>
-	</Events>
-	<States>
-		<State id="0" name="ALL_M" initial="true" accepting="true"/>
-		<State id="1" name="VSV_PREF"/>
-	</States>
-	<Transitions>
-		<Transition source="0" dest="1" event="7"/>
-		<Transition source="0" dest="0" event="3"/>
-		<Transition source="0" dest="0" event="4"/>
-		<Transition source="0" dest="0" event="5"/>
-		<Transition source="0" dest="0" event="6"/>
-		<Transition source="0" dest="0" event="0"/>
-		<Transition source="0" dest="0" event="1"/>
-		<Transition source="0" dest="0" event="2"/>
-		<Transition source="1" dest="0" event="6"/>
-		<Transition source="1" dest="1" event="7"/>
-	</Transitions>
-</Automaton>
 <Automaton name="vsv_start_condition" type="Specification">
 	<Events>
 		<Event id="0" label="uav_end_vsv" controllable="false"/>

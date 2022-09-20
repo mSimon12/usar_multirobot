@@ -39,9 +39,9 @@
 		<Transition source="2" dest="0" event="2"/>
 		<Transition source="2" dest="2" event="11"/>
 		<Transition source="2" dest="2" event="9"/>
+		<Transition source="2" dest="2" event="10"/>
 		<Transition source="2" dest="2" event="6"/>
 		<Transition source="2" dest="2" event="5"/>
-		<Transition source="2" dest="2" event="10"/>
 		<Transition source="2" dest="2" event="0"/>
 		<Transition source="2" dest="1" event="1"/>
 	</Transitions>
@@ -422,6 +422,7 @@
 		<Event id="4" label="rst_f" controllable="false"/>
 		<Event id="5" label="st_app"/>
 		<Event id="6" label="st_exp"/>
+		<Event id="7" label="st_vsv"/>
 	</Events>
 	<States>
 		<State id="0" name="OK" initial="true" accepting="true"/>
@@ -431,6 +432,7 @@
 		<Transition source="0" dest="1" event="0"/>
 		<Transition source="0" dest="0" event="5"/>
 		<Transition source="0" dest="0" event="6"/>
+		<Transition source="0" dest="0" event="7"/>
 		<Transition source="0" dest="0" event="1"/>
 		<Transition source="0" dest="0" event="2"/>
 		<Transition source="0" dest="0" event="3"/>
@@ -516,30 +518,6 @@
 		<Transition source="1" dest="0" event="3"/>
 		<Transition source="1" dest="0" event="4"/>
 		<Transition source="1" dest="0" event="5"/>
-	</Transitions>
-</Automaton>
-<Automaton name="vsv_pref_after_victim_found" type="Specification">
-	<Events>
-		<Event id="0" label="rsm_app"/>
-		<Event id="1" label="rsm_exp"/>
-		<Event id="2" label="st_app"/>
-		<Event id="3" label="st_exp"/>
-		<Event id="4" label="st_vsv"/>
-		<Event id="5" label="victim_found" controllable="false"/>
-	</Events>
-	<States>
-		<State id="0" name="ALL_M" initial="true" accepting="true"/>
-		<State id="1" name="VSV_PREFERENCE"/>
-	</States>
-	<Transitions>
-		<Transition source="0" dest="1" event="5"/>
-		<Transition source="0" dest="0" event="2"/>
-		<Transition source="0" dest="0" event="3"/>
-		<Transition source="0" dest="0" event="4"/>
-		<Transition source="0" dest="0" event="0"/>
-		<Transition source="0" dest="0" event="1"/>
-		<Transition source="1" dest="0" event="4"/>
-		<Transition source="1" dest="1" event="5"/>
 	</Transitions>
 </Automaton>
 <Automaton name="vsv_start_condition" type="Specification">
