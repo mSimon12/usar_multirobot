@@ -1,0 +1,2510 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Module xmlns="http://waters.sourceforge.net/xsd/module" xmlns:B="http://waters.sourceforge.net/xsd/base" Name="Pioneer3at v4">
+<EventDeclList>
+<EventDecl Kind="PROPOSITION" Name=":accepting"/>
+<EventDecl Kind="CONTROLLABLE" Name="on_vs"/>
+<EventDecl Kind="CONTROLLABLE" Name="off_vs"/>
+<EventDecl Kind="CONTROLLABLE" Name="on_gs"/>
+<EventDecl Kind="CONTROLLABLE" Name="off_gs"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="bat_L"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="bat_LL"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="end_app"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="end_exp"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="call_tele"/>
+<EventDecl Kind="CONTROLLABLE" Name="req_assist"/>
+<EventDecl Kind="CONTROLLABLE" Name="st_app"/>
+<EventDecl Kind="CONTROLLABLE" Name="st_exp"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="gas_found"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="victim_found"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="critic_fail"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_f"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="end_rb"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="end_vsv"/>
+<EventDecl Kind="CONTROLLABLE" Name="st_rb"/>
+<EventDecl Kind="CONTROLLABLE" Name="st_vsv"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="bat_OK"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_vs"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="er_gs"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_gs"/>
+<EventDecl Kind="CONTROLLABLE" Name="rep_victim"/>
+<EventDecl Kind="CONTROLLABLE" Name="rep_gas"/>
+<EventDecl Kind="CONTROLLABLE" Name="sus_app"/>
+<EventDecl Kind="CONTROLLABLE" Name="rsm_app"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="er_app"/>
+<EventDecl Kind="CONTROLLABLE" Name="rst_app"/>
+<EventDecl Kind="CONTROLLABLE" Name="abort_app"/>
+<EventDecl Kind="CONTROLLABLE" Name="rst_exp"/>
+<EventDecl Kind="CONTROLLABLE" Name="sus_exp"/>
+<EventDecl Kind="CONTROLLABLE" Name="rsm_exp"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="er_exp"/>
+<EventDecl Kind="CONTROLLABLE" Name="abort_exp"/>
+<EventDecl Kind="CONTROLLABLE" Name="sus_rb"/>
+<EventDecl Kind="CONTROLLABLE" Name="rsm_rb"/>
+<EventDecl Kind="CONTROLLABLE" Name="rst_rb"/>
+<EventDecl Kind="CONTROLLABLE" Name="abort_rb"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="er_rb"/>
+<EventDecl Kind="CONTROLLABLE" Name="abort_vsv"/>
+<EventDecl Kind="CONTROLLABLE" Name="rst_vsv"/>
+<EventDecl Kind="CONTROLLABLE" Name="sus_vsv"/>
+<EventDecl Kind="CONTROLLABLE" Name="rsm_vsv"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="er_vsv"/>
+<EventDecl Kind="CONTROLLABLE" Name="st_tele"/>
+<EventDecl Kind="CONTROLLABLE" Name="rst_tele"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="er_tele"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="end_tele"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="pos_fail"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="fail"/>
+<EventDecl Kind="CONTROLLABLE" Name="abort_tele"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="er_vs"/>
+</EventDeclList>
+<ComponentList>
+<SimpleComponent Kind="PLANT" Name="battery_monitor">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="BAT_OK">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="80" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-61" Y="-1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="BAT_LOW">
+<PointGeometry>
+<Point X="176" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="34"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="BAT_CRITICAL">
+<PointGeometry>
+<Point X="272" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="9" Y="-1"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="BAT_LOW" Target="BAT_CRITICAL">
+<LabelBlock>
+<SimpleIdentifier Name="bat_LL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="-16"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="224" Y="82"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="BAT_CRITICAL" Target="BAT_LOW">
+<LabelBlock>
+<SimpleIdentifier Name="bat_L"/>
+<LabelGeometry Anchor="NW">
+<Point X="-16" Y="-3"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="226" Y="109"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="BAT_OK" Target="BAT_LOW">
+<LabelBlock>
+<SimpleIdentifier Name="bat_L"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="128" Y="83"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="BAT_LOW" Target="BAT_OK">
+<LabelBlock>
+<SimpleIdentifier Name="bat_OK"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="128" Y="110"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="victims_recognition_system">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="VS_OFF">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="64"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-13" Y="-13"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-60" Y="-3"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VS_ON">
+<PointGeometry>
+<Point X="160" Y="64"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="11" Y="-5"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VS_ERROR">
+<PointGeometry>
+<Point X="112" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-32" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="VS_OFF" Target="VS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="on_vs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-3"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="VS_ON" Target="VS_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="off_vs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="113" Y="48"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VS_ON" Target="VS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="victim_found"/>
+<LabelGeometry Anchor="NW">
+<Point X="-14" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="167" Y="38"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VS_ON" Target="VS_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_vs"/>
+<LabelGeometry Anchor="NW">
+<Point X="6" Y="-16"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="147" Y="99"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VS_ERROR" Target="VS_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="rst_vs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-42" Y="-11"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="79" Y="97"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="gas_sensor">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="GS_OFF">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="112"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-13" Y="-13"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-60" Y="-3"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="GS_ON">
+<PointGeometry>
+<Point X="192" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="9" Y="-6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="GS_ERROR">
+<PointGeometry>
+<Point X="144" Y="160"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-32" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="GS_OFF" Target="GS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="on_gs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-3"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="GS_ON" Target="GS_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="off_gs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="145" Y="96"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="GS_ON" Target="GS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="gas_found"/>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="200" Y="86"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="GS_ON" Target="GS_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_gs"/>
+<LabelGeometry Anchor="NW">
+<Point X="4" Y="-13"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="180" Y="145"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="GS_ERROR" Target="GS_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="rst_gs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-43" Y="-12"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="110" Y="144"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="communication">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="COMMUNICATION">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="32" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-50" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="COMMUNICATION" Target="COMMUNICATION">
+<LabelBlock>
+<SimpleIdentifier Name="call_tele"/>
+<SimpleIdentifier Name="rep_gas"/>
+<SimpleIdentifier Name="rep_victim"/>
+<SimpleIdentifier Name="req_assist"/>
+<LabelGeometry Anchor="NW">
+<Point X="10" Y="-67"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="59" Y="85"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="failures">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="NO_FAILURE">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="32" Y="48"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-16" Y="-15"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-87" Y="-7"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="SIMPLE_FAILURE">
+<PointGeometry>
+<Point X="176" Y="48"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="12" Y="-4"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="CRITIC_FAILURE">
+<PointGeometry>
+<Point X="32" Y="192"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-58" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="POS_FAILURE">
+<PointGeometry>
+<Point X="176" Y="192"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-1" Y="8"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="CRITIC_FAILURE" Target="NO_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-29" Y="-10"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="13" Y="119"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="POS_FAILURE" Target="NO_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="17" Y="7"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="121" Y="110"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="SIMPLE_FAILURE" Target="POS_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="pos_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="2" Y="-8"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="POS_FAILURE" Target="CRITIC_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="critic_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="NO_FAILURE" Target="POS_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="pos_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-64" Y="-21"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="99" Y="122"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="NO_FAILURE" Target="CRITIC_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="critic_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-1" Y="15"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="SIMPLE_FAILURE" Target="CRITIC_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="critic_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-15" Y="-69"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="116" Y="135"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="NO_FAILURE" Target="SIMPLE_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-12" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="SIMPLE_FAILURE" Target="NO_FAILURE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="104" Y="28"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="approach">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="APP_IDLE">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="16" Y="176"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-22" Y="-21"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-74" Y="-1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="APP_EXE">
+<PointGeometry>
+<Point X="128" Y="176"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-10" Y="-22"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="APP_ERROR">
+<PointGeometry>
+<Point X="240" Y="176"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="13" Y="1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="APP_SUSP">
+<PointGeometry>
+<Point X="128" Y="272"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="17"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="APP_IDLE" Target="APP_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="-20" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="73" Y="188"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_EXE" Target="APP_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="-4"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="APP_EXE" Target="APP_SUSP">
+<LabelBlock>
+<SimpleIdentifier Name="sus_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="3" Y="-9"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="136" Y="225"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_EXE" Target="APP_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="end_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="-24" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="73" Y="167"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_SUSP" Target="APP_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="abort_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="-75" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="54" Y="243"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_SUSP" Target="APP_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="14" Y="-24"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="210" Y="248"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_ERROR" Target="APP_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="110" Y="142"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_SUSP" Target="APP_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="rsm_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="-60" Y="-8"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="119" Y="225"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="exploration">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="EXP_IDLE">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="48" Y="192"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-14" Y="-13"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-85" Y="1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="EXP_EXE">
+<PointGeometry>
+<Point X="160" Y="192"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="3" Y="-20"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="EXP_ERROR">
+<PointGeometry>
+<Point X="288" Y="192"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="13" Y="1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="EXP_SUSP">
+<PointGeometry>
+<Point X="160" Y="288"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-32" Y="14"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="EXP_IDLE" Target="EXP_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="st_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="-20" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="105" Y="204"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_EXE" Target="EXP_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="EXP_EXE" Target="EXP_SUSP">
+<LabelBlock>
+<SimpleIdentifier Name="sus_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="2" Y="-10"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="172" Y="241"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_EXE" Target="EXP_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="end_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="-24" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="105" Y="183"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_SUSP" Target="EXP_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="abort_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="-68" Y="-16"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="89" Y="258"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_SUSP" Target="EXP_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="10" Y="-20"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="250" Y="268"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_ERROR" Target="EXP_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="144" Y="154"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_SUSP" Target="EXP_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="rsm_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="-57" Y="-7"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="149" Y="241"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="victims_surroundings_verification">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="VSV_IDLE">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="176" Y="176"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-20" Y="-17"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-84" Y="1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VSV_EXE">
+<PointGeometry>
+<Point X="288" Y="176"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-9" Y="-22"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VSV_ERROR">
+<PointGeometry>
+<Point X="400" Y="176"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="13" Y="1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VSV_SUSP">
+<PointGeometry>
+<Point X="288" Y="272"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-81" Y="2"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="VSV_IDLE" Target="VSV_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="st_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-20" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="233" Y="188"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_EXE" Target="VSV_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="VSV_EXE" Target="VSV_SUSP">
+<LabelBlock>
+<SimpleIdentifier Name="sus_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="1" Y="-12"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="299" Y="224"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_EXE" Target="VSV_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="end_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-24" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="233" Y="167"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_SUSP" Target="VSV_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="abort_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-68" Y="-16"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="214" Y="244"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_SUSP" Target="VSV_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="10" Y="-20"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="364" Y="239"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_ERROR" Target="VSV_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="268" Y="140"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_SUSP" Target="VSV_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-54" Y="-15"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="277" Y="224"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="return_to_base">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="RB_IDLE">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="416" Y="272"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-15" Y="-16"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-84" Y="1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="RB_EXE">
+<PointGeometry>
+<Point X="528" Y="272"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-10" Y="-22"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="RB_ERROR">
+<PointGeometry>
+<Point X="640" Y="272"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="13" Y="1"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="RB_SUSP">
+<PointGeometry>
+<Point X="528" Y="368"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-31" Y="7"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="RB_IDLE" Target="RB_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="st_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="473" Y="284"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_EXE" Target="RB_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="RB_EXE" Target="RB_SUSP">
+<LabelBlock>
+<SimpleIdentifier Name="sus_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="2" Y="-12"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="540" Y="320"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_EXE" Target="RB_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="end_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="473" Y="263"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_SUSP" Target="RB_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="abort_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-68" Y="-16"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="453" Y="339"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_SUSP" Target="RB_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="16" Y="-28"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="610" Y="344"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_ERROR" Target="RB_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="497" Y="230"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_SUSP" Target="RB_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="rsm_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-51" Y="-12"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="515" Y="320"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="teleoperation">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="TELE_IDLE">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="128" Y="64"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-33" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-61" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="TELE_EXE">
+<PointGeometry>
+<Point X="240" Y="64"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-29" Y="11"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="TELE_ERROR">
+<PointGeometry>
+<Point X="352" Y="64"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-8" Y="8"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="TELE_IDLE" Target="TELE_EXE">
+<LabelBlock>
+<SimpleIdentifier Name="st_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-20" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="TELE_EXE" Target="TELE_ERROR">
+<LabelBlock>
+<SimpleIdentifier Name="er_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+</Edge>
+<Edge Source="TELE_EXE" Target="TELE_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="end_tele"/>
+<SimpleIdentifier Name="abort_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-36" Y="-33"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="184" Y="47"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="TELE_ERROR" Target="TELE_IDLE">
+<LabelBlock>
+<SimpleIdentifier Name="rst_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="239" Y="106"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="mutual_exclusion">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="Mi_OFF">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="320" Y="80"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-21" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-82" Y="-6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="EXP_ON">
+<PointGeometry>
+<Point X="528" Y="192"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="5" Y="-19"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="APP_ON">
+<PointGeometry>
+<Point X="512" Y="-16"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="4" Y="0"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VSV_ON">
+<PointGeometry>
+<Point X="320" Y="272"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="5" Y="-10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="RB_ON">
+<PointGeometry>
+<Point X="128" Y="192"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-59" Y="-16"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="TELE_ON">
+<PointGeometry>
+<Point X="144" Y="-16"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-64" Y="2"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="Mi_OFF" Target="EXP_ON">
+<LabelBlock>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="12" Y="-23"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="435" Y="121"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_ON" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="sus_exp"/>
+<SimpleIdentifier Name="end_exp"/>
+<SimpleIdentifier Name="er_exp"/>
+<LabelGeometry Anchor="NW">
+<Point X="-40" Y="1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="417" Y="141"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_OFF" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="end_app"/>
+<SimpleIdentifier Name="end_exp"/>
+<SimpleIdentifier Name="end_vsv"/>
+<SimpleIdentifier Name="end_rb"/>
+<SimpleIdentifier Name="end_tele"/>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_vsv"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="er_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-25" Y="-153"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="318" Y="49"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_ON" Target="APP_ON">
+<LabelBlock>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="er_tele"/>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="1" Y="-60"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="523" Y="-40"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="EXP_ON" Target="EXP_ON">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="er_tele"/>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-11" Y="6"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="550" Y="220"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_ON" Target="VSV_ON">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="er_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="2"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="317" Y="302"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_ON" Target="RB_ON">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_tele"/>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-51" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="112" Y="219"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="TELE_ON" Target="TELE_ON">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-36" Y="-66"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="124" Y="-39"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_OFF" Target="APP_ON">
+<LabelBlock>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="st_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="-3" Y="-49"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="407" Y="13"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="APP_ON" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="end_app"/>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="sus_app"/>
+<LabelGeometry Anchor="NW">
+<Point X="36" Y="-27"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="425" Y="51"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_OFF" Target="VSV_ON">
+<LabelBlock>
+<SimpleIdentifier Name="rsm_vsv"/>
+<SimpleIdentifier Name="st_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-2" Y="33"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="330" Y="173"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_ON" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="end_vsv"/>
+<SimpleIdentifier Name="er_vsv"/>
+<SimpleIdentifier Name="sus_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-58" Y="-7"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="306" Y="177"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_OFF" Target="RB_ON">
+<LabelBlock>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="st_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-53" Y="25"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="232" Y="149"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="RB_ON" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="end_rb"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="sus_rb"/>
+<LabelGeometry Anchor="NW">
+<Point X="-73" Y="-25"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="216" Y="123"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_OFF" Target="TELE_ON">
+<LabelBlock>
+<SimpleIdentifier Name="st_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-57" Y="-11"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="221" Y="47"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="TELE_ON" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="end_tele"/>
+<SimpleIdentifier Name="er_tele"/>
+<SimpleIdentifier Name="abort_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-35" Y="-63"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="236" Y="24"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="manouvers_vs_dependencies">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="VS_OFF">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="0" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-54" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VS_ON">
+<PointGeometry>
+<Point X="96" Y="112"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="3" Y="5"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="VS_OFF" Target="VS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="on_vs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="48" Y="101"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VS_ON" Target="VS_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="off_vs"/>
+<SimpleIdentifier Name="er_vs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-18" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="48" Y="123"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VS_ON" Target="VS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="5" Y="-80"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="111" Y="84"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="manouvers_gs_dependencies">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="GS_OFF">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="16" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-54" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="GS_ON">
+<PointGeometry>
+<Point X="112" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="3" Y="5"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="GS_OFF" Target="GS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="on_gs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="64" Y="133"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="GS_ON" Target="GS_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="off_gs"/>
+<SimpleIdentifier Name="er_gs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-18" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="64" Y="155"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="GS_ON" Target="GS_ON">
+<LabelBlock>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="1" Y="-60"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="127" Y="116"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="VS_turn_off_condition">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="Mi_OFF">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="48" Y="96"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-21" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-54" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="Mi_ON">
+<PointGeometry>
+<Point X="144" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="3" Y="5"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="Mi_OFF" Target="Mi_ON">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-25" Y="-95"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="96" Y="85"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_ON" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="sus_app"/>
+<SimpleIdentifier Name="sus_exp"/>
+<SimpleIdentifier Name="sus_vsv"/>
+<SimpleIdentifier Name="end_app"/>
+<SimpleIdentifier Name="end_exp"/>
+<SimpleIdentifier Name="end_vsv"/>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-28" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="96" Y="107"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_OFF" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="end_app"/>
+<SimpleIdentifier Name="end_exp"/>
+<SimpleIdentifier Name="end_vsv"/>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_vsv"/>
+<SimpleIdentifier Name="off_vs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-45" Y="-100"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="39" Y="72"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="GS_turn_off_condition">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="Mi_OFF">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="80" Y="128"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-21" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-54" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="Mi_ON">
+<PointGeometry>
+<Point X="176" Y="128"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="3" Y="5"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="Mi_OFF" Target="Mi_ON">
+<LabelBlock>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="-65"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="128" Y="117"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_ON" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="sus_exp"/>
+<SimpleIdentifier Name="sus_vsv"/>
+<SimpleIdentifier Name="end_exp"/>
+<SimpleIdentifier Name="end_vsv"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-25" Y="5"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="128" Y="139"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="Mi_OFF" Target="Mi_OFF">
+<LabelBlock>
+<SimpleIdentifier Name="end_exp"/>
+<SimpleIdentifier Name="end_vsv"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_vsv"/>
+<SimpleIdentifier Name="off_gs"/>
+<LabelGeometry Anchor="NW">
+<Point X="-44" Y="-74"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="70" Y="100"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="motion_assist_request">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="NO_ASSIT">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="208"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-21" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-74" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="ASSIST_ALLOWED">
+<PointGeometry>
+<Point X="208" Y="208"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="12" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="NO_ASSIT" Target="ASSIST_ALLOWED">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="er_vsv"/>
+<SimpleIdentifier Name="pos_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="-79"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="152" Y="192"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="ASSIST_ALLOWED" Target="NO_ASSIT">
+<LabelBlock>
+<SimpleIdentifier Name="req_assist"/>
+<SimpleIdentifier Name="rst_app"/>
+<SimpleIdentifier Name="rst_exp"/>
+<SimpleIdentifier Name="rst_rb"/>
+<SimpleIdentifier Name="rst_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-29" Y="1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="152" Y="224"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="ASSIST_ALLOWED" Target="ASSIST_ALLOWED">
+<LabelBlock>
+<SimpleIdentifier Name="er_app"/>
+<SimpleIdentifier Name="er_exp"/>
+<SimpleIdentifier Name="er_rb"/>
+<SimpleIdentifier Name="er_vsv"/>
+<SimpleIdentifier Name="pos_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="11" Y="-70"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="219" Y="182"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="NO_ASSIT" Target="NO_ASSIT">
+<LabelBlock>
+<SimpleIdentifier Name="rst_app"/>
+<SimpleIdentifier Name="rst_exp"/>
+<SimpleIdentifier Name="rst_rb"/>
+<SimpleIdentifier Name="rst_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-41" Y="-62"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="85" Y="182"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="teleoperation_pref_and_start_condition">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="AUTO">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="112" Y="208"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-15" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-46" Y="3"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="TELE">
+<PointGeometry>
+<Point X="224" Y="208"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="5" Y="4"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="AUTO" Target="TELE">
+<LabelBlock>
+<SimpleIdentifier Name="call_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="-25"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="168" Y="192"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="TELE" Target="AUTO">
+<LabelBlock>
+<SimpleIdentifier Name="st_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="168" Y="224"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="AUTO" Target="AUTO">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_rb"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-59" Y="-110"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="110" Y="178"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="TELE" Target="TELE">
+<LabelBlock>
+<SimpleIdentifier Name="call_tele"/>
+<LabelGeometry Anchor="NW">
+<Point X="-6" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="237" Y="181"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="vsv_start_condition">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="VSV_NOK">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="-432" Y="144"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-22" Y="10"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-59" Y="13"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VSV_OK">
+<PointGeometry>
+<Point X="-336" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="VSV_NOK" Target="VSV_OK">
+<LabelBlock>
+<SimpleIdentifier Name="victim_found"/>
+<LabelGeometry Anchor="NW">
+<Point X="-35" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="-384" Y="132"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_OK" Target="VSV_NOK">
+<LabelBlock>
+<SimpleIdentifier Name="end_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="-384" Y="156"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_OK" Target="VSV_OK">
+<LabelBlock>
+<SimpleIdentifier Name="victim_found"/>
+<SimpleIdentifier Name="st_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="5" Y="-22"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="-320" Y="120"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_NOK" Target="VSV_NOK">
+<LabelBlock>
+<SimpleIdentifier Name="end_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-42" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="-444" Y="113"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="report_victim_found">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="NO_V">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="64" Y="96"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-22" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-43" Y="9"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="V_TO_REPORT">
+<PointGeometry>
+<Point X="176" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="NO_V" Target="V_TO_REPORT">
+<LabelBlock>
+<SimpleIdentifier Name="victim_found"/>
+<LabelGeometry Anchor="NW">
+<Point X="-35" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="82"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="V_TO_REPORT" Target="NO_V">
+<LabelBlock>
+<SimpleIdentifier Name="rep_victim"/>
+<LabelGeometry Anchor="NW">
+<Point X="-27" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="120" Y="110"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="V_TO_REPORT" Target="V_TO_REPORT">
+<LabelBlock>
+<SimpleIdentifier Name="victim_found"/>
+<LabelGeometry Anchor="NW">
+<Point X="-15" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="185" Y="67"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="NO_V" Target="NO_V">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_rb"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-38" Y="-124"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="55" Y="67"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="report_gas_found">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="NO_G">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="144"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-18" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-43" Y="9"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="G_TO_REPORT">
+<PointGeometry>
+<Point X="208" Y="144"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="NO_G" Target="G_TO_REPORT">
+<LabelBlock>
+<SimpleIdentifier Name="gas_found"/>
+<LabelGeometry Anchor="NW">
+<Point X="-30" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="152" Y="130"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="G_TO_REPORT" Target="NO_G">
+<LabelBlock>
+<SimpleIdentifier Name="rep_gas"/>
+<LabelGeometry Anchor="NW">
+<Point X="-24" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="152" Y="158"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="G_TO_REPORT" Target="G_TO_REPORT">
+<LabelBlock>
+<SimpleIdentifier Name="gas_found"/>
+<LabelGeometry Anchor="NW">
+<Point X="-15" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="217" Y="115"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="NO_G" Target="NO_G">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_rb"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<LabelGeometry Anchor="NW">
+<Point X="-36" Y="-128"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="84" Y="114"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="simple_failure_operation_mode">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="OK">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="160"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-15" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-27" Y="8"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="SIMPLE_FAIL">
+<PointGeometry>
+<Point X="192" Y="160"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="OK" Target="SIMPLE_FAIL">
+<LabelBlock>
+<SimpleIdentifier Name="fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-12" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="144" Y="148"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="SIMPLE_FAIL" Target="OK">
+<LabelBlock>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-15" Y="-1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="144" Y="172"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="SIMPLE_FAIL" Target="SIMPLE_FAIL">
+<LabelBlock>
+<SimpleIdentifier Name="fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-3" Y="-16"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="201" Y="131"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="OK" Target="OK">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-48" Y="-99"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="93" Y="130"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="position_failure_operation_mode">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="POS_OK">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="112" Y="256"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-15" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-54" Y="8"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="POS_FAIL">
+<PointGeometry>
+<Point X="208" Y="256"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="POS_OK" Target="POS_FAIL">
+<LabelBlock>
+<SimpleIdentifier Name="pos_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-22" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="160" Y="244"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="POS_FAIL" Target="POS_OK">
+<LabelBlock>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-13" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="160" Y="268"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="POS_FAIL" Target="POS_FAIL">
+<LabelBlock>
+<SimpleIdentifier Name="pos_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="217" Y="227"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="POS_OK" Target="POS_OK">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_rb"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-45" Y="-132"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="109" Y="226"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="critical_failure_operation_mode">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="OK">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="48" Y="96"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-15" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-33" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="CRITIC_FAIL">
+<PointGeometry>
+<Point X="144" Y="96"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="8" Y="6"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="OK" Target="CRITIC_FAIL">
+<LabelBlock>
+<SimpleIdentifier Name="critic_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-26" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="96" Y="84"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="CRITIC_FAIL" Target="OK">
+<LabelBlock>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-13" Y="0"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="96" Y="108"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="CRITIC_FAIL" Target="CRITIC_FAIL">
+<LabelBlock>
+<SimpleIdentifier Name="critic_fail"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="153" Y="67"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="OK" Target="OK">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_rb"/>
+<SimpleIdentifier Name="st_tele"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<SimpleIdentifier Name="rst_f"/>
+<LabelGeometry Anchor="NW">
+<Point X="-48" Y="-142"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="45" Y="66"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="bat_operation_modes">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="ALL_M">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="80" Y="160"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-23" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-39" Y="10"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="VSV_RB_TELE">
+<PointGeometry>
+<Point X="192" Y="160"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-37" Y="39"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="NO_Mi">
+<PointGeometry>
+<Point X="320" Y="160"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-2" Y="9"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="ALL_M" Target="VSV_RB_TELE">
+<LabelBlock>
+<SimpleIdentifier Name="bat_L"/>
+<LabelGeometry Anchor="NW">
+<Point X="-17" Y="-19"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="137" Y="146"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_RB_TELE" Target="ALL_M">
+<LabelBlock>
+<SimpleIdentifier Name="bat_OK"/>
+<LabelGeometry Anchor="NW">
+<Point X="-23" Y="1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="138" Y="175"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="ALL_M" Target="ALL_M">
+<LabelBlock>
+<SimpleIdentifier Name="st_app"/>
+<SimpleIdentifier Name="st_exp"/>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="st_rb"/>
+<SimpleIdentifier Name="st_tele"/>
+<SimpleIdentifier Name="rsm_app"/>
+<SimpleIdentifier Name="rsm_exp"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="bat_OK"/>
+<SimpleIdentifier Name="bat_LL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-59" Y="-146"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="75" Y="133"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_RB_TELE" Target="VSV_RB_TELE">
+<LabelBlock>
+<SimpleIdentifier Name="st_vsv"/>
+<SimpleIdentifier Name="st_rb"/>
+<SimpleIdentifier Name="st_tele"/>
+<SimpleIdentifier Name="rsm_vsv"/>
+<SimpleIdentifier Name="rsm_rb"/>
+<SimpleIdentifier Name="bat_L"/>
+<LabelGeometry Anchor="NW">
+<Point X="-24" Y="-94"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="198" Y="132"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="VSV_RB_TELE" Target="NO_Mi">
+<LabelBlock>
+<SimpleIdentifier Name="bat_LL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-19" Y="-17"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="256" Y="144"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="NO_Mi" Target="VSV_RB_TELE">
+<LabelBlock>
+<SimpleIdentifier Name="bat_L"/>
+<LabelGeometry Anchor="NW">
+<Point X="-13" Y="1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="256" Y="176"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="NO_Mi" Target="NO_Mi">
+<LabelBlock>
+<SimpleIdentifier Name="bat_OK"/>
+<SimpleIdentifier Name="bat_LL"/>
+<LabelGeometry Anchor="NW">
+<Point X="6" Y="-21"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="338" Y="137"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="SPEC" Name="sensor_at_critical_battery">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="BAT_NOT_DEAD">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+<PointGeometry>
+<Point X="96" Y="128"/>
+</PointGeometry>
+<InitialArrowGeometry>
+<Point X="-19" Y="0"/>
+</InitialArrowGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="-91" Y="9"/>
+</LabelGeometry>
+</SimpleNode>
+<SimpleNode Name="BAT_DEAD">
+<PointGeometry>
+<Point X="208" Y="128"/>
+</PointGeometry>
+<LabelGeometry Anchor="NW">
+<Point X="6" Y="5"/>
+</LabelGeometry>
+</SimpleNode>
+</NodeList>
+<EdgeList>
+<Edge Source="BAT_NOT_DEAD" Target="BAT_NOT_DEAD">
+<LabelBlock>
+<SimpleIdentifier Name="on_vs"/>
+<SimpleIdentifier Name="on_gs"/>
+<SimpleIdentifier Name="bat_L"/>
+<LabelGeometry Anchor="NW">
+<Point X="-31" Y="-50"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="85" Y="101"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="BAT_DEAD" Target="BAT_DEAD">
+<LabelBlock>
+<SimpleIdentifier Name="bat_LL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-15" Y="-22"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="220" Y="101"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="BAT_NOT_DEAD" Target="BAT_DEAD">
+<LabelBlock>
+<SimpleIdentifier Name="bat_LL"/>
+<LabelGeometry Anchor="NW">
+<Point X="-21" Y="-18"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="152" Y="115"/>
+</SplineGeometry>
+</Edge>
+<Edge Source="BAT_DEAD" Target="BAT_NOT_DEAD">
+<LabelBlock>
+<SimpleIdentifier Name="bat_L"/>
+<LabelGeometry Anchor="NW">
+<Point X="-12" Y="1"/>
+</LabelGeometry>
+</LabelBlock>
+<SplineGeometry>
+<Point X="150" Y="142"/>
+</SplineGeometry>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+</ComponentList>
+</Module>
