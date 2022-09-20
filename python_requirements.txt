@@ -4,4 +4,4 @@ pandas==1.0.2
 pysimplegui==4.38.0
 rospkg==1.2.3
 tabulate==0.8.6
-untangle==1.1.1
+untangle==1.2.1
