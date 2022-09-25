@@ -26,25 +26,25 @@
 <EventDecl Kind="CONTROLLABLE" Name="uav_sus_app"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_rsm_app"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_er_app"/>
-<EventDecl Kind="CONTROLLABLE" Name="uav_rst_app"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="uav_rst_app"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_abort_app"/>
-<EventDecl Kind="CONTROLLABLE" Name="uav_rst_assess"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="uav_rst_assess"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_sus_assess"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_rsm_assess"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_er_assess"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_abort_assess"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_sus_rb"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_rsm_rb"/>
-<EventDecl Kind="CONTROLLABLE" Name="uav_rst_rb"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="uav_rst_rb"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_abort_rb"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_er_rb"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_abort_vsv"/>
-<EventDecl Kind="CONTROLLABLE" Name="uav_rst_vsv"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="uav_rst_vsv"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_sus_vsv"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_rsm_vsv"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_er_vsv"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_st_tele"/>
-<EventDecl Kind="CONTROLLABLE" Name="uav_rst_tele"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="uav_rst_tele"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_er_tele"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_end_tele"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_pos_fail"/>
@@ -54,12 +54,12 @@
 <EventDecl Kind="CONTROLLABLE" Name="uav_sus_v_search"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_rsm_v_search"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_abort_v_search"/>
-<EventDecl Kind="CONTROLLABLE" Name="uav_rst_v_search"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="uav_rst_v_search"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_er_v_search"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_st_safe_land"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_end_safe_land"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="uav_er_safe_land"/>
-<EventDecl Kind="CONTROLLABLE" Name="uav_rst_safe_land"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="uav_rst_safe_land"/>
 <EventDecl Kind="CONTROLLABLE" Name="uav_abort_tele"/>
 </EventDeclList>
 <ComponentList>

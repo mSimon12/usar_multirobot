@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="windows-1252"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <Module xmlns="http://waters.sourceforge.net/xsd/module" xmlns:B="http://waters.sourceforge.net/xsd/base" Name="Pioneer3at v4">
 <EventDeclList>
 <EventDecl Kind="PROPOSITION" Name=":accepting"/>
@@ -31,25 +31,25 @@
 <EventDecl Kind="CONTROLLABLE" Name="sus_app"/>
 <EventDecl Kind="CONTROLLABLE" Name="rsm_app"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="er_app"/>
-<EventDecl Kind="CONTROLLABLE" Name="rst_app"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_app"/>
 <EventDecl Kind="CONTROLLABLE" Name="abort_app"/>
-<EventDecl Kind="CONTROLLABLE" Name="rst_exp"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_exp"/>
 <EventDecl Kind="CONTROLLABLE" Name="sus_exp"/>
 <EventDecl Kind="CONTROLLABLE" Name="rsm_exp"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="er_exp"/>
 <EventDecl Kind="CONTROLLABLE" Name="abort_exp"/>
 <EventDecl Kind="CONTROLLABLE" Name="sus_rb"/>
 <EventDecl Kind="CONTROLLABLE" Name="rsm_rb"/>
-<EventDecl Kind="CONTROLLABLE" Name="rst_rb"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_rb"/>
 <EventDecl Kind="CONTROLLABLE" Name="abort_rb"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="er_rb"/>
 <EventDecl Kind="CONTROLLABLE" Name="abort_vsv"/>
-<EventDecl Kind="CONTROLLABLE" Name="rst_vsv"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_vsv"/>
 <EventDecl Kind="CONTROLLABLE" Name="sus_vsv"/>
 <EventDecl Kind="CONTROLLABLE" Name="rsm_vsv"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="er_vsv"/>
 <EventDecl Kind="CONTROLLABLE" Name="st_tele"/>
-<EventDecl Kind="CONTROLLABLE" Name="rst_tele"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="rst_tele"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="er_tele"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="end_tele"/>
 <EventDecl Kind="UNCONTROLLABLE" Name="pos_fail"/>
